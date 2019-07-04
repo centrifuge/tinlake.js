@@ -1,6 +1,6 @@
 {
-  "name": "tinlake",
-  "version": "0.0.1",
+  "name": "@centrifuge/tinlake-js",
+  "version": "0.1.0",
   "description": "Centrifuge Tinlake Contracts Client",
   "main": "dist/Tinlake.js",
   "types": "dist/Tinlake.d.ts",
@@ -8,6 +8,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "bignumber.js": "^9.0.0",
     "ethjs": "^0.4.0",
@@ -40,7 +43,8 @@
     "bundle": "rollup -c",
     "watch": "rollup -cw",
     "test": "npm run bundle && ts-mocha -p test/tsconfig.json test/**/*",
-    "nodemon": "nodemon node inspect src/index.js"
+    "nodemon": "nodemon node inspect src/index.js",
+    "ppreublish": "npm run bundle"
   },
   "repository": {
     "type": "git",
