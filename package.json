@@ -44,7 +44,7 @@
     "watch": "rollup -cw",
     "test": "npm run bundle && ts-mocha -p test/tsconfig.json test/**/*",
     "nodemon": "nodemon node inspect src/index.js",
-    "prepublish" "npm run bundle"
+    "prepublish": "npm run bundle"
   },
   "repository": {
     "type": "git",
