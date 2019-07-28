@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "bignumber.js": "^9.0.0",
+    "decimal.js-light": "^2.5.0",
     "ethjs": "^0.4.0",
     "ethjs-provider-signer": "^0.1.4",
     "ethjs-signer": "^0.1.1",
@@ -37,7 +38,9 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
-    "test": "npm run build && ts-mocha -p test/tsconfig.json test/**/*",
+    "test": "npm run test-unit && npm run test-integration",
+    "test-unit": "ts-mocha -p test/tsconfig.json src/**/*.spec.ts",
+    "test-integration": "npm run build && ts-mocha -p test/tsconfig.json test/**/*",
     "nodemon": "nodemon node inspect dist/Tinlake.js"
   },
   "repository": {

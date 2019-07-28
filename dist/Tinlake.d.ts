@@ -156,3 +156,9 @@ declare class Tinlake {
     getNFTData: <T>(tokenId: string) => Promise<T>;
 }
 export default Tinlake;
+export * from './utils/baseToDisplay';
+export * from './utils/bnToHex';
+export * from './utils/displayToBase';
+export * from './utils/feeToInterestRate';
+export * from './utils/getLoanStatus';
+export * from './utils/interestRateToFee';
