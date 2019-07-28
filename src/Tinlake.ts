@@ -4,6 +4,7 @@ import { AbiCoder } from 'web3-eth-abi';
 const abiCoder = new AbiCoder();
 // tslint:disable-next-line:import-name
 import BN from 'bn.js';
+import { sha3 } from 'web3-utils';
 
 // tslint:disable:import-name no-duplicate-imports
 import contractAbiNft from './abi/test/SimpleNFT.abi.json';
@@ -394,7 +395,7 @@ const waitAndReturnEvents = (eth: ethI, txHash: string, abi: any) => {
         if (err != null) {
           reject('failed to get receipt');
         }
-        const events = getEvents(eth, receipt, abi);
+        const events = getEvents(receipt, abi);
         resolve({ events, txHash: tx.hash, status: receipt.status });
       });
 
@@ -433,7 +434,7 @@ const waitForTransaction = (eth: ethI, txHash: any) => {
   });
 };
 
-const findEvent = (eth: ethI, abi: { filter: (arg0: (item: any) => boolean | undefined) => any[]; },
+const findEvent = (abi: { filter: (arg0: (item: any) => boolean | undefined) => any[]; },
                    funcSignature: any) => {
   return abi.filter((item: {
     type: string; name: string;
@@ -442,12 +443,12 @@ const findEvent = (eth: ethI, abi: { filter: (arg0: (item: any) => boolean | und
     if (item.type !== 'event') return false;
     const signature =
       `${item.name}(${item.inputs.map((input: { type: any; }) => input.type).join(',')})`;
-    const hash = eth.web3_sha3(signature);
+    const hash = sha3(signature);
     if (hash === funcSignature) return true;
   });
 };
 
-const getEvents = (eth: ethI, receipt: {
+const getEvents = (receipt: {
   logs:
   { length: number; forEach: (arg0: (log: any) => void) => void; };
 },
@@ -458,7 +459,7 @@ const getEvents = (eth: ethI, receipt: {
   const events: { 'event': any; 'data': any; }[] = [];
   receipt.logs.forEach((log: { topics: any[]; }) => {
     const funcSignature = log.topics[0];
-    const matches = findEvent(eth, abi, funcSignature);
+    const matches = findEvent(abi, funcSignature);
     if (matches.length === 1) {
       const event = matches[0];
       const inputs = event.inputs.filter((input: { indexed: any; }) => input.indexed)
