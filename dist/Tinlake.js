@@ -26473,7 +26473,7 @@ var waitAndReturnEvents = function (eth, txHash, abi) {
                 if (err != null) {
                     reject('failed to get receipt');
                 }
-                var events = getEvents(receipt, abi);
+                var events = getEvents(eth, receipt, abi);
                 resolve({ events: events, txHash: tx.hash, status: receipt.status });
             });
         });
@@ -26509,24 +26509,24 @@ var waitForTransaction = function (eth, txHash) {
         wait(txHash);
     });
 };
-var findEvent = function (abi, funcSignature) {
+var findEvent = function (eth, abi, funcSignature) {
     return abi.filter(function (item) {
         if (item.type !== 'event')
             return false;
         var signature = item.name + "(" + item.inputs.map(function (input) { return input.type; }).join(',') + ")";
-        var hash = sha3$1(signature);
+        var hash = eth.web3_sha3(signature);
         if (hash === funcSignature)
             return true;
     });
 };
-var getEvents = function (receipt, abi) {
+var getEvents = function (eth, receipt, abi) {
     if (receipt.logs.length === 0) {
         return null;
     }
     var events = [];
     receipt.logs.forEach(function (log) {
         var funcSignature = log.topics[0];
-        var matches = findEvent(abi, funcSignature);
+        var matches = findEvent(eth, abi, funcSignature);
         if (matches.length === 1) {
             var event = matches[0];
             var inputs = event.inputs.filter(function (input) { return input.indexed; })

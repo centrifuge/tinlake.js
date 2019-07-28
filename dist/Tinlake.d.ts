@@ -59,6 +59,7 @@ interface Contracts {
     newSilverLoanNft: any;
 }
 interface ethI {
+    web3_sha3: (signature: string) => string;
     getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
     getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
     contract: (arg0: any) => {

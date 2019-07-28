@@ -2,7 +2,6 @@
 import Eth from 'ethjs';
 import { AbiCoder } from 'web3-eth-abi';
 const abiCoder = new AbiCoder();
-import { sha3 } from 'web3-utils';
 // tslint:disable-next-line:import-name
 import BN from 'bn.js';
 
@@ -93,6 +92,7 @@ interface Contracts {
 
 // tslint:disable-next-line:class-name
 interface ethI {
+  web3_sha3: (signature: string) => string;
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
   contract: (arg0: any) => { at: (arg0: any) => void };
@@ -394,7 +394,7 @@ const waitAndReturnEvents = (eth: ethI, txHash: string, abi: any) => {
         if (err != null) {
           reject('failed to get receipt');
         }
-        const events = getEvents(receipt, abi);
+        const events = getEvents(eth, receipt, abi);
         resolve({ events, txHash: tx.hash, status: receipt.status });
       });
 
@@ -433,7 +433,7 @@ const waitForTransaction = (eth: ethI, txHash: any) => {
   });
 };
 
-const findEvent = (abi: { filter: (arg0: (item: any) => boolean | undefined) => any[]; },
+const findEvent = (eth: ethI, abi: { filter: (arg0: (item: any) => boolean | undefined) => any[]; },
                    funcSignature: any) => {
   return abi.filter((item: {
     type: string; name: string;
@@ -442,12 +442,12 @@ const findEvent = (abi: { filter: (arg0: (item: any) => boolean | undefined) => 
     if (item.type !== 'event') return false;
     const signature =
       `${item.name}(${item.inputs.map((input: { type: any; }) => input.type).join(',')})`;
-    const hash = sha3(signature);
+    const hash = eth.web3_sha3(signature);
     if (hash === funcSignature) return true;
   });
 };
 
-const getEvents = (receipt: {
+const getEvents = (eth: ethI, receipt: {
   logs:
   { length: number; forEach: (arg0: (log: any) => void) => void; };
 },
@@ -458,7 +458,7 @@ const getEvents = (receipt: {
   const events: { 'event': any; 'data': any; }[] = [];
   receipt.logs.forEach((log: { topics: any[]; }) => {
     const funcSignature = log.topics[0];
-    const matches = findEvent(abi, funcSignature);
+    const matches = findEvent(eth, abi, funcSignature);
     if (matches.length === 1) {
       const event = matches[0];
       const inputs = event.inputs.filter((input: { indexed: any; }) => input.indexed)

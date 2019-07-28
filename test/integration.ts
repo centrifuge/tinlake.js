@@ -20,8 +20,8 @@ const tokenID = `0x${Math.floor(Math.random() * (10 ** 15))}`;
 let loanID: string;
 
 const gasLimit = 1000000;
-const principal = '100';
-const appraisal = '300';
+const principal = '100000000000000000000';
+const appraisal = '300000000000000000000';
 const fee = '1000000564701133626865910626'; // 5 % per day
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -300,7 +300,7 @@ describe('functional tinlake tests', () => {
     });
   });
 
-  describe.only('tinlake call functionality', function () {
+  describe('tinlake call functionality', function () {
     this.timeout(50000);
 
     const loanID = '4';
@@ -369,7 +369,7 @@ describe('functional tinlake tests', () => {
       assert(isAdmin === false);
     });
 
-    it.only('gets additional NFT data', async () => {
+    it('gets additional NFT data', async () => {
       const data = await borrowerTinlake.getNFTData(
         '88113924690647335018863500983244386663858523359731661673246712804208111741806');
     });
