@@ -28182,6 +28182,19 @@ var feeToInterestRate = function (fee) {
     return interestRateString;
 };
 
+function getLoanStatus(principal, debt) {
+    if (!principal.isZero()) {
+        return 'Whitelisted';
+    }
+    if (principal.isZero() && !debt.isZero()) {
+        return 'Ongoing';
+    }
+    if (principal.isZero() && debt.isZero()) {
+        return 'Repaid';
+    }
+    throw Error('Unknown loan status');
+}
+
 Decimal.set({
     precision: 28,
     toExpNeg: -7,
@@ -28595,4 +28608,4 @@ var getEvents = function (eth, receipt, abi) {
 };
 
 export default Tinlake;
-export { LOAN_ID_IDX, baseToDisplay, bnToHex, displayToBase, feeToInterestRate, interestRateToFee };
+export { LOAN_ID_IDX, baseToDisplay, bnToHex, displayToBase, feeToInterestRate, getLoanStatus, interestRateToFee };
