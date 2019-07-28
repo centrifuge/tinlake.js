@@ -368,6 +368,11 @@ describe('functional tinlake tests', () => {
       const isAdmin = await borrowerTinlake.isAdmin(borrowerEthFrom);
       assert(isAdmin === false);
     });
+
+    it.only('gets additional NFT data', async () => {
+      const data = await borrowerTinlake.getNFTData(
+        '88113924690647335018863500983244386663858523359731661673246712804208111741806');
+    });
   });
 });
 

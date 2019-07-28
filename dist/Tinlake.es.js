@@ -24681,6 +24681,523 @@ var contractAbiAdmin = [
   }
 ];
 
+var contractAbiNewSilverLoan = [
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "b",
+        type: "bytes"
+      }
+    ],
+    name: "bytesToUint",
+    outputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "uri_prefix",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "from",
+        type: "address"
+      },
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "ratings",
+    outputs: [
+      {
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "from",
+        type: "address"
+      },
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "usr",
+        type: "address"
+      },
+      {
+        name: "tkn",
+        type: "uint256"
+      },
+      {
+        name: "anchor",
+        type: "uint256"
+      },
+      {
+        name: "data_root",
+        type: "bytes32"
+      },
+      {
+        name: "signatures_root",
+        type: "bytes32"
+      },
+      {
+        name: "properties",
+        type: "bytes[]"
+      },
+      {
+        name: "values",
+        type: "bytes[]"
+      },
+      {
+        name: "salts",
+        type: "bytes32[]"
+      },
+      {
+        name: "proofs",
+        type: "bytes32[][]"
+      }
+    ],
+    name: "mint",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "anchors",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "from",
+        type: "address"
+      },
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "owner",
+        type: "address"
+      },
+      {
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
+    outputs: [
+      {
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "uri",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "data",
+    outputs: [
+      {
+        name: "document_version",
+        type: "uint256"
+      },
+      {
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        name: "asis_value",
+        type: "uint256"
+      },
+      {
+        name: "rehab_value",
+        type: "uint256"
+      },
+      {
+        name: "borrower",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        name: "anchors_",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        name: "usr",
+        type: "address"
+      },
+      {
+        indexed: false,
+        name: "tkn",
+        type: "uint256"
+      }
+    ],
+    name: "Minted",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "approved",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "operator",
+        type: "address"
+      },
+      {
+        indexed: false,
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "ApprovalForAll",
+    type: "event"
+  }
+];
+
 var contractAbiPileForAdd = [
   {
     constant: true,
@@ -25674,6 +26191,8 @@ var Tinlake = /** @class */ (function () {
                     .at(_this.contractAddresses['PILE']),
                 admin: _this.eth.contract(_this.contractAbis.admin)
                     .at(_this.contractAddresses['ADMIN']),
+                newSilverLoanNft: _this.eth.contract(_this.contractAbis.newSilverLoanNft)
+                    .at(_this.contractAddresses['NFT_COLLATERAL']),
             };
         };
         this.setEthConfig = function (ethConfig) {
@@ -25907,6 +26426,17 @@ var Tinlake = /** @class */ (function () {
                 }
             });
         }); };
+        this.getNFTData = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+            var res;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.contracts.newSilverLoanNft.data(tokenId)];
+                    case 1:
+                        res = _a.sent();
+                        return [2 /*return*/, res];
+                }
+            });
+        }); };
         this.contractAbis = contractAbis || {
             nft: contractAbiNft,
             title: contractAbiTitle,
@@ -25922,6 +26452,7 @@ var Tinlake = /** @class */ (function () {
             pileForAdd: contractAbiPileForAdd,
             pileForInit: contractAbiPileForInit,
             admin: contractAbiAdmin,
+            newSilverLoanNft: contractAbiNewSilverLoan,
         };
         this.contractAddresses = contractAddresses;
         this.setProvider(provider, ethOptions);

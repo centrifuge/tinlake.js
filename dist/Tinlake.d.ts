@@ -14,6 +14,7 @@ interface ContractAbis {
     'pileForAdd': any;
     'pileForInit': any;
     'admin': any;
+    'newSilverLoanNft': any;
 }
 interface ContractAddresses {
     'APPRAISER': string;
@@ -33,6 +34,7 @@ interface ContractAddresses {
     'SPELL': string;
     'CURRENCY': string;
     'ADMIN': string;
+    'NEW_SILVER_LOAN_NFT': string;
 }
 interface Options {
     contractAbis?: ContractAbis;
@@ -54,6 +56,7 @@ interface Contracts {
     pileForAdd: any;
     pileForInit: any;
     admin: any;
+    newSilverLoanNft: any;
 }
 interface ethI {
     getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
@@ -149,5 +152,6 @@ declare class Tinlake {
     getTotalDebt: () => Promise<BN>;
     getTotalBalance: () => Promise<BN>;
     getTotalValueOfNFTs: () => Promise<BN>;
+    getNFTData: <T>(tokenId: string) => Promise<T>;
 }
 export default Tinlake;
