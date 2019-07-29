@@ -1,0 +1,3 @@
+[submodule "build/tinlake"]
+	path = build/tinlake
+	url = https://github.com/centrifuge/tinlake.git
