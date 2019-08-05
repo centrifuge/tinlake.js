@@ -9,7 +9,11 @@ interface ContractAbis {
     'shelf': any;
     'appraiser': any;
     'lender': any;
+    'collateral': any;
     'pile': any;
+    'pileForAdd': any;
+    'pileForInit': any;
+    'admin': any;
 }
 interface ContractAddresses {
     'APPRAISER': string;
@@ -28,6 +32,7 @@ interface ContractAddresses {
     'ADMIT': string;
     'SPELL': string;
     'CURRENCY': string;
+    'ADMIN': string;
 }
 interface Options {
     contractAbis?: ContractAbis;
@@ -44,7 +49,11 @@ interface Contracts {
     shelf: any;
     appraiser: any;
     lender: any;
+    collateral: any;
     pile: any;
+    pileForAdd: any;
+    pileForInit: any;
+    admin: any;
 }
 interface ethI {
     getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
@@ -81,6 +90,7 @@ export interface BalanceDebt {
     fee: BN;
     chi: BN;
 }
+export declare const LOAN_ID_IDX = 2;
 declare class Tinlake {
     provider: any;
     eth: ethI;
@@ -90,6 +100,11 @@ declare class Tinlake {
     contracts: Contracts;
     contractAbis: ContractAbis;
     constructor(provider: any, contractAddresses: ContractAddresses, { contractAbis, ethOptions, ethConfig }?: Options);
+    setProvider: (provider: any, ethOptions?: any) => void;
+    setEthConfig: (ethConfig: {
+        [key: string]: any;
+    }) => void;
+    isAdmin: (address: string) => Promise<boolean>;
     loanCount: () => Promise<BN>;
     getLoan: (loanId: string) => Promise<Loan>;
     getBalanceDebt: (loanId: string) => Promise<BalanceDebt>;
@@ -106,6 +121,7 @@ declare class Tinlake {
      */
     adminAdmit: (registry: string, nft: string, principal: string, owner: string) => Promise<Events>;
     adminAppraise: (loanID: string, appraisal: string) => Promise<Events>;
+    getAppraisal: (loanID: string) => Promise<BN>;
     /**
      * @param to Address that should receive the currency (e. g. DAI)
      */
@@ -117,5 +133,21 @@ declare class Tinlake {
     repay: (loanId: string, wad: string, from: string, to: string) => Promise<Events>;
     approveCurrency: (usr: string, wad: string) => Promise<Events>;
     lenderRely: (usr: string) => Promise<Events>;
+    initFee: (fee: string) => Promise<Events>;
+    existsFee: (fee: string) => Promise<boolean>;
+    addFee: (loanId: string, fee: string, balance: string) => Promise<Events>;
+    getCurrentDebt: (loanId: string) => Promise<BN>;
+    /**
+     * whitelist is a shortcut contract that calls adminAdmit (admit.admit),
+     * adminAppraise (appraiser.file) and addFee (pile.file) to prevent additional
+     * transactions. It is required though that the fee is already initialized
+     * using initFee
+     * @param owner Owner of the created loan
+     */
+    whitelist: (registry: string, nft: string, principal: string, appraisal: string, fee: string, owner: string) => any;
+    unwhitelist: (loanId: string, registry: string, nft: string) => Promise<Events>;
+    getTotalDebt: () => Promise<BN>;
+    getTotalBalance: () => Promise<BN>;
+    getTotalValueOfNFTs: () => Promise<BN>;
 }
 export default Tinlake;

@@ -16,7 +16,15 @@ import contractAbiDesk from './abi/Desk.abi.json';
 import contractAbiShelf from './abi/Shelf.abi.json';
 import contractAbiAppraiser from './abi/Appraiser.abi.json';
 import contractAbiLender from './abi/MakerAdapter.abi.json';
+import contractAbiCollateral from './abi/Collateral.abi.json';
 import contractAbiPile from './abi/Pile.abi.json';
+import contractAbiAdmin from './abi/Admin.abi.json';
+// the following are just different orders of the methods in the ABI file. Reason is that ethjs
+// does not expose overloaded methods under different keys,
+// but instead just uses the last method, e. g. `file`. The following ABIs put the needed `file`
+// method last.
+import contractAbiPileForAdd from './abi/PileForAdd.json';
+import contractAbiPileForInit from './abi/PileForInit.abi.json';
 // tslint:enable:import-name
 
 interface ContractAbis {
@@ -29,7 +37,11 @@ interface ContractAbis {
   'shelf': any;
   'appraiser': any;
   'lender': any;
+  'collateral': any;
   'pile': any;
+  'pileForAdd': any;
+  'pileForInit': any;
+  'admin': any;
 }
 
 interface ContractAddresses {
@@ -49,6 +61,7 @@ interface ContractAddresses {
   'ADMIT': string;
   'SPELL': string;
   'CURRENCY': string;
+  'ADMIN': string;
 }
 
 interface Options {
@@ -67,7 +80,11 @@ interface Contracts {
   shelf: any;
   appraiser: any;
   lender: any;
+  collateral: any;
   pile: any;
+  pileForAdd: any;
+  pileForInit: any;
+  admin: any;
 }
 
 // tslint:disable-next-line:class-name
@@ -103,6 +120,8 @@ export interface BalanceDebt {
   chi: BN;
 }
 
+export const LOAN_ID_IDX = 2;
+
 class Tinlake {
   public provider: any;
   public eth: ethI;
@@ -124,12 +143,22 @@ class Tinlake {
       shelf: contractAbiShelf,
       appraiser: contractAbiAppraiser,
       lender: contractAbiLender,
+      collateral: contractAbiCollateral,
       pile: contractAbiPile,
+      pileForAdd: contractAbiPileForAdd,
+      pileForInit: contractAbiPileForInit,
+      admin: contractAbiAdmin,
     };
     this.contractAddresses = contractAddresses;
+
+    this.setProvider(provider, ethOptions);
+    this.setEthConfig(ethConfig || {});
+  }
+
+  setProvider = (provider: any, ethOptions?: any) => {
     this.provider = provider;
     this.ethOptions = ethOptions || {};
-    this.ethConfig = ethConfig || {};
+
     this.eth = new Eth(this.provider, this.ethOptions) as ethI;
 
     this.contracts = {
@@ -151,9 +180,26 @@ class Tinlake {
         .at(this.contractAddresses['APPRAISER']),
       lender: this.eth.contract(this.contractAbis.lender)
         .at(this.contractAddresses['LENDER']),
+      collateral: this.eth.contract(this.contractAbis.collateral)
+        .at(this.contractAddresses['COLLATERAL']),
       pile: this.eth.contract(this.contractAbis.pile)
         .at(this.contractAddresses['PILE']),
+      pileForAdd: this.eth.contract(this.contractAbis.pileForAdd)
+        .at(this.contractAddresses['PILE']),
+      pileForInit: this.eth.contract(this.contractAbis.pileForInit)
+        .at(this.contractAddresses['PILE']),
+      admin: this.eth.contract(this.contractAbis.admin)
+        .at(this.contractAddresses['ADMIN']),
     };
+  }
+
+  setEthConfig = (ethConfig: { [key: string]: any }) => {
+    this.ethConfig = ethConfig;
+  }
+
+  isAdmin = async (address: Address): Promise<boolean> => {
+    const res = await this.contracts.admit.wards(address);
+    return !(res[0] as BN).isZero();
   }
 
   loanCount = async (): Promise<BN> => {
@@ -220,6 +266,11 @@ class Tinlake {
       });
   }
 
+  getAppraisal = async (loanID: string): Promise<BN> => {
+    const res = await this.contracts.appraiser.value(loanID);
+    return res['0'];
+  }
+
   /**
    * @param to Address that should receive the currency (e. g. DAI)
    */
@@ -255,6 +306,73 @@ class Tinlake {
       return waitAndReturnEvents(this.eth, txHash, this.contracts['lender'].abi);
     });
   }
+
+  initFee = (fee: string): Promise<Events> => {
+    return this.contracts.pileForInit.file(fee, fee, this.ethConfig)
+      .then((txHash: string) => {
+        console.log(`[Pile.file] txHash: ${txHash}`);
+        return waitAndReturnEvents(this.eth, txHash, this.contracts.pileForInit.abi);
+      });
+  }
+
+  existsFee = async (fee: string): Promise<boolean> => {
+    const res: { speed: BN } = await this.contracts.pile.fees(fee);
+    return !res.speed.isZero();
+  }
+
+  addFee = (loanId: string, fee: string, balance: string): Promise<Events> => {
+    return this.contracts.pileForAdd.file(loanId, fee, balance, this.ethConfig)
+      .then((txHash: string) => {
+        console.log(`[Pile.file] txHash: ${txHash}`);
+        return waitAndReturnEvents(this.eth, txHash, this.contracts.pileForAdd.abi);
+      });
+  }
+
+  getCurrentDebt = async (loanId: string): Promise<BN> => {
+    const res = await this.contracts.pile.burden(loanId);
+    return res['0'];
+  }
+
+  /**
+   * whitelist is a shortcut contract that calls adminAdmit (admit.admit),
+   * adminAppraise (appraiser.file) and addFee (pile.file) to prevent additional
+   * transactions. It is required though that the fee is already initialized
+   * using initFee
+   * @param owner Owner of the created loan
+   */
+  whitelist = (registry: Address, nft: string, principal: string, appraisal: string,
+               fee: string, owner: string) => {
+    return this.contracts.admin.whitelist(registry, nft, principal, appraisal, fee, owner,
+                                          this.ethConfig)
+      .then((txHash: string) => {
+        console.log(`[Admin.whitelist] txHash: ${txHash}`);
+        return waitAndReturnEvents(this.eth, txHash, this.contracts['nft'].abi);
+      });
+  }
+
+  unwhitelist = (loanId: string, registry: string, nft: string):
+    Promise<Events> => {
+    return this.contracts.shelf.file(loanId, registry, nft, '0', this.ethConfig)
+      .then((txHash: string) => {
+        console.log(`[Shelf.file] txHash: ${txHash}`);
+        return waitAndReturnEvents(this.eth, txHash, this.contracts['shelf'].abi);
+      });
+  }
+
+  getTotalDebt = async (): Promise<BN> => {
+    const res: { 0: BN } = await this.contracts.pile.Debt();
+    return res['0'];
+  }
+
+  getTotalBalance = async (): Promise<BN> => {
+    const res: { 0: BN } = await this.contracts.pile.Balance();
+    return res['0'];
+  }
+
+  getTotalValueOfNFTs = async (): Promise<BN> => {
+    const res: { 0: BN } = await this.contracts.collateral.totalSupply();
+    return res['0'];
+  }
 }
 
 const waitAndReturnEvents = (eth: ethI, txHash: string, abi: any) => {
@@ -275,21 +393,26 @@ const waitAndReturnEvents = (eth: ethI, txHash: string, abi: any) => {
 // todo replace with a better polling
 const waitForTransaction = (eth: ethI, txHash: any) => {
   return new Promise((resolve, reject) => {
-    const secMax = 5;
+    const secMax = 60;
     let sec = 0;
     const wait = (txHash: string) => {
       setTimeout(() => {
         eth.getTransactionByHash(txHash, (err: any, tx: any) => {
-          if (tx.blockHash != null) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          if (tx && tx.blockHash != null) {
             resolve(tx);
             return;
           }
           console.log(`waiting for tx :${txHash}`);
           sec = sec + 1;
-          if (sec !== secMax) {
+          if (sec < secMax) {
             wait(txHash);
+          } else {
+            reject(`waiting for transaction tx ${tx} timed out after ${secMax} seconds`);
           }
-
         });
       },         1000);
 
@@ -300,8 +423,10 @@ const waitForTransaction = (eth: ethI, txHash: any) => {
 
 const findEvent = (abi: { filter: (arg0: (item: any) => boolean | undefined) => any[]; },
                    funcSignature: any) => {
-  return abi.filter((item: { type: string; name: string;
-    inputs: { map: (arg0: (input: any) => any) => { join: (arg0: string) => string; }; }; }) => {
+  return abi.filter((item: {
+    type: string; name: string;
+    inputs: { map: (arg0: (input: any) => any) => { join: (arg0: string) => string; }; };
+  }) => {
     if (item.type !== 'event') return false;
     const signature =
       `${item.name}(${item.inputs.map((input: { type: any; }) => input.type).join(',')})`;
@@ -310,8 +435,10 @@ const findEvent = (abi: { filter: (arg0: (item: any) => boolean | undefined) => 
   });
 };
 
-const getEvents = (receipt: { logs:
-                    { length: number; forEach: (arg0: (log: any) => void) => void; }; },
+const getEvents = (receipt: {
+  logs:
+  { length: number; forEach: (arg0: (log: any) => void) => void; };
+},
                    abi: any) => {
   if (receipt.logs.length === 0) {
     return null;
@@ -325,11 +452,11 @@ const getEvents = (receipt: { logs:
       const inputs = event.inputs.filter((input: { indexed: any; }) => input.indexed)
         .map((input: { type: any; }) => input.type);
 
-        // remove 0x prefix from topics
+      // remove 0x prefix from topics
       const topics = log.topics.map((t: { replace: (arg0: string, arg1: string) => void; }) =>
         t.replace('0x', ''));
 
-        // concat topics without first topic (func signature)
+      // concat topics without first topic (func signature)
       const bytes = `0x${topics.slice(1).join('')}`;
 
       const data = abiCoder.decodeParameters(inputs, bytes);

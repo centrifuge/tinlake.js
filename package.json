@@ -1,6 +1,6 @@
 {
   "name": "@centrifuge/tinlake-js",
-  "version": "0.1.0",
+  "version": "0.0.10",
   "description": "Centrifuge Tinlake Contracts Client",
   "main": "dist/Tinlake.js",
   "types": "dist/Tinlake.d.ts",
@@ -16,7 +16,6 @@
     "ethjs": "^0.4.0",
     "ethjs-provider-signer": "^0.1.4",
     "ethjs-signer": "^0.1.1",
-    "fs": "0.0.1-security",
     "mocha": "^6.1.4",
     "web3-eth-abi": "^1.0.0-beta.55",
     "web3-utils": "^1.0.0-beta.55"
@@ -40,10 +39,10 @@
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "bundle": "rollup -c",
+    "build": "rollup -c",
     "watch": "rollup -cw",
-    "test": "npm run bundle && ts-mocha -p test/tsconfig.json test/**/*",
-    "nodemon": "nodemon node inspect src/index.js",
+    "test": "npm run build && ts-mocha -p test/tsconfig.json test/**/*",
+    "nodemon": "nodemon node inspect dist/Tinlake.js"
     "prepublish": "npm run bundle"
   },
   "repository": {
