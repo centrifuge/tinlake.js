@@ -2,9 +2,9 @@
 import Eth from 'ethjs';
 import { AbiCoder } from 'web3-eth-abi';
 const abiCoder = new AbiCoder();
-import { sha3 } from 'web3-utils';
 // tslint:disable-next-line:import-name
 import BN from 'bn.js';
+import { sha3 } from 'web3-utils';
 
 // tslint:disable:import-name no-duplicate-imports
 import contractAbiNft from './abi/test/SimpleNFT.abi.json';
@@ -19,6 +19,7 @@ import contractAbiLender from './abi/MakerAdapter.abi.json';
 import contractAbiCollateral from './abi/Collateral.abi.json';
 import contractAbiPile from './abi/Pile.abi.json';
 import contractAbiAdmin from './abi/Admin.abi.json';
+import contractAbiNewSilverLoan from './abi/NewSilverLoanNFT.abi.json';
 // the following are just different orders of the methods in the ABI file. Reason is that ethjs
 // does not expose overloaded methods under different keys,
 // but instead just uses the last method, e. g. `file`. The following ABIs put the needed `file`
@@ -42,6 +43,7 @@ interface ContractAbis {
   'pileForAdd': any;
   'pileForInit': any;
   'admin': any;
+  'newSilverLoanNft': any;
 }
 
 interface ContractAddresses {
@@ -62,6 +64,7 @@ interface ContractAddresses {
   'SPELL': string;
   'CURRENCY': string;
   'ADMIN': string;
+  'NEW_SILVER_LOAN_NFT': string;
 }
 
 interface Options {
@@ -85,10 +88,12 @@ interface Contracts {
   pileForAdd: any;
   pileForInit: any;
   admin: any;
+  newSilverLoanNft: any;
 }
 
 // tslint:disable-next-line:class-name
 interface ethI {
+  web3_sha3: (signature: string) => string;
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
   contract: (arg0: any) => { at: (arg0: any) => void };
@@ -122,7 +127,7 @@ export interface BalanceDebt {
 
 export const LOAN_ID_IDX = 2;
 
-class Tinlake {
+export class Tinlake {
   public provider: any;
   public eth: ethI;
   public ethOptions: any;
@@ -148,6 +153,7 @@ class Tinlake {
       pileForAdd: contractAbiPileForAdd,
       pileForInit: contractAbiPileForInit,
       admin: contractAbiAdmin,
+      newSilverLoanNft: contractAbiNewSilverLoan,
     };
     this.contractAddresses = contractAddresses;
 
@@ -190,6 +196,8 @@ class Tinlake {
         .at(this.contractAddresses['PILE']),
       admin: this.eth.contract(this.contractAbis.admin)
         .at(this.contractAddresses['ADMIN']),
+      newSilverLoanNft: this.eth.contract(this.contractAbis.newSilverLoanNft)
+        .at(this.contractAddresses['NFT_COLLATERAL']),
     };
   }
 
@@ -198,7 +206,7 @@ class Tinlake {
   }
 
   isAdmin = async (address: Address): Promise<boolean> => {
-    const res = await this.contracts.admit.wards(address);
+    const res = await this.contracts.admin.wards(address);
     return !(res[0] as BN).isZero();
   }
 
@@ -373,6 +381,11 @@ class Tinlake {
     const res: { 0: BN } = await this.contracts.collateral.totalSupply();
     return res['0'];
   }
+
+  getNFTData: <T>(tokenId: string) => Promise<T> = async (tokenId) => {
+    const res = await this.contracts.newSilverLoanNft.data(tokenId);
+    return res;
+  }
 }
 
 const waitAndReturnEvents = (eth: ethI, txHash: string, abi: any) => {
@@ -468,4 +481,9 @@ const getEvents = (receipt: {
   return events;
 };
 
-export default Tinlake;
+export * from './utils/baseToDisplay';
+export * from './utils/bnToHex';
+export * from './utils/displayToBase';
+export * from './utils/feeToInterestRate';
+export * from './utils/getLoanStatus';
+export * from './utils/interestRateToFee';
