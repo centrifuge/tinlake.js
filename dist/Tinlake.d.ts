@@ -95,7 +95,7 @@ export interface BalanceDebt {
     chi: BN;
 }
 export declare const LOAN_ID_IDX = 2;
-declare class Tinlake {
+export declare class Tinlake {
     provider: any;
     eth: ethI;
     ethOptions: any;
@@ -155,7 +155,6 @@ declare class Tinlake {
     getTotalValueOfNFTs: () => Promise<BN>;
     getNFTData: <T>(tokenId: string) => Promise<T>;
 }
-export default Tinlake;
 export * from './utils/baseToDisplay';
 export * from './utils/bnToHex';
 export * from './utils/displayToBase';
