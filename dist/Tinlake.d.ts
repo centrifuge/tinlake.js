@@ -14,7 +14,7 @@ interface ContractAbis {
     'pileForAdd': any;
     'pileForInit': any;
     'admin': any;
-    'newSilverLoanNft': any;
+    'nftData': any;
 }
 interface ContractAddresses {
     'APPRAISER': string;
@@ -56,7 +56,7 @@ interface Contracts {
     pileForAdd: any;
     pileForInit: any;
     admin: any;
-    newSilverLoanNft: any;
+    nftData: any;
 }
 interface ethI {
     web3_sha3: (signature: string) => string;
@@ -94,6 +94,10 @@ export interface BalanceDebt {
     fee: BN;
     chi: BN;
 }
+export interface AbiOutput {
+    name: string;
+    type: 'uint265' | 'address';
+}
 export declare const LOAN_ID_IDX = 2;
 export declare class Tinlake {
     provider: any;
@@ -103,7 +107,7 @@ export declare class Tinlake {
     contractAddresses: ContractAddresses;
     contracts: Contracts;
     contractAbis: ContractAbis;
-    constructor(provider: any, contractAddresses: ContractAddresses, { contractAbis, ethOptions, ethConfig }?: Options);
+    constructor(provider: any, contractAddresses: ContractAddresses, nftDataOutputs: AbiOutput[], { contractAbis, ethOptions, ethConfig }?: Options);
     setProvider: (provider: any, ethOptions?: any) => void;
     setEthConfig: (ethConfig: {
         [key: string]: any;

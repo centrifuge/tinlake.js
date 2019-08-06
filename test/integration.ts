@@ -1,13 +1,10 @@
-// tslint:disable-next-line:variable-name
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
 import assert from 'assert';
 const rpcUrl = process.env['ETH_RPC_URL'];
-// tslint:disable-next-line:import-name
 import BN from 'bn.js';
-// tslint:disable-next-line:import-name
 import contractAddresses from './addresses_tinlake.json';
-// import { sleep } from './utils/sleep';
+import nftDataContractCall from './nft_data_contract_call.json';
 import Tinlake, { LOAN_ID_IDX } from '../dist/Tinlake';
 
 const SUCCESS_STATUS = '0x1';
@@ -35,6 +32,7 @@ describe('functional tinlake tests', () => {
         accounts: (cb: (arg0: null, arg1: string[]) => void) => cb(null, [adminEthFrom]),
       }),
       contractAddresses,
+      nftDataContractCall.outputs,
       {
         ethConfig: { from: adminEthFrom, gasLimit: `0x${gasLimit.toString(16)}` },
       },
@@ -46,6 +44,7 @@ describe('functional tinlake tests', () => {
         accounts: (cb: (arg0: null, arg1: string[]) => void) => cb(null, [borrowerEthFrom]),
       }),
       contractAddresses,
+      nftDataContractCall.outputs,
       {
         ethConfig: { from: borrowerEthFrom, gasLimit: `0x${gasLimit.toString(16)}` },
       },
