@@ -85,7 +85,6 @@ export interface AbiOutput {
 export declare const LOAN_ID_IDX = 2;
 export declare class Tinlake {
     provider: any;
-    network: any;
     eth: ethI;
     ethOptions: any;
     ethConfig: any;
