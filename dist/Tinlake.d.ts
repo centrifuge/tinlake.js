@@ -85,6 +85,7 @@ export interface AbiOutput {
 export declare const LOAN_ID_IDX = 2;
 export declare class Tinlake {
     provider: any;
+    network: any;
     eth: ethI;
     ethOptions: any;
     ethConfig: any;
@@ -106,6 +107,7 @@ export declare class Tinlake {
     ownerOfNFT: (tokenId: string) => Promise<any>;
     ownerOfLoan: (loanId: string) => Promise<any>;
     balanceOfCurrency: (usr: string) => Promise<any>;
+    mintCurrency: (usr: string, wad: string) => Promise<unknown>;
     /**
      * @param owner Owner of the new NFT
      */
