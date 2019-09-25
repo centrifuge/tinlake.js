@@ -128,7 +128,6 @@ export const LOAN_ID_IDX = 2;
 
 export class Tinlake {
   public provider: any;
-  public network: any;
   public eth: ethI;
   public ethOptions: any;
   public ethConfig: any;
@@ -177,10 +176,8 @@ export class Tinlake {
 
   setProvider = (provider: any, ethOptions?: any) => {
     this.provider = provider;
-
     this.ethOptions = ethOptions || {};
     this.eth = new Eth(this.provider, this.ethOptions) as ethI;
-
 
     this.contracts = {
       nft: this.eth.contract(this.contractAbis.nft)
