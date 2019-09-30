@@ -34735,7 +34735,7 @@ var Tinlake = /** @class */ (function () {
                 console.log("[NFT.mint] txHash: " + txHash);
                 return waitAndReturnEvents(_this.eth, txHash, _this.contracts['nft'].abi, _this.transactionTimeout);
             });
-    };
+        };
         /**
          * @param owner Owner of the created loan
          */

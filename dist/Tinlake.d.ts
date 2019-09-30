@@ -65,6 +65,16 @@ interface ethI {
         at: (arg0: any) => void;
     };
 }
+interface Events {
+    txHash: string;
+    status: any;
+    events: {
+        event: {
+            name: any;
+        };
+        data: any[];
+    }[];
+}
 export declare type Address = string;
 export interface Loan {
     registry: Address;
@@ -110,7 +120,7 @@ export declare class Tinlake {
     /**
      * @param owner Owner of the new NFT
      */
-    mintNFT: (owner: string, tokenId: string) => Promise<unknown>;
+    mintNFT: (owner: string, tokenId: string) => Promise<Events>;
     /**
      * @param owner Owner of the created loan
      */
