@@ -340,9 +340,12 @@ export class Tinlake {
   }
 
   initFee = async (fee: string) => {
-    const txHash = await executeAndRetry(this.contracts.admin.file, [fee, fee, this.ethConfig]);
-    console.log(`[Pile.file] txHash: ${txHash}`);
-    return waitAndReturnEvents(this.eth, txHash, this.contracts.admin.abi, this.transactionTimeout);
+    // not all deployments include the new version of admin contract. call for some deployments file driectly from pile to avoid regression
+    const adminHasInitFeeMethod = await hasMethod(this.eth,this.contracts.admin.address,"file(uint256,uint256)")
+    const contract = adminHasInitFeeMethod ? this.contracts.admin : this.contracts.pileForInit
+    const txHash = await executeAndRetry(contract.file, [fee, fee, this.ethConfig]);
+    console.log(`[Pile/Admin.file] txHash: ${txHash}`);
+    return waitAndReturnEvents(this.eth, txHash, contract.abi, this.transactionTimeout);
   }
 
   existsFee = async (fee: string) => {
@@ -507,6 +510,12 @@ const getEvents = (receipt: {
     }
   });
   return events;
+};
+
+async function hasMethod(eth: any, contractAddress: string, signature: string) {
+  const code = await eth.getCode(contractAddress);
+  const hash = abiCoder.encodeFunctionSignature(signature);
+  return code.indexOf(hash.slice(2, hash.length)) > 0;
 };
 
 function sleep(millis: number) {

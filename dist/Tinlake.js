@@ -34913,14 +34913,18 @@ var Tinlake = /** @class */ (function () {
             });
         }); };
         this.initFee = function (fee) { return __awaiter(_this, void 0, void 0, function () {
-            var txHash;
+            var adminHasInitFeeMethod, contract, txHash;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, executeAndRetry(this.contracts.admin.file, [fee, fee, this.ethConfig])];
+                    case 0: return [4 /*yield*/, hasMethod(this.eth, this.contracts.admin.address, "file(uint256,uint256)")];
                     case 1:
+                        adminHasInitFeeMethod = _a.sent();
+                        contract = adminHasInitFeeMethod ? this.contracts.admin : this.contracts.pileForInit;
+                        return [4 /*yield*/, executeAndRetry(contract.file, [fee, fee, this.ethConfig])];
+                    case 2:
                         txHash = _a.sent();
-                        console.log("[Pile.file] txHash: " + txHash);
-                        return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts.admin.abi, this.transactionTimeout)];
+                        console.log("[Pile/Admin.file] txHash: " + txHash);
+                        return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, contract.abi, this.transactionTimeout)];
                 }
             });
         }); };
@@ -35185,6 +35189,20 @@ var getEvents = function (receipt, abi) {
     });
     return events;
 };
+function hasMethod(eth, contractAddress, signature) {
+    return __awaiter(this, void 0, void 0, function () {
+        var code, hash;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, eth.getCode(contractAddress)];
+                case 1:
+                    code = _a.sent();
+                    hash = abiCoder$1.encodeFunctionSignature(signature);
+                    return [2 /*return*/, code.indexOf(hash.slice(2, hash.length)) > 0];
+            }
+        });
+    });
+}
 
 exports.LOAN_ID_IDX = LOAN_ID_IDX;
 exports.Tinlake = Tinlake;
