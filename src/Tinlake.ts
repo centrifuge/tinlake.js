@@ -24,7 +24,6 @@ import contractAbiAdmin from './abi/Admin.abi.json';
 // method last.
 import contractAbiPileForAdd from './abi/PileForAdd.json';
 import contractAbiPileForInit from './abi/PileForInit.abi.json';
-import { toASCII } from 'punycode';
 
 const pollingInterval = 1000
 interface ContractAbis {
@@ -361,7 +360,7 @@ export class Tinlake {
     return waitAndReturnEvents(this.eth, txHash, this.contracts.pileForAdd.abi, this.transactionTimeout);
   }
 
-  getTinlakeVersion = async () => {
+  getTinlakeVersion = async (): Promise<string | null> => {
     try {
       const res = await executeAndRetry(this.contracts.reception.versio, []);
       return res && res['0'] && hexToUtf8(res['0']) || null;
