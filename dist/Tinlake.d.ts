@@ -137,6 +137,7 @@ export declare class Tinlake {
     initFee: (fee: string) => Promise<unknown>;
     existsFee: (fee: string) => Promise<boolean>;
     addFee: (loanId: string, fee: string, balance: string) => Promise<unknown>;
+    getTinlakeVersion: () => Promise<any>;
     getCurrentDebt: (loanId: string) => Promise<BN>;
     /**
      * whitelist is a shortcut contract that calls adminAdmit (admit.admit),

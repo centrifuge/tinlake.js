@@ -2,7 +2,8 @@ import Eth from 'ethjs';
 import { AbiCoder } from 'web3-eth-abi';
 const abiCoder = new AbiCoder();
 import BN from 'bn.js';
-import { sha3 } from 'web3-utils';
+import { sha3, hexToUtf8 } from 'web3-utils';
+import compareVersions from 'compare-versions'
 
 
 import contractAbiNft from './abi/test/SimpleNFT.abi.json';
@@ -23,6 +24,7 @@ import contractAbiAdmin from './abi/Admin.abi.json';
 // method last.
 import contractAbiPileForAdd from './abi/PileForAdd.json';
 import contractAbiPileForInit from './abi/PileForInit.abi.json';
+import { toASCII } from 'punycode';
 
 const pollingInterval = 1000
 interface ContractAbis {
@@ -340,10 +342,13 @@ export class Tinlake {
   }
 
   initFee = async (fee: string) => {
-    const txHash = await executeAndRetry(this.contracts.admin.file, [fee, fee, this.ethConfig]);
-    console.log(`[Pile.file] txHash: ${txHash}`);
-    return waitAndReturnEvents(this.eth, txHash, this.contracts.admin.abi, this.transactionTimeout);
-  }
+    // Only deployments with version >= v0.1.0 include the new admin contract. call for older deployments file driectly on pile to avoid regression
+    const version = await this.getTinlakeVersion();
+    const contract = (version && compareVersions.compare(version, 'v0.1.0', '>=')) ? this.contracts.admin : this.contracts.pileForInit;
+    const txHash = await executeAndRetry(contract.file, [fee, fee, this.ethConfig]);
+    console.log(`[Pile/Admin.file] txHash: ${txHash}`);
+    return waitAndReturnEvents(this.eth, txHash, contract.abi, this.transactionTimeout);
+  } 
 
   existsFee = async (fee: string) => {
     const res: { speed: BN } = await executeAndRetry(this.contracts.pile.fees, [fee]);
@@ -354,6 +359,15 @@ export class Tinlake {
     const txHash = await executeAndRetry(this.contracts.pileForAdd.file, [loanId, fee, balance, this.ethConfig]);
     console.log(`[Pile.file] txHash: ${txHash}`);
     return waitAndReturnEvents(this.eth, txHash, this.contracts.pileForAdd.abi, this.transactionTimeout);
+  }
+
+  getTinlakeVersion = async () => {
+    try {
+      const res = await executeAndRetry(this.contracts.reception.versio, []);
+      return res && res['0'] && hexToUtf8(res['0']) || null;
+    } catch (e) {
+      return null;
+    }
   }
 
   getCurrentDebt = async (loanId: string): Promise<BN> => {
