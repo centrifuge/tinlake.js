@@ -35095,7 +35095,7 @@ var Tinlake = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, executeAndRetry(this.contracts.reception.versio, [])];
+                        return [4 /*yield*/, executeAndRetry(this.contracts.reception.version, [])];
                     case 1:
                         res = _a.sent();
                         return [2 /*return*/, res && res['0'] && src_26(res['0']) || null];

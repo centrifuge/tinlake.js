@@ -361,7 +361,7 @@ export class Tinlake {
 
   getTinlakeVersion = async (): Promise<string | null> => {
     try {
-      const res = await executeAndRetry(this.contracts.reception.versio, []);
+      const res = await executeAndRetry(this.contracts.reception.version, []);
       return res && res['0'] && hexToUtf8(res['0']) || null;
     } catch (e) {
       return null;
