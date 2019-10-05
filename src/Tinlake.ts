@@ -3,7 +3,7 @@ import { AbiCoder } from 'web3-eth-abi';
 const abiCoder = new AbiCoder();
 import BN from 'bn.js';
 import { sha3, hexToUtf8 } from 'web3-utils';
-import compareVersions from 'compare-versions'
+import compareVersions from 'compare-versions';
 
 
 import contractAbiNft from './abi/test/SimpleNFT.abi.json';
@@ -25,7 +25,7 @@ import contractAbiAdmin from './abi/Admin.abi.json';
 import contractAbiPileForAdd from './abi/PileForAdd.json';
 import contractAbiPileForInit from './abi/PileForInit.abi.json';
 
-const pollingInterval = 1000
+const pollingInterval = 1000;
 interface ContractAbis {
   'nft': any;
   'title': any;
@@ -239,13 +239,13 @@ export class Tinlake {
   }
 
   approveNFT = async (tokenId: string, to: string) => {
-    const txHash = await executeAndRetry(this.contracts.nft.approve, [to, tokenId, this.ethConfig])
+    const txHash = await executeAndRetry(this.contracts.nft.approve, [to, tokenId, this.ethConfig]);
     console.log(`[NFT Approve] txHash: ${txHash}`);
     return waitAndReturnEvents(this.eth, txHash, this.contracts['nft'].abi, this.transactionTimeout);
   }
 
   approveCollateral = async (usr: string, wad: string) => {
-    const txHash = await executeAndRetry(this.contracts.collateral.approve, [usr, wad, this.ethConfig])
+    const txHash = await executeAndRetry(this.contracts.collateral.approve, [usr, wad, this.ethConfig]);
     console.log(`[Collateral Approve] txHash: ${txHash}`);
     return waitAndReturnEvents(this.eth, txHash, this.contracts['collateral'].abi, this.transactionTimeout);
   }
@@ -282,16 +282,15 @@ export class Tinlake {
    * @param owner Owner of the created loan
    */
   adminAdmit = async (registry: string, nft: string, principal: string, owner: string) => {
-    const txHash = await executeAndRetry(this.contracts.admit.admit, [registry, nft, principal, owner, this.ethConfig])
+    const txHash = await executeAndRetry(this.contracts.admit.admit, [registry, nft, principal, owner, this.ethConfig]);
     console.log(`[Admit.admit] txHash: ${txHash}`);
-    return waitAndReturnEvents(this.eth, txHash, this.contracts['nft'].abi, this.transactionTimeout); 
+    return waitAndReturnEvents(this.eth, txHash, this.contracts['nft'].abi, this.transactionTimeout);
   }
 
   adminAppraise = async (loanID: string, appraisal: string) => {
     const txHash = await executeAndRetry(this.contracts.appraiser.file, [loanID, appraisal, this.ethConfig]);
     console.log(`[Appraisal.file] txHash: ${txHash}`);
-    return waitAndReturnEvents(this.eth, txHash, this.contracts['nft'].abi, this.transactionTimeout);
-      
+    return waitAndReturnEvents(this.eth, txHash, this.contracts['nft'].abi, this.transactionTimeout); 
   }
 
   getAppraisal = async (loanID: string) => {
@@ -303,7 +302,7 @@ export class Tinlake {
    * @param to Address that should receive the currency (e. g. DAI)
    */
   borrow = async (loanId: string, to: string) => {
-    const txHash = await executeAndRetry(this.contracts.reception.borrow, [loanId, to, this.ethConfig])
+    const txHash = await executeAndRetry(this.contracts.reception.borrow, [loanId, to, this.ethConfig]);
     console.log(`[Reception.borrow] txHash: ${txHash}`);
     return waitAndReturnEvents(this.eth, txHash, this.contracts['reception'].abi, this.transactionTimeout);
   }
@@ -313,7 +312,7 @@ export class Tinlake {
    * @param usr Address that receives the NFT
    */
   repay = async (loanId: string, wad: string, usr: string) => {
-    const txHash = await executeAndRetry(this.contracts.reception.repay, [loanId, wad, usr,  this.ethConfig])  
+    const txHash = await executeAndRetry(this.contracts.reception.repay, [loanId, wad, usr,  this.ethConfig]);  
     console.log(`[Reception.repay] txHash: ${txHash}`);
     return waitAndReturnEvents(this.eth, txHash, this.contracts['reception'].abi, this.transactionTimeout);
   }
@@ -323,7 +322,7 @@ export class Tinlake {
    * @param usr Address that receives the NFT
    */
   close = async  (loanId: string, usr: string) => {
-    const txHash = await executeAndRetry(this.contracts.reception.close, [loanId, usr,  this.ethConfig])
+    const txHash = await executeAndRetry(this.contracts.reception.close, [loanId, usr,  this.ethConfig]);
     console.log(`[Reception.close] txHash: ${txHash}`);
     return waitAndReturnEvents(this.eth, txHash, this.contracts['reception'].abi, this.transactionTimeout);
   }
@@ -341,7 +340,7 @@ export class Tinlake {
   }
 
   initFee = async (fee: string) => {
-    // Only deployments with version >= v0.1.0 include the new admin contract. call for older deployments file driectly on pile to avoid regression
+    // Only deployments with version >= v0.1.0 include the new admin contract. For older deployments call file method driectly on pile to avoid regression
     const version = await this.getTinlakeVersion();
     const contract = (version && compareVersions.compare(version, 'v0.1.0', '>=')) ? this.contracts.admin : this.contracts.pileForInit;
     const txHash = await executeAndRetry(contract.file, [fee, fee, this.ethConfig]);
@@ -414,7 +413,7 @@ export class Tinlake {
   }
 }
 
-async function executeAndRetry (f: Function, args: Array<any> = []) : Promise<any> {
+async function executeAndRetry(f: Function, args: Array<any> = []) : Promise<any> {
   try {
     const result = await f(...args);
     return result;
@@ -422,13 +421,12 @@ async function executeAndRetry (f: Function, args: Array<any> = []) : Promise<an
     // using error message, since error code -32603 is not unique enough 
     // todo introduce retry limit
     if (e && e.message && (e.message.indexOf("Cannot read property 'number' of null") !== -1 ||
-        e.message.indexOf('error with payload')  !== -1)) {
-        console.log("internal RPC error detected, retry triggered...", e)
-        throw (new Error("Internal RPC Error. Please try again."))
+      e.message.indexOf('error with payload')  !== -1)) {
+      console.log("internal RPC error detected, retry triggered...", e)
+      throw (new Error("Internal RPC Error. Please try again."));
       // await sleep(1000);
       // return executeAndRetry(f, args);
-    }
-    else {
+    } else {
       throw(e);
     }
   }
