@@ -238,15 +238,13 @@ export class Tinlake {
     const loanCountBn = await this.loanCount()
     const loanCount = loanCountBn && loanCountBn.toNumber() || 0;
     const loans = [];
-    
-    // works as long as we increase the loanIds incrementally
+
     for (let id = 0; id < loanCount; id++) {
       const loanId = `${id}`
       const loan = await this.getLoan(loanId);
       if (!loan) {
         continue;
       }
-
       const balanceDebtRes = await this.getBalanceDebt(loanId);
       const balanceDebt = balanceDebtRes && balanceDebtRes.debt && new Decimal(balanceDebtRes.debt.toString());
       const principal = new Decimal(loan.principal.toString());
