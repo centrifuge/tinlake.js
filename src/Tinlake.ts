@@ -1,14 +1,9 @@
 import Eth from 'ethjs';
-import { AbiCoder } from 'web3-eth-abi';
 
-import { Loan, Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from "./types";
 
-/*
-import { Decimal } from 'decimal.js-light';
+import { Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from "./types";
 
-*/
-
-// todo make out collective export
+// TODO import collectively
 import contractAbiNft from './abi/test/SimpleNFT.abi.json';
 import contractAbiTitle from './abi/Title.abi.json';
 import contractAbiCurrency from './abi/test/SimpleToken.abi.json';
@@ -78,12 +73,10 @@ export class Tinlake {
         .at(this.contractAddresses['NFT_COLLATERAL']),
     };
   }
-
   setEthConfig = (ethConfig: { [key: string]: any }) => {
     this.ethConfig = ethConfig;
   }
 }
-
 
 export default Tinlake;
 

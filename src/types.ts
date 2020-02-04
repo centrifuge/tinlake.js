@@ -1,5 +1,5 @@
 
-// TODO : give better naming
+// TODO : use Tinlake type
 export type Constructor<T = {}> = new (...args: any[]) => T;
 
 export interface ethI {
@@ -14,11 +14,10 @@ export interface ContractAddresses {
     'NFT_COLLATERAL': string;
     'TITLE': string;
     'CURRENCY': string;
-    // 'LIGHTSWITCH': string;
+    'LIGHTSWITCH': string;
     'SHELF': string;
     'COLLATERAL': string;
     'PILE': string;
-    //'DEPLOYER': string;
   }
   
   export interface Options {
@@ -38,7 +37,7 @@ export interface ContractAddresses {
   }
 
   // TODO: create abis based on contract names
-  // TODO cleanup why 3 different maps
+  // TODO cleanup 
   export interface ContractAbis {
     'nft': any;
     'title': any;

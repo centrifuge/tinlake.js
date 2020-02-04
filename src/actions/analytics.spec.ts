@@ -1,5 +1,5 @@
-import Tinlake from "../src/Tinlake";
-import WithAnalytics from "../src/actions/analytics";
+import Tinlake from "../Tinlake.ts";
+import WithAnalytics from "./analytics";
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
 
@@ -54,8 +54,6 @@ getDebt();
 
 
 async function getDebt(){
-  // const functions = Object.getOwnPropertyNames(tinlake);
-  // console.log(functions);
   const debt = await tinlake.getTotalDebt();
-  console.log("debt debt", debt);
+  console.log("total debt", debt);
 }

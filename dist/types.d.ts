@@ -12,6 +12,7 @@ export interface ContractAddresses {
     'NFT_COLLATERAL': string;
     'TITLE': string;
     'CURRENCY': string;
+    'LIGHTSWITCH': string;
     'SHELF': string;
     'COLLATERAL': string;
     'PILE': string;
