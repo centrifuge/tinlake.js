@@ -1,3 +1,4 @@
+import BN from 'bn.js';
 export declare type Constructor<T = {}> = new (...args: any[]) => T;
 export interface ethI {
     web3_sha3: (signature: string) => string;
@@ -8,37 +9,58 @@ export interface ethI {
     };
     abi: any;
 }
-export interface ContractAddresses {
-    'NFT_COLLATERAL': string;
-    'TITLE': string;
-    'CURRENCY': string;
-    'LIGHTSWITCH': string;
-    'SHELF': string;
-    'COLLATERAL': string;
-    'PILE': string;
-}
 export interface Options {
     contractAbis?: ContractAbis;
     ethOptions?: any;
     ethConfig?: any;
 }
+export interface EthConfig {
+    from: string;
+    gasLimit: string;
+}
 export interface Contracts {
     title: any;
-    nft: any;
-    currency: any;
     shelf: any;
-    collateral: any;
     pile: any;
+    ceiling: any;
+    collector: any;
+    threshold: any;
+    pricePool: any;
+    currency: any;
+    jOperator: any;
+    distributor: any;
+    assessor: any;
+    nft: any;
     nftData: any;
 }
 export interface ContractAbis {
-    'nft': any;
     'title': any;
-    'currency': any;
     'shelf': any;
-    'collateral': any;
     'pile': any;
+    'ceiling': any;
+    'collector': any;
+    'threshold': any;
+    'pricePool': any;
+    'currency': any;
+    'jOperator': any;
+    'distributor': any;
+    'assessor': any;
+    'nft': any;
     'nftData': any;
+}
+export interface ContractAddresses {
+    'BORROWER_TITLE': string;
+    'BORROWER_SHELF': string;
+    'PILE': string;
+    'BORROWER_CEILING': string;
+    'BORROWER_COLLECTOR': string;
+    'BORROWER_THRESHOLD': string;
+    'BORROWER_PRICE_POOL': string;
+    'TINLAKE_CURRENCY': string;
+    'LENDER_JUNIOR_OPERATOR': string;
+    'LENDER_DISTRIBUTOR': string;
+    'LENDER_ASSESSOR': string;
+    'NFT_COLLATERAL': string;
 }
 export interface Events {
     txHash: string;
@@ -71,5 +93,5 @@ export interface BalanceDebt {
 }
 export interface AbiOutput {
     name: string;
-    type: 'uint265' | 'address';
+    type: 'address' | 'uint256';
 }

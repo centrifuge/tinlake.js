@@ -1,6 +1,5 @@
-import { Loan, Contracts } from "./../types";
+import { Loan, Contracts, Constructor } from './../types';
 import BN from 'bn.js';
-declare type Constructor<T = {}> = new (...args: any[]) => T;
 declare function Analytics<AnalyticsBase extends Constructor<{}>>(Base: AnalyticsBase): {
     new (...args: any[]): {
         contracts: Contracts;
@@ -9,7 +8,6 @@ declare function Analytics<AnalyticsBase extends Constructor<{}>>(Base: Analytic
         getNFTData: <T>(tokenId: string) => Promise<T>;
         getLoan: (loanId: string) => Promise<Loan>;
         loanCount: () => Promise<BN>;
-        getCurrentDebt: (loanId: string) => Promise<BN>;
     };
 } & AnalyticsBase;
 export default Analytics;

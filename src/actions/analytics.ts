@@ -1,53 +1,45 @@
-import { Loan, Contracts } from "./../types";
-import { executeAndRetry } from "./../ethereum";
+import { Loan, Contracts, Constructor } from './../types';
+import { executeAndRetry } from './../ethereum';
 import BN from 'bn.js';
 
-// todo move to types 
-type Constructor<T = {}> = new (...args: any[]) => T;
-
+// tslint:disable-next-line:function-name
 function Analytics<AnalyticsBase extends Constructor<{}>>(Base: AnalyticsBase) {
-     return class extends Base {
+  return class extends Base {
 
-        contracts: Contracts;
+    contracts: Contracts;
 
-        constructor(...args: any[]) {
-            super(...args);
-        }
-
-        getTotalDebt = async (): Promise<BN> => {
-            const res: { 0: BN } = await executeAndRetry(this.contracts.pile.Debt, []);
-            return res['0'];
-        }
-        
-        getTotalBalance = async (): Promise<BN> => {
-            const res: { 0: BN } = await executeAndRetry(this.contracts.pile.Balance, []);
-            return res['0'];
-        }
-        
-        getNFTData: <T>(tokenId: string) => Promise<T> = async (tokenId) => {
-            const res = await executeAndRetry(this.contracts.nftData.data, [tokenId]);
-            return res;
-        }
-        
-        getLoan = async (loanId: string): Promise<Loan> => {
-            return await executeAndRetry(this.contracts.shelf.shelf, [loanId]);
-        }
-
-        loanCount = async (): Promise<BN> => {
-            const res = await executeAndRetry(this.contracts.title.count, []);
-            return res[0];
-        }
-        
-        getCurrentDebt = async (loanId: string): Promise<BN> => {
-            const res = await executeAndRetry(this.contracts.pile.burden, [loanId]);
-            return res['0'];
-        }
+    getTotalDebt = async (): Promise<BN> => {
+      const res: { 0: BN } = await executeAndRetry(this.contracts.pile.Debt, []);
+      return res['0'];
     }
+
+    getTotalBalance = async (): Promise<BN> => {
+      const res: { 0: BN } = await executeAndRetry(this.contracts.pile.Balance, []);
+      return res['0'];
+    }
+
+    getNFTData: <T>(tokenId: string) => Promise<T> = async (tokenId) => {
+      const res = await executeAndRetry(this.contracts.nftData.data, [tokenId]);
+      return res;
+    }
+
+    getLoan = async (loanId: string): Promise<Loan> => {
+      return await executeAndRetry(this.contracts.shelf.shelf, [loanId]);
+    }
+
+    loanCount = async (): Promise<BN> => {
+      const res = await executeAndRetry(this.contracts.title.count, []);
+      return res[0];
+    }
+
+    // getCurrentDebt = async (loanId: string): Promise<BN> => {
+    //   const res = await executeAndRetry(this.contracts.pile.burden, [loanId]);
+    //   return res['0'];
+    // }
+  };
 }
 
 export default Analytics;
- 
-
 
     /*
   getAllLoans = async (): Promise<Loan[]> => {
@@ -76,7 +68,7 @@ export default Analytics;
         loan['status'] = 'Other';
       }
       loans.push(loan)
-    } 
+    }
     return loans;
   }
   */
@@ -86,7 +78,3 @@ export default Analytics;
     return await executeAndRetry(this.contracts.pile.loans, [loanId]);
   }
   */
-
-
- 
-
