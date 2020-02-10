@@ -1,4 +1,4 @@
-import { Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from "./types";
+import { Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from './types';
 export declare class Tinlake {
     provider: any;
     eth: ethI;
