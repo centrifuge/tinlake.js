@@ -17,8 +17,12 @@ export interface ethI {
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
   contract: (arg0: any) => { at: (arg0: any) => void };
+<<<<<<< HEAD
   sendRawTransaction: any;
   getTransactionCount: any;
+=======
+  sendTransaction: any;
+>>>>>>> upstream/naxos
   abi: any;
 }
 
@@ -70,6 +74,7 @@ export interface ContractAddresses {
   "ROOT_CONTRACT": string;
   "TINLAKE_CURRENCY": string;
   "LENDER_DEPLOYER": string;
+<<<<<<< HEAD
   "LENDER_JUNIOR_OPERATOR": string;
   "LENDER_JUNIOR": string;
   "LENDER_SENIOR": string;
@@ -91,6 +96,25 @@ export interface ContractAddresses {
 export interface AbiOutput {
   name: string;
   type: 'address' | 'uint256';
+=======
+
+  "LENDER_JUNIOR_OPERATOR": string;
+  "LENDER_JUNIOR": string;
+  "LENDER_SENIOR": string;
+  "LENDER_SENIOR_OPERATOR": string;
+  "LENDER_DISTRIBUTOR": string;
+  "LENDER_ASSESSOR": string;
+  "BORROWER_DEPLOYER": string;
+  "BORROWER_TITLE": string;
+  "BORROWER_PILE": string;
+  "BORROWER_SHELF": string;
+  "BORROWER_CEILING": string;
+  "BORROWER_COLLECTOR": string;
+  "BORROWER_THRESHOLD": string;
+  "BORROWER_PRICE_POOL": string;
+  "GOVERNANCE": string;
+  "NFT_COLLATERAL" : string;
+>>>>>>> upstream/naxos
 }
 
 export interface Events {

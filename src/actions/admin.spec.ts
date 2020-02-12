@@ -20,7 +20,7 @@ describe('ceiling', function () {
     });
 
     it('set ceiling for a loan', async () => {
-        //rely admin account on ceiling
+        // rely admin account on ceiling
         // relyAccount(adminAccount, testConfig);
     });
 

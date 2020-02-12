@@ -1,8 +1,11 @@
 import contractAddresses from './addresses.json';
 import nftDataContractCall from './nft_data_contract_call.json';
+<<<<<<< HEAD
 import abiDefinitions from '../src/abi/index';
 
 
+=======
+>>>>>>> upstream/naxos
 
 const testConfig = {
     godAccount: {
@@ -14,7 +17,10 @@ const testConfig = {
     SUCCESS_STATUS: '0x1',
     rpcUrl: 'http://127.0.0.1:8545',
     contractAddresses,
+<<<<<<< HEAD
     contractAbis: abiDefinitions,
+=======
+>>>>>>> upstream/naxos
     nftDataContractCall
 }
 
