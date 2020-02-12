@@ -1,4 +1,4 @@
-import { Contracts, Constructor, Tinlake  } from '../types';
+import { Constructor, Tinlake  } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 import BN from 'bn.js';
 

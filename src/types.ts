@@ -14,6 +14,7 @@ export interface Tinlake {
 }
 
 export interface ethI {
+  send: Function;
   web3_sha3: (signature: string) => string;
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
@@ -75,27 +76,27 @@ export interface ContractAbis {
 
 // TODO: update contract address strings
 export interface ContractAddresses {
-  "DEPLOYMENT_NAME": "Local Test Deployment",
-  "ROOT_CONTRACT": string;
-  "TINLAKE_CURRENCY": string;
-  "LENDER_DEPLOYER": string;
+  'DEPLOYMENT_NAME': 'Local Test Deployment';
+  'ROOT_CONTRACT': string;
+  'TINLAKE_CURRENCY': string;
+  'LENDER_DEPLOYER': string;
 
-  "LENDER_JUNIOR_OPERATOR": string;
-  "LENDER_JUNIOR": string;
-  "LENDER_SENIOR": string;
-  "LENDER_SENIOR_OPERATOR": string;
-  "LENDER_DISTRIBUTOR": string;
-  "LENDER_ASSESSOR": string;
-  "BORROWER_DEPLOYER": string;
-  "BORROWER_TITLE": string;
-  "BORROWER_PILE": string;
-  "BORROWER_SHELF": string;
-  "BORROWER_CEILING": string;
-  "BORROWER_COLLECTOR": string;
-  "BORROWER_THRESHOLD": string;
-  "BORROWER_PRICE_POOL": string;
-  "GOVERNANCE": string;
-  "NFT_COLLATERAL" : string;
+  'LENDER_JUNIOR_OPERATOR': string;
+  'LENDER_JUNIOR': string;
+  'LENDER_SENIOR': string;
+  'LENDER_SENIOR_OPERATOR': string;
+  'LENDER_DISTRIBUTOR': string;
+  'LENDER_ASSESSOR': string;
+  'BORROWER_DEPLOYER': string;
+  'BORROWER_TITLE': string;
+  'BORROWER_PILE': string;
+  'BORROWER_SHELF': string;
+  'BORROWER_CEILING': string;
+  'BORROWER_COLLECTOR': string;
+  'BORROWER_THRESHOLD': string;
+  'BORROWER_PRICE_POOL': string;
+  'GOVERNANCE': string;
+  'NFT_COLLATERAL' : string;
 }
 
 export interface Events {
