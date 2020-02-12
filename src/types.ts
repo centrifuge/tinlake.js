@@ -2,6 +2,7 @@
 import BN from 'bn.js';
 export type Constructor<T = {}> = new (...args: any[]) => T;
 
+<<<<<<< HEAD
 export interface Tinlake {
   provider: any;
   eth: ethI;
@@ -13,12 +14,17 @@ export interface Tinlake {
   contractAbis: ContractAbis;
 }
 
+=======
+>>>>>>> upstream/naxos
 export interface ethI {
   web3_sha3: (signature: string) => string;
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
   contract: (arg0: any) => { at: (arg0: any) => void };
+<<<<<<< HEAD
   sendTransaction: any;
+=======
+>>>>>>> upstream/naxos
   abi: any;
 }
 
@@ -75,6 +81,7 @@ export interface ContractAbis {
 
 // TODO: update contract address strings
 export interface ContractAddresses {
+<<<<<<< HEAD
   "DEPLOYMENT_NAME": "Local Test Deployment",
   "ROOT_CONTRACT": string;
   "TINLAKE_CURRENCY": string;
@@ -96,6 +103,24 @@ export interface ContractAddresses {
   "BORROWER_PRICE_POOL": string;
   "GOVERNANCE": string;
   "NFT_COLLATERAL" : string;
+=======
+  // borrower
+  'BORROWER_TITLE': string;
+  'BORROWER_SHELF': string;
+  'PILE': string;
+  'BORROWER_CEILING': string;
+  'BORROWER_COLLECTOR': string;
+  'BORROWER_THRESHOLD': string;
+  'BORROWER_PRICE_POOL': string;
+  'TINLAKE_CURRENCY': string;
+  // lender
+  'LENDER_JUNIOR_OPERATOR': string;
+  // 'LENDER_SENIOR_OPERATOR': string;
+  'LENDER_DISTRIBUTOR': string;
+  'LENDER_ASSESSOR': string;
+
+  'NFT_COLLATERAL': string;
+>>>>>>> upstream/naxos
 }
 
 export interface Events {

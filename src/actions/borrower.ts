@@ -83,7 +83,11 @@ function Borrower<BorrowerBase extends Constructor<{}>>(Base: BorrowerBase) {
       return waitAndReturnEvents(this.eth, txHash, this.contracts['shelf'].abi, this.transactionTimeout);
     }
 }
+<<<<<<< HEAD
   // TODO: pile contract calls
+=======
+    // TODO: pile contract calls
+>>>>>>> upstream/naxos
   // TODO: pool calls
 }
 

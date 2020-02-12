@@ -1,9 +1,11 @@
-var SignerProvider = require('ethjs-provider-signer');
-var sign = require('ethjs-signer').sign;
-var borrowerEthFrom = '0x08f3Ba249a9507f4e91e8aD8a357dCF83Ea264A8';
-var transactionTimeout = 36000;
-var gasLimit = 1000000;
-/*
+import Tinlake from '../Tinlake';
+import WithAnalytics from './analytics';
+const SignerProvider = require('ethjs-provider-signer');
+const { sign } = require('ethjs-signer');
+
+const borrowerEthFrom = '0x08f3Ba249a9507f4e91e8aD8a357dCF83Ea264A8';
+const transactionTimeout = 36000;
+const gasLimit = 1000000;
 const contractAddresses = {
   TINLAKE_CURRENCY: '0xd961caaad74eaa1f58969b0e841fe40642734469',
   LENDER_JUNIOR_OPERATOR: '0x3a3990838ed9ef61c433ed617d6059ffd0fd8a23',
@@ -60,5 +62,4 @@ const tinlake = new TinlakeSetup(
 //   const debt = await tinlake.getTotalDebt();
 //   console.log('total debt', debt);
 // }
-*/
-//# sourceMappingURL=analytics.spec.js.map
+

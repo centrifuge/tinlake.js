@@ -68,24 +68,9 @@ export default Analytics;
         loan['status'] = 'Other';
       }
       loans.push(loan)
-<<<<<<< HEAD
-    } 
-=======
-    }
->>>>>>> upstream/naxos
-    return loans;
-  }
-  */
 
   /*
   getBalanceDebt = async (loanId: string): Promise<BalanceDebt> => {
     return await executeAndRetry(this.contracts.pile.loans, [loanId]);
   }
   */
-<<<<<<< HEAD
-
-
- 
-
-=======
->>>>>>> upstream/naxos

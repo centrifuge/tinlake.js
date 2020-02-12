@@ -1,12 +1,9 @@
 import { Constructor, Tinlake } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 
-// tslint:disable-next-line:function-name
 function Admin<AdminBase extends Constructor<Tinlake>>(Base: AdminBase) {
   return class extends Base {
    
-    // -- LOAN SETUP --
-
     fileCeiling = async (loanId: string, ceilingAmount: string) => {
       const txHash = await executeAndRetry(this.contracts.ceiling.file, [loanId, ceilingAmount, this.ethConfig]);
       console.log(`[Ceiling file] txHash: ${txHash}`);
