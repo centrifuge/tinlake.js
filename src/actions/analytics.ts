@@ -68,10 +68,6 @@ export default Analytics;
         loan['status'] = 'Other';
       }
       loans.push(loan)
-    }
-    return loans;
-  }
-  */
 
   /*
   getBalanceDebt = async (loanId: string): Promise<BalanceDebt> => {
