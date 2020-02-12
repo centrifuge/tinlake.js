@@ -1,20 +1,7 @@
 import Eth from 'ethjs';
-
 import { Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from './types';
+import abiDefinitions from './abi/index';
 
-// TODO import collectively
-// NFT
-import contractAbiTitle from './abi/Title.abi.json';
-import contractAbiCurrency from './abi/test/SimpleToken.abi.json';
-import contractAbiShelf from './abi/Shelf.abi.json';
-import contractAbiCeiling from './abi/Principal.abi.json';
-import contractAbiCollector from './abi/Collector.abi.json';
-import contractAbiThreshold from './abi/PushRegistry.abi.json';
-import contractAbiPricePool from './abi/PricePool.abi.json';
-import contractAbiPile from './abi/Pile.abi.json';
-import contractAbiJOperator from './abi/AllowanceOperator.abi.json';
-import contractAbiDistributor from './abi/DefaultDistributor.abi.json';
-import contractAbiAssessor from './abi/DefaultAssessor.abi.json';
 
 export class Tinlake {
   public provider: any;
@@ -26,22 +13,21 @@ export class Tinlake {
   public contracts: Contracts;
   public contractAbis: ContractAbis;
 
-  // tslint:disable-next-line:max-line-length
   constructor(provider: any, contractAddresses: ContractAddresses, nftDataOutputs: AbiOutput[], transactionTimeout: number,
               { contractAbis, ethOptions, ethConfig }: Options = {}) {
     this.contractAbis = contractAbis || {
-      nft: contractAbiTitle,
-      title: contractAbiTitle,
-      shelf: contractAbiShelf,
-      ceiling: contractAbiCeiling,
-      collector: contractAbiCollector,
-      currency: contractAbiCurrency,
-      threshold: contractAbiThreshold,
-      pricePool: contractAbiPricePool,
-      pile: contractAbiPile,
-      jOperator: contractAbiJOperator,
-      distributor: contractAbiDistributor,
-      assessor: contractAbiAssessor,
+      nft: abiDefinitions.title,
+      title: abiDefinitions.title,
+      shelf: abiDefinitions.shelf,
+      ceiling: abiDefinitions.ceiling,
+      collector: abiDefinitions.collector,
+      currency: abiDefinitions.currency,
+      threshold: abiDefinitions.threshold,
+      pricePool: abiDefinitions.pricePool,
+      pile: abiDefinitions.pile,
+      jOperator: abiDefinitions.operator,
+      distributor: abiDefinitions.distributor,
+      assessor: abiDefinitions.assessor,
       nftData: [{
         constant: true,
         inputs: [

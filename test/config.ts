@@ -1,5 +1,6 @@
 import contractAddresses from './addresses.json';
 import nftDataContractCall from './nft_data_contract_call.json';
+import abiDefinitions from '../src/abi/index';
 
 const testConfig = {
     godAccount: {
@@ -11,6 +12,7 @@ const testConfig = {
     SUCCESS_STATUS: '0x1',
     rpcUrl: 'http://127.0.0.1:8545',
     contractAddresses,
+    contractAbis: abiDefinitions,
     nftDataContractCall
 }
 
