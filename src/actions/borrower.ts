@@ -1,12 +1,10 @@
-import { Contracts, Constructor, EthConfig } from '../types';
+import { Contracts, Constructor, Tinlake  } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 import BN from 'bn.js';
 
 // tslint:disable-next-line:function-name
-function Borrower<BorrowerBase extends Constructor<{}>>(Base: BorrowerBase) {
+function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase) {
   return class extends Base {
-    contracts : Contracts;
-    ethConfig: EthConfig;
 
     // -- TESTING FUNCTIONS --
     mintNFT = async (usr: string) => {
@@ -83,7 +81,7 @@ function Borrower<BorrowerBase extends Constructor<{}>>(Base: BorrowerBase) {
       return waitAndReturnEvents(this.eth, txHash, this.contracts['shelf'].abi, this.transactionTimeout);
     }
 }
-    // TODO: pile contract calls
+  // TODO: pile contract calls
   // TODO: pool calls
 }
 

@@ -42,9 +42,6 @@ export class Tinlake {
       jOperator: contractAbiJOperator,
       distributor: contractAbiDistributor,
       assessor: contractAbiAssessor,
-
-      // collateral: contractAbiCollateral,
-      // pile: contractAbiPile,
       nftData: [{
         constant: true,
         inputs: [
@@ -80,7 +77,7 @@ export class Tinlake {
       shelf: this.eth.contract(this.contractAbis.shelf)
         .at(this.contractAddresses['BORROWER_SHELF']),
       pile: this.eth.contract(this.contractAbis.pile)
-        .at(this.contractAddresses['PILE']),
+        .at(this.contractAddresses['BORROWER_PILE']),
       ceiling: this.eth.contract(this.contractAbis.ceiling)
         .at(this.contractAddresses['BORROWER_CEILING']),
       collector: this.eth.contract(this.contractAbis.collector)
