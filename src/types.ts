@@ -1,4 +1,3 @@
-// TODO : use Tinlake type
 import BN from 'bn.js';
 export type Constructor<T = {}> = new (...args: any[]) => T;
 
@@ -18,7 +17,8 @@ export interface ethI {
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
   contract: (arg0: any) => { at: (arg0: any) => void };
-  sendTransaction: any;
+  sendRawTransaction: any;
+  getTransactionCount: any;
   abi: any;
 }
 
@@ -34,7 +34,6 @@ export interface EthConfig {
 }
 
 export interface Contracts {
-  // borrower
   title: any;
   shelf: any;
   pile: any;
@@ -43,19 +42,14 @@ export interface Contracts {
   threshold: any;
   pricePool: any;
   currency: any;
-  // lender
   jOperator: any;
   distributor: any;
   assessor: any;
-
   nft: any;
   nftData: any;
 }
 
-// TODO: create abis based on contract names
-// TODO cleanup
 export interface ContractAbis {
-  // borrower
   'title': any;
   'shelf': any;
   'pile': any;
@@ -64,22 +58,18 @@ export interface ContractAbis {
   'threshold': any;
   'pricePool': any;
   'currency': any;
-  // lender
   'jOperator': any;
   'distributor': any;
   'assessor': any;
-
   'nft': any;
   'nftData': any;
 }
 
-// TODO: update contract address strings
 export interface ContractAddresses {
   "DEPLOYMENT_NAME": "Local Test Deployment",
   "ROOT_CONTRACT": string;
   "TINLAKE_CURRENCY": string;
   "LENDER_DEPLOYER": string;
-
   "LENDER_JUNIOR_OPERATOR": string;
   "LENDER_JUNIOR": string;
   "LENDER_SENIOR": string;
@@ -96,6 +86,11 @@ export interface ContractAddresses {
   "BORROWER_PRICE_POOL": string;
   "GOVERNANCE": string;
   "NFT_COLLATERAL" : string;
+}
+
+export interface AbiOutput {
+  name: string;
+  type: 'address' | 'uint256';
 }
 
 export interface Events {
@@ -123,9 +118,4 @@ export interface BalanceDebt {
   balance: BN;
   fee: BN;
   chi: BN;
-}
-
-export interface AbiOutput {
-  name: string;
-  type: 'address' | 'uint256';
 }
