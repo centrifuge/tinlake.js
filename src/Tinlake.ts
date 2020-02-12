@@ -42,12 +42,6 @@ export class Tinlake {
       jOperator: contractAbiJOperator,
       distributor: contractAbiDistributor,
       assessor: contractAbiAssessor,
-<<<<<<< HEAD
-=======
-
-      // collateral: contractAbiCollateral,
-      // pile: contractAbiPile,
->>>>>>> upstream/naxos
       nftData: [{
         constant: true,
         inputs: [
@@ -83,11 +77,7 @@ export class Tinlake {
       shelf: this.eth.contract(this.contractAbis.shelf)
         .at(this.contractAddresses['BORROWER_SHELF']),
       pile: this.eth.contract(this.contractAbis.pile)
-<<<<<<< HEAD
         .at(this.contractAddresses['BORROWER_PILE']),
-=======
-        .at(this.contractAddresses['PILE']),
->>>>>>> upstream/naxos
       ceiling: this.eth.contract(this.contractAbis.ceiling)
         .at(this.contractAddresses['BORROWER_CEILING']),
       collector: this.eth.contract(this.contractAbis.collector)
