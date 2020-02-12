@@ -26,7 +26,6 @@ function Borrower<BorrowerBase extends Constructor<{}>>(Base: BorrowerBase) {
       const res : { 0: BN } = await executeAndRetry(this.contracts.title.count, []);
       return res[0];
     }
-
     // -- TESTING FUNCTIONS END --
 
     issue = async (registry: string, tokenId: string): Promise<BN> => {

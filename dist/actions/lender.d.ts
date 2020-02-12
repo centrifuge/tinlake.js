@@ -1,9 +1,10 @@
-import { Constructor, Contracts } from '../types';
+import { Constructor, Contracts, EthConfig } from '../types';
 declare function Lender<LenderBase extends Constructor<{}>>(Base: LenderBase): {
     new (...args: any[]): {
         contracts: Contracts;
-        supply: (currencyAmount: number, config: any) => Promise<unknown>;
-        redeem: (tokenAmount: number) => Promise<unknown>;
+        ethConfig: EthConfig;
+        supplyJunior: (currencyAmount: string) => Promise<unknown>;
+        redeemJunior: (tokenAmount: string) => Promise<unknown>;
         balance: () => Promise<unknown>;
     };
 } & LenderBase;

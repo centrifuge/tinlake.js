@@ -14,6 +14,7 @@ declare function Borrower<BorrowerBase extends Constructor<{}>>(Base: BorrowerBa
         borrow: (loan: string, currencyAmount: string) => Promise<unknown>;
         withdraw: (loan: string, currencyAmount: string) => Promise<unknown>;
         repay: (loan: string, currencyAmount: string) => Promise<unknown>;
+        approveCurrency: (usr: string, currencyAmount: string) => Promise<unknown>;
     };
 } & BorrowerBase;
 export default Borrower;

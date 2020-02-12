@@ -39,8 +39,6 @@ function Admin<AdminBase extends Constructor<{}>>(Base: AdminBase) {
 
     approveAllowance = async (user: string, maxCurrency: string, maxToken: string) => {
       // tslint:disable-next-line:max-line-length
-      // TODO: which operator?
-      // tslint:disable-next-line:max-line-length
       const txHash = await executeAndRetry(this.contracts.jOperator.approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance] txHash: ${txHash}`);
       // tslint:disable-next-line:max-line-length
