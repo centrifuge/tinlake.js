@@ -6,37 +6,34 @@ import WithBorrower from './borrower';
 import WithAdmin from './admin';
 import testConfig from '../../test/config';
 import Tinlake from '../Tinlake';
-import { createTinlake, fundAccountWithETH, initTestUtils } from '../../test/utils';
+import { createTinlake, TestProvider } from '../../test/utils';
 
 const SUCCESS_STATUS = '0x1';
 
-const TinlakeSetup = WithAdmin(WithBorrower(Tinlake));
 const borrowerAccount = account.generate(randomString.generate(32));
+const testProvider = new TestProvider(testConfig);
+const TinlakeSetup = WithAdmin(WithBorrower(Tinlake));
 const tinlake = createTinlake(borrowerAccount, TinlakeSetup, testConfig);
 
 async function mintIssue(user: string) {
   const mintResult = await tinlake.mintNFT(user);
   assert.equal(mintResult.status, SUCCESS_STATUS);
   const tokenCount = await tinlake.getNFTCount();
-  await tinlake.issue(testConfig.contractAddresses.NFT_COLLATERAL, tokenCount -  1);
+  await tinlake.issue(tinlake.contractAddresses.NFT_COLLATERAL, tokenCount -  1);
 }
-
-async function setUp() {
-  initTestUtils(testConfig);
-  // fund borrower account
-  await fundAccountWithETH(borrowerAccount, testConfig);
-}
-setUp()
 
 describe('borrower functions', () => {
-//   it('issues a loan from a minted collateral NFT', async () => {
-//     await mintIssue(borrowerAccount);
-//     const tokenCount = await tinlake.getNFTCount();
-//     const loanCount = await tinlake.getTitleCount();
-//     console.log('TokenID:', `${tokenCount - 1}`);
-//     console.log('LoanID:', `${loanCount - 1}`);
-//     assert.equal(tokenCount, loanCount);
-//   });
+  before(async () =>  {
+    await testProvider.fundAccountWithETH(borrowerAccount, '2000000000000000');
+  });
+  it('issues a loan from a minted collateral NFT', async () => {
+    await mintIssue(borrowerAccount.address);
+    const tokenCount = await tinlake.getNFTCount();
+    const loanCount = await tinlake.getTitleCount();
+    console.log('TokenID:', `${tokenCount - 1}`);
+    console.log('LoanID:', `${loanCount - 1}`);
+    assert.equal(tokenCount, loanCount);
+  });
 //
 //   it('locks an NFT successfully', async () => {
 //     const loanCount = await tinlake.getTitleCount();

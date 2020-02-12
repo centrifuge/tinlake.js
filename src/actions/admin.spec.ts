@@ -43,4 +43,3 @@ describe('collector', function () {
 });
 
 // ------------ admin tests lender -------------
-
