@@ -1,5 +1,5 @@
 import { Account } from "./types";
-import { ethI, EthConfig, ContractAbis, ContractAddresses } from '../src/types';
+import { ethI, EthConfig, ContractAbis, ContractAddresses, ContractNames } from '../src/types';
 const Eth = require('ethjs');
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
@@ -50,7 +50,7 @@ export class TestProvider {
     console.log(`User Account ${usr.address} funded with ${amount} DAI`)
   }
 
-  async  relyAccount(usr: Account, contract: string) {;
+  async  relyAccount(usr: Account, contract: ContractNames) {;
   }
 }
 
