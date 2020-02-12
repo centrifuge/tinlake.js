@@ -24,7 +24,7 @@ const contractAddresses = {
   BORROWER_THRESHOLD: '0xd5785559ff692cd235759ca01b78ba594f997c57',
   BORROWER_PRICE_POOL: '0xe7a4fb8f5bfb886b9c356f636c368d31df6fe493',
   // Manually deployed Title Contract
-  NFT_COLLATERAL: '0x90e549d37be6f3b73e58306c338f199023dfccf8',
+  NFT: '0x90e549d37be6f3b73e58306c338f199023dfccf8',
 };
 
 const rpcUrl = 'http://127.0.0.1:8545';
@@ -71,10 +71,10 @@ async function testMintIssue() {
   // // assert status success
   // const tokenId = await tinlake.getNFTCount();
   // console.log(`TokenID: ${tokenId.toString()}`);
-  // await tinlake.issue(contractAddresses.NFT_COLLATERAL, `${tokenId.toString()}`);
+  // await tinlake.issue(contractAddresses.NFT, `${tokenId.toString()}`);
   // const count = await tinlake.getTitleCount();
   // console.log(`LoanID: ${count.toString()}`);
   // await tinlake.lock(count.toString());
 }
 
-testMintIssue();
+//testMintIssue();

@@ -10,16 +10,19 @@ import contractAbiOperator from './AllowanceOperator.abi.json';
 import contractAbiDistributor from './DefaultDistributor.abi.json';
 import contractAbiAssessor from './DefaultAssessor.abi.json';
 
+import { ContractAbis } from '../types';
+
 export default {
-    title : contractAbiTitle,
-    currency : contractAbiCurrency,
-    shelf : contractAbiShelf,
-    ceiling : contractAbiCeiling,
-    collector : contractAbiCollector, 
-    threshold : contractAbiThreshold,
-    pricePool : contractAbiPricePool, 
-    pile : contractAbiPile, 
-    operator : contractAbiOperator, 
-    distributor : contractAbiDistributor, 
-    assessor: contractAbiAssessor,
-}
+    "NFT" : contractAbiTitle,
+    "TITLE" : contractAbiTitle,
+    "CURRENCY" : contractAbiCurrency,
+    "SHELF" : contractAbiShelf,
+    "CEILING" : contractAbiCeiling,
+    "COLLECTOR" : contractAbiCollector, 
+    "THRESHOLD" : contractAbiThreshold,
+    "PRICE_POOL" : contractAbiPricePool, 
+    "PILE": contractAbiPile, 
+    "JUNIOR_OPERATOR" : contractAbiOperator, 
+    "DISTRIBUTOR" : contractAbiDistributor, 
+    "ASSESSOR": contractAbiAssessor
+} as ContractAbis
