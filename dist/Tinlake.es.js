@@ -10353,768 +10353,16 @@ Eth$1.fromUtf8 = lib.fromUtf8;
 Eth$1.toUtf8 = lib.toUtf8;
 Eth$1.HttpProvider = lib$7;
 
-var contractAbiNft = [
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "interfaceId",
-        type: "bytes4"
-      }
-    ],
-    name: "supportsInterface",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "getApproved",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "transferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "ownerOf",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "setApprovalForAll",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      },
-      {
-        name: "_data",
-        type: "bytes"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "tokenURI",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "tkn",
-        type: "uint256"
-      },
-      {
-        name: "ref",
-        type: "string"
-      },
-      {
-        name: "amount",
-        type: "uint256"
-      },
-      {
-        name: "asset",
-        type: "string"
-      }
-    ],
-    name: "mint",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      },
-      {
-        name: "operator",
-        type: "address"
-      }
-    ],
-    name: "isApprovedForAll",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "data",
-    outputs: [
-      {
-        name: "reference_id",
-        type: "string"
-      },
-      {
-        name: "amount",
-        type: "uint256"
-      },
-      {
-        name: "asset_type",
-        type: "string"
-      },
-      {
-        name: "borrower",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "to",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Transfer",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "approved",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Approval",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "operator",
-        type: "address"
-      },
-      {
-        indexed: false,
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "ApprovalForAll",
-    type: "event"
-  }
-];
-
 var contractAbiTitle = [
   {
-    constant: true,
     inputs: [
       {
-        name: "interfaceId",
-        type: "bytes4"
-      }
-    ],
-    name: "supportsInterface",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "count",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "getApproved",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "transferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "ownerOf",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "rely",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "issue",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "deny",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "setApprovalForAll",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      },
-      {
-        name: "_data",
-        type: "bytes"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "wards",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "tokenURI",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      },
-      {
-        name: "operator",
-        type: "address"
-      }
-    ],
-    name: "isApprovedForAll",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "uri",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
+        internalType: "string",
         name: "name",
         type: "string"
       },
       {
+        internalType: "string",
         name: "symbol",
         type: "string"
       }
@@ -11128,38 +10376,19 @@ var contractAbiTitle = [
     inputs: [
       {
         indexed: true,
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "to",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Transfer",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
+        internalType: "address",
         name: "owner",
         type: "address"
       },
       {
         indexed: true,
+        internalType: "address",
         name: "approved",
         type: "address"
       },
       {
         indexed: true,
+        internalType: "uint256",
         name: "tokenId",
         type: "uint256"
       }
@@ -11172,104 +10401,641 @@ var contractAbiTitle = [
     inputs: [
       {
         indexed: true,
+        internalType: "address",
         name: "owner",
         type: "address"
       },
       {
         indexed: true,
+        internalType: "address",
         name: "operator",
         type: "address"
       },
       {
         indexed: false,
+        internalType: "bool",
         name: "approved",
         type: "bool"
       }
     ],
     name: "ApprovalForAll",
     type: "event"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tkn",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "count",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "issue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "uri",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   }
 ];
 
 var contractAbiCurrency = [
   {
-    constant: true,
     inputs: [
-    ],
-    name: "name",
-    outputs: [
       {
-        name: "",
+        internalType: "string",
+        name: "symbol_",
         type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
       },
       {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
+        internalType: "string",
+        name: "name_",
+        type: "string"
+      },
       {
-        name: "",
-        type: "bool"
+        internalType: "string",
+        name: "version_",
+        type: "string"
+      },
+      {
+        internalType: "uint256",
+        name: "chainId_",
+        type: "uint256"
       }
     ],
     payable: false,
     stateMutability: "nonpayable",
-    type: "function"
+    type: "constructor"
   },
   {
-    constant: true,
-    inputs: [
-    ],
-    name: "totalSupply",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
+    anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "address",
         name: "src",
         type: "address"
       },
       {
-        name: "dst",
+        indexed: true,
+        internalType: "address",
+        name: "usr",
         type: "address"
       },
       {
+        indexed: false,
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       }
     ],
-    name: "transferFrom",
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "src",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "dst",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "DOMAIN_SEPARATOR",
     outputs: [
       {
+        internalType: "bytes32",
         name: "",
-        type: "bool"
+        type: "bytes32"
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -11279,12 +11045,107 @@ var contractAbiCurrency = [
     name: "PERMIT_TYPEHASH",
     outputs: [
       {
+        internalType: "bytes32",
         name: "",
         type: "bytes32"
       }
     ],
     payable: false,
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      }
+    ],
+    name: "burn",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -11294,6 +11155,7 @@ var contractAbiCurrency = [
     name: "decimals",
     outputs: [
       {
+        internalType: "uint8",
         name: "",
         type: "uint8"
       }
@@ -11303,126 +11165,10 @@ var contractAbiCurrency = [
     type: "function"
   },
   {
-    constant: true,
-    inputs: [
-    ],
-    name: "DOMAIN_SEPARATOR",
-    outputs: [
-      {
-        name: "",
-        type: "bytes32"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     constant: false,
     inputs: [
       {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "mint",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "version",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "rely",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "nonces",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
+        internalType: "address",
         name: "usr",
         type: "address"
       }
@@ -11438,15 +11184,17 @@ var contractAbiCurrency = [
     constant: false,
     inputs: [
       {
+        internalType: "address",
         name: "usr",
         type: "address"
       },
       {
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       }
     ],
-    name: "burn",
+    name: "mint",
     outputs: [
     ],
     payable: false,
@@ -11457,56 +11205,17 @@ var contractAbiCurrency = [
     constant: false,
     inputs: [
       {
-        name: "dst",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "transfer",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "push",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
+        internalType: "address",
         name: "src",
         type: "address"
       },
       {
+        internalType: "address",
         name: "dst",
         type: "address"
       },
       {
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       }
@@ -11521,16 +11230,13 @@ var contractAbiCurrency = [
   {
     constant: true,
     inputs: [
-      {
-        name: "",
-        type: "address"
-      }
     ],
-    name: "wards",
+    name: "name",
     outputs: [
       {
+        internalType: "string",
         name: "",
-        type: "uint256"
+        type: "string"
       }
     ],
     payable: false,
@@ -11541,17 +11247,15 @@ var contractAbiCurrency = [
     constant: true,
     inputs: [
       {
-        name: "",
-        type: "address"
-      },
-      {
+        internalType: "address",
         name: "",
         type: "address"
       }
     ],
-    name: "allowance",
+    name: "nonces",
     outputs: [
       {
+        internalType: "uint256",
         name: "",
         type: "uint256"
       }
@@ -11564,10 +11268,12 @@ var contractAbiCurrency = [
     constant: false,
     inputs: [
       {
+        internalType: "address",
         name: "usr",
         type: "address"
       },
       {
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       }
@@ -11580,853 +11286,449 @@ var contractAbiCurrency = [
     type: "function"
   },
   {
+    constant: false,
     inputs: [
       {
-        name: "symbol_",
-        type: "string"
-      },
-      {
-        name: "name_",
-        type: "string"
-      },
-      {
-        name: "version_",
-        type: "string"
-      },
-      {
-        name: "chainId_",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "src",
-        type: "address"
-      },
-      {
-        indexed: true,
+        internalType: "address",
         name: "usr",
         type: "address"
       },
       {
-        indexed: false,
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       }
     ],
-    name: "Approval",
-    type: "event"
+    name: "push",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
   },
   {
-    anonymous: false,
+    constant: true,
     inputs: [
       {
-        indexed: true,
-        name: "src",
-        type: "address"
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
       },
       {
-        indexed: true,
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "totalSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
         name: "dst",
         type: "address"
       },
       {
-        indexed: false,
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       }
     ],
-    name: "Transfer",
-    type: "event"
+    name: "transfer",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "src",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "dst",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "version",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   }
 ];
 
 var contractAbiShelf = [
   {
-    constant: true,
     inputs: [
       {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "shelf",
-    outputs: [
-      {
-        name: "registry",
+        internalType: "address",
+        name: "currency_",
         type: "address"
       },
       {
-        name: "tokenId",
-        type: "uint256"
-      },
-      {
-        name: "price",
-        type: "uint256"
-      },
-      {
-        name: "principal",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "appraiser",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "pile",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "rely",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "deposit",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "release",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "deny",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      }
-    ],
-    name: "adjust",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "registry_",
+        internalType: "address",
+        name: "title_",
         type: "address"
       },
       {
-        name: "nft_",
-        type: "uint256"
-      },
-      {
-        name: "to",
-        type: "address"
-      }
-    ],
-    name: "move",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "wards",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        name: "registry_",
-        type: "address"
-      },
-      {
-        name: "nft_",
-        type: "uint256"
-      }
-    ],
-    name: "file",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        name: "registry_",
-        type: "address"
-      },
-      {
-        name: "nft_",
-        type: "uint256"
-      },
-      {
-        name: "principal_",
-        type: "uint256"
-      }
-    ],
-    name: "file",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "bags",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
+        internalType: "address",
         name: "pile_",
         type: "address"
       },
       {
-        name: "appraiser_",
+        internalType: "address",
+        name: "ceiling_",
         type: "address"
       }
     ],
     payable: false,
     stateMutability: "nonpayable",
     type: "constructor"
-  }
-];
-
-var contractAbiCollateral = [
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
   },
   {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "totalSupply",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "src",
-        type: "address"
-      },
-      {
-        name: "dst",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "transferFrom",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "PERMIT_TYPEHASH",
-    outputs: [
-      {
-        name: "",
-        type: "bytes32"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "decimals",
-    outputs: [
-      {
-        name: "",
-        type: "uint8"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "DOMAIN_SEPARATOR",
-    outputs: [
-      {
-        name: "",
-        type: "bytes32"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "mint",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "version",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "rely",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "nonces",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "holder",
-        type: "address"
-      },
-      {
-        name: "spender",
-        type: "address"
-      },
-      {
-        name: "nonce",
-        type: "uint256"
-      },
-      {
-        name: "expiry",
-        type: "uint256"
-      },
-      {
-        name: "allowed",
-        type: "bool"
-      },
-      {
-        name: "v",
-        type: "uint8"
-      },
-      {
-        name: "r",
-        type: "bytes32"
-      },
-      {
-        name: "s",
-        type: "bytes32"
-      }
-    ],
-    name: "permit",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "deny",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "burn",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "dst",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "transfer",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "push",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "src",
-        type: "address"
-      },
-      {
-        name: "dst",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "move",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "wards",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      },
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "allowance",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      }
-    ],
-    name: "pull",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        name: "symbol_",
-        type: "string"
-      },
-      {
-        name: "name_",
-        type: "string"
-      },
-      {
-        name: "version_",
-        type: "string"
-      },
-      {
-        name: "chainId_",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
-    anonymous: false,
+    anonymous: true,
     inputs: [
       {
         indexed: true,
-        name: "src",
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
         type: "address"
       },
       {
         indexed: true,
-        name: "usr",
-        type: "address"
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
       },
       {
         indexed: false,
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
-      }
-    ],
-    name: "Approval",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "src",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "dst",
-        type: "address"
       },
       {
         indexed: false,
-        name: "wad",
-        type: "uint256"
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
       }
     ],
-    name: "Transfer",
+    name: "LogNote",
     type: "event"
-  }
-];
-
-var contractAbiPile = [
+  },
   {
     constant: true,
     inputs: [
     ],
-    name: "tkn",
+    name: "balance",
     outputs: [
       {
+        internalType: "uint256",
         name: "",
-        type: "address"
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "balanceRequest",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "balances",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
       }
     ],
     payable: false,
@@ -12437,34 +11739,13 @@ var contractAbiPile = [
     constant: false,
     inputs: [
       {
+        internalType: "uint256",
         name: "loan",
         type: "uint256"
       },
       {
-        name: "wad",
-        type: "uint256"
-      },
-      {
-        name: "usr",
-        type: "address"
-      }
-    ],
-    name: "withdraw",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        name: "wad",
+        internalType: "uint256",
+        name: "currencyAmount",
         type: "uint256"
       }
     ],
@@ -12479,11 +11760,12 @@ var contractAbiPile = [
     constant: true,
     inputs: [
     ],
-    name: "Balance",
+    name: "ceiling",
     outputs: [
       {
+        internalType: "contract CeilingLike",
         name: "",
-        type: "uint256"
+        type: "address"
       }
     ],
     payable: false,
@@ -12494,15 +11776,124 @@ var contractAbiPile = [
     constant: false,
     inputs: [
       {
+        internalType: "uint256",
         name: "loan",
         type: "uint256"
       },
       {
-        name: "fee_",
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "claim",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "currency",
+    outputs: [
+      {
+        internalType: "contract TokenLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "distributor",
+    outputs: [
+      {
+        internalType: "contract DistributorLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
         type: "uint256"
       },
       {
-        name: "balance_",
+        internalType: "address",
+        name: "registry_",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "nft_",
         type: "uint256"
       }
     ],
@@ -12514,107 +11905,26 @@ var contractAbiPile = [
     type: "function"
   },
   {
-    constant: true,
-    inputs: [
-      {
-        name: "fee",
-        type: "uint256"
-      }
-    ],
-    name: "compounding",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      },
-      {
-        name: "",
-        type: "uint256"
-      },
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "want",
-    outputs: [
-      {
-        name: "",
-        type: "int256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "loan",
-        type: "uint256"
-      }
-    ],
-    name: "burden",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "fees",
-    outputs: [
-      {
-        name: "debt",
-        type: "uint256"
-      },
-      {
-        name: "chi",
-        type: "uint256"
-      },
-      {
-        name: "speed",
-        type: "uint256"
-      },
-      {
-        name: "rho",
-        type: "uint48"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     constant: false,
     inputs: [
       {
-        name: "fee",
+        internalType: "address",
+        name: "registry_",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token_",
         type: "uint256"
       }
     ],
-    name: "drip",
+    name: "issue",
     outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
     ],
     payable: false,
     stateMutability: "nonpayable",
@@ -12624,11 +11934,12 @@ var contractAbiPile = [
     constant: true,
     inputs: [
     ],
-    name: "Debt",
+    name: "lender",
     outputs: [
       {
+        internalType: "address",
         name: "",
-        type: "uint256"
+        type: "address"
       }
     ],
     payable: false,
@@ -12639,6 +11950,133 @@ var contractAbiPile = [
     constant: false,
     inputs: [
       {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "lock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "nftLocked",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    name: "nftlookup",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "pile",
+    outputs: [
+      {
+        internalType: "contract PileLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "recover",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
         name: "usr",
         type: "address"
       }
@@ -12654,11 +12092,406 @@ var contractAbiPile = [
     constant: false,
     inputs: [
       {
-        name: "fee",
+        internalType: "uint256",
+        name: "loan",
         type: "uint256"
       },
       {
-        name: "speed_",
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "repay",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "shelf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "title",
+    outputs: [
+      {
+        internalType: "contract TitleLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "token",
+    outputs: [
+      {
+        internalType: "address",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "nft",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "unlock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "withdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  }
+];
+
+var contractAbiCeiling = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "borrow",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "ceiling",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "principal",
         type: "uint256"
       }
     ],
@@ -12670,9 +12503,555 @@ var contractAbiPile = [
     type: "function"
   },
   {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
     constant: false,
     inputs: [
       {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repay",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiCollector = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "shelf_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "pile_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "threshold_",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "buyer",
+        type: "address"
+      }
+    ],
+    name: "collect",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "collect",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "collectors",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "denyCollector",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "buyer",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "nftPrice",
+        type: "uint256"
+      }
+    ],
+    name: "file",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "options",
+    outputs: [
+      {
+        internalType: "address",
+        name: "buyer",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "nftPrice",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "relyCollector",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "seize",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiThreshold = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "data",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
         name: "usr",
         type: "address"
       }
@@ -12688,13 +13067,15 @@ var contractAbiPile = [
     constant: true,
     inputs: [
       {
-        name: "loan",
+        internalType: "uint256",
+        name: "what",
         type: "uint256"
       }
     ],
-    name: "balanceOf",
+    name: "get",
     outputs: [
       {
+        internalType: "uint256",
         name: "",
         type: "uint256"
       }
@@ -12707,54 +13088,34 @@ var contractAbiPile = [
     constant: false,
     inputs: [
       {
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        name: "wad",
-        type: "uint256"
-      },
-      {
+        internalType: "address",
         name: "usr",
         type: "address"
       }
     ],
-    name: "repay",
+    name: "rely",
     outputs: [
     ],
     payable: false,
     stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "lender",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
     type: "function"
   },
   {
     constant: false,
     inputs: [
       {
-        name: "loan",
+        internalType: "uint256",
+        name: "what",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
         type: "uint256"
       }
     ],
-    name: "debtOf",
+    name: "set",
     outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
     ],
     payable: false,
     stateMutability: "nonpayable",
@@ -12764,6 +13125,7 @@ var contractAbiPile = [
     constant: true,
     inputs: [
       {
+        internalType: "address",
         name: "",
         type: "address"
       }
@@ -12771,6 +13133,7 @@ var contractAbiPile = [
     name: "wards",
     outputs: [
       {
+        internalType: "uint256",
         name: "",
         type: "uint256"
       }
@@ -12778,16 +13141,70 @@ var contractAbiPile = [
     payable: false,
     stateMutability: "view",
     type: "function"
+  }
+];
+
+var contractAbiPricePool = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
   },
   {
     constant: false,
     inputs: [
       {
-        name: "loan",
-        type: "uint256"
+        internalType: "address",
+        name: "usr",
+        type: "address"
       }
     ],
-    name: "collect",
+    name: "deny",
     outputs: [
     ],
     payable: false,
@@ -12798,12 +13215,35 @@ var contractAbiPile = [
     constant: false,
     inputs: [
       {
+        internalType: "bytes32",
         name: "what",
         type: "bytes32"
       },
       {
-        name: "data",
+        internalType: "address",
+        name: "addr",
         type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
       }
     ],
     name: "file",
@@ -12817,26 +13257,53 @@ var contractAbiPile = [
     constant: true,
     inputs: [
       {
-        name: "",
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
         type: "uint256"
       }
     ],
-    name: "loans",
+    name: "rdiv",
     outputs: [
       {
-        name: "debt",
+        internalType: "uint256",
+        name: "z",
         type: "uint256"
-      },
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
       {
-        name: "balance",
-        type: "uint256"
-      },
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "riskScore",
+    outputs: [
       {
-        name: "fee",
-        type: "uint256"
-      },
-      {
-        name: "chi",
+        internalType: "uint256",
+        name: "",
         type: "uint256"
       }
     ],
@@ -12845,9 +13312,880 @@ var contractAbiPile = [
     type: "function"
   },
   {
+    constant: true,
     inputs: [
       {
-        name: "tkn_",
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "totalValue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiPile = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "accrue",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "newRate",
+        type: "uint256"
+      }
+    ],
+    name: "changeRate",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "interestBearingAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "ratePerSecond",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "lastUpdated",
+        type: "uint256"
+      }
+    ],
+    name: "chargeInterest",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "ratePerSecond",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "lastUpdated",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "pie",
+        type: "uint256"
+      }
+    ],
+    name: "compounding",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "debt",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "decDebt",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "rate",
+        type: "uint256"
+      }
+    ],
+    name: "drip",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "rate",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "ratePerSecond",
+        type: "uint256"
+      }
+    ],
+    name: "file",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "incDebt",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "loanRates",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "pie",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "rate",
+        type: "uint256"
+      }
+    ],
+    name: "rateDebt",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "rates",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "pie",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "ratePerSecond",
+        type: "uint256"
+      },
+      {
+        internalType: "uint48",
+        name: "lastUpdated",
+        type: "uint48"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "n",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "base",
+        type: "uint256"
+      }
+    ],
+    name: "rpow",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "rate",
+        type: "uint256"
+      }
+    ],
+    name: "setRate",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "pie",
+        type: "uint256"
+      }
+    ],
+    name: "toAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "toPie",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "total",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiJOperator = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "assessor_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "distributor_",
         type: "address"
       }
     ],
@@ -12860,37 +14198,1449 @@ var contractAbiPile = [
     inputs: [
       {
         indexed: true,
+        internalType: "bytes4",
         name: "sig",
         type: "bytes4"
       },
       {
         indexed: true,
+        internalType: "address",
         name: "guy",
         type: "address"
       },
       {
         indexed: true,
+        internalType: "bytes32",
         name: "foo",
         type: "bytes32"
       },
       {
         indexed: true,
+        internalType: "bytes32",
         name: "bar",
         type: "bytes32"
       },
       {
         indexed: false,
+        internalType: "uint256",
         name: "wad",
         type: "uint256"
       },
       {
         indexed: false,
+        internalType: "bytes",
         name: "fax",
         type: "bytes"
       }
     ],
     name: "LogNote",
     type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "maxCurrency_",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "maxToken_",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "assessor",
+    outputs: [
+      {
+        internalType: "contract AssessorLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "distributor",
+    outputs: [
+      {
+        internalType: "contract DistributorLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenAmount",
+        type: "uint256"
+      }
+    ],
+    name: "redeem",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "supply",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "tranche",
+    outputs: [
+      {
+        internalType: "contract TrancheLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiDistributor = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "currency_",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "balance",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "currency",
+    outputs: [
+      {
+        internalType: "contract CurrencyLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "junior",
+    outputs: [
+      {
+        internalType: "contract TrancheLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "senior",
+    outputs: [
+      {
+        internalType: "contract TrancheLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "shelf",
+    outputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiAssessor = [
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenAmountForONE",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche_",
+        type: "address"
+      }
+    ],
+    name: "accrueTrancheInterest",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche",
+        type: "address"
+      }
+    ],
+    name: "calcAssetValue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "calcMaxSeniorAssetValue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "calcMinJuniorAssetValue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche",
+        type: "address"
+      }
+    ],
+    name: "calcTokenPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "interestBearingAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "ratePerSecond",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "lastUpdated",
+        type: "uint256"
+      }
+    ],
+    name: "chargeInterest",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "ratePerSecond",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "lastUpdated",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "pie",
+        type: "uint256"
+      }
+    ],
+    name: "compounding",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "currentJuniorRatio",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr_",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "file",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "junior",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "minJuniorRatio",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "pool",
+    outputs: [
+      {
+        internalType: "contract PoolLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rdiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "redeemApprove",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "rmul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "n",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "base",
+        type: "uint256"
+      }
+    ],
+    name: "rpow",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeAdd",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeDiv",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeMul",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "x",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "y",
+        type: "uint256"
+      }
+    ],
+    name: "safeSub",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "z",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "senior",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "supplyApprove",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "pie",
+        type: "uint256"
+      }
+    ],
+    name: "toAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chi",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "toPie",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "pure",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "tokenAmountForONE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   }
 ];
 
@@ -14964,6 +17714,7 @@ var interestRateToFee = function (interestRate) {
 };
 
 var Tinlake = /** @class */ (function () {
+    // tslint:disable-next-line:max-line-length
     function Tinlake(provider, contractAddresses, nftDataOutputs, transactionTimeout, _a) {
         var _this = this;
         var _b = _a === void 0 ? {} : _a, contractAbis = _b.contractAbis, ethOptions = _b.ethOptions, ethConfig = _b.ethConfig;
@@ -14972,32 +17723,52 @@ var Tinlake = /** @class */ (function () {
             _this.ethOptions = ethOptions || {};
             _this.eth = new lib$a(_this.provider, _this.ethOptions);
             _this.contracts = {
-                nft: _this.eth.contract(_this.contractAbis.nft)
-                    .at(_this.contractAddresses['NFT_COLLATERAL']),
+                // borrower
                 title: _this.eth.contract(_this.contractAbis.title)
-                    .at(_this.contractAddresses['TITLE']),
+                    .at(_this.contractAddresses['BORROWER_TITLE']),
                 currency: _this.eth.contract(_this.contractAbis.currency)
-                    .at(_this.contractAddresses['CURRENCY']),
+                    .at(_this.contractAddresses['TINLAKE_CURRENCY']),
                 shelf: _this.eth.contract(_this.contractAbis.shelf)
-                    .at(_this.contractAddresses['SHELF']),
-                collateral: _this.eth.contract(_this.contractAbis.collateral)
-                    .at(_this.contractAddresses['COLLATERAL']),
+                    .at(_this.contractAddresses['BORROWER_SHELF']),
                 pile: _this.eth.contract(_this.contractAbis.pile)
-                    .at(_this.contractAddresses['PILE']),
+                    .at(_this.contractAddresses['BORROWER_PILE']),
+                ceiling: _this.eth.contract(_this.contractAbis.ceiling)
+                    .at(_this.contractAddresses['BORROWER_CEILING']),
+                collector: _this.eth.contract(_this.contractAbis.collector)
+                    .at(_this.contractAddresses['BORROWER_COLLECTOR']),
+                threshold: _this.eth.contract(_this.contractAbis.threshold)
+                    .at(_this.contractAddresses['BORROWER_THRESHOLD']),
+                pricePool: _this.eth.contract(_this.contractAbis.pricePool)
+                    .at(_this.contractAddresses['BORROWER_PRICE_POOL']),
                 nftData: _this.eth.contract(_this.contractAbis.nftData)
                     .at(_this.contractAddresses['NFT_COLLATERAL']),
+                nft: _this.eth.contract(_this.contractAbis.nft)
+                    .at(_this.contractAddresses['NFT_COLLATERAL']),
+                // lender
+                jOperator: _this.eth.contract(_this.contractAbis.jOperator)
+                    .at(_this.contractAddresses['LENDER_JUNIOR_OPERATOR']),
+                distributor: _this.eth.contract(_this.contractAbis.distributor)
+                    .at(_this.contractAddresses['LENDER_DISTRIBUTOR']),
+                assessor: _this.eth.contract(_this.contractAbis.assessor)
+                    .at(_this.contractAddresses['LENDER_ASSESSOR']),
             };
         };
         this.setEthConfig = function (ethConfig) {
             _this.ethConfig = ethConfig;
         };
         this.contractAbis = contractAbis || {
-            nft: contractAbiNft,
+            nft: contractAbiTitle,
             title: contractAbiTitle,
-            currency: contractAbiCurrency,
             shelf: contractAbiShelf,
-            collateral: contractAbiCollateral,
+            ceiling: contractAbiCeiling,
+            collector: contractAbiCollector,
+            currency: contractAbiCurrency,
+            threshold: contractAbiThreshold,
+            pricePool: contractAbiPricePool,
             pile: contractAbiPile,
+            jOperator: contractAbiJOperator,
+            distributor: contractAbiDistributor,
+            assessor: contractAbiAssessor,
             nftData: [{
                     constant: true,
                     inputs: [
