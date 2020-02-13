@@ -31,58 +31,17 @@ export interface EthConfig {
     from: string;
     gasLimit: string;
 }
-export interface Contracts {
-    title: any;
-    shelf: any;
-    pile: any;
-    ceiling: any;
-    collector: any;
-    threshold: any;
-    pricePool: any;
-    currency: any;
-    jOperator: any;
-    distributor: any;
-    assessor: any;
-    nft: any;
-    nftData: any;
-}
-export interface ContractAbis {
-    'title': any;
-    'shelf': any;
-    'pile': any;
-    'ceiling': any;
-    'collector': any;
-    'threshold': any;
-    'pricePool': any;
-    'currency': any;
-    'jOperator': any;
-    'distributor': any;
-    'assessor': any;
-    'nft': any;
-    'nftData': any;
-}
-export interface ContractAddresses {
-    "DEPLOYMENT_NAME": "Local Test Deployment";
-    "ROOT_CONTRACT": string;
-    "TINLAKE_CURRENCY": string;
-    "LENDER_DEPLOYER": string;
-    "LENDER_JUNIOR_OPERATOR": string;
-    "LENDER_JUNIOR": string;
-    "LENDER_SENIOR": string;
-    "LENDER_SENIOR_OPERATOR": string;
-    "LENDER_DISTRIBUTOR": string;
-    "LENDER_ASSESSOR": string;
-    "BORROWER_DEPLOYER": string;
-    "BORROWER_TITLE": string;
-    "BORROWER_PILE": string;
-    "BORROWER_SHELF": string;
-    "BORROWER_CEILING": string;
-    "BORROWER_COLLECTOR": string;
-    "BORROWER_THRESHOLD": string;
-    "BORROWER_PRICE_POOL": string;
-    "GOVERNANCE": string;
-    "NFT_COLLATERAL": string;
-}
+export declare const contractNames: string[];
+declare type ContractNames = typeof contractNames[number];
+export declare type Contracts = {
+    [key in ContractNames]?: any;
+};
+export declare type ContractAbis = {
+    [key in ContractNames]?: any;
+};
+export declare type ContractAddresses = {
+    [key in ContractNames]?: string;
+};
 export interface AbiOutput {
     name: string;
     type: 'address' | 'uint256';
@@ -116,3 +75,4 @@ export interface BalanceDebt {
     fee: BN;
     chi: BN;
 }
+export {};

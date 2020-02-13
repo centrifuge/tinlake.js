@@ -6,7 +6,7 @@ declare function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: Borro
         getNFTCount: () => Promise<BN>;
         getTitleCount: () => Promise<BN>;
         issue: (registry: string, tokenId: string) => Promise<BN>;
-        lock: (loan: string) => Promise<unknown>;
+        lock: (loan: string) => Promise<BN>;
         unlock: (loan: string) => Promise<unknown>;
         close: (loan: string) => Promise<unknown>;
         borrow: (loan: string, currencyAmount: string) => Promise<unknown>;

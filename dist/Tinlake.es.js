@@ -10353,6 +10353,25 @@ Eth$1.fromUtf8 = lib.fromUtf8;
 Eth$1.toUtf8 = lib.toUtf8;
 Eth$1.HttpProvider = lib$7;
 
+var contractNames = [
+    'ROOT',
+    'CURRENCY',
+    'JUNIOR_OPERATOR',
+    'JUNIOR',
+    'SENIOR',
+    'SENIOR_OPERATOR',
+    'DISTRIBUTOR',
+    'ASSESSOR',
+    'TITLE',
+    'PILE',
+    'SHELF',
+    'CEILING',
+    'COLLECTOR',
+    'THRESHOLD',
+    'PRICE_POOL',
+    'NFT',
+];
+
 var contractAbiTitle = [
   {
     inputs: [
@@ -15645,17 +15664,18 @@ var contractAbiAssessor = [
 ];
 
 var abiDefinitions = {
-    title: contractAbiTitle,
-    currency: contractAbiCurrency,
-    shelf: contractAbiShelf,
-    ceiling: contractAbiCeiling,
-    collector: contractAbiCollector,
-    threshold: contractAbiThreshold,
-    pricePool: contractAbiPricePool,
-    pile: contractAbiPile,
-    operator: contractAbiOperator,
-    distributor: contractAbiDistributor,
-    assessor: contractAbiAssessor,
+    NFT: contractAbiTitle,
+    TITLE: contractAbiTitle,
+    CURRENCY: contractAbiCurrency,
+    SHELF: contractAbiShelf,
+    CEILING: contractAbiCeiling,
+    COLLECTOR: contractAbiCollector,
+    THRESHOLD: contractAbiThreshold,
+    PRICE_POOL: contractAbiPricePool,
+    PILE: contractAbiPile,
+    JUNIOR_OPERATOR: contractAbiOperator,
+    DISTRIBUTOR: contractAbiDistributor,
+    ASSESSOR: contractAbiAssessor,
 };
 
 var baseToDisplay = function (base, decimals) {
@@ -17731,72 +17751,32 @@ var Tinlake = /** @class */ (function () {
     function Tinlake(provider, contractAddresses, nftDataOutputs, transactionTimeout, _a) {
         var _this = this;
         var _b = _a === void 0 ? {} : _a, contractAbis = _b.contractAbis, ethOptions = _b.ethOptions, ethConfig = _b.ethConfig;
+        this.contracts = {};
+        this.contractAbis = {};
         this.setProvider = function (provider, ethOptions) {
             _this.provider = provider;
             _this.ethOptions = ethOptions || {};
             _this.eth = new lib$a(_this.provider, _this.ethOptions);
-            _this.contracts = {
-                // borrower
-                title: _this.eth.contract(_this.contractAbis.title)
-                    .at(_this.contractAddresses['BORROWER_TITLE']),
-                currency: _this.eth.contract(_this.contractAbis.currency)
-                    .at(_this.contractAddresses['TINLAKE_CURRENCY']),
-                shelf: _this.eth.contract(_this.contractAbis.shelf)
-                    .at(_this.contractAddresses['BORROWER_SHELF']),
-                pile: _this.eth.contract(_this.contractAbis.pile)
-                    .at(_this.contractAddresses['BORROWER_PILE']),
-                ceiling: _this.eth.contract(_this.contractAbis.ceiling)
-                    .at(_this.contractAddresses['BORROWER_CEILING']),
-                collector: _this.eth.contract(_this.contractAbis.collector)
-                    .at(_this.contractAddresses['BORROWER_COLLECTOR']),
-                threshold: _this.eth.contract(_this.contractAbis.threshold)
-                    .at(_this.contractAddresses['BORROWER_THRESHOLD']),
-                pricePool: _this.eth.contract(_this.contractAbis.pricePool)
-                    .at(_this.contractAddresses['BORROWER_PRICE_POOL']),
-                nftData: _this.eth.contract(_this.contractAbis.nftData)
-                    .at(_this.contractAddresses['NFT_COLLATERAL']),
-                nft: _this.eth.contract(_this.contractAbis.nft)
-                    .at(_this.contractAddresses['NFT_COLLATERAL']),
-                // lender
-                jOperator: _this.eth.contract(_this.contractAbis.jOperator)
-                    .at(_this.contractAddresses['LENDER_JUNIOR_OPERATOR']),
-                distributor: _this.eth.contract(_this.contractAbis.distributor)
-                    .at(_this.contractAddresses['LENDER_DISTRIBUTOR']),
-                assessor: _this.eth.contract(_this.contractAbis.assessor)
-                    .at(_this.contractAddresses['LENDER_ASSESSOR']),
-            };
+            contractNames.forEach(function (name) {
+                if (_this.contractAbis[name] && _this.contractAddresses[name]) {
+                    _this.contracts[name] = _this.eth.contract(_this.contractAbis[name])
+                        .at(_this.contractAddresses[name]);
+                }
+            });
         };
         this.setEthConfig = function (ethConfig) {
             _this.ethConfig = ethConfig;
         };
-        this.contractAbis = contractAbis || {
-            nft: abiDefinitions.title,
-            title: abiDefinitions.title,
-            shelf: abiDefinitions.shelf,
-            ceiling: abiDefinitions.ceiling,
-            collector: abiDefinitions.collector,
-            currency: abiDefinitions.currency,
-            threshold: abiDefinitions.threshold,
-            pricePool: abiDefinitions.pricePool,
-            pile: abiDefinitions.pile,
-            jOperator: abiDefinitions.operator,
-            distributor: abiDefinitions.distributor,
-            assessor: abiDefinitions.assessor,
-            nftData: [{
-                    constant: true,
-                    inputs: [
-                        {
-                            name: '',
-                            type: 'uint256',
-                        },
-                    ],
-                    name: 'data',
-                    outputs: nftDataOutputs,
-                    payable: false,
-                    stateMutability: 'view',
-                    type: 'function',
-                }],
-        };
+        if (!contractAbis) {
+            contractNames.forEach(function (name) {
+                if (abiDefinitions[name]) {
+                    _this.contractAbis[name] = abiDefinitions[name];
+                }
+            });
+        }
+        else {
+            this.contractAbis = contractAbis;
+        }
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);

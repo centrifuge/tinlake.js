@@ -8,24 +8,24 @@ function Lender<LenderBase extends Constructor<{}>>(Base: LenderBase) {
     ethConfig: EthConfig;
 
     supplyJunior = async (currencyAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts.jOperator.supply, [currencyAmount, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].supply, [currencyAmount, this.ethConfig]);
       console.log(`[Supply] txHash: ${txHash}`);
       // tslint:disable-next-line:max-line-length
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['jOperator'].abi, this.transactionTimeout);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);
     }
 
     redeemJunior = async (tokenAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts.jOperator.redeem, [tokenAmount, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].redeem, [tokenAmount, this.ethConfig]);
       console.log(`[Redeem] txHash: ${txHash}`);
       // tslint:disable-next-line:max-line-length
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['jOperator'].abi, this.transactionTimeout);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);
     }
 
     balance = async () => {
-      const txHash = await executeAndRetry(this.contracts.distributor.balance, [this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['DISTRIBUTOR'].balance, [this.ethConfig]);
       console.log(`[Balance] txHash: ${txHash}`);
       // tslint:disable-next-line:max-line-length
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['distributor'].abi, this.transactionTimeout);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['DISTRIBUTOR'].abi, this.transactionTimeout);
     }
     // TODO: assessor accrueTrancheInterest
   };

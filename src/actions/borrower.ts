@@ -2,14 +2,14 @@ import { Constructor, Tinlake  } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 import BN from 'bn.js';
 
+// tslint:disable-next-line:function-name
 function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase) {
   return class extends Base {
-
 
     mintNFT = async (usr: string) => {
       const txHash = await executeAndRetry(this.contracts['NFT'].issue, [usr, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['NFT'].abi, this.transactionTimeout);
     }
 
     getNFTCount = async (): Promise<BN> => {
@@ -28,9 +28,11 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
     }
 
     lock = async (loan: string) => {
-      const txHash = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
-      console.log(`[Collateral NFT lock] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+      const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
+      return res[0];
+      // const txHash = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
+      // console.log(`[Collateral NFT lock] txHash: ${txHash}`);
+      // return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
     unlock = async (loan: string) => {
@@ -69,7 +71,7 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
     // tslint:disable-next-line:max-line-length
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
-}
+  };
   // TODO: pile contract calls
   // TODO: pool calls
 }
