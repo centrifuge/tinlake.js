@@ -2,7 +2,6 @@ import Eth from 'ethjs';
 import { contractNames, Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from './types';
 import  abiDefinitions  from './abi/index';
 
-
 export class Tinlake {
   public provider: any;
   public eth: ethI;
@@ -17,13 +16,13 @@ export class Tinlake {
               { contractAbis, ethOptions, ethConfig }: Options = {}) {
 
     if (!contractAbis) {
-      contractNames.forEach(name => {
+      contractNames.forEach((name) => {
         if (abiDefinitions[name]) {
           this.contractAbis[name] = abiDefinitions[name];
-        } 
+        }
       });
     } else {
-      this.contractAbis = contractAbis
+      this.contractAbis = contractAbis;
     }
 
     this.contractAddresses = contractAddresses;
@@ -36,14 +35,14 @@ export class Tinlake {
     this.provider = provider;
     this.ethOptions = ethOptions || {};
     this.eth = new Eth(this.provider, this.ethOptions) as ethI;
- 
-    contractNames.forEach(name => {
+
+    contractNames.forEach((name) => {
       if (this.contractAbis[name] && this.contractAddresses[name]) {
         this.contracts[name] = this.eth.contract(this.contractAbis[name])
-        .at(this.contractAddresses[name])
+        .at(this.contractAddresses[name]);
       }
-    })
-  }
+    });
+  };
   setEthConfig = (ethConfig: { [key: string]: any }) => {
     this.ethConfig = ethConfig;
   }

@@ -13,6 +13,7 @@ export interface Tinlake {
 }
 
 export interface ethI {
+  send: Function;
   web3_sha3: (signature: string) => string;
   getTransactionReceipt: (arg0: any, arg1: (err: any, receipt: any) => void) => void;
   getTransactionByHash: (arg0: any, arg1: (err: any, tx: any) => void) => void;
@@ -34,22 +35,22 @@ export interface EthConfig {
 }
 
 export const contractNames = [
-  "ROOT" ,
-  "CURRENCY",
-  "JUNIOR_OPERATOR",
-  "JUNIOR",
-  "SENIOR",
-  "SENIOR_OPERATOR",
-  "DISTRIBUTOR",
-  "ASSESSOR",
-  "TITLE",
-  "PILE",
-  "SHELF",
-  "CEILING",
-  "COLLECTOR",
-  "THRESHOLD",
-  "PRICE_POOL",
-  "NFT"
+  'ROOT' ,
+  'CURRENCY',
+  'JUNIOR_OPERATOR',
+  'JUNIOR',
+  'SENIOR',
+  'SENIOR_OPERATOR',
+  'DISTRIBUTOR',
+  'ASSESSOR',
+  'TITLE',
+  'PILE',
+  'SHELF',
+  'CEILING',
+  'COLLECTOR',
+  'THRESHOLD',
+  'PRICE_POOL',
+  'NFT',
 ];
 
 type ContractNames = typeof contractNames[number];
