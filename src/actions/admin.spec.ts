@@ -1,4 +1,4 @@
-const randomString = require("randomstring");
+const randomString = require('randomstring');
 const account = require('ethjs-account');
 import assert from 'assert';
 import WithAdmin from './admin';
@@ -43,4 +43,3 @@ describe('collector', function () {
 });
 
 // ------------ admin tests lender -------------
-

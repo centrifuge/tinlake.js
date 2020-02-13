@@ -13,16 +13,16 @@ import contractAbiAssessor from './DefaultAssessor.abi.json';
 import { ContractAbis } from '../types';
 
 export default {
-    "NFT" : contractAbiTitle,
-    "TITLE" : contractAbiTitle,
-    "CURRENCY" : contractAbiCurrency,
-    "SHELF" : contractAbiShelf,
-    "CEILING" : contractAbiCeiling,
-    "COLLECTOR" : contractAbiCollector, 
-    "THRESHOLD" : contractAbiThreshold,
-    "PRICE_POOL" : contractAbiPricePool, 
-    "PILE": contractAbiPile, 
-    "JUNIOR_OPERATOR" : contractAbiOperator, 
-    "DISTRIBUTOR" : contractAbiDistributor, 
-    "ASSESSOR": contractAbiAssessor
-} as ContractAbis
+  NFT : contractAbiTitle,
+  TITLE : contractAbiTitle,
+  CURRENCY : contractAbiCurrency,
+  SHELF : contractAbiShelf,
+  CEILING : contractAbiCeiling,
+  COLLECTOR : contractAbiCollector,
+  THRESHOLD : contractAbiThreshold,
+  PRICE_POOL : contractAbiPricePool,
+  PILE: contractAbiPile,
+  JUNIOR_OPERATOR : contractAbiOperator,
+  DISTRIBUTOR : contractAbiDistributor,
+  ASSESSOR: contractAbiAssessor,
+} as ContractAbis;
