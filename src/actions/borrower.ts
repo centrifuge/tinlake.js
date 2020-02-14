@@ -6,8 +6,8 @@ import BN from 'bn.js';
 function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase) {
   return class extends Base {
 
-    mintNFT = async (usr: string) => {
-      const txHash = await executeAndRetry(this.contracts['NFT'].issue, [usr, this.ethConfig]);
+    mintNFT = async (user: string) => {
+      const txHash = await executeAndRetry(this.contracts['NFT'].issue, [user, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['NFT'].abi, this.transactionTimeout);
     }
@@ -22,17 +22,32 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
       return res[0];
     }
 
+    getNFTOwner = async (nftID: string): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['NFT'].ownerOf, [nftID]);
+      return res[0];
+    }
+
+    getTitleOwner = async (loanID: string): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanID]);
+      return res[0];
+    }
+    
+    getCurrencyBalance = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [user]);
+      return res[0]; 
+    }
+
     issue = async (registry: string, tokenId: string): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
       return res[0];
     }
 
     lock = async (loan: string) => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
-      return res[0];
-      // const txHash = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
-      // console.log(`[Collateral NFT lock] txHash: ${txHash}`);
-      // return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+      // const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
+      // return res[0];
+      const txHash = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
+      console.log(`[Collateral NFT lock] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
     unlock = async (loan: string) => {

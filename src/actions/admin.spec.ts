@@ -16,7 +16,7 @@ const tinlake = createTinlake(adminAccount, TinlakeSetup, testConfig);
 describe('ceiling', function () {
     before(async () =>  {
         // fund admin account with eth
-        await testProvider.fundAccountWithETH(adminAccount, "20000000");
+        // await testProvider.fundAccountWithETH(adminAccount, "20000000");
     });
 
     it('set ceiling for a loan', async () => {
