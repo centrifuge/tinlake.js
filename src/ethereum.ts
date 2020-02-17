@@ -22,7 +22,6 @@ export async function executeAndRetry(f: Function, args: Array<any> = []) : Prom
   }
 }
 
-// tslint:disable-next-line:max-line-length
 export const waitAndReturnEvents = async (eth: ethI, txHash: string, abi: any, transactionTimeout: number) => {
   const tx:any = await waitForTransaction(eth, txHash, transactionTimeout);
   return new Promise((resolve, reject) => {
@@ -58,7 +57,6 @@ export const waitForTransaction = (eth: ethI, txHash: any, transactionTimeout: n
           if (sec < secMax) {
             wait(txHash);
           } else {
-            // tslint:disable-next-line:max-line-length
             reject(new Error(`waiting for transaction tx ${txHash} timed out after ${secMax} seconds`));
           }
         });
