@@ -4,7 +4,7 @@ import assert from 'assert';
 import WithAdmin from './admin';
 import Tinlake from '../Tinlake';
 import testConfig from '../../test/config';
-import { createTinlake, TestProvider} from '../../test/utils';
+import { createTinlake, TestProvider } from '../../test/utils';
 
 const adminAccount = account.generate(randomString.generate(32));
 const testProvider = new TestProvider(testConfig);
@@ -20,6 +20,7 @@ describe('ceiling', function () {
     });
 
     it('set ceiling for a loan', async () => {
+        testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
         // rely admin account on ceiling
         // relyAccount(adminAccount, testConfig);
     });

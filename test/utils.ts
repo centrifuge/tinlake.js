@@ -35,21 +35,20 @@ export class TestProvider {
       nonce,
     };
     const signedTransaction = sign(transaction, this.sponsorAccount.privateKey);
-    const txHash = await executeAndRetry(this.eth.sendRawTransaction, [signedTransaction]);
-    await waitAndReturnEvents(this.eth, txHash, this.contractAbis.currency, this.transactionTimeout);
+    await executeAndRetry(this.eth.sendRawTransaction, [signedTransaction]);
     console.log(`User Account ${usr.address} funded with ${amount} ETH`);
   }
 
   async fundAccountWithCurrency(usr: Account, amount: string) {
-    const currencyContract: any = this.eth.contract(this.contractAbis.currency).at(this.contractAddresses['TINLAKE_CURRENCY']);
-    this.eth.contract(this.contractAbis.currency)
-        .at(this.contractAddresses['TINLAKE_CURRENCY']);
-    const txHash = await executeAndRetry(currencyContract.mint, [usr.address, amount, this.ethConfig]);
-    await waitAndReturnEvents(this.eth, txHash, this.contractAbis.currency, this.transactionTimeout);
-    console.log(`User Account ${usr.address} funded with ${amount} DAI`);
+    const currencyContract: any = this.eth.contract(this.contractAbis['TINLAKE_CURRENCY']).at(this.contractAddresses['TINLAKE_CURRENCY']);
+    await executeAndRetry(currencyContract.mint, [usr.address, amount, this.ethConfig]);
+    console.log(`User Account ${usr.address} funded with ${amount} TINLAKE_CURRENCY`);
   }
 
-  async  relyAccount(usr: Account, contract: ContractNames) {
+  async relyAccount(usr: Account, contractAddress: string) {
+    const rootContract : any = this.eth.contract(this.contractAbis['ROOT_CONTRACT']).at(this.contractAddresses['ROOT_CONTRACT']);
+    await executeAndRetry(rootContract.relyContract, [contractAddress, usr.address, this.ethConfig]);
+    console.log(`User Account ${usr.address} relied on contract ${contractAddress}`);
   }
 }
 

@@ -13,13 +13,24 @@ const testProvider = new TestProvider(testConfig);
 const TinlakeSetup = WithAdmin(WithLender(Tinlake));
 const tinlake = createTinlake(lenderAccount, TinlakeSetup, testConfig);
 
-describe('borrower functions', () => {
+/*
+describe('lender functions', () => {
   before(async () =>  {
     await testProvider.fundAccountWithETH(lenderAccount, '2000000000000000');
   });
   it('supplies a tranche with some funds', async () => {
-    // const currencyAmount = '1000';
-    // const supplyResult = await tinlake.supplyJunior(currencyAmount);
-    // assert.equal(supplyResult.status, testConfig.SUCCESS_STATUS);
+    const currencyAmount = 1000;
+    const supplyResult = await tinlake.supplyJunior(currencyAmount);
+    assert.equal(supplyResult.status, testConfig.SUCCESS_STATUS);
+    assert.equal(await tinlake.getCurrencyBalance(tinlake.contractAddresses.JUNIOR), currencyAmount);
+  });
+
+  it('redeems tokens for a certain amount of currency', async () => {
+    const currencyAmount = 1000;
+    const tokenAmount = 1000;
+    const redeemResult = await tinlake.redeemJunior(tokenAmount);
+    assert.equal(redeemResult.status, testConfig.SUCCESS_STATUS);
+    assert.equal(await tinlake.getCurrencyBalance(lenderAccount.address), currencyAmount);
   });
 });
+*/

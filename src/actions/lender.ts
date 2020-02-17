@@ -1,5 +1,6 @@
 import { Constructor, Contracts, EthConfig } from '../types';
 import { executeAndRetry, waitAndReturnEvents } from '../ethereum';
+import BN from 'bn.js';
 
 // tslint:disable-next-line:function-name
 function Lender<LenderBase extends Constructor<{}>>(Base: LenderBase) {
@@ -19,6 +20,11 @@ function Lender<LenderBase extends Constructor<{}>>(Base: LenderBase) {
       console.log(`[Redeem] txHash: ${txHash}`);
       // tslint:disable-next-line:max-line-length
       return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);
+    }
+
+    getCurrencyBalance = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [user]);
+      return res[0];
     }
 
     balance = async () => {

@@ -8,10 +8,9 @@ import testConfig from '../../test/config';
 import Tinlake from '../Tinlake';
 import { createTinlake, TestProvider } from '../../test/utils';
 
-// const borrowerAccount = account.generate(randomString.generate(32));
+const borrowerAccount = account.generate(randomString.generate(32));
 const testProvider = new TestProvider(testConfig);
 const TinlakeSetup = WithAdmin(WithBorrower(Tinlake));
-const borrowerAccount = testConfig.godAccount;
 const tinlake = createTinlake(borrowerAccount, TinlakeSetup, testConfig);
 
 async function mintIssue(user: string) {
@@ -25,46 +24,49 @@ describe('borrower functions', () => {
   before(async () =>  {
     await testProvider.fundAccountWithETH(borrowerAccount, '2000000000000000');
   });
-    /*
-
+/*
   it('issues a loan from a minted collateral NFT', async () => {
-    await mintIssue(borrowerAccount.address);
     const tokenCount = await tinlake.getNFTCount();
     const loanCount = await tinlake.getTitleCount();
-    console.log('TokenID:', `${tokenCount - 1}`);
-    console.log('LoanID:', `${loanCount - 1}`);
-    assert.equal(tokenCount.toString(), loanCount.toString());
+    await mintIssue(borrowerAccount.address);
+    const tokenCount_ = await tinlake.getNFTCount();
+    const loanCount_ = await tinlake.getTitleCount();
+    console.log('TokenID:', `${tokenCount_ - 1}`);
+    console.log('LoanID:', `${loanCount_ - 1}`);
+
+    assert(tokenCount.toNumber() ===  tokenCount_.toNumber() - 1);
+    assert(loanCount.toNumber() ===  loanCount_.toNumber() - 1);
+    assert.equal(await tinlake.getTitleOwner(loanCount - 1), borrowerAccount.address);
   });
 
-
-  it('locks an NFT successfully', async () => {
+  it('locks a loan title successfully', async () => {
     const loanCount = await tinlake.getTitleCount();
     console.log('LoanID:', `${loanCount - 1}`);
-    const lockResult = await tinlake.lock(5);
-    assert.equal(lockResult.status, testConfig.SUCCESS_STATUS);
+    assert.equal(await tinlake.getTitleOwner(loanCount - 1), borrowerAccount.address);
+    await tinlake.lock(loanCount);
+    assert.equal(await tinlake.getTitleOwner(loanCount - 1), tinlake.contractAddresses.SHELF);
   });
 
-  it('unlocks an NFT successfully', async () => {
+  it('unlocks a loan title successfully', async () => {
     const loanCount = await tinlake.getTitleCount();
-    const unlockResult = await tinlake.unlock(loanCount - 1);
-    assert.equal(unlockResult.status, testConfig.SUCCESS_STATUS);
+    await tinlake.unlock(loanCount - 1);
+    assert.equal(await tinlake.getTitleOwner(loanCount - 1), borrowerAccount.address);
   });
 
   it('borrows money based on a locked NFT successfully', async () => {
-    const ceilingAmount = '10000';
+    const ceilingAmount = 10000;
     const loanId = await tinlake.getTitleCount();
     const fileResult = await tinlake.fileCeiling(loanId - 1 , ceilingAmount);
     assert.equal(fileResult.status, testConfig.SUCCESS_STATUS);
+    // there should be money in the tranche
+    await tinlake.borrow(loanId - 1, ceilingAmount);
+    assert.equal(await tinlake.getCurrencyBalance(borrowerAccount.address), ceilingAmount);
   });
 
-  it('borrows money based on a locked NFT successfully', async () => {
-    // const loanId = await tinlake.getTitleCount();
-    // console.log('$$$$$$$', loanId.toString());
-    // await tinlake.borrow;
-  });
-*/
-// const fileResult = await tinlake.fileCeiling(loanId.toString(), ceilingAmount);
-// assert.equal(fileResult.status, SUCCESS_STATUS);
-
+  it('closes a loan successfully', async () => {
+    const loanCount = await tinlake.getTitleCount();
+    const closeResult = await tinlake.close(loanCount - 1);
+    assert.equal(closeResult.status, testConfig.SUCCESS_STATUS);
+  });*/
 });
 

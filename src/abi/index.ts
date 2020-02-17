@@ -9,13 +9,14 @@ import contractAbiPile from './Pile.abi.json';
 import contractAbiOperator from './AllowanceOperator.abi.json';
 import contractAbiDistributor from './DefaultDistributor.abi.json';
 import contractAbiAssessor from './DefaultAssessor.abi.json';
+import contractAbiRoot from './Root.abi.json';
 
 import { ContractAbis } from '../types';
 
 export default {
-  NFT : contractAbiTitle,
+  COLLATERAL_NFT : contractAbiTitle,
   TITLE : contractAbiTitle,
-  CURRENCY : contractAbiCurrency,
+  TINLAKE_CURRENCY : contractAbiCurrency,
   SHELF : contractAbiShelf,
   CEILING : contractAbiCeiling,
   COLLECTOR : contractAbiCollector,
@@ -25,4 +26,5 @@ export default {
   JUNIOR_OPERATOR : contractAbiOperator,
   DISTRIBUTOR : contractAbiDistributor,
   ASSESSOR: contractAbiAssessor,
+  ROOT_CONTRACT: contractAbiRoot
 } as ContractAbis;
