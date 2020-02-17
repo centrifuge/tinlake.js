@@ -8,7 +8,7 @@ const testConfig = {
     publicKey: '0x592ff5c6edfe1325d0af7ec33f56483e85ec33d30c213fa189f7887dc8525420db6a25cf1a1d1c1430c5a14d742750bbadd301cde5d87f8c7cc927c0fdcd5c2a',
     privateKey: '0xb2e0c8e791c37df214808cdadc187f0cba0e36160f1a38b321a25c9a0cea8c11',
   },
-  transactionTimeout: 5000,
+  transactionTimeout: 50000,
   gasLimit: 10000000,
   SUCCESS_STATUS: '0x1',
   rpcUrl: 'http://127.0.0.1:8545',

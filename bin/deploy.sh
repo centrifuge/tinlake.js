@@ -1,18 +1,17 @@
 # run testnet
 # dapp testnet
 
-# super power user for tinlake.js tests 
+# superpower user for tinlake.js tests 
 GOD_ADDRESS=0xf6fa8a3f3199cdd85749ec749fb8f9c2551f9928
 
-# make super power user from tinlake.js tests to be the governance address (control over the root contract)
+# make superpower user from tinlake.js tests to be the governance address (control over the root contract)
 # be sure to use the same address in tinlake.js test config
 export GOVERNANCE=$GOD_ADDRESS
 
-# Setup local config
+# setup local config
 ./tinlake/bin/test/setup_local_config.sh
 
-
-# create address folderseth 
+# create address folder
 mkdir ./tinlake/deployments
 
 # deploy contracts
@@ -27,6 +26,13 @@ cat ./tinlake/deployments/addresses_unknown.json > ./test/addresses.json
 
 # src env for contract deployment
 source ./tinlake/bin/test/local_env.sh
-# send funds to god address
+
+# rely superpower user on nft collateral contract 
+NFT_COLLATERAL_ADDRESS=$(cat ./test/addresses.json | jq '.COLLATERAL_NFT' | tr -d '"') 
+seth send $NFT_COLLATERAL_ADDRESS 'rely(address)' $GOD_ADDRESS
+
+# send funds to superpower user
 seth send --value 10000000000000000000 $GOD_ADDRESS
+seth send $ADMIN 'rely(address)' $ADMINPROXY
+
 

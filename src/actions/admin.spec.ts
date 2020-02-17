@@ -20,13 +20,11 @@ describe('ceiling', function () {
     });
 
     it('set ceiling for a loan', async () => {
-        testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
-        // rely admin account on ceiling
-        // relyAccount(adminAccount, testConfig);
+        await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
+        // await tinlake.setCeiling(loanId, ceiling);
     });
 
     it('update ceiling for a loan', async () => {
-         //rely admin account on ceiling
     });
 
 });
