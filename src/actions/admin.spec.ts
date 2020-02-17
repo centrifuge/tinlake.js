@@ -4,7 +4,7 @@ import assert from 'assert';
 import WithAdmin from './admin';
 import Tinlake from '../Tinlake';
 import testConfig from '../../test/config';
-import { createTinlake, TestProvider} from '../../test/utils';
+import { createTinlake, TestProvider } from '../../test/utils';
 
 const adminAccount = account.generate(randomString.generate(32));
 const testProvider = new TestProvider(testConfig);
@@ -16,10 +16,11 @@ const tinlake = createTinlake(adminAccount, TinlakeSetup, testConfig);
 describe('ceiling', function () {
     before(async () =>  {
         // fund admin account with eth
-        // await testProvider.fundAccountWithETH(adminAccount, "20000000");
+        await testProvider.fundAccountWithETH(adminAccount, "20000000");
     });
 
     it('set ceiling for a loan', async () => {
+        testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
         // rely admin account on ceiling
         // relyAccount(adminAccount, testConfig);
     });

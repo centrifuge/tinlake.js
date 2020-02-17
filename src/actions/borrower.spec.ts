@@ -24,7 +24,7 @@ describe('borrower functions', () => {
   before(async () =>  {
     await testProvider.fundAccountWithETH(borrowerAccount, '2000000000000000');
   });
-
+/*
   it('issues a loan from a minted collateral NFT', async () => {
     const tokenCount = await tinlake.getNFTCount();
     const loanCount = await tinlake.getTitleCount();
@@ -67,5 +67,6 @@ describe('borrower functions', () => {
     const loanCount = await tinlake.getTitleCount();
     const closeResult = await tinlake.close(loanCount - 1);
     assert.equal(closeResult.status, testConfig.SUCCESS_STATUS);
-  });
+  });*/
 });
+

@@ -71,3 +71,6 @@ typings/
 .idea/
 bin/.idea/
 src/.DS_Store
+
+# ignore submodules
+tinlake/

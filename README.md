@@ -22,11 +22,14 @@ Install dependencies with `npm install`.
 `--load=name` start from a previously saved snapshot
 
 
+### Get tinlake submodule
+`git submodule update --init --recursive`
+
 #### Deploy Tinlake Contracts for Tests
-`./bin/deploy-local.sh`
+`./bin/deploy.sh`
 
 #### Set Environment Variables for local deployment
-`source bin/env-local`
+`./tinlake/bin/test/local_env`
 
 #### Run integration tests
 `npm run test`

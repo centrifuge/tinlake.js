@@ -13,6 +13,7 @@ const testProvider = new TestProvider(testConfig);
 const TinlakeSetup = WithAdmin(WithLender(Tinlake));
 const tinlake = createTinlake(lenderAccount, TinlakeSetup, testConfig);
 
+/*
 describe('lender functions', () => {
   before(async () =>  {
     await testProvider.fundAccountWithETH(lenderAccount, '2000000000000000');
@@ -32,3 +33,4 @@ describe('lender functions', () => {
     assert.equal(await tinlake.getCurrencyBalance(lenderAccount.address), currencyAmount);
   });
 });
+*/

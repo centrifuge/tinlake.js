@@ -35,8 +35,7 @@ export interface EthConfig {
 }
 
 export const contractNames = [
-  'ROOT' ,
-  'CURRENCY',
+  'TINLAKE_CURRENCY',
   'JUNIOR_OPERATOR',
   'JUNIOR',
   'SENIOR',
@@ -50,7 +49,8 @@ export const contractNames = [
   'COLLECTOR',
   'THRESHOLD',
   'PRICE_POOL',
-  'NFT',
+  'COLLATERAL_NFT',
+  'ROOT_CONTRACT'
 ];
 
 type ContractNames = typeof contractNames[number];

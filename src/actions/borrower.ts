@@ -7,13 +7,13 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
   return class extends Base {
 
     mintNFT = async (user: string) => {
-      const txHash = await executeAndRetry(this.contracts['NFT'].issue, [user, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['NFT'].abi, this.transactionTimeout);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
     }
 
     getNFTCount = async (): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['NFT'].count, []);
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].count, []);
       return res[0];
     }
 
@@ -23,7 +23,7 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
     }
 
     getNFTOwner = async (nftID: string): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['NFT'].ownerOf, [nftID]);
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [nftID]);
       return res[0];
     }
 
