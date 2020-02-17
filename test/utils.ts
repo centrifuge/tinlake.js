@@ -57,13 +57,6 @@ export class TestProvider {
     await executeAndRetry(rootContract.relyContract, [contractAddress, usr.address, this.ethConfig]);
     console.log(`User Account ${usr.address} relied on contract ${contractAddress}`);
   }
-/*
-  async mintNFT(usr: Account) {
-    const nftContract : any = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(this.contractAddresses['COLLATERAL_NFT']);
-    const txHash = await executeAndRetry(nftContract.issue, [usr.address, this.ethConfig]);
-    console.log(`[Mint NFT] txHash: ${txHash}`);
-    return waitAndReturnEvents(this.eth, txHash, nftContract.abi, this.transactionTimeout);
-  }*/
 
   async mintNFT(usr: Account) {
     const nftContract : any = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(this.contractAddresses['COLLATERAL_NFT']);
