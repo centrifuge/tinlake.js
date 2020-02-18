@@ -2,30 +2,35 @@ import assert from 'assert';
 const account = require('ethjs-account');
 const randomString = require('randomstring');
 
-import WithLender from './lender';
-import WithAdmin from './admin';
 import testConfig from '../../test/config';
-import Tinlake from '../Tinlake';
+import { ITinlake } from '../Tinlake';
 import { createTinlake, TestProvider } from '../../test/utils';
 
 const lenderAccount = account.generate(randomString.generate(32));
+const adminAccount = account.generate(randomString.generate(32));
 const testProvider = new TestProvider(testConfig);
-const TinlakeSetup = WithAdmin(WithLender(Tinlake));
-const tinlake = createTinlake(lenderAccount, TinlakeSetup, testConfig);
+const tinlake = createTinlake(lenderAccount, testConfig);
 
-/*
+
 describe('lender functions', () => {
   before(async () =>  {
+    // fund lender account with currency
     await testProvider.fundAccountWithETH(lenderAccount, '2000000000000000');
+    // rely admin on junior operator
+    await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
+
   });
-  it('supplies a tranche with some funds', async () => {
+
+  it('success: lender supplies tranche with funds', async () => {
+
+    // rely lender
     const currencyAmount = 1000;
     const supplyResult = await tinlake.supplyJunior(currencyAmount);
     assert.equal(supplyResult.status, testConfig.SUCCESS_STATUS);
     assert.equal(await tinlake.getCurrencyBalance(tinlake.contractAddresses.JUNIOR), currencyAmount);
   });
 
-  it('redeems tokens for a certain amount of currency', async () => {
+  it('success: redeems tokens for a certain amount of currency', async () => {
     const currencyAmount = 1000;
     const tokenAmount = 1000;
     const redeemResult = await tinlake.redeemJunior(tokenAmount);
@@ -33,4 +38,3 @@ describe('lender functions', () => {
     assert.equal(await tinlake.getCurrencyBalance(lenderAccount.address), currencyAmount);
   });
 });
-*/

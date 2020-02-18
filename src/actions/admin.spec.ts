@@ -1,17 +1,17 @@
 const randomString = require('randomstring');
 const account = require('ethjs-account');
 import assert from 'assert';
-import WithAdmin from './admin';
-import Tinlake from '../Tinlake';
-import testConfig from '../../test/config';
+import { ITinlake } from '../Tinlake';
+import { Account } from '../../test/types';
 import { createTinlake, TestProvider } from '../../test/utils';
+import testConfig from '../../test/config';
 
-const adminAccount = account.generate(randomString.generate(32));
 const testProvider = new TestProvider(testConfig);
-const TinlakeSetup = WithAdmin(Tinlake);
-const tinlake = createTinlake(adminAccount, TinlakeSetup, testConfig);
+const adminAccount = account.generate(randomString.generate(32));
+const lenderAccount = account.generate(randomString.generate(32));
+const adminTinlake = createTinlake(adminAccount, testConfig);
 
-// ------------ admin tests borrower -------------
+// ------------ admin tests borrower-site -------------
 
 describe('ceiling', function () {
     before(async () =>  {
@@ -19,26 +19,31 @@ describe('ceiling', function () {
         await testProvider.fundAccountWithETH(adminAccount, "20000000");
     });
 
-    it('set ceiling for a loan', async () => {
+    it('success: set ceiling for a loan', async () => {
+        // rely admin on ceiling contract
         await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
         // await tinlake.setCeiling(loanId, ceiling);
     });
 
-    it('update ceiling for a loan', async () => {
+    it('success: update ceiling for a loan', async () => {
     });
 
 });
 
-describe('interest rate', function () {
+describe('pile', function () {
      //rely admin account on pile
 });
 
-describe('threshold', function () {
-    //rely admin account on threshold
-});
-
-describe('collector', function () {
-    //rely admin account on collector
-});
-
-// ------------ admin tests lender -------------
+// ------------ admin tests lender-site -------------
+describe.only('operator', function () {
+    it('success: set allowance for junior investor', async () => {
+        // rely admin on junior operator
+        await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
+        const maxCurrency = 10000000;
+        const maxToken = 10000000;
+        // set allowance for lender address
+        const allowanceResult: any = await adminTinlake.approveAllowance(lenderAccount.address, maxCurrency, maxToken);
+        assert.equal(allowanceResult.status, testConfig.SUCCESS_STATUS);
+        // add assertions
+    })
+})
