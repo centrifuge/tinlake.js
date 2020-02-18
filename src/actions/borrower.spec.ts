@@ -26,8 +26,7 @@ async function mintIssue(usr: Account) {
   assert.equal(mintResult.status, testConfig.SUCCESS_STATUS);
   // assert usr = nftOwner
   assert.equal((await borrowerTinlake.getNFTOwner(tokenId)).toLowerCase(), usr.address.toLowerCase());
-  const issueResult : any = await borrowerTinlake.issue(testConfig.contractAddresses["COLLATERAL_NFT"], tokenId);
-
+  const issueResult : any = await borrowerTinlake.issue(testConfig.contractAddresses['COLLATERAL_NFT'], tokenId);
   const loanId = (await borrowerTinlake.getTitleCount()).toNumber() - 1;
   // assert loan successfully issued
   assert.equal(issueResult.status, testConfig.SUCCESS_STATUS);
@@ -39,11 +38,19 @@ async function mintIssue(usr: Account) {
 describe.only('borrower functions', () => {
 
   before(async () =>  {
-    await testProvider.fundAccountWithETH(borrowerAccount, '200000');
+    await testProvider.fundAccountWithETH(borrowerAccount, '2000000000000000000000');
+    await testProvider.fundAccountWithETH(adminAccount, '200000000000000000');
   });
 
   it('issues a loan from a minted collateral NFT', async () => {
     await mintIssue(borrowerAccount);
+  });
+
+  it('fails when msg.sender is not the collateral NFT owner', async () => {
+    const mintResult : any = await testProvider.mintNFT(adminAccount);
+    const tokenId = mintResult.events[0].data[2].toString();
+    const issueResult = await borrowerTinlake.issue(testConfig.contractAddresses['COLLATERAL_NFT'], tokenId);
+    assert.equal(issueResult.status, testConfig.FAIL_STATUS);
   });
 
   it('closes a loan successfully', async () => {
@@ -53,20 +60,24 @@ describe.only('borrower functions', () => {
   });
 
   it('locks nft successfully', async () => {
-    // mint nft & issue laon
+    // mint nft & issue loan
     const { tokenId, loanId } = await mintIssue(borrowerAccount);
-    await borrowerTinlake.approveNFT(tokenId, borrowerTinlake.contractAddresses["SHELF"]);
-   
+    await borrowerTinlake.approveNFT(tokenId, borrowerTinlake.contractAddresses['SHELF']);
+
     // lock nft
     await borrowerTinlake.lock(loanId);
-    assert.equal(await borrowerTinlake.getNFTOwner(tokenId), borrowerTinlake.contractAddresses["SHELF"]);
+    assert.equal(await borrowerTinlake.getNFTOwner(tokenId), borrowerTinlake.contractAddresses['SHELF']);
+
+    // fails because borrower does not own loan NFT anymore
+    const failLockResult = await borrowerTinlake.lock(loanId);
+    assert.equal(failLockResult.status, testConfig.FAIL_STATUS);
   });
 
   it('unlocks nft successfully', async () => {
-    // mint nft & issue laon 
+    // mint nft & issue loan
     const { tokenId, loanId } = await mintIssue(borrowerAccount);
-    await borrowerTinlake.approveNFT(tokenId, borrowerTinlake.contractAddresses["SHELF"]);
-    
+    await borrowerTinlake.approveNFT(tokenId, borrowerTinlake.contractAddresses['SHELF']);
+
     // lock nft
     await borrowerTinlake.lock(loanId);
 
@@ -75,22 +86,21 @@ describe.only('borrower functions', () => {
   });
 
   it('borrows money successfully', async () => {
-     // mint nft & issue laon 
-     const { tokenId, loanId } = await mintIssue(borrowerAccount);
-     const ceiling = 10000;
+     // mint nft & issue loan
+    const { tokenId, loanId } = await mintIssue(borrowerAccount);
+    const ceiling = 10000;
 
-     await borrowerTinlake.approveNFT(tokenId, testConfig.contractAddresses["SHELF"]);
-     
+    await borrowerTinlake.approveNFT(tokenId, testConfig.contractAddresses['SHELF']);
+
      // lock nft
-     await borrowerTinlake.lock(loanId);
+    await borrowerTinlake.lock(loanId);
 
      // admin sets ceiling
-     await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
-     await adminTinlake.setCeiling(loanId, ceiling);
+    await testProvider.relyAccount(adminAccount, testConfig.contractAddresses['CEILING']);
+    await adminTinlake.setCeiling(loanId, ceiling);
 
     // supply tranche with money
     // await tinlake.borrow(loanId - 1, ceilingAmount);
     // assert.equal(await tinlake.getCurrencyBalance(borrowerAccount.address), ceilingAmount);
   });
 });
-

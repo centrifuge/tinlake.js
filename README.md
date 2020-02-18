@@ -28,9 +28,6 @@ Install dependencies with `npm install`.
 #### Deploy Tinlake Contracts for Tests
 `./bin/deploy.sh`
 
-#### Set Environment Variables for local deployment
-`./tinlake/bin/test/local_env`
-
 #### Run integration tests
 `npm run test`
 

@@ -32,7 +32,5 @@ NFT_COLLATERAL_ADDRESS=$(cat ./test/addresses.json | jq '.COLLATERAL_NFT' | tr -
 seth send $NFT_COLLATERAL_ADDRESS 'rely(address)' $GOD_ADDRESS
 
 # send funds to superpower user
-seth send --value 10000000000000000000 $GOD_ADDRESS
-seth send $ADMIN 'rely(address)' $ADMINPROXY
-
+seth send --value 10000000000000000000000000000000000000000000000000000000 $GOD_ADDRESS
 
