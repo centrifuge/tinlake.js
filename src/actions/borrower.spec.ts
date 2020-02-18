@@ -17,7 +17,8 @@ describe('borrower functions', () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
-    await testProvider.fundAccountWithETH(borrowerAccount, '200000');
+    await testProvider.fundAccountWithETH(borrowerAccount, '2000000000000000000000');
+    await testProvider.fundAccountWithETH(adminAccount, '200000000000000000');
   });
 
   it('issues a loan from a minted collateral NFT', async () => {

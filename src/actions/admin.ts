@@ -25,8 +25,6 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
 
     // ------------ admin functions lender-site -------------
     approveAllowance = async (user: string, maxCurrency: string, maxToken: string) => {
-      console.log("details", user, maxCurrency, maxToken );
-      console.log("config", this.ethConfig );
       const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);

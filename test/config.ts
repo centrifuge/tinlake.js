@@ -11,6 +11,7 @@ const testConfig = {
   transactionTimeout: 50000,
   gasLimit: 10000000,
   SUCCESS_STATUS: '0x1',
+  FAIL_STATUS: '0x0',
   rpcUrl: 'http://127.0.0.1:8545',
   contractAddresses,
   contractAbis: abiDefinitions,
