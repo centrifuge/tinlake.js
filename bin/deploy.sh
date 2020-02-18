@@ -1,6 +1,11 @@
 # run testnet
 # dapp testnet
 
+# remove tinlake submodule and install newest dependency
+# rm -r ./tinlake
+# git submodule update --init --recursive
+# git submodule update --recursive --remote --merge
+
 # superpower user for tinlake.js tests 
 GOD_ADDRESS=0xf6fa8a3f3199cdd85749ec749fb8f9c2551f9928
 
@@ -32,7 +37,6 @@ NFT_COLLATERAL_ADDRESS=$(cat ./test/addresses.json | jq '.COLLATERAL_NFT' | tr -
 seth send $NFT_COLLATERAL_ADDRESS 'rely(address)' $GOD_ADDRESS
 
 # send funds to superpower user
-seth send --value 10000000000000000000 $GOD_ADDRESS
-seth send $ADMIN 'rely(address)' $ADMINPROXY
+seth send --value 1000000000000000000000000000000000000 $GOD_ADDRESS
 
 
