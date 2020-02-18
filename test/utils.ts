@@ -1,9 +1,10 @@
 import { Account } from './types';
 import { ethI, EthConfig, ContractAbis, ContractAddresses, ContractNames } from '../src/types';
+import { executeAndRetry, waitAndReturnEvents } from '../src/ethereum';
+import BN from 'bn.js';
 const Eth = require('ethjs');
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
-import { waitAndReturnEvents, executeAndRetry } from '../src/ethereum';
 
 export class TestProvider {
   public eth : ethI;
@@ -13,8 +14,14 @@ export class TestProvider {
   public contractAddresses: ContractAddresses;
   public transactionTimeout: number;
   public gasLimit: number;
+  // make test provider to be singleton
+  private static instance: TestProvider;
 
   constructor(testConfig: any) {
+    if (TestProvider.instance) {
+      return TestProvider.instance;
+    }
+    TestProvider.instance = this;
     const { rpcUrl, godAccount, contractAddresses, contractAbis, gasLimit, transactionTimeout } = testConfig;
     this.eth = new Eth(createSignerProvider(rpcUrl, godAccount));
     this.ethConfig = { from: godAccount.address, gasLimit: `0x${gasLimit.toString(16)}` };
@@ -49,6 +56,13 @@ export class TestProvider {
     const rootContract : any = this.eth.contract(this.contractAbis['ROOT_CONTRACT']).at(this.contractAddresses['ROOT_CONTRACT']);
     await executeAndRetry(rootContract.relyContract, [contractAddress, usr.address, this.ethConfig]);
     console.log(`User Account ${usr.address} relied on contract ${contractAddress}`);
+  }
+
+  async mintNFT(usr: Account) {
+    const nftContract : any = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(this.contractAddresses['COLLATERAL_NFT']);
+    const txHash = await executeAndRetry(nftContract.issue, [usr.address, this.ethConfig]);
+    console.log(`[Mint NFT] txHash: ${txHash}`);
+    return waitAndReturnEvents(this.eth, txHash, nftContract.abi, this.transactionTimeout);
   }
 }
 

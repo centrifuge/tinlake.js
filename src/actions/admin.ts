@@ -4,7 +4,7 @@ import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 function Admin<AdminBase extends Constructor<Tinlake>>(Base: AdminBase) {
   return class extends Base {
    
-    fileCeiling = async (loanId: string, ceilingAmount: string) => {
+    setCeiling = async (loanId: string, ceilingAmount: string) => {
       const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, ceilingAmount, this.ethConfig]);
       console.log(`[Ceiling file] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['CEILING'].abi, this.transactionTimeout);
@@ -25,7 +25,6 @@ function Admin<AdminBase extends Constructor<Tinlake>>(Base: AdminBase) {
     // -- TRANCHE OPERATOR SETUP --
     approveAllowance = async (user: string, maxCurrency: string, maxToken: string) => {
       // TODO: which operator?
-      // tslint:disable-next-line:max-line-length
       const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);

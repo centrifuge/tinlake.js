@@ -2,7 +2,6 @@ import { Constructor, Tinlake  } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 import BN from 'bn.js';
 
-// tslint:disable-next-line:function-name
 function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase) {
   return class extends Base {
 
@@ -37,9 +36,10 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
       return res[0]; 
     }
 
-    issue = async (registry: string, tokenId: string): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
-      return res[0];
+    issue = async (registry: string, tokenId: string) => {
+      const txHash = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
+      console.log(`[Mint NFT] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
     lock = async (loan: string) => {
@@ -81,10 +81,16 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
     }
 
     approveCurrency = async (usr: string, currencyAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts['CURRENCY'], [usr, currencyAmount, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'], [usr, currencyAmount, this.ethConfig]);
       console.log(`[Repay] txHash: ${txHash}`);
     // tslint:disable-next-line:max-line-length
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+    }
+
+    approveNFT = async (tokenId: string, to: string) => {
+      const txHash = await executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])
+      console.log(`[NFT Approve] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout);
     }
   };
   // TODO: pile contract calls
