@@ -21,10 +21,6 @@ Install dependencies with `npm install`.
 `--save=name` after finishing, save snapshot
 `--load=name` start from a previously saved snapshot
 
-
-### Get tinlake submodule
-`git submodule update --init --recursive`
-
 #### Deploy Tinlake Contracts for Tests
 `./bin/deploy.sh`
 
