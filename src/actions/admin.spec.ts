@@ -10,6 +10,7 @@ const testProvider = new TestProvider(testConfig);
 const adminAccount = account.generate(randomString.generate(32));
 const lenderAccount = account.generate(randomString.generate(32));
 const adminTinlake = createTinlake(adminAccount, testConfig);
+const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT } = testConfig
 
@@ -26,7 +27,7 @@ describe('admin tests', () => {
        
         it('success: set ceiling for a loan', async () => {
             // rely admin on ceiling contract
-            await testProvider.relyAddress(adminAccount.address, testConfig.contractAddresses["CEILING"]);
+            await governanceTinlake.relyAddress(adminAccount.address, testConfig.contractAddresses["CEILING"]);
             // await tinlake.setCeiling(loanId, ceiling);
         });
 
@@ -44,7 +45,7 @@ describe('admin tests', () => {
     describe('operator', function () {
         it('success: set allowance for junior investor', async () => {
                 // rely admin on junior operator
-                await testProvider.relyAddress(adminAccount.address, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
+                await governanceTinlake.relyAddress(adminAccount.address, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
                 const maxCurrency = 1000;
                 const maxToken = 100;
 
