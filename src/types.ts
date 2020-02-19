@@ -53,7 +53,7 @@ export const contractNames = [
   'ROOT_CONTRACT'
 ];
 
-type ContractNames = typeof contractNames[number];
+export type ContractNames = typeof contractNames[number];
 
 export type Contracts = {
   [key in ContractNames]?: any;

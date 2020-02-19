@@ -13,12 +13,14 @@ const testProvider = new TestProvider(testConfig);
 const borrowerTinlake = createTinlake(borrowerAccount, testConfig);
 const adminTinlake = createTinlake(adminAccount, testConfig);
 
-describe('borrower functions', () => {
+const { SUCCESS_STATUS, FAUCET_AMOUNT } = testConfig
+
+describe('borrower tests', () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
-    await testProvider.fundAccountWithETH(borrowerAccount, '2000000000000000000000');
-    await testProvider.fundAccountWithETH(adminAccount, '200000000000000000');
+    await testProvider.fundAccountWithETH(borrowerAccount, FAUCET_AMOUNT);
+    await testProvider.fundAccountWithETH(adminAccount, FAUCET_AMOUNT);
   });
 
   it('success: issue loan from a minted collateral NFT', async () => {
@@ -28,7 +30,7 @@ describe('borrower functions', () => {
   it('success: close loan', async () => {
     const { loanId } = await mintIssue(borrowerAccount, borrowerTinlake);
     const closeResult = await borrowerTinlake.close(loanId);
-    assert.equal(closeResult.status, testConfig.SUCCESS_STATUS);
+    assert.equal(closeResult.status, SUCCESS_STATUS);
   });
 
   it('success: lock nft', async () => {
@@ -79,14 +81,14 @@ export async function mintIssue(usr: Account, tinlake: ITinlake) {
   const tokenId = mintResult.events[0].data[2].toString();
 
   // assert nft successfully minted
-  assert.equal(mintResult.status, testConfig.SUCCESS_STATUS);
+  assert.equal(mintResult.status, SUCCESS_STATUS);
   // assert usr = nftOwner
   assert.equal((await tinlake.getNFTOwner(tokenId)).toLowerCase(), usr.address.toLowerCase());
   const issueResult : any = await tinlake.issue(testConfig.contractAddresses["COLLATERAL_NFT"], tokenId);
 
   const loanId = (await tinlake.getTitleCount()).toNumber() - 1;
   // assert loan successfully issued
-  assert.equal(issueResult.status, testConfig.SUCCESS_STATUS);
+  assert.equal(issueResult.status, SUCCESS_STATUS);
   // assert usr = loanOwner
   assert.equal((await tinlake.getTitleOwner(loanId)).toLowerCase(), usr.address.toLowerCase());
   return { tokenId, loanId };
