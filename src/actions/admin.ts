@@ -39,7 +39,7 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
 }
 
 export type IAdminActions = {
-  isWard(user: string, contractName: ContractNames): Promise<any>,
+  isWard(user: string, contractName: ContractNames): Promise<BN>,
   setCeiling(loanId: string, amount: string): Promise<any>,
   initRate(rate: string, speed: string): Promise<any>,
   setRate(loan: string, rate: string): Promise<any>,
