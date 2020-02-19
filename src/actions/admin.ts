@@ -1,9 +1,15 @@
-import { Constructor, Tinlake } from '../types';
+import { Constructor, Tinlake, ContractNames } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
+import BN from 'bn.js';
 
 function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IAdminActions {
    
+    isWard = async (user: string, contractName: ContractNames) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts[contractName].wards, [user]);
+      return res[0];
+    }
+
     // ------------ admin functions borrower-site -------------
     setCeiling = async (loanId: string, amount: string) => {
       const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);
@@ -33,6 +39,7 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
 }
 
 export type IAdminActions = {
+  isWard(user: string, contractName: ContractNames): Promise<BN>,
   setCeiling(loanId: string, amount: string): Promise<any>,
   initRate(rate: string, speed: string): Promise<any>,
   setRate(loan: string, rate: string): Promise<any>,

@@ -2,9 +2,9 @@
 # dapp testnet
 
 # remove tinlake submodule and install newest dependency
-# rm -r ./tinlake
-# git submodule update --init --recursive
-# git submodule update --recursive --remote --merge
+[ -d ./tinlake ] && rm -r ./tinlake
+git submodule update --init --recursive 
+git submodule update --recursive --remote --merge 
 
 # superpower user for tinlake.js tests 
 GOD_ADDRESS=0xf6fa8a3f3199cdd85749ec749fb8f9c2551f9928

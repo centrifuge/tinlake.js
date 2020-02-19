@@ -43,8 +43,6 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
     }
 
     lock = async (loan: string) => {
-      // const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
-      // return res[0];
       const txHash = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
       console.log(`[Collateral NFT lock] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);

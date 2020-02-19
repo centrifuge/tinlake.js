@@ -11,39 +11,52 @@ const adminAccount = account.generate(randomString.generate(32));
 const lenderAccount = account.generate(randomString.generate(32));
 const adminTinlake = createTinlake(adminAccount, testConfig);
 
-// ------------ admin tests borrower-site -------------
+const { SUCCESS_STATUS, FAUCET_AMOUNT } = testConfig
 
-describe('ceiling', function () {
+// ------------ admin tests borrower-site -------------
+describe('admin tests', () => {
+
     before(async () =>  {
         // fund admin account with eth
-        await testProvider.fundAccountWithETH(adminAccount, "20000000");
+        await testProvider.fundAccountWithETH(adminAccount, FAUCET_AMOUNT);
     });
 
-    it('success: set ceiling for a loan', async () => {
-        // rely admin on ceiling contract
-        await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
-        // await tinlake.setCeiling(loanId, ceiling);
+    
+    describe('ceiling', function () {
+       
+        it('success: set ceiling for a loan', async () => {
+            // rely admin on ceiling contract
+            await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
+            // await tinlake.setCeiling(loanId, ceiling);
+        });
+
+        it('success: update ceiling for a loan', async () => {
+        });
+
     });
 
-    it('success: update ceiling for a loan', async () => {
+    describe('pile', function () {
+        //rely admin account on pile
     });
+    
 
-});
+    // ------------ admin tests lender-site -------------
+    describe('operator', function () {
+        it('success: set allowance for junior investor', async () => {
+                // rely admin on junior operator
+                await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
+                const maxCurrency = 1000;
+                const maxToken = 100;
 
-describe('pile', function () {
-     //rely admin account on pile
-});
-
-// ------------ admin tests lender-site -------------
-describe.only('operator', function () {
-    it('success: set allowance for junior investor', async () => {
-        // rely admin on junior operator
-        await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
-        const maxCurrency = 10000000;
-        const maxToken = 10000000;
-        // set allowance for lender address
-        const allowanceResult: any = await adminTinlake.approveAllowance(lenderAccount.address, maxCurrency, maxToken);
-        assert.equal(allowanceResult.status, testConfig.SUCCESS_STATUS);
-        // add assertions
+                // set allowance for lender address
+                const allowanceResult: any = await adminTinlake.approveAllowance(lenderAccount.address, maxCurrency, maxToken);
+                            
+                const maxSupplyAmount = await adminTinlake.getMaxSupplyAmount(lenderAccount.address);
+                const maxRedeemAmount = await adminTinlake.getMaxRedeemAmount(lenderAccount.address);
+                assert.equal(allowanceResult.status, testConfig.SUCCESS_STATUS);
+                assert.equal(maxRedeemAmount, maxToken);
+                assert.equal(maxSupplyAmount, maxCurrency);
+        })
     })
+
 })

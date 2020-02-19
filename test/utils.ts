@@ -66,7 +66,7 @@ export class TestProvider {
   }
 }
 
-export function createTinlake(usr: Partial<Account>, testConfig: any) {
+export function createTinlake(usr: Account, testConfig: any) {
   const {
         rpcUrl,
         transactionTimeout,

@@ -1,8 +1,8 @@
-import { Constructor, Contracts, EthConfig } from '../types';
+import { Constructor, Tinlake, Contracts, EthConfig } from '../types';
 import { executeAndRetry, waitAndReturnEvents } from '../ethereum';
 import BN from 'bn.js';
 
-function LenderActions<ActionBase extends Constructor<{}>>(Base: ActionBase) {
+function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase) {
   return class extends Base implements ILenderActions {
     contracts: Contracts;
     ethConfig: EthConfig;
@@ -24,6 +24,16 @@ function LenderActions<ActionBase extends Constructor<{}>>(Base: ActionBase) {
       return res[0];
     }
 
+    getMaxSupplyAmount = async (user: string) => {
+      const res : { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR_OPERATOR"].maxCurrency, [user]);
+      return res[0];
+    }
+
+    getMaxRedeemAmount = async (user: string) => {
+      const res  =  await executeAndRetry(this.contracts["JUNIOR_OPERATOR"].maxToken, [user]);
+      return res[0];
+    }
+
     balance = async () => {
       const txHash = await executeAndRetry(this.contracts['DISTRIBUTOR'].balance, [this.ethConfig]);
       console.log(`[Balance] txHash: ${txHash}`);
@@ -36,6 +46,8 @@ export type ILenderActions = {
   supplyJunior(currencyAmount: string): Promise<any>,
   redeemJunior(tokenAmount: string): Promise<any>,
   getCurrencyBalance(user: string): Promise<BN>,
+  getMaxSupplyAmount(user: string): Promise<BN>,
+  getMaxRedeemAmount(user: string): Promise<BN>,
   balance(): Promise<any>
 }
 
