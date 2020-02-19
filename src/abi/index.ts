@@ -26,5 +26,7 @@ export default {
   JUNIOR_OPERATOR : contractAbiOperator,
   DISTRIBUTOR : contractAbiDistributor,
   ASSESSOR: contractAbiAssessor,
-  ROOT_CONTRACT: contractAbiRoot
+  ROOT_CONTRACT: contractAbiRoot,
+  JUNIOR_TOKEN: contractAbiCurrency,
+  SENIOR_TOKEN: contractAbiCurrency
 } as ContractAbis;

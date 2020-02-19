@@ -19,9 +19,26 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
       return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);
     }
 
-    getCurrencyBalance = async (user: string) => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [user]);
+    getJuniorTokenBalance = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['JUNIOR_TOKEN'].balanceOf, [user]);
       return res[0];
+    }
+
+    getSeniorTokenBalance = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['SENIOR_TOKEN'].balanceOf, [user]);
+      return res[0];
+    }
+
+    approveJuniorToken = async (usr: string, tokenAmount: string) => {
+      const txHash = await executeAndRetry(this.contracts['JUNIOR_TOKEN'].approve, [usr, tokenAmount, this.ethConfig])
+      console.log(`[Currency.approve] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_TOKEN'].abi, this.transactionTimeout);
+    }
+
+    approveSeniorToken = async (usr: string, tokenAmount: string) => {
+      const txHash = await executeAndRetry(this.contracts['SENIOR_TOKEN'].approve, [usr, tokenAmount, this.ethConfig])
+      console.log(`[Currency.approve] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['SENIOR_TOKEN'].abi, this.transactionTimeout);
     }
 
     getMaxSupplyAmount = async (user: string) => {
@@ -46,6 +63,8 @@ export type ILenderActions = {
   supplyJunior(currencyAmount: string): Promise<any>,
   redeemJunior(tokenAmount: string): Promise<any>,
   getCurrencyBalance(user: string): Promise<BN>,
+  getJuniorTokenBalance(user: string): Promise<BN>,
+  getSeniorTokenBalance(user: string): Promise<BN>,
   getMaxSupplyAmount(user: string): Promise<BN>,
   getMaxRedeemAmount(user: string): Promise<BN>,
   balance(): Promise<any>
