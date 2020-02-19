@@ -17,7 +17,7 @@ describe('lender functions', () => {
     // fund lender account with currency
     await testProvider.fundAccountWithETH(lenderAccount, testConfig.FAUCET_AMOUNT);
     // rely admin on junior operator
-    await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
+    await testProvider.relyAddress(adminAccount.address, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
   });
 
   it('success: lender supplies tranche with funds', async () => {

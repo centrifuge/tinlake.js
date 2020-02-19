@@ -10,59 +10,29 @@ export class TestProvider {
   public eth : ethI;
   public sponsorAccount: Account;
   public ethConfig: EthConfig;
-  public contractAbis: ContractAbis;
-  public contractAddresses: ContractAddresses;
   public transactionTimeout: number;
   public gasLimit: number;
-  // make test provider to be singleton
-  private static instance: TestProvider;
 
   constructor(testConfig: any) {
-    if (TestProvider.instance) {
-      return TestProvider.instance;
-    }
-    TestProvider.instance = this;
-    const { rpcUrl, godAccount, contractAddresses, contractAbis, gasLimit, transactionTimeout } = testConfig;
+    const { rpcUrl, godAccount, gasLimit, transactionTimeout } = testConfig;
     this.eth = new Eth(createSignerProvider(rpcUrl, godAccount));
     this.ethConfig = { from: godAccount.address, gasLimit: `0x${gasLimit.toString(16)}` };
     this.transactionTimeout = transactionTimeout;
-    this.contractAddresses = contractAddresses;
-    this.gasLimit = gasLimit;
     this.sponsorAccount = godAccount;
-    this.contractAbis = contractAbis;
   }
 
-  async fundAccountWithETH(usr: Account, amount: string) {
+  async fundAccountWithETH(usr: string, amount: string) {
     const nonce = await this.eth.getTransactionCount(this.ethConfig.from);
     const transaction = {
       from: this.ethConfig.from,
-      to: usr.address,
+      to: usr,
       value: amount,
-      gas: this.gasLimit,
+      gas: this.ethConfig.gasLimit,
       nonce,
     };
     const signedTransaction = sign(transaction, this.sponsorAccount.privateKey);
     await executeAndRetry(this.eth.sendRawTransaction, [signedTransaction]);
-    console.log(`User Account ${usr.address} funded with ${amount} ETH`);
-  }
-
-  async fundAccountWithCurrency(usr: Account, amount: string) {
-    const currencyContract: any = this.eth.contract(this.contractAbis['TINLAKE_CURRENCY']).at(this.contractAddresses['TINLAKE_CURRENCY']);
-    await executeAndRetry(currencyContract.mint, [usr.address, amount, this.ethConfig]);
-    console.log(`User Account ${usr.address} funded with ${amount} TINLAKE_CURRENCY`);
-  }
-
-  async relyAccount(usr: Account, contractAddress: string) {
-    const rootContract : any = this.eth.contract(this.contractAbis['ROOT_CONTRACT']).at(this.contractAddresses['ROOT_CONTRACT']);
-    await executeAndRetry(rootContract.relyContract, [contractAddress, usr.address, this.ethConfig]);
-    console.log(`User Account ${usr.address} relied on contract ${contractAddress}`);
-  }
-
-  async mintNFT(usr: Account) {
-    const nftContract : any = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(this.contractAddresses['COLLATERAL_NFT']);
-    const txHash = await executeAndRetry(nftContract.issue, [usr.address, this.ethConfig]);
-    console.log(`[Mint NFT] txHash: ${txHash}`);
-    return waitAndReturnEvents(this.eth, txHash, nftContract.abi, this.transactionTimeout);
+    console.log(`User Account ${usr} funded with ${amount} ETH`);
   }
 }
 

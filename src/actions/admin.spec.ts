@@ -26,7 +26,7 @@ describe('admin tests', () => {
        
         it('success: set ceiling for a loan', async () => {
             // rely admin on ceiling contract
-            await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["CEILING"]);
+            await testProvider.relyAddress(adminAccount.address, testConfig.contractAddresses["CEILING"]);
             // await tinlake.setCeiling(loanId, ceiling);
         });
 
@@ -44,7 +44,7 @@ describe('admin tests', () => {
     describe('operator', function () {
         it('success: set allowance for junior investor', async () => {
                 // rely admin on junior operator
-                await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
+                await testProvider.relyAddress(adminAccount.address, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
                 const maxCurrency = 1000;
                 const maxToken = 100;
 

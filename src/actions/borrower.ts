@@ -30,11 +30,6 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
       const res : { 0: BN } = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanID]);
       return res[0];
     }
-    
-    getCurrencyBalance = async (user: string) => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [user]);
-      return res[0]; 
-    }
 
     issue = async (registry: string, tokenId: string) => {
       const txHash = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
@@ -78,13 +73,6 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
-    approveCurrency = async (usr: string, currencyAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'], [usr, currencyAmount, this.ethConfig]);
-      console.log(`[Repay] txHash: ${txHash}`);
-    // tslint:disable-next-line:max-line-length
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
-    }
-
     approveNFT = async (tokenId: string, to: string) => {
       const txHash = await executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])
       console.log(`[NFT Approve] txHash: ${txHash}`);
@@ -94,7 +82,19 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 }
 
 export type IBorrowerActions = {
-  // add borrower tinlake type
+  mintNFT(user: string): Promise<any>,
+  getNFTCount(): Promise<BN>,
+  getTitleCount(): Promise<BN>;
+  getNFTOwner(nftID: string): Promise<BN>,
+  getTitleOwner(loanID: string): Promise<BN>,
+  issue(registry: string, tokenId: string): Promise<any>,
+  lock(loan: string): Promise<any>,
+  unlock(loan: string): Promise<any>,
+  close(loan: string): Promise<any>,
+  borrow(loan: string, currencyAmount: string): Promise<any>,
+  withdraw(loan: string, currencyAmount: string) : Promise<any>,
+  repay(loan: string, currencyAmount: string): Promise<any>,
+  approveNFT(tokenId: string, to: string): Promise<any>
 }
 
 export default BorrowerActions;
