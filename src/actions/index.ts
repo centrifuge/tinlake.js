@@ -6,13 +6,13 @@ import Collateral, { ICollateralActions } from './collateral';
 import Analytics, { IAnalyticsActions } from './analytics';
 
 export default {
-    Admin,
-    Borrower,
-    Lender,
-    Currency,
-    Collateral,
-    Analytics
-}
+  Admin,
+  Borrower,
+  Lender,
+  Currency,
+  Collateral,
+  Analytics,
+};
 
 export type TinlakeActions =
     IAdminActions &

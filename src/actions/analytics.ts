@@ -1,8 +1,8 @@
-import { Loan, Constructor } from './../types';
+import { Loan, Constructor, Tinlake } from './../types';
 import { executeAndRetry } from './../ethereum';
 import BN from 'bn.js';
 
-function AnalyticsActions<ActionsBase extends Constructor<{}>>(Base: ActionsBase) {
+function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IAnalyticsActions {
 
     getTotalDebt = async (): Promise<BN> => {
