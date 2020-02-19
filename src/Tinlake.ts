@@ -50,8 +50,8 @@ export class Tinlake {
   }
 }
 
-const { Admin, Borrower, Lender, Analytics, Currency, Collateral } = actions;
-const TinlakeWithActions = (Borrower(Admin(Lender(Analytics(Currency(Collateral(Tinlake)))))));
+const { Admin, Borrower, Lender, Analytics, Currency, Collateral, Governance} = actions;
+const TinlakeWithActions = (Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake))))))));
 
 export type ITinlake = TinlakeActions & {
   setProvider(provider: any, ethOptions?: any) : void,
