@@ -13,7 +13,7 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
 }
 
 export type ICollateralActions = {
-  mintNFT(usr: string, registry: string): Promise<any>;
+  mintNFT(usr: string, registry: string): Promise<any>
 }
 
 export default CollateralActions;
