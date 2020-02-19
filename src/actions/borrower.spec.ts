@@ -3,6 +3,7 @@ const account = require('ethjs-account');
 const randomString = require('randomstring');
 import { Account } from '../../test/types';
 import WithBorrower from './borrower';
+import WithAnalytics from './analytics';
 import WithAdmin from './admin';
 import testConfig from '../../test/config';
 import Tinlake from '../Tinlake';
