@@ -45,7 +45,6 @@ describe('admin tests', () => {
         it('success: set allowance for junior investor', async () => {
                 // rely admin on junior operator
                 await testProvider.relyAccount(adminAccount, testConfig.contractAddresses["JUNIOR_OPERATOR"]);
-                // const isWard = await adminTinlake.isWard(adminAccount.address, "JUNIOR_OPERATOR");
                 const maxCurrency = 1000;
                 const maxToken = 100;
 

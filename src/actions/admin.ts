@@ -7,7 +7,7 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
    
     isWard = async (user: string, contractName: ContractNames) => {
       const res : { 0: BN } = await executeAndRetry(this.contracts[contractName].wards, [user]);
-      return res[0].toNumber();
+      return res[0];
     }
 
     // ------------ admin functions borrower-site -------------
