@@ -1,6 +1,7 @@
 import Eth from 'ethjs';
 import { contractNames, Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from './types';
 import  abiDefinitions  from './abi/index';
+import actions, { TinlakeActions } from './actions/index';
 
 export class Tinlake {
   public provider: any;
@@ -48,7 +49,15 @@ export class Tinlake {
   }
 }
 
-export default Tinlake;
+const { Admin, Borrower, Lender, Analytics, Currency, Collateral} = actions;
+const TinlakeWithActions = (Borrower(Admin(Lender(Analytics(Currency(Collateral(Tinlake)))))));
+
+export type ITinlake = TinlakeActions & {
+  setProvider(provider: any, ethOptions?: any) : void,
+  setEthConfig(ethConfig: { [key: string]: any }): void
+};
+
+export default TinlakeWithActions;
 
 export * from './utils/baseToDisplay';
 export * from './utils/bnToHex';

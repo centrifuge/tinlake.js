@@ -1,11 +1,18 @@
-import { Constructor, Tinlake } from '../types';
+import { Constructor, Tinlake, ContractNames } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
+import BN from 'bn.js';
 
-function Admin<AdminBase extends Constructor<Tinlake>>(Base: AdminBase) {
-  return class extends Base {
+function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
+  return class extends Base implements IAdminActions {
    
-    setCeiling = async (loanId: string, ceilingAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, ceilingAmount, this.ethConfig]);
+    isWard = async (user: string, contractName: ContractNames) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts[contractName].wards, [user]);
+      return res[0];
+    }
+
+    // ------------ admin functions borrower-site -------------
+    setCeiling = async (loanId: string, amount: string) => {
+      const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);
       console.log(`[Ceiling file] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['CEILING'].abi, this.transactionTimeout);
     }
@@ -22,9 +29,8 @@ function Admin<AdminBase extends Constructor<Tinlake>>(Base: AdminBase) {
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }
 
-    // -- TRANCHE OPERATOR SETUP --
+    // ------------ admin functions lender-site -------------
     approveAllowance = async (user: string, maxCurrency: string, maxToken: string) => {
-      // TODO: which operator?
       const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);
@@ -32,4 +38,12 @@ function Admin<AdminBase extends Constructor<Tinlake>>(Base: AdminBase) {
   };
 }
 
-export default Admin;
+export type IAdminActions = {
+  isWard(user: string, contractName: ContractNames): Promise<BN>,
+  setCeiling(loanId: string, amount: string): Promise<any>,
+  initRate(rate: string, speed: string): Promise<any>,
+  setRate(loan: string, rate: string): Promise<any>,
+  approveAllowance(user: string, maxCurrency: string, maxToken: string): Promise<any>
+}
+
+export default AdminActions;

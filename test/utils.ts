@@ -1,7 +1,7 @@
 import { Account } from './types';
+import Tinlake, { ITinlake } from '../src/Tinlake';
 import { ethI, EthConfig, ContractAbis, ContractAddresses, ContractNames } from '../src/types';
 import { executeAndRetry, waitAndReturnEvents } from '../src/ethereum';
-import BN from 'bn.js';
 const Eth = require('ethjs');
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
@@ -66,7 +66,7 @@ export class TestProvider {
   }
 }
 
-export function createTinlake(usr: Partial<Account>, TinlakeSetup: any, testConfig: any) {
+export function createTinlake(usr: Account, testConfig: any) {
   const {
         rpcUrl,
         transactionTimeout,
@@ -75,7 +75,7 @@ export function createTinlake(usr: Partial<Account>, TinlakeSetup: any, testConf
         nftDataContractCall,
     } = testConfig;
 
-  const tinlake = new TinlakeSetup(
+  const tinlake = new Tinlake(
         createSignerProvider(rpcUrl, usr),
         contractAddresses,
         nftDataContractCall.outputs,

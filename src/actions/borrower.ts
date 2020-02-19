@@ -2,8 +2,8 @@ import { Constructor, Tinlake  } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 import BN from 'bn.js';
 
-function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase) {
-  return class extends Base {
+function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
+  return class extends Base implements IBorrowerActions{
 
     mintNFT = async (user: string) => {
       const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig]);
@@ -43,8 +43,6 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
     }
 
     lock = async (loan: string) => {
-      // const res : { 0: BN } = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
-      // return res[0];
       const txHash = await executeAndRetry(this.contracts['SHELF'].lock, [loan, this.ethConfig]);
       console.log(`[Collateral NFT lock] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
@@ -93,8 +91,10 @@ function Borrower<BorrowerBase extends Constructor<Tinlake>>(Base: BorrowerBase)
       return waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout);
     }
   };
-  // TODO: pile contract calls
-  // TODO: pool calls
 }
 
-export default Borrower;
+export type IBorrowerActions = {
+  // add borrower tinlake type
+}
+
+export default BorrowerActions;
