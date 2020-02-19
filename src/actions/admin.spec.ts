@@ -18,7 +18,6 @@ describe('admin tests', () => {
 
     before(async () =>  {
         // fund admin account with eth
-        console.log("admin account", adminAccount.address);
         await testProvider.fundAccountWithETH(adminAccount, FAUCET_AMOUNT);
     });
 
