@@ -9,7 +9,7 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       const res : { 0: BN } = await executeAndRetry(this.contracts[contractName].wards, [user]);
       return res[0];
     }
-
+  
     // ------------ admin functions borrower-site -------------
     setCeiling = async (loanId: string, amount: string) => {
       const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);

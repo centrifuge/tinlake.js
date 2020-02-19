@@ -4,6 +4,7 @@ import Lender, { ILenderActions } from './lender';
 import Currency, { ICurrencyActions } from './currency';
 import Collateral, { ICollateralActions } from './collateral';
 import Analytics, { IAnalyticsActions } from './analytics';
+import Governance, { IGovernanceActions } from './governance';
 
 export default {
     Admin,
@@ -11,7 +12,8 @@ export default {
     Lender,
     Currency,
     Collateral,
-    Analytics
+    Analytics,
+    Governance
 }
 
 export type TinlakeActions =
@@ -20,4 +22,5 @@ export type TinlakeActions =
     ILenderActions &
     ICurrencyActions &
     ILenderActions &
-    IAnalyticsActions;
+    IAnalyticsActions &
+    IGovernanceActions;
