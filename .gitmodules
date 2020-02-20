@@ -1,4 +1,3 @@
 [submodule "tinlake"]
 	path = tinlake
 	url = https://github.com/centrifuge/tinlake
-	branch = develop

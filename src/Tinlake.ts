@@ -2,9 +2,10 @@ import Eth from 'ethjs';
 import { contractNames, Contracts, ethI, ContractAddresses, ContractAbis, AbiOutput, Options } from './types';
 import  abiDefinitions  from './abi/index';
 import actions, { TinlakeActions } from './actions/index';
+import BN from 'bn.js';
 
 export class Tinlake {
-  public provider: any;
+  public provider: any
   public eth: ethI;
   public ethOptions: any;
   public ethConfig: any;
