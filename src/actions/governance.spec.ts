@@ -11,7 +11,7 @@ const userAccount = account.generate(randomString.generate(32));
 
 const { SUCCESS_STATUS, FAIL_STATUS, FAUCET_AMOUNT } = testConfig
 
-describe.only('governance tests', () => {
+describe('governance tests', () => {
     describe('grant permissions', function () {
 
         it('success: rely account on the ceiling contract', async () => {
@@ -29,7 +29,7 @@ describe.only('governance tests', () => {
              await relyAddress(userAccount.address, "PILE");
         });
 
-        it('failure: account has no governance permissions', async () => {
+        it('fail: account has no governance permissions', async () => {
             const randomAccount = account.generate(randomString.generate(32));
             const randomTinlake = createTinlake(randomAccount, testConfig);
             const res = await randomTinlake.relyAddress(userAccount.address, testConfig.contractAddresses['CEILING']);

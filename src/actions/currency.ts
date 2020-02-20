@@ -25,7 +25,7 @@ function CurrencyActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 
 export type ICurrencyActions = {
   mintCurrency(usr: string, amount: string): void,
-  getCurrencyBalance(usr: string, amount: string): Promise<BN>,
+  getCurrencyBalance(usr: string): Promise<BN>,
   approveCurrency(usr: string, amount: string): Promise<any> 
 }
 
