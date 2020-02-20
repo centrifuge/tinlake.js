@@ -18,7 +18,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses} = testConfig
 
-describe.only('borrower tests', async () => {
+describe('borrower tests', async () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
