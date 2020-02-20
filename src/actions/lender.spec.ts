@@ -36,11 +36,7 @@ describe('lender functions', async () => {
     const currencyAmount = 100000;
     const tokenAmount = 100;
     // whitelist investor
-<<<<<<< HEAD
     await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, tokenAmount)
-=======
-    await whitelistInvestor(lenderAccount.address, currencyAmount, tokenAmount)
->>>>>>> upstream/naxos
     await supply(lenderAccount.address, currencyAmount, lenderTinlake);
   });
 
@@ -62,11 +58,7 @@ describe('lender functions', async () => {
     const currencyAmount = 100000;
     const tokenAmount = 100;
     // whitelist investor
-<<<<<<< HEAD
     await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, tokenAmount)
-=======
-    await whitelistInvestor(lenderAccount.address, currencyAmount, tokenAmount)
->>>>>>> upstream/naxos
     // supply currency - receive tokens
     await supply(lenderAccount.address, currencyAmount, lenderTinlake);
     // approve junior tranche to take tokens
@@ -86,7 +78,6 @@ describe('lender functions', async () => {
     assert.equal(initialTrancheCurrencyBalance.toNumber(), newTrancheCurrencyBalance.toNumber() + tokenAmount);
     assert.equal(initialLenderCurrencyBalance.toNumber() + tokenAmount, newLenderCurrencyBalance);
     assert.equal(tokenAmount, initialJuniorTokenBalance.toNumber() - newJuniorTokenBalance.toNumber());
-<<<<<<< HEAD
   });
 
   it('fail: redeem junior - no allowance', async () => {
@@ -107,33 +98,6 @@ describe('lender functions', async () => {
 async function supply(investor: string, currencyAmount: string, tinlake: ITinlake) {
   // approve junior tranche to take currency
   await tinlake.approveCurrency(contractAddresses['JUNIOR'], currencyAmount);
-=======
-  });
-
-  it('fail: redeem junior - no allowance', async () => {
-    const currencyAmount = 100000;
-    const tokenAmount = 100;
-
-    // whitelist investor with no allowance to redeem
-    await whitelistInvestor(lenderAccount.address, currencyAmount, 0)
-    // supply currency - receive tokens
-    await supply(lenderAccount.address, currencyAmount, lenderTinlake);
-    // approve junior tranche to take tokens
-    await lenderTinlake.approveJuniorToken(contractAddresses['JUNIOR'], tokenAmount);
-    const redeemResult = await lenderTinlake.redeemJunior(tokenAmount);
-    assert.equal(redeemResult.status, FAIL_STATUS);
-  });
-});
-
-async function whitelistInvestor(investor: string, currencyAmount: string, tokenAmount: string) {
-  await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
-  await adminTinlake.approveAllowance(investor, currencyAmount, tokenAmount);
-}
-
-async function supply(investor: string, currencyAmount: string, tinlake: ITinlake) {
-  // approve junior tranche to take currency
-  await lenderTinlake.approveCurrency(contractAddresses['JUNIOR'], currencyAmount);
->>>>>>> upstream/naxos
   // fund investor with tinlake currency
   await governanceTinlake.mintCurrency(investor, currencyAmount);
   const initialLenderCurrencyBalance = await tinlake.getCurrencyBalance(investor);
