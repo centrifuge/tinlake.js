@@ -77,8 +77,7 @@ describe('borrower tests', async () => {
     await new Promise(r => setTimeout(r, 3000));
     // mint extra currency so that borrower can repay loan with interest
     await governanceTinlake.mintCurrency(borrowerAccount.address, FAUCET_AMOUNT);
-    // approve shelf to take currency
-
+    
     // repay loan
     const initialDebt = await borrowerTinlake.getDebt(loanId);
     // approve shelf to take currency
