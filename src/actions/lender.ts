@@ -48,7 +48,7 @@ export type ILenderActions = {
   getCurrencyBalance(user: string): Promise<BN>,
   getMaxSupplyAmount(user: string): Promise<BN>,
   getMaxRedeemAmount(user: string): Promise<BN>,
-  balance(): Promise<any>
+  balance(): Promise<any>,
 }
 
 export default LenderActions;

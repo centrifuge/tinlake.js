@@ -1,33 +1,26 @@
-import { Loan, Contracts, Constructor } from './../types';
+import { Loan, Constructor, Tinlake } from './../types';
 import { executeAndRetry } from './../ethereum';
 import BN from 'bn.js';
 
-function AnalyticsActions<ActionsBase extends Constructor<{}>>(Base: ActionsBase) {
+function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IAnalyticsActions {
 
-    contracts: Contracts;
-
     getTotalDebt = async (): Promise<BN> => {
-      const res: { 0: BN } = await executeAndRetry(this.contracts.pile.Debt, []);
+      const res: { 0: BN } = await executeAndRetry(this.contracts['PILE'].Debt, []);
       return res['0'];
     }
 
     getTotalBalance = async (): Promise<BN> => {
-      const res: { 0: BN } = await executeAndRetry(this.contracts.pile.Balance, []);
+      const res: { 0: BN } = await executeAndRetry(this.contracts['PILE'].Balance, []);
       return res['0'];
     }
 
-    getNFTData: <T>(tokenId: string) => Promise<T> = async (tokenId) => {
-      const res = await executeAndRetry(this.contracts.nftData.data, [tokenId]);
-      return res;
-    }
-
     getLoan = async (loanId: string): Promise<Loan> => {
-      return await executeAndRetry(this.contracts.shelf.shelf, [loanId]);
+      return await executeAndRetry(this.contracts['SHELF'].shelf, [loanId]);
     }
 
     loanCount = async (): Promise<BN> => {
-      const res = await executeAndRetry(this.contracts.title.count, []);
+      const res = await executeAndRetry(this.contracts['TITLE'].count, []);
       return res[0];
     }
   };
