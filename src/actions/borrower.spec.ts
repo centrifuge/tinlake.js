@@ -1,7 +1,6 @@
 import assert from 'assert';
 const account = require('ethjs-account');
 const randomString = require('randomstring');
-import { Account } from '../../test/types';
 import testConfig from '../../test/config';
 import { ITinlake } from '../Tinlake';
 import { createTinlake, TestProvider} from '../../test/utils';

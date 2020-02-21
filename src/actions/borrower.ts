@@ -27,7 +27,7 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 
     getDebt = async (loanID: string): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
-      return res[0];
+      return res ? res[0] : Promise.resolve(new BN(0));
     }
 
     issue = async (registry: string, tokenId: string) => {
@@ -75,20 +75,17 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 }
 
 export type IBorrowerActions = {
-  mintNFT(user: string): Promise<any>,
   getNFTCount(): Promise<BN>,
   getTitleCount(): Promise<BN>;
   getNFTOwner(nftID: string): Promise<BN>,
   getTitleOwner(loanID: string): Promise<BN>,
   issue(registry: string, tokenId: string): Promise<any>,
-  getDebt(loanID: string): Promise<BN>,
   lock(loan: string): Promise<any>,
   unlock(loan: string): Promise<any>,
   close(loan: string): Promise<any>,
   borrow(loan: string, currencyAmount: string): Promise<any>,
   withdraw(loan: string, currencyAmount: string, usr: string) : Promise<any>,
   repay(loan: string, currencyAmount: string): Promise<any>,
-  approveNFT(tokenId: string, to: string): Promise<any>
 }
 
 export default BorrowerActions;
