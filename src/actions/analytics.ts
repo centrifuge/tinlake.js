@@ -6,17 +6,13 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
   return class extends Base implements IAnalyticsActions {
 
     getTotalDebt = async (): Promise<BN> => {
-      const res: { 0: BN } = await executeAndRetry(this.contracts['PILE'].Debt, []);
+      const res: { 0: BN } = await executeAndRetry(this.contracts['PILE'].total, []);
       return res['0'];
     }
 
     getTotalBalance = async (): Promise<BN> => {
-      const res: { 0: BN } = await executeAndRetry(this.contracts['PILE'].Balance, []);
+      const res: { 0: BN } = await executeAndRetry(this.contracts['SHELF'].balance, []);
       return res['0'];
-    }
-
-    getLoan = async (loanId: string): Promise<Loan> => {
-      return await executeAndRetry(this.contracts['SHELF'].shelf, [loanId]);
     }
 
     loanCount = async (): Promise<BN> => {
@@ -27,6 +23,9 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
 }
 
 export type IAnalyticsActions = {
+  getTotalDebt(): Promise<BN>,
+  getTotalBalance(): Promise<BN>,
+  loanCount(): Promise<BN>
 }
 
 export default AnalyticsActions;

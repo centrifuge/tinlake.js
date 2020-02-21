@@ -5,12 +5,6 @@ import BN from 'bn.js';
 function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IBorrowerActions{
 
-    mintNFT = async (user: string) => {
-      const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig]);
-      console.log(`[Mint NFT] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
-    }
-
     getNFTCount = async (): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].count, []);
       return res[0];
@@ -28,6 +22,11 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 
     getTitleOwner = async (loanID: string): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanID]);
+      return res[0];
+    }
+
+    getDebt = async (loanID: string): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
       return res[0];
     }
 
@@ -61,8 +60,8 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
-    withdraw = async (loan: string, currencyAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts['SHELF'].withdraw, [loan, currencyAmount, this.ethConfig]);
+    withdraw = async (loan: string, currencyAmount: string, usr: string) => {
+      const txHash = await executeAndRetry(this.contracts['SHELF'].withdraw, [loan, currencyAmount, usr, this.ethConfig]);
       console.log(`[Withdraw] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
@@ -71,12 +70,6 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
       const txHash = await executeAndRetry(this.contracts['SHELF'].repay, [loan, currencyAmount, this.ethConfig]);
       console.log(`[Repay] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
-    }
-
-    approveNFT = async (tokenId: string, to: string) => {
-      const txHash = await executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])
-      console.log(`[NFT Approve] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout);
     }
   };
 }
@@ -88,11 +81,12 @@ export type IBorrowerActions = {
   getNFTOwner(nftID: string): Promise<BN>,
   getTitleOwner(loanID: string): Promise<BN>,
   issue(registry: string, tokenId: string): Promise<any>,
+  getDebt(loanID: string): Promise<BN>,
   lock(loan: string): Promise<any>,
   unlock(loan: string): Promise<any>,
   close(loan: string): Promise<any>,
   borrow(loan: string, currencyAmount: string): Promise<any>,
-  withdraw(loan: string, currencyAmount: string) : Promise<any>,
+  withdraw(loan: string, currencyAmount: string, usr: string) : Promise<any>,
   repay(loan: string, currencyAmount: string): Promise<any>,
   approveNFT(tokenId: string, to: string): Promise<any>
 }

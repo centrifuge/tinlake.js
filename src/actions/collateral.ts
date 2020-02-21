@@ -4,11 +4,18 @@ import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements ICollateralActions {
 
-    async mintNFT(usr: string, registry: string) {
-      const txHash = await executeAndRetry(this.contracts[registry].issue, [usr, this.ethConfig]);
+    mintNFT = async (user: string) => {
+      const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts[registry].abi, this.transactionTimeout);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
     }
+
+    approveNFT = async (tokenId: string, to: string) => {
+      const txHash = await executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])
+      console.log(`[NFT Approve] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout);
+    }
+
   }
 }
 
