@@ -1,5 +1,6 @@
 import { Constructor, Tinlake  } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
+import BN from 'bn.js';
 
 function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements ICollateralActions {
@@ -16,11 +17,24 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
       return waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout);
     }
 
+    getNFTCount = async (): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].count, []);
+      return res[0];
+    }
+
+    getNFTOwner = async (nftID: string): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [nftID]);
+      return res[0];
+    }
+
   }
 }
 
 export type ICollateralActions = {
-  mintNFT(usr: string, registry: string): Promise<any>
+  mintNFT(usr: string, registry: string): Promise<any>,
+  approveNFT(tokenId: string, to: string) : Promise<any>,
+  getNFTCount(): Promise<BN>,
+  getTitleCount(): Promise<BN>
 }
 
 export default CollateralActions;

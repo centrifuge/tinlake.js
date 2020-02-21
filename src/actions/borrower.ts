@@ -87,8 +87,7 @@ export type IBorrowerActions = {
   close(loan: string): Promise<any>,
   borrow(loan: string, currencyAmount: string): Promise<any>,
   withdraw(loan: string, currencyAmount: string, usr: string) : Promise<any>,
-  repay(loan: string, currencyAmount: string): Promise<any>,
-  approveNFT(tokenId: string, to: string): Promise<any>
+  repay(loan: string, currencyAmount: string): Promise<any>
 }
 
 export default BorrowerActions;

@@ -20,7 +20,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res[0];
     }
 
-    getLoan = async (loanId: number): Promise<Loan> => {
+    getLoan = async (loanId: string): Promise<Loan> => {
       const res: { 0: Loan } = await executeAndRetry(this.contracts['SHELF'].shelf, [loanId]);
       return res[0];
     }
@@ -29,15 +29,10 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       let loanArray = [];
       const count = (await this.loanCount()).toNumber() - 1;
       for (let i = 0; i <= count; i += 1) {
-        const loan = await this.getLoan(i);
+        const loan = await this.getLoan(`${i}`);
         loanArray.push(loan);
       }
       return loanArray;
-    }
-
-    loanCount = async () => {
-      const txHash = await executeAndRetry(this.contracts['TITLE'].count, []);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['TITLE'].abi, this.transactionTimeout);
     }
 
   };
@@ -46,7 +41,8 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
 export type IAnalyticsActions = {
   getTotalDebt(): Promise<BN>,
   getTotalBalance(): Promise<BN>,
-  loanCount(): Promise<BN>
+  loanCount(): Promise<BN>,
+  getLoan(loanId: string): Promise<any>,
   getLoanList(): Promise<Loan[]>,
 }
 
