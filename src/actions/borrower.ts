@@ -80,7 +80,6 @@ export type IBorrowerActions = {
   getNFTOwner(nftID: string): Promise<BN>,
   getTitleOwner(loanID: string): Promise<BN>,
   issue(registry: string, tokenId: string): Promise<any>,
-  getDebt(loanID: string): Promise<BN>,
   lock(loan: string): Promise<any>,
   unlock(loan: string): Promise<any>,
   close(loan: string): Promise<any>,
