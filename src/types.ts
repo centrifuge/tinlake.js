@@ -87,6 +87,7 @@ export interface Balance {
 export type Address = string;
 
 export interface Loan {
+<<<<<<< HEAD
   loanId: string;
   registry: Address;
   tokenId: string;
@@ -96,6 +97,17 @@ export interface Loan {
   debt: number;
   threshold?: number;
   price?: number;
+=======
+  loanId: BN;
+  registry: Address;
+  tokenId: BN;
+  ownerOf: BN;
+  principal: BN;
+  interestRate: BN;
+  debt: BN;
+  threshold?: BN;
+  price?: BN;
+>>>>>>> upstream/naxos
   status?: string;
 }
 
