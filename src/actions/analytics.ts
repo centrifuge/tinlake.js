@@ -15,12 +15,12 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res[0];
     }
 
-    getPrincipal = async (loanId: number): Promise<BN> => {
+    getPrincipal = async (loanId: string): Promise<BN> => {
       const res = await executeAndRetry(this.contracts['CEILING'].ceiling, [loanId]);
       return res ? res[0] : Promise.resolve(new BN(0));
     }
 
-    getDebt = async (loanID: number): Promise<BN> => {
+    getDebt = async (loanID: string): Promise<BN> => {
       const res = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
       return res ? res[0] : Promise.resolve(new BN(0));
     }
@@ -30,22 +30,22 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res[0];
     }
 
-    getLoan = async (loanId: number): Promise<Loan> => {
+    getLoan = async (loanId: string): Promise<Loan> => {
       const res = await executeAndRetry(this.contracts['SHELF'].shelf, [loanId]);
       return res;
     }
 
-    getInterestRate = async (loanId: number): Promise<BN> => {
+    getInterestRate = async (loanId: string): Promise<BN> => {
       const res = await executeAndRetry(this.contracts['PILE'].loanRates, [loanId]);
       return res ? res[0] : Promise.resolve(new BN(0));
     }
 
-    getOwnerOfLoan = async (loanId: number): Promise<BN> => {
+    getOwnerOfLoan = async (loanId: string): Promise<BN> => {
       const res: { 0: BN }  = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
       return res[0];
     }
 
-    assembleLoan = async (loanId: number): Promise<Loan> => {
+    assembleLoan = async (loanId: string): Promise<Loan> => {
       const res = await this.getLoan(loanId);
       const principalBN = await this.getPrincipal(loanId);
       const ownerOfBN = await this.getOwnerOfLoan(loanId);
@@ -68,7 +68,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const loanArray = [];
       const count = (await this.loanCount()).toNumber() - 1;
       for (let i = 0; i <= count; i += 1) {
-        const loan = await this.assembleLoan(i);
+        const loan = await this.assembleLoan(i.toString());
         loanArray.push(loan);
       }
       return loanArray;
