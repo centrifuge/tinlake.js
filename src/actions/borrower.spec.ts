@@ -23,8 +23,9 @@ describe('borrower tests', async () => {
   before(async () =>  {
     // fund borrowerAccount with ETH
     await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
+    const amount = '5000';
     // supply tranche with money
-    await fundTranche();
+    await fundTranche(amount);
   });
 
   beforeEach(async() => {
@@ -135,20 +136,20 @@ async function mintIssueBorrow (usr: string, tinlake: ITinlake, amount: string) 
   return { tokenId, loanId }
 }
 
-async function fundTranche() {
+async function fundTranche(amount: string) {
   const lenderAccount = account.generate(randomString.generate(32));
   const lenderTinlake = createTinlake(lenderAccount, testConfig);
   // fund lender accoutn with eth
-  await testProvider.fundAccountWithETH(lenderAccount.address, FAUCET_AMOUNT);
+  await testProvider.fundAccountWithETH(lenderAccount.address, amount);
   // make admin adress ward on tranche operator
   await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
   // whitelist lender
-  await adminTinlake.approveAllowance(lenderAccount.address, FAUCET_AMOUNT, FAUCET_AMOUNT);
+  await adminTinlake.approveAllowance(lenderAccount.address, amount, amount);
   // lender approves tranche to take currency
-  await lenderTinlake.approveCurrency(contractAddresses['JUNIOR'], FAUCET_AMOUNT);
+  await lenderTinlake.approveCurrency(contractAddresses['JUNIOR'], amount);
   // mint currency for lender
-  await governanceTinlake.mintCurrency(lenderAccount.address, FAUCET_AMOUNT);
+  await governanceTinlake.mintCurrency(lenderAccount.address, amount);
   // lender supplies tranche with funds
-  await lenderTinlake.supplyJunior(FAUCET_AMOUNT);
+  await lenderTinlake.supplyJunior(amount);
 }
 

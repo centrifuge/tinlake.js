@@ -33,15 +33,15 @@ describe('lender functions', async () => {
   });
 
   it('success: supply junior', async () => {
-    const currencyAmount = 100000;
+    const currencyAmount = 1000;
     const tokenAmount = 100;
     // whitelist investor
     await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, tokenAmount)
-    await supply(lenderAccount.address, currencyAmount, lenderTinlake);
+    await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
   });
 
   it('fail: supply junior - no allowance', async () => {
-    const currencyAmount = 100000;
+    const currencyAmount = 1000;
     // approve junior tranche to take currency
     await lenderTinlake.approveCurrency(contractAddresses['JUNIOR'], currencyAmount);
     // fund investor with tinlake currency
@@ -55,12 +55,12 @@ describe('lender functions', async () => {
   });
 
   it('success: redeem junior', async () => {
-    const currencyAmount = 100000;
+    const currencyAmount = 1000;
     const tokenAmount = 100;
     // whitelist investor
     await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, tokenAmount)
     // supply currency - receive tokens
-    await supply(lenderAccount.address, currencyAmount, lenderTinlake);
+    await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens
     await lenderTinlake.approveJuniorToken(contractAddresses['JUNIOR'], tokenAmount);
 
@@ -81,13 +81,13 @@ describe('lender functions', async () => {
   });
 
   it('fail: redeem junior - no allowance', async () => {
-    const currencyAmount = 100000;
+    const currencyAmount = 1000;
     const tokenAmount = 100;
 
     // whitelist investor with no allowance to redeem
     await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, 0)
     // supply currency - receive tokens
-    await supply(lenderAccount.address, currencyAmount, lenderTinlake);
+    await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens
     await lenderTinlake.approveJuniorToken(contractAddresses['JUNIOR'], tokenAmount);
     const redeemResult = await lenderTinlake.redeemJunior(tokenAmount);
@@ -112,9 +112,9 @@ async function supply(investor: string, currencyAmount: string, tinlake: ITinlak
   // assert result successful
   assert.equal(supplyResult.status, SUCCESS_STATUS);
   // assert tranche balance increased by currency amount
-  assert.equal((newTrancheCurrencyBalance.toNumber() - initialTrancheCurrencyBalance.toNumber()), currencyAmount);
+  assert.equal((newTrancheCurrencyBalance.toNumber() - initialTrancheCurrencyBalance.toNumber()), parseInt(currencyAmount));
   // assert investor currency balanace decreased
-  assert.equal((initialLenderCurrencyBalance.toNumber() - newLenderCurrencyBalance.toNumber()), currencyAmount);
+  assert.equal((initialLenderCurrencyBalance.toNumber() - newLenderCurrencyBalance.toNumber()), parseInt(currencyAmount));
   // assert investor received tokens
-  assert.equal(initialJuniorTokenBalance.toNumber() + currencyAmount, newJuniorTokenBalance.toNumber());
+  assert.equal(initialJuniorTokenBalance.toNumber() + parseInt(currencyAmount), newJuniorTokenBalance.toNumber());
 }
