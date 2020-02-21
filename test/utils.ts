@@ -32,7 +32,6 @@ export class TestProvider {
     };
     const signedTransaction = sign(transaction, this.sponsorAccount.privateKey);
     await executeAndRetry(this.eth.sendRawTransaction, [signedTransaction]);
-    console.log(`User Account ${usr} funded with ${amount} ETH`);
   }
 }
 

@@ -4,12 +4,61 @@ import BN from 'bn.js';
 
 function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IAdminActions {
-   
+
     isWard = async (user: string, contractName: ContractNames) => {
       const res : { 0: BN } = await executeAndRetry(this.contracts[contractName].wards, [user]);
       return res[0];
     }
-  
+
+    // loan admin permissions
+    canSetCeiling = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['CEILING'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    canSetInterestRate = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['PILE'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    // tranche admin permissions
+    canSetJuniorTrancheInterest = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['JUNIOR'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    canSetSeniorTrancheInterest = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['SENIOR'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    canSetEquityRatio = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['ASSESSOR'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    canSetRiskScore = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['PRICE_POOL'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    // lender permissions (note: allowance operator for default deployment)
+    canSetInvestorAllowance = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    // collector permissions
+    canSetThreshold = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['THRESHOLD'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
+    canSetLoanPrice = async (user: string) => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLECTOR'].wards, [user]);
+      return res[0].toNumber() === 1;
+    }
+
     // ------------ admin functions borrower-site -------------
     setCeiling = async (loanId: string, amount: string) => {
       const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);
@@ -40,10 +89,19 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
 
 export type IAdminActions = {
   isWard(user: string, contractName: ContractNames): Promise<BN>,
+  canSetCeiling(user: string): Promise<boolean>,
+  canSetInterestRate(user: string): Promise<boolean>,
+  canSetJuniorTrancheInterest(user: string): Promise<boolean>,
+  canSetSeniorTrancheInterest(user: string): Promise<boolean>,
+  canSetEquityRatio(user: string): Promise<boolean>,
+  canSetRiskScore(user: string): Promise<boolean>,
+  canSetInvestorAllowance(user: string): Promise<boolean>,
+  canSetThreshold(user: string): Promise<boolean>,
+  canSetLoanPrice(user: string): Promise<boolean>,
   setCeiling(loanId: string, amount: string): Promise<any>,
   initRate(rate: string, speed: string): Promise<any>,
   setRate(loan: string, rate: string): Promise<any>,
-  approveAllowance(user: string, maxCurrency: string, maxToken: string): Promise<any>
-}
+  approveAllowance(user: string, maxCurrency: string, maxToken: string): Promise<any>,
+};
 
 export default AdminActions;

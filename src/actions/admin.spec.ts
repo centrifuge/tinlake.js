@@ -15,15 +15,15 @@ const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig
 
 // ------------ admin tests borrower-site -------------
-describe('admin tests', () => {
+describe('admin tests', async () => {
 
   before(async () => {
     // fund admin account with eth
-    await testProvider.fundAccountWithETH(adminAccount, FAUCET_AMOUNT);
+    await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
   });
 
 
-  describe('ceiling', function () {
+  describe('ceiling', async () => {
 
     it('success: set ceiling for a loan', async () => {
       // rely admin on ceiling contract
@@ -36,12 +36,12 @@ describe('admin tests', () => {
 
   });
 
-  describe('pile', function () {
+  describe('pile', async () => {
     //rely admin account on pile
   });
 
   // ------------ admin tests lender-site -------------
-  describe('operator', function () {
+  describe('operator', async () => {
     it('success: set allowance for junior investor', async () => {
       // rely admin on junior operator
       await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);

@@ -3,7 +3,7 @@ import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 import BN from 'bn.js';
 
 function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
-  return class extends Base implements IBorrowerActions{
+  return class extends Base implements IBorrowerActions {
 
     getNFTCount = async (): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].count, []);

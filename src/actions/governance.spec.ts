@@ -11,8 +11,8 @@ const userAccount = account.generate(randomString.generate(32));
 
 const { SUCCESS_STATUS, FAIL_STATUS, FAUCET_AMOUNT } = testConfig
 
-describe('governance tests', () => {
-    describe('grant permissions', function () {
+describe('governance tests', async () => {
+    describe('grant permissions', async function () {
 
         it('success: rely account on the ceiling contract', async () => {
             // rely user account on the ceiling contract
