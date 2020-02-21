@@ -30,7 +30,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res[0];
     }
 
-    getLoan = async (loanId: string): Promise<Loan> => {
+    getCollateral = async (loanId: string): Promise<Loan> => {
       const res = await executeAndRetry(this.contracts['SHELF'].shelf, [loanId]);
       return res;
     }
@@ -45,30 +45,29 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res[0];
     }
 
-    assembleLoan = async (loanId: string): Promise<Loan> => {
+    getLoan = async (loanId: string): Promise<Loan> => {
       const res = await this.getLoan(loanId);
-      const principalBN = await this.getPrincipal(loanId);
-      const ownerOfBN = await this.getOwnerOfLoan(loanId);
-      const interestRateBN = await this.getInterestRate(loanId);
-      const debtBN = await this.getDebt(loanId);
+      const principal = (await this.getPrincipal(loanId)).toNumber();
+      const ownerOf = (await this.getOwnerOfLoan(loanId)).toNumber();
+      const interestRate = (await this.getInterestRate(loanId)).toNumber();
+      const debt = (await this.getDebt(loanId)).toNumber();
 
-      const loan = {
-        loanId: new BN(loanId),
+      return {
+        loanId: loanId,
         registry: res.registry,
         tokenId: res.tokenId,
-        principal: principalBN,
-        interestRate: interestRateBN,
-        ownerOf: ownerOfBN,
-        debt: debtBN,
+        principal,
+        interestRate,
+        ownerOf,
+        debt,
       };
-      return loan;
     }
 
     getLoanList = async (): Promise<Loan[]> => {
       const loanArray = [];
       const count = (await this.loanCount()).toNumber() - 1;
       for (let i = 0; i <= count; i += 1) {
-        const loan = await this.assembleLoan(i.toString());
+        const loan = await this.getLoan(i.toString());
         loanArray.push(loan);
       }
       return loanArray;
@@ -79,8 +78,13 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
 export type IAnalyticsActions = {
   getTotalDebt(): Promise<BN>,
   getTotalBalance(): Promise<BN>,
-  loanCount(): Promise<BN>
+  loanCount(): Promise<BN>,
   getLoanList(): Promise<Loan[]>,
+  getLoan(loanId: string): Promise<Loan>,
+  getCollateral(loanId:string):Promise<any>,
+  getPrincipal(loanId:string):Promise<BN>,
+  getInterestRate(loanId:string):Promise<BN>,
+  getOwnerOfLoan(loanId:string):Promise<BN>
 };
 
 export default AnalyticsActions;

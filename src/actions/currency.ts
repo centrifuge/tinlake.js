@@ -29,4 +29,5 @@ export type ICurrencyActions = {
   approveCurrency(usr: string, amount: string): Promise<any> 
 }
 
+
 export default CurrencyActions;
