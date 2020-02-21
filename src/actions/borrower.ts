@@ -75,7 +75,6 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 }
 
 export type IBorrowerActions = {
-  mintNFT(user: string): Promise<any>,
   getNFTCount(): Promise<BN>,
   getTitleCount(): Promise<BN>;
   getNFTOwner(nftID: string): Promise<BN>,
@@ -88,7 +87,6 @@ export type IBorrowerActions = {
   borrow(loan: string, currencyAmount: string): Promise<any>,
   withdraw(loan: string, currencyAmount: string, usr: string) : Promise<any>,
   repay(loan: string, currencyAmount: string): Promise<any>,
-  approveNFT(tokenId: string, to: string): Promise<any>
 }
 
 export default BorrowerActions;
