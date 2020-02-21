@@ -31,10 +31,10 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
 }
 
 export type ICollateralActions = {
-  mintNFT(usr: string, registry: string): Promise<any>,
+  mintNFT(usr: string): Promise<any>,
   approveNFT(tokenId: string, to: string) : Promise<any>,
   getNFTCount(): Promise<BN>,
-  getTitleCount(): Promise<BN>
+  getNFTOwner(nftID: string): Promise<BN>
 }
 
 export default CollateralActions;

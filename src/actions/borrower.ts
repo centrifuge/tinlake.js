@@ -5,31 +5,6 @@ import BN from 'bn.js';
 function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IBorrowerActions {
 
-    getNFTCount = async (): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].count, []);
-      return res[0];
-    }
-
-    getTitleCount = async (): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['TITLE'].count, []);
-      return res[0];
-    }
-
-    getNFTOwner = async (nftID: string): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [nftID]);
-      return res[0];
-    }
-
-    getTitleOwner = async (loanID: string): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanID]);
-      return res[0];
-    }
-
-    getDebt = async (loanID: string): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
-      return res[0];
-    }
-
     issue = async (registry: string, tokenId: string) => {
       const txHash = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
@@ -75,19 +50,13 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 }
 
 export type IBorrowerActions = {
-  mintNFT(user: string): Promise<any>,
-  getNFTCount(): Promise<BN>,
-  getTitleCount(): Promise<BN>;
-  getNFTOwner(nftID: string): Promise<BN>,
-  getTitleOwner(loanID: string): Promise<BN>,
   issue(registry: string, tokenId: string): Promise<any>,
-  getDebt(loanID: string): Promise<BN>,
   lock(loan: string): Promise<any>,
   unlock(loan: string): Promise<any>,
   close(loan: string): Promise<any>,
   borrow(loan: string, currencyAmount: string): Promise<any>,
   withdraw(loan: string, currencyAmount: string, usr: string) : Promise<any>,
-  repay(loan: string, currencyAmount: string): Promise<any>
+  repay(loan: string, currencyAmount: string): Promise<any>,
 }
 
 export default BorrowerActions;

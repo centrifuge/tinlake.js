@@ -1,7 +1,6 @@
 import assert from 'assert';
 const account = require('ethjs-account');
 const randomString = require('randomstring');
-import { Account } from '../../test/types';
 import testConfig from '../../test/config';
 import { ITinlake } from '../Tinlake';
 import { createTinlake, TestProvider} from '../../test/utils';
@@ -102,11 +101,11 @@ async function mintIssue(usr: string, tinlake: ITinlake) {
   assert.equal(nftOwner.toLowerCase(), usr.toLowerCase());
 
   const issueResult : any = await tinlake.issue(contractAddresses["COLLATERAL_NFT"], tokenId);
-  const loanId = `${(await tinlake.getTitleCount()).toNumber() - 1}`;
+  const loanId = `${(await tinlake.loanCount()).toNumber() - 1}`;
   // assert loan successfully issued
   assert.equal(issueResult.status, SUCCESS_STATUS);
   // assert usr = loanOwner
-  const titleOwner = `${await tinlake.getTitleOwner(loanId)}`;
+  const titleOwner = `${await tinlake.getOwnerOfLoan(loanId)}`;
   assert.equal(titleOwner.toLowerCase(), usr.toLowerCase());
 
   return { tokenId: `${tokenId}`, loanId : `${loanId}` };

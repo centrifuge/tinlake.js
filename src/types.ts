@@ -87,10 +87,15 @@ export interface Balance {
 export type Address = string;
 
 export interface Loan {
+  loanId: string;
   registry: Address;
-  tokenId: BN;
-  price: BN;
-  principal: BN;
+  tokenId: string;
+  ownerOf: number;
+  principal: number;
+  interestRate: number;
+  debt: number;
+  threshold?: number;
+  price?: number;
   status?: string;
 }
 
