@@ -50,13 +50,6 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 }
 
 export type IBorrowerActions = {
-<<<<<<< HEAD
-=======
-  getNFTCount(): Promise<BN>,
-  getTitleCount(): Promise<BN>;
-  getNFTOwner(nftID: string): Promise<BN>,
-  getTitleOwner(loanID: string): Promise<BN>,
->>>>>>> upstream/naxos
   issue(registry: string, tokenId: string): Promise<any>,
   lock(loan: string): Promise<any>,
   unlock(loan: string): Promise<any>,
