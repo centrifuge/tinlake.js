@@ -109,9 +109,6 @@ async function supply(investor: string, currencyAmount: string, tinlake: ITinlak
   const newLenderCurrencyBalance = await tinlake.getCurrencyBalance(investor);
   const newJuniorTokenBalance = await tinlake.getJuniorTokenBalance(investor);
 
-  console.log(currencyAmount);
-  console.log("new", newTrancheCurrencyBalance.toNumber());
-  console.log("initial", initialTrancheCurrencyBalance.toNumber());
   // assert result successful
   assert.equal(supplyResult.status, SUCCESS_STATUS);
   // assert tranche balance increased by currency amount
