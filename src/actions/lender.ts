@@ -62,7 +62,6 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
 export type ILenderActions = {
   supplyJunior(currencyAmount: string): Promise<any>,
   redeemJunior(tokenAmount: string): Promise<any>,
-  getCurrencyBalance(user: string): Promise<BN>,
   getJuniorTokenBalance(user: string): Promise<BN>,
   getSeniorTokenBalance(user: string): Promise<BN>,
   getMaxSupplyAmount(user: string): Promise<BN>,
