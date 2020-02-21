@@ -27,7 +27,7 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 
     getDebt = async (loanID: string): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
-      return res[0];
+      return res ? res[0] : Promise.resolve(new BN(0));
     }
 
     issue = async (registry: string, tokenId: string) => {

@@ -93,6 +93,7 @@ export interface Loan {
   ownerOf: BN;
   principal: BN;
   interestRate: BN;
+  debt: BN;
   threshold?: BN;
   price?: BN;
   status?: string;

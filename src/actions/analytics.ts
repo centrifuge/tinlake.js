@@ -1,4 +1,5 @@
 import { Loan, Constructor, Tinlake } from './../types';
+import { getDebt } from './borrower';
 import { executeAndRetry } from './../ethereum';
 import BN from 'bn.js';
 
@@ -45,6 +46,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const principalBN = await this.getPrincipal(loanId);
       const ownerOfBN = await this.getOwnerOfLoan(loanId);
       const interestRateBN = await this.getInterestRate(loanId);
+      const debtBN = await getDebt(loanId);
 
       const loan = {
         loanId: new BN(loanId),
@@ -53,6 +55,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
         principal: principalBN,
         interestRate: interestRateBN,
         ownerOf: ownerOfBN,
+        debt: debtBN,
       };
       return loan;
     }
