@@ -21,7 +21,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
     }
 
     getDebt = async (loanID: number): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
+      const res = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
       return res ? res[0] : Promise.resolve(new BN(0));
     }
 
