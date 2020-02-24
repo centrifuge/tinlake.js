@@ -46,7 +46,6 @@ seth send --value 10000000000000000000000000000000000000000000000000000000 $GOD_
 # build contracts if needed
 
 BIN_DIR=${BIN_DIR:-$(cd "${1%/*}"&&pwd)}
-message Bin Dir Address: $BIN_DIR
 
 cd $BIN_DIR/tinlake-proxy && dapp build --extract
 
