@@ -2,3 +2,7 @@
 	path = tinlake
 	url = https://github.com/centrifuge/tinlake
 	branch = develop
+
+[submodule "tinlake-proxy"]
+	path = tinlake-proxy
+	url = git@github.com:centrifuge/tinlake-proxy.git
