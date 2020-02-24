@@ -66,10 +66,8 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
     getLoanList = async (): Promise<Loan[]> => {
       const loanArray = [];
       const count = (await this.loanCount()).toNumber() - 1;
-      console.log("count count", count);
       for (let i = 0; i <= count; i += 1) {
         const loan = await this.getLoan(i.toString());
-        console.log("loan",loan);
         loanArray.push(loan);
       }
       return loanArray;
