@@ -4,6 +4,7 @@
 # remove tinlake submodule and install newest dependency
 [ -d ./tinlake ] && rm -r ./tinlake
 [ -d ./tinlake-proxy ] && rm -r ./tinlake-proxy
+[ -d ./tinlake-actions ] && rm -r ./tinlake-actions
 git submodule update --init --recursive
 git submodule update --recursive --remote --merge
 
@@ -17,11 +18,11 @@ export GOVERNANCE=$GOD_ADDRESS
 # setup local config
 ./tinlake/bin/test/setup_local_config.sh
 
-## src env for contract deployment
+# src env for contract deployment
 source ./tinlake/bin/util/util.sh
 source ./tinlake/bin/test/local_env.sh
 
-create address folder
+#create address folder
 mkdir ./tinlake/deployments
 
 # deploy contracts
@@ -43,15 +44,33 @@ seth send --value 10000000000000000000000000000000000000000000000000000000 $GOD_
 
 # deploy proxy registry contract
 # build contracts if needed
-cd tinlake-proxy && dapp build --extract
+
+BIN_DIR=${BIN_DIR:-$(cd "${1%/*}"&&pwd)}
+message Bin Dir Address: $BIN_DIR
+
+cd $BIN_DIR/tinlake-proxy && dapp build --extract
 
 export PROXY_REGISTRY=$(seth send --create ./out/ProxyRegistry.bin 'ProxyRegistry()')
 message Proxy Registry Address: $PROXY_REGISTRY
 
-DEPLOYMENT_FILE=../tinlake/deployments/addresses_$(seth chain).json
+DEPLOYMENT_FILE=$BIN_DIR/tinlake/deployments/addresses_$(seth chain).json
 
 addValuesToFile $DEPLOYMENT_FILE <<EOF
 {
     "PROXY_REGISTRY" :"$PROXY_REGISTRY"
 }
 EOF
+
+# deploy tinlake actions
+
+cd $BIN_DIR/tinlake-actions && dapp build --extract
+
+export ACTIONS=$(seth send --create ./out/Actions.bin 'Actions()')
+message Tinlake Actions Address: $ACTIONS
+
+addValuesToFile $DEPLOYMENT_FILE <<EOF
+{
+    "ACTIONS" :"$ACTIONS"
+}
+EOF
+
