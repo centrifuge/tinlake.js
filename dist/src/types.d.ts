@@ -66,7 +66,7 @@ export interface Loan {
     loanId: string;
     registry: Address;
     tokenId: string;
-    ownerOf: number;
+    ownerOf: string;
     principal: number;
     interestRate: number;
     debt: number;
