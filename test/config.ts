@@ -16,7 +16,7 @@ const testConfig = {
   nftDataContractCall,
   SUCCESS_STATUS: '0x1',
   FAIL_STATUS: '0x0',
-  FAUCET_AMOUNT: '20000000000000000000'
+  FAUCET_AMOUNT: '200000000000000000000'
 };
 
 export default testConfig;

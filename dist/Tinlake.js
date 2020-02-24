@@ -34104,23 +34104,23 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res[0]];
+                            return [2 /*return*/, res];
                     }
                 });
             }); };
             _this.getLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var res, principal, ownerOf, interestRate, debt;
+                var collateral, principal, ownerOf, interestRate, debt;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.getLoan(loanId)];
+                        case 0: return [4 /*yield*/, this.getCollateral(loanId)];
                         case 1:
-                            res = _a.sent();
+                            collateral = _a.sent();
                             return [4 /*yield*/, this.getPrincipal(loanId)];
                         case 2:
                             principal = (_a.sent()).toNumber();
                             return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
                         case 3:
-                            ownerOf = (_a.sent()).toNumber();
+                            ownerOf = _a.sent();
                             return [4 /*yield*/, this.getInterestRate(loanId)];
                         case 4:
                             interestRate = (_a.sent()).toNumber();
@@ -34129,8 +34129,8 @@ function AnalyticsActions(Base) {
                             debt = (_a.sent()).toNumber();
                             return [2 /*return*/, {
                                     loanId: loanId,
-                                    registry: res.registry,
-                                    tokenId: res.tokenId,
+                                    registry: collateral.registry,
+                                    tokenId: collateral.tokenId,
                                     principal: principal,
                                     interestRate: interestRate,
                                     ownerOf: ownerOf,
@@ -34148,6 +34148,7 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.loanCount()];
                         case 1:
                             count = (_a.sent()).toNumber() - 1;
+                            console.log("count count", count);
                             i = 0;
                             _a.label = 2;
                         case 2:
@@ -34155,6 +34156,7 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();
+                            console.log("loan", loan);
                             loanArray.push(loan);
                             _a.label = 4;
                         case 4:

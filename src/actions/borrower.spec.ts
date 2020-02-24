@@ -17,7 +17,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses} = testConfig
 
-describe('borrower tests', async () => {
+describe.only('borrower tests', async () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
@@ -139,7 +139,7 @@ async function fundTranche(amount: string) {
   const lenderAccount = account.generate(randomString.generate(32));
   const lenderTinlake = createTinlake(lenderAccount, testConfig);
   // fund lender accoutn with eth
-  await testProvider.fundAccountWithETH(lenderAccount.address, amount);
+  await testProvider.fundAccountWithETH(lenderAccount.address, FAUCET_AMOUNT);
   // make admin adress ward on tranche operator
   await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
   // whitelist lender
