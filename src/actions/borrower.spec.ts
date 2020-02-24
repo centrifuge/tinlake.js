@@ -17,17 +17,14 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses} = testConfig
 
-describe.only('borrower tests', async () => {
+describe('borrower tests', async () => {
 
   before(async () =>  {
-    await governanceTinlake.relyAddress('0x08f3Ba249a9507f4e91e8aD8a357dCF83Ea264A8', contractAddresses["CEILING"]);
     // fund borrowerAccount with ETH
     await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
     const amount = '5000';
     // supply tranche with money
     await fundTranche(amount);
-    const mintResult : any = await governanceTinlake.mintNFT('0x08f3Ba249a9507f4e91e8aD8a357dCF83Ea264A8')
-    console.log("mintResult", mintResult.events[0].data[2].toString());
   });
 
   beforeEach(async() => {
