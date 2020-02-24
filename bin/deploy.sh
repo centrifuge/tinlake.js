@@ -17,7 +17,11 @@ export GOVERNANCE=$GOD_ADDRESS
 # setup local config
 ./tinlake/bin/test/setup_local_config.sh
 
- create address folder
+## src env for contract deployment
+source ./tinlake/bin/util/util.sh
+source ./tinlake/bin/test/local_env.sh
+
+create address folder
 mkdir ./tinlake/deployments
 
 # deploy contracts
@@ -29,10 +33,6 @@ mkdir ./tinlake/deployments
 # copy the addresses of deployed contracts from tinlake folder to tinlake.js test folder
 touch ./test/addresses.json
 cat ./tinlake/deployments/addresses_unknown.json > ./test/addresses.json
-
-## src env for contract deployment
-source ./tinlake/bin/util/util.sh
-source ./tinlake/bin/test/local_env.sh
 
 # rely superpower user on nft collateral contract
 NFT_COLLATERAL_ADDRESS=$(cat ./test/addresses.json | jq '.COLLATERAL_NFT' | tr -d '"')
