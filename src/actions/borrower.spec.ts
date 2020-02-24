@@ -33,7 +33,7 @@ describe('borrower tests', async () => {
     await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   })
 
-  it.only('success: issue loan from a minted collateral NFT', async () => {
+  it('success: issue loan from a minted collateral NFT', async () => {
     await mintIssue(borrowerAccount.address, borrowerTinlake);
   });
 
