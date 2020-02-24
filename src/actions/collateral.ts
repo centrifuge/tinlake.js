@@ -22,9 +22,14 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
       return res[0];
     }
 
-    getNFTOwner = async (nftID: string): Promise<BN> => {
-      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [nftID]);
+    getNFTOwner = async (tokenId: string): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId]);
       return res[0];
+    }
+
+    getNFTData = async (tokenId: string): Promise<any> => {
+      const res = await executeAndRetry(this.contracts['COLLATERAL_NFT'].data, [tokenId]);
+      return res;
     }
 
   }
@@ -34,7 +39,8 @@ export type ICollateralActions = {
   mintNFT(usr: string): Promise<any>,
   approveNFT(tokenId: string, to: string) : Promise<any>,
   getNFTCount(): Promise<BN>,
-  getNFTOwner(nftID: string): Promise<BN>
+  getNFTOwner(tokenId: string): Promise<BN>,
+  getNFTData(tokenId: string): Promise<any>
 }
 
 export default CollateralActions;

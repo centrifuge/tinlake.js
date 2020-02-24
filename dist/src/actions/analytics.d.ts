@@ -7,7 +7,7 @@ declare function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base
         getPrincipal: (loanId: string) => Promise<BN>;
         getDebt: (loanID: string) => Promise<BN>;
         loanCount: () => Promise<BN>;
-        getCollateral: (loanId: string) => Promise<Loan>;
+        getCollateral: (loanId: string) => Promise<any>;
         getInterestRate: (loanId: string) => Promise<BN>;
         getOwnerOfLoan: (loanId: string) => Promise<any>;
         getLoan: (loanId: string) => Promise<Loan>;
