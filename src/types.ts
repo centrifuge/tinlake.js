@@ -89,7 +89,7 @@ export type Address = string;
 export interface Loan {
   loanId: string;
   registry: Address;
-  tokenId: string;
+  tokenId: number;
   ownerOf: string;
   principal: number;
   interestRate: number;

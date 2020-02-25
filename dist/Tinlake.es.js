@@ -33992,14 +33992,25 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
-            _this.getNFTOwner = function (nftID) { return __awaiter(_this, void 0, void 0, function () {
+            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [nftID])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getNFTData = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].data, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res];
                     }
                 });
             }); };
@@ -34098,7 +34109,7 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res];
+                            return [2 /*return*/, res[0]];
                     }
                 });
             }); };
@@ -34124,7 +34135,7 @@ function AnalyticsActions(Base) {
                             return [2 /*return*/, {
                                     loanId: loanId,
                                     registry: collateral.registry,
-                                    tokenId: collateral.tokenId,
+                                    tokenId: collateral.tokenId.toNumber(),
                                     principal: principal,
                                     interestRate: interestRate,
                                     ownerOf: ownerOf,
@@ -34142,7 +34153,6 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.loanCount()];
                         case 1:
                             count = (_a.sent()).toNumber() - 1;
-                            console.log("count count", count);
                             i = 0;
                             _a.label = 2;
                         case 2:
@@ -34150,7 +34160,6 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();
-                            console.log("loan", loan);
                             loanArray.push(loan);
                             _a.label = 4;
                         case 4:
