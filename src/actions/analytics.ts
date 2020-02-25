@@ -30,7 +30,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res[0];
     }
 
-    getCollateral = async (loanId: string): Promise<Loan> => {
+    getCollateral = async (loanId: string): Promise<any> => {
       const res = await executeAndRetry(this.contracts['SHELF'].shelf, [loanId]);
       return res;
     }
@@ -41,8 +41,8 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
     }
 
     getOwnerOfLoan = async (loanId: string): Promise<any> => {
-      const res  = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
-      return res;
+      const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
+      return res[0];
     }
 
     getLoan = async (loanId: string): Promise<Loan> => {
@@ -55,7 +55,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return {
        loanId: loanId,
        registry: collateral.registry,
-       tokenId: collateral.tokenId,
+       tokenId: collateral.tokenId.toNumber(),
        principal,
        interestRate,
        ownerOf,
