@@ -66,8 +66,19 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       return waitAndReturnEvents(this.eth, txHash, this.contracts['CEILING'].abi, this.transactionTimeout);
     }
 
-    initRate = async (rate: string, speed: string) => {
-      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rate, speed, this.ethConfig]);
+    existsRateGroup = async (rate: string) => {
+      const res: { ratePerSecond: BN } = await executeAndRetry(this.contracts['PILE'].rates, [rate]);
+      return !res.ratePerSecond.isZero();
+    }
+
+    initRate = async (rate: string) => {
+      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rate, rate, this.ethConfig]);
+      console.log(`[Initialising rate] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
+    }
+
+    changeRate = async (loan: string, rate: string) => {
+      const txHash = await executeAndRetry(this.contracts['PILE'].changeRate, [loan, rate, this.ethConfig]);
       console.log(`[Initialising rate] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }

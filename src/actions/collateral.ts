@@ -10,7 +10,7 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
       console.log(`[Mint NFT] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
     }
-
+    
     approveNFT = async (tokenId: string, to: string) => {
       const txHash = await executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])
       console.log(`[NFT Approve] txHash: ${txHash}`);
