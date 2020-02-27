@@ -91,11 +91,11 @@ export interface Loan {
   registry: Address;
   tokenId: number;
   ownerOf: string;
-  principal: number;
-  interestRate: number;
-  debt: number;
-  threshold?: number;
-  price?: number;
+  principal: BN;
+  interestRate: BN;
+  debt: BN;
+  threshold?: BN;
+  price?: BN;
   status?: string;
 }
 

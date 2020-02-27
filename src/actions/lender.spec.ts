@@ -6,7 +6,6 @@ import testConfig from '../../test/config';
 import { ITinlake } from '../Tinlake';
 import { createTinlake, TestProvider } from '../../test/utils';
 
-
 let lenderAccount;
 let lenderTinlake;
 

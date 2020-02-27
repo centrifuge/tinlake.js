@@ -23719,7 +23719,7 @@ var Utils = /*#__PURE__*/Object.freeze({
 
 var _version = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.version = "4.0.30";
+exports.version = "4.0.45";
 });
 
 unwrapExports(_version);
@@ -25172,7 +25172,7 @@ function _decode(data, offset) {
     else if (data[offset] >= 0x80) {
         var length = data[offset] - 0x80;
         if (offset + 1 + length > data.length) {
-            throw new Error('invlaid rlp data');
+            throw new Error('invalid rlp data');
         }
         var result = bytes.hexlify(data.slice(offset + 1, offset + 1 + length));
         return { consumed: (1 + length), result: result };
@@ -25318,12 +25318,48 @@ function getContractAddress(transaction) {
     ])).substring(26));
 }
 exports.getContractAddress = getContractAddress;
+// See: https://eips.ethereum.org/EIPS/eip-1014
+function getCreate2Address(options) {
+    var initCodeHash = options.initCodeHash;
+    if (options.initCode) {
+        if (initCodeHash) {
+            if (keccak256_1.keccak256(options.initCode) !== initCodeHash) {
+                errors.throwError("initCode/initCodeHash mismatch", errors.INVALID_ARGUMENT, {
+                    arg: "options", value: options
+                });
+            }
+        }
+        else {
+            initCodeHash = keccak256_1.keccak256(options.initCode);
+        }
+    }
+    if (!initCodeHash) {
+        errors.throwError("missing initCode or initCodeHash", errors.INVALID_ARGUMENT, {
+            arg: "options", value: options
+        });
+    }
+    var from = getAddress(options.from);
+    var salt = bytes.arrayify(options.salt);
+    if (salt.length !== 32) {
+        errors.throwError("invalid salt", errors.INVALID_ARGUMENT, {
+            arg: "options", value: options
+        });
+    }
+    return getAddress("0x" + keccak256_1.keccak256(bytes.concat([
+        "0xff",
+        from,
+        salt,
+        initCodeHash
+    ])).substring(26));
+}
+exports.getCreate2Address = getCreate2Address;
 });
 
 unwrapExports(address);
 var address_1 = address.getAddress;
 var address_2 = address.getIcapAddress;
 var address_3 = address.getContractAddress;
+var address_4 = address.getCreate2Address;
 
 var utf8$1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -33659,11 +33695,34 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.initRate = function (rate, speed) { return __awaiter(_this, void 0, void 0, function () {
+            _this.existsRateGroup = function (rate) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rate])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, !res.ratePerSecond.isZero()];
+                    }
+                });
+            }); };
+            _this.initRate = function (rate) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rate, speed, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rate, rate, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Initialising rate] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.changeRate = function (loan, rate) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rate, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -33759,7 +33818,9 @@ function BorrowerActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig])];
+                        case 0:
+                            console.log("repay", loan, "moin", currencyAmount);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Borrow] txHash: " + txHash);
@@ -34104,7 +34165,7 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].loanRates, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res ? res[0] : Promise.resolve(new bn(0))];
+                            return [2 /*return*/, res ? res[0] : new bn(0)];
                     }
                 });
             }); };
@@ -34128,20 +34189,20 @@ function AnalyticsActions(Base) {
                             collateral = _a.sent();
                             return [4 /*yield*/, this.getPrincipal(loanId)];
                         case 2:
-                            principal = (_a.sent()).toNumber();
+                            principal = (_a.sent());
                             return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
                         case 3:
                             ownerOf = _a.sent();
                             return [4 /*yield*/, this.getInterestRate(loanId)];
                         case 4:
-                            interestRate = (_a.sent()).toNumber();
+                            interestRate = _a.sent();
                             return [4 /*yield*/, this.getDebt(loanId)];
                         case 5:
-                            debt = (_a.sent()).toNumber();
+                            debt = (_a.sent());
                             return [2 /*return*/, {
                                     loanId: loanId,
                                     registry: collateral.registry,
-                                    tokenId: collateral.tokenId.toNumber(),
+                                    tokenId: collateral.tokenId,
                                     principal: principal,
                                     interestRate: interestRate,
                                     ownerOf: ownerOf,
@@ -34158,18 +34219,18 @@ function AnalyticsActions(Base) {
                             loanArray = [];
                             return [4 /*yield*/, this.loanCount()];
                         case 1:
-                            count = (_a.sent()).toNumber() - 1;
+                            count = (_a.sent()).toNumber();
                             i = 0;
                             _a.label = 2;
                         case 2:
-                            if (!(i <= count)) return [3 /*break*/, 5];
+                            if (!(i < count)) return [3 /*break*/, 5];
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();
                             loanArray.push(loan);
                             _a.label = 4;
                         case 4:
-                            i += 1;
+                            i++;
                             return [3 /*break*/, 2];
                         case 5: return [2 /*return*/, loanArray];
                     }
@@ -36232,9 +36293,11 @@ var lookup = {};
  * @param fee Fee
  */
 var feeToInterestRate = function (fee) {
-    // tslint:disable-next-line:no-parameter-reassignment
     if (typeof fee !== 'string' && typeof fee !== 'number') {
         fee = fee.toString();
+    }
+    if (fee.toString() === "0") {
+        return fee.toString();
     }
     if (lookup[fee]) {
         return lookup[fee];

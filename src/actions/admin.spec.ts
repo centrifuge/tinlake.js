@@ -5,9 +5,11 @@ import { ITinlake } from '../Tinlake';
 import { Account } from '../../test/types';
 import { createTinlake, TestProvider } from '../../test/utils';
 import testConfig from '../../test/config';
+import { interestRateToFee } from '../utils/interestRateToFee';
 
 const testProvider = new TestProvider(testConfig);
 const adminAccount = account.generate(randomString.generate(32));
+const borrowerAccount = account.generate(randomString.generate(32));
 const lenderAccount = account.generate(randomString.generate(32));
 const adminTinlake = createTinlake(adminAccount, testConfig);
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
@@ -20,20 +22,27 @@ describe('admin tests', async () => {
   before(async () => {
     // fund admin account with eth
     await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
+    await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   });
 
-
   describe('ceiling', async () => {
-
     it('success: set ceiling for a loan', async () => {
       // rely admin on ceiling contract
       await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["CEILING"]);
       // await tinlake.setCeiling(loanId, ceiling);
     });
 
-    it('success: update ceiling for a loan', async () => {
+    it('success: init rate', async () => {
+        // rely admin on ceiling contract
+        await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["PILE"]);
+        const rate = '5';
+        const ratePerSecond = interestRateToFee(rate);
+        const initResult = await adminTinlake.initRate(ratePerSecond);
+        assert.equal(initResult.status, testConfig.SUCCESS_STATUS);
     });
 
+    it('success: set rate for loan', async () => {
+    });
   });
 
   describe('pile', async () => {
@@ -58,7 +67,6 @@ describe('admin tests', async () => {
       assert.equal(maxSupplyAmount, maxCurrency);
     })
   })
-
 })
 
 

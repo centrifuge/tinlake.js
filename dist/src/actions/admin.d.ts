@@ -13,7 +13,9 @@ declare function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
         canSetThreshold: (user: string) => Promise<boolean>;
         canSetLoanPrice: (user: string) => Promise<boolean>;
         setCeiling: (loanId: string, amount: string) => Promise<unknown>;
-        initRate: (rate: string, speed: string) => Promise<unknown>;
+        existsRateGroup: (rate: string) => Promise<boolean>;
+        initRate: (rate: string) => Promise<unknown>;
+        changeRate: (loan: string, rate: string) => Promise<unknown>;
         setRate: (loan: string, rate: string) => Promise<unknown>;
         approveAllowance: (user: string, maxCurrency: string, maxToken: string) => Promise<unknown>;
         provider: any;
