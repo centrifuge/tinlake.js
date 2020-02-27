@@ -33818,7 +33818,9 @@ function BorrowerActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig])];
+                        case 0:
+                            console.log("repay", loan, "moin", currencyAmount);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Borrow] txHash: " + txHash);
@@ -34178,7 +34180,6 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
-            // 1.0.0-beta.55
             _this.getLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
                 var collateral, principal, ownerOf, interestRate, debt;
                 return __generator(this, function (_a) {
@@ -34219,10 +34220,10 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.loanCount()];
                         case 1:
                             count = (_a.sent()).toNumber();
-                            i = 1;
+                            i = 0;
                             _a.label = 2;
                         case 2:
-                            if (!(i <= count)) return [3 /*break*/, 5];
+                            if (!(i < count)) return [3 /*break*/, 5];
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();

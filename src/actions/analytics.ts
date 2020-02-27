@@ -44,7 +44,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
       return res[0];
     }
-    // 1.0.0-beta.55
+   
     getLoan = async (loanId: string): Promise<Loan> => {
       const collateral = await this.getCollateral(loanId);
       const principal = (await this.getPrincipal(loanId));
@@ -65,7 +65,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
     getLoanList = async (): Promise<Loan[]> => {
       const loanArray = [];
       const count = (await this.loanCount()).toNumber();
-      for (let i = 1; i <= count; i ++) {
+      for (let i = 0; i < count; i++) {
         const loan = await this.getLoan(i.toString());
         loanArray.push(loan);
       }

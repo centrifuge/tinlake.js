@@ -17,7 +17,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses} = testConfig
 
-describe('borrower tests', async () => {
+describe.only('borrower tests', async () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
@@ -32,7 +32,7 @@ describe('borrower tests', async () => {
     borrowerTinlake = createTinlake(borrowerAccount, testConfig);
     await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   })
-
+  
   it('success: issue loan from a minted collateral NFT', async () => {
     await mintIssue(borrowerAccount.address, borrowerTinlake);
   });

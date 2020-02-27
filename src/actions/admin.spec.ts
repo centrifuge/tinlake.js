@@ -17,7 +17,7 @@ const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig
 
 // ------------ admin tests borrower-site -------------
-describe.only('admin tests', async () => {
+describe('admin tests', async () => {
 
   before(async () => {
     // fund admin account with eth

@@ -30,6 +30,7 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
     }
 
     borrow = async (loan: string, currencyAmount: string) => {
+      console.log("repay", loan, "moin",  currencyAmount);
       const txHash = await executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig]);
       console.log(`[Borrow] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
