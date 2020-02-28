@@ -50,7 +50,7 @@ export function createTinlake(usr: Account, testConfig: any) {
         nftDataContractCall.outputs,
         transactionTimeout,
       {
-        ethConfig: { from: usr.address, gasLimit: `0x${gasLimit.toString(16)}` },
+        ethConfig: { from: usr.address, gasLimit: `0x${gasLimit.toString(16)}`, proxy: '' },
       },
     );
 

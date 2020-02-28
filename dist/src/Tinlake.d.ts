@@ -18,6 +18,19 @@ export declare class Tinlake {
 }
 declare const TinlakeWithActions: {
     new (...args: any[]): {
+        newProxy: (owner: string) => Promise<any>;
+        getProxy: (accessTokenId: string) => Promise<any>;
+        provider: any;
+        eth: ethI;
+        ethOptions: any;
+        ethConfig: any;
+        contractAddresses: ContractAddresses;
+        transactionTimeout: number;
+        contracts: Contracts;
+        contractAbis: ContractAbis;
+    };
+} & {
+    new (...args: any[]): {
         issue: (registry: string, tokenId: string) => Promise<unknown>;
         lock: (loan: string) => Promise<unknown>;
         unlock: (loan: string) => Promise<unknown>;
@@ -86,10 +99,10 @@ declare const TinlakeWithActions: {
         getPrincipal: (loanId: string) => Promise<BN>;
         getDebt: (loanID: string) => Promise<BN>;
         loanCount: () => Promise<BN>;
-        getLoan: (loanId: string) => Promise<import("./types").Loan>;
+        getCollateral: (loanId: string) => Promise<any>;
         getInterestRate: (loanId: string) => Promise<BN>;
-        getOwnerOfLoan: (loanId: string) => Promise<BN>;
-        assembleLoan: (loanId: string) => Promise<import("./types").Loan>;
+        getOwnerOfLoan: (loanId: string) => Promise<any>;
+        getLoan: (loanId: string) => Promise<import("./types").Loan>;
         getLoanList: () => Promise<import("./types").Loan[]>;
         provider: any;
         eth: ethI;
@@ -119,7 +132,8 @@ declare const TinlakeWithActions: {
         mintNFT: (user: string) => Promise<unknown>;
         approveNFT: (tokenId: string, to: string) => Promise<unknown>;
         getNFTCount: () => Promise<BN>;
-        getNFTOwner: (nftID: string) => Promise<BN>;
+        getNFTOwner: (tokenId: string) => Promise<BN>;
+        getNFTData: (tokenId: string) => Promise<any>;
         provider: any;
         eth: ethI;
         ethOptions: any;

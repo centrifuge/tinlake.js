@@ -1,11 +1,11 @@
 # run testnet
 # dapp testnet
 
-# remove tinlake submodule and install newest dependency
-[ -d ./tinlake ] && rm -r ./tinlake
-[ -d ./tinlake-proxy ] && rm -r ./tinlake-proxy
-[ -d ./tinlake-actions ] && rm -r ./tinlake-actions
-git submodule update --init --recursive
+# remove submodules and install newest dependencies
+[ -d ./tinlake ] && rm -rf ./tinlake
+[ -d ./tinlake-proxy ] && rm -rf ./tinlake-proxy
+[ -d ./tinlake-actions ] && rm -rf ./tinlake-actions
+git submodule init
 git submodule update --recursive --remote --merge
 
 # superpower user for tinlake.js tests
@@ -25,7 +25,7 @@ source ./tinlake/bin/test/local_env.sh
 #create address folder
 mkdir ./tinlake/deployments
 
-# deploy contracts
+# deploy tinlake contracts
 ./tinlake/bin/deploy.sh
 
 # deploy nft
@@ -43,33 +43,12 @@ seth send $NFT_COLLATERAL_ADDRESS 'rely(address)' $GOD_ADDRESS
 seth send --value 10000000000000000000000000000000000000000000000000000000 $GOD_ADDRESS
 
 # deploy proxy registry contract
-# build contracts if needed
-
-BIN_DIR=${BIN_DIR:-$(cd "${1%/*}"&&pwd)}
-
-cd $BIN_DIR/tinlake-proxy && dapp build --extract
-
-export PROXY_REGISTRY=$(seth send --create ./out/ProxyRegistry.bin 'ProxyRegistry()')
-message Proxy Registry Address: $PROXY_REGISTRY
-
-DEPLOYMENT_FILE=$BIN_DIR/tinlake/deployments/addresses_$(seth chain).json
-
-addValuesToFile $DEPLOYMENT_FILE <<EOF
-{
-    "PROXY_REGISTRY" :"$PROXY_REGISTRY"
-}
-EOF
+./tinlake-proxy/bin/deploy.sh
+cat ./tinlake-proxy/bin/test/addresses.json >> ./test/addresses.json
 
 # deploy tinlake actions
+./tinlake-actions/  bin/deploy.sh
+cat ./tinlake-actions/bin/test/addresses.json >> ./test/addresses.json
 
-cd $BIN_DIR/tinlake-actions && dapp build --extract
 
-export ACTIONS=$(seth send --create ./out/Actions.bin 'Actions()')
-message Tinlake Actions Address: $ACTIONS
-
-addValuesToFile $DEPLOYMENT_FILE <<EOF
-{
-    "ACTIONS" :"$ACTIONS"
-}
-EOF
 

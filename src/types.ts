@@ -32,6 +32,7 @@ export interface Options {
 export interface EthConfig {
   from: string;
   gasLimit: string;
+  proxy: string;
 }
 
 export const contractNames = [
@@ -52,7 +53,13 @@ export const contractNames = [
   'THRESHOLD',
   'PRICE_POOL',
   'COLLATERAL_NFT',
-  'ROOT_CONTRACT'
+  'ROOT_CONTRACT',
+  'PROXY',
+  'PROXY_REGISTRY',
+  'ACTIONS',
+
+  'TEST_PROXY_REGISTRY',
+  'TEST_PROXY',
 ];
 
 export type ContractNames = typeof contractNames[number];

@@ -10382,7 +10382,12 @@ var contractNames = [
     'THRESHOLD',
     'PRICE_POOL',
     'COLLATERAL_NFT',
-    'ROOT_CONTRACT'
+    'ROOT_CONTRACT',
+    'PROXY',
+    'PROXY_REGISTRY',
+    'ACTIONS',
+    'TEST_PROXY_REGISTRY',
+    'TEST_PROXY',
 ];
 
 var contractAbiTitle = [
@@ -15972,6 +15977,2117 @@ var contractAbiRoot = [
   }
 ];
 
+var contractAbiActions = [
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "approveERC20",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      }
+    ],
+    name: "approveNFT",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "borrowWithdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      }
+    ],
+    name: "issue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "lock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "lockBorrowWithdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repay",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repayUnlock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repayUnlockClose",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract OperatorLike",
+        name: "operator",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "supply",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      }
+    ],
+    name: "transferIssue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "transferIssueLockBorrowWithdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "unlock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "unlockClose",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  }
+];
+
+var contractAbiProxy = [
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "accessToken_",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    payable: true,
+    stateMutability: "payable",
+    type: "fallback"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "accessToken",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "_target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "registry",
+    outputs: [
+      {
+        internalType: "contract RegistryLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiProxyRegistry = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "approved",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "ApprovalForAll",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "proxy",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Created",
+    type: "event"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    name: "cache",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheRead",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheWrite",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tkn",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "count",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "issue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "proxies",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "uri",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiTestProxyRegistry = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "approved",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "ApprovalForAll",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "proxy",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Created",
+    type: "event"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    name: "cache",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheRead",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheWrite",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "called",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tkn",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "count",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "issue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "proxies",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "test",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "uri",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiTestProxy = [
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "accessToken_",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    payable: true,
+    stateMutability: "payable",
+    type: "fallback"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "accessToken",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "_target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "registry",
+    outputs: [
+      {
+        internalType: "contract RegistryLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
 var abiDefinitions = {
     COLLATERAL_NFT: contractAbiTitle,
     TITLE: contractAbiTitle,
@@ -15987,7 +18103,12 @@ var abiDefinitions = {
     ASSESSOR: contractAbiAssessor,
     ROOT_CONTRACT: contractAbiRoot,
     JUNIOR_TOKEN: contractAbiCurrency,
-    SENIOR_TOKEN: contractAbiCurrency
+    SENIOR_TOKEN: contractAbiCurrency,
+    PROXY: contractAbiProxy,
+    PROXY_REGISTRY: contractAbiProxyRegistry,
+    ACTIONS: contractAbiActions,
+    TEST_PROXY_REGISTRY: contractAbiTestProxyRegistry,
+    TEST_PROXY: contractAbiTestProxy,
 };
 
 /*! *****************************************************************************
@@ -33714,7 +35835,7 @@ function BorrowerActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
-                            console.log("[Mint NFT] txHash: " + txHash);
+                            console.log("[Issue Loan] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout)];
                     }
                 });
@@ -33964,14 +36085,17 @@ function CollateralActions(Base) {
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.mintNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+                var txHash, response;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Mint NFT] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                        case 2:
+                            response = _a.sent();
+                            return [2 /*return*/, response.events[0].data[2].toString()];
                     }
                 });
             }); };
@@ -34206,6 +36330,282 @@ function GovernanceActions(Base) {
     }(Base));
 }
 
+var Contract = require('web3-eth-contract');
+var abiCoder$2 = new AbiCoder$1();
+function ProxyActions(Base) {
+    return /** @class */ (function (_super) {
+        __extends(class_1, _super);
+        function class_1() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.approveNFT = function (tokenId, to) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT Approve] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.getTokenOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.transferNFT = function (from, to, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].transferFrom, [from, to, tokenId, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT Approve] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.newProxy = function (owner) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash, response;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].build, [owner, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Proxy created] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['PROXY_REGISTRY'].abi, this.transactionTimeout)];
+                        case 2:
+                            response = _a.sent();
+                            return [2 /*return*/, response.events[0].data[2].toString()];
+                    }
+                });
+            }); };
+            _this.newTestProxy = function (owner) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash, response;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TEST_PROXY_REGISTRY'].build, [owner, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Proxy created] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['TEST_PROXY_REGISTRY'].abi, this.transactionTimeout)];
+                        case 2:
+                            response = _a.sent();
+                            return [2 /*return*/, response.events[0].data[2].toString()];
+                    }
+                });
+            }); };
+            _this.getTestProxy = function (accessTokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TEST_PROXY_REGISTRY'].proxies, [accessTokenId, this.ethConfig])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getProxy = function (accessTokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].proxies, [accessTokenId, this.ethConfig])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getProxyAccessToken = function () { return __awaiter(_this, void 0, void 0, function () {
+                var accessToken, address, proxy, res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!(this.ethConfig.proxy === '')) return [3 /*break*/, 3];
+                            return [4 /*yield*/, this.newProxy(this.ethConfig.from)];
+                        case 1:
+                            accessToken = _a.sent();
+                            return [4 /*yield*/, this.getProxy(accessToken)];
+                        case 2:
+                            address = _a.sent();
+                            this.ethConfig.proxy = address;
+                            _a.label = 3;
+                        case 3:
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                            return [4 /*yield*/, executeAndRetry(proxy.accessToken, [this.ethConfig])];
+                        case 4:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0].toNumber()];
+                    }
+                });
+            }); };
+            _this.proxyApproveNFT = function (address, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var registry, proxy, actions, encoded, txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            registry = this.contracts['COLLATERAL_NFT'].address;
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                            actions = new Contract(this.contractAbis['ACTIONS'], this.contracts['ACTIONS'].address, this.ethConfig);
+                            encoded = actions.methods.approveNFT(registry, address, tokenId).encodeABI();
+                            console.log('TESTencoded!', encoded);
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Approve NFT] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['ACTIONS'], this.transactionTimeout)];
+                        case 2: return [2 /*return*/, _a.sent()];
+                    }
+                });
+            }); };
+            _this.testProxy = function () { return __awaiter(_this, void 0, void 0, function () {
+                var access, _a, _b, _c, encoded1, registry, encoded;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, this.getProxyAccessToken()];
+                        case 1:
+                            access = _d.sent();
+                            _b = (_a = console).log;
+                            _c = ['owner of token'];
+                            return [4 /*yield*/, this.getTokenOwner(access)];
+                        case 2:
+                            _b.apply(_a, _c.concat([_d.sent()]));
+                            encoded1 = abiCoder$2.encodeFunctionCall({
+                                name: 'test',
+                                type: 'function',
+                                inputs: []
+                            }, []);
+                            console.log('TEST', encoded1);
+                            registry = new Contract(this.contractAbis['TEST_PROXY_REGISTRY'], '0x207b2fe52ce5d935a93785238b2879e2e07de756', this.ethConfig);
+                            encoded = registry.methods.test().encodeABI();
+                            console.log('TESTencoded!', encoded);
+                            return [2 /*return*/];
+                    }
+                });
+            }); };
+            _this.proxyTransferIssue = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var accessToken, address, access, _a, _b, _c, shelf, registry, proxy, actions, encoded, approve, _d, _e, _f, txHash, res;
+                return __generator(this, function (_g) {
+                    switch (_g.label) {
+                        case 0:
+                            if (!(this.ethConfig.proxy === '')) return [3 /*break*/, 3];
+                            return [4 /*yield*/, this.newProxy(this.ethConfig.from)];
+                        case 1:
+                            accessToken = _g.sent();
+                            return [4 /*yield*/, this.getProxy(accessToken)];
+                        case 2:
+                            address = _g.sent();
+                            this.ethConfig.proxy = address;
+                            _g.label = 3;
+                        case 3:
+                            console.log('proxy inside', this.ethConfig.proxy);
+                            return [4 /*yield*/, this.getProxyAccessToken()];
+                        case 4:
+                            access = _g.sent();
+                            _b = (_a = console).log;
+                            _c = ['owner of token'];
+                            return [4 /*yield*/, this.getTokenOwner(access)];
+                        case 5:
+                            _b.apply(_a, _c.concat([_g.sent()]));
+                            shelf = this.contracts['SHELF'].address;
+                            registry = this.contracts['COLLATERAL_NFT'].address;
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                            actions = this.contracts['ACTIONS'].address;
+                            encoded = abiCoder$2.encodeFunctionCall({
+                                name: 'transferIssue',
+                                type: 'function',
+                                inputs: [{ name: 'shelf', type: 'address' }, { name: 'registry', type: 'address' }, { name: 'token', type: 'uint256' }]
+                            }, [shelf, registry, tokenId]);
+                            console.log('encoded', encoded);
+                            return [4 /*yield*/, this.approveNFT(tokenId, this.ethConfig.proxy)];
+                        case 6:
+                            approve = _g.sent();
+                            console.log('nft approve', approve);
+                            // await this.transferNFT(this.ethConfig.from, this.ethConfig.proxy, tokenId);
+                            _e = (_d = console).log;
+                            _f = ['NFT OWNER NOW'];
+                            return [4 /*yield*/, this.getNFTOwner(tokenId)];
+                        case 7:
+                            // await this.transferNFT(this.ethConfig.from, this.ethConfig.proxy, tokenId);
+                            _e.apply(_d, _f.concat([_g.sent()]));
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [actions, encoded, this.ethConfig])];
+                        case 8:
+                            txHash = _g.sent();
+                            console.log("[Transfer Issue Loan] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['ACTIONS'], this.transactionTimeout)];
+                        case 9:
+                            res = _g.sent();
+                            console.log(res);
+                            return [4 /*yield*/, this.getNFTOwner(tokenId)];
+                        case 10: return [2 /*return*/, _g.sent()];
+                    }
+                });
+            }); };
+            return _this;
+            // transferIssue = async (tokenId: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['ACTIONS'].transferIssue, [this.contractAddresses['SHELF'], [this.contractAddresses['COLLATERAL_NFT], tokenId, this.ethConfig]);
+            //   console.log(`[Mint NFT] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['ACTIONS'].abi, this.transactionTimeout);
+            // }
+            //
+            // lock = async (loan: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['ACTIONS'].lock, [loan, this.ethConfig]);
+            //   console.log(`[Collateral NFT lock] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['ACTIONS'].abi, this.transactionTimeout);
+            // }
+            // unlock = async (loan: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].unlock, [loan, this.ethConfig]);
+            //   console.log(`[Collateral NFT unlock] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // close = async (loan: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].close, [loan, this.ethConfig]);
+            //   console.log(`[Loan close] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // borrow = async (loan: string, currencyAmount: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig]);
+            //   console.log(`[Borrow] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // withdraw = async (loan: string, currencyAmount: string, usr: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].withdraw, [loan, currencyAmount, usr, this.ethConfig]);
+            //   console.log(`[Withdraw] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // repay = async (loan: string, currencyAmount: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].repay, [loan, currencyAmount, this.ethConfig]);
+            //   console.log(`[Repay] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+        }
+        return class_1;
+    }(Base));
+}
+
 var actions = {
     Admin: AdminActions,
     Borrower: BorrowerActions,
@@ -34213,7 +36613,8 @@ var actions = {
     Currency: CurrencyActions,
     Collateral: CollateralActions,
     Analytics: AnalyticsActions,
-    Governance: GovernanceActions
+    Governance: GovernanceActions,
+    ProxyActions: ProxyActions,
 };
 
 var baseToDisplay = function (base, decimals) {
@@ -36322,8 +38723,8 @@ var Tinlake = /** @class */ (function () {
     }
     return Tinlake;
 }());
-var Admin = actions.Admin, Borrower = actions.Borrower, Lender = actions.Lender, Analytics = actions.Analytics, Currency = actions.Currency, Collateral = actions.Collateral, Governance = actions.Governance;
-var TinlakeWithActions = (Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake))))))));
+var Admin = actions.Admin, Borrower = actions.Borrower, Lender = actions.Lender, Analytics = actions.Analytics, Currency = actions.Currency, Collateral = actions.Collateral, Governance = actions.Governance, ProxyActions$1 = actions.ProxyActions;
+var TinlakeWithActions = (ProxyActions$1(Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake)))))))));
 
 exports.Tinlake = Tinlake;
 exports.baseToDisplay = baseToDisplay;

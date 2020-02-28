@@ -30,6 +30,7 @@ export interface Options {
 export interface EthConfig {
     from: string;
     gasLimit: string;
+    proxy: string;
 }
 export declare const contractNames: string[];
 export declare type ContractNames = typeof contractNames[number];

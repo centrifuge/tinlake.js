@@ -12,7 +12,7 @@ const lenderAccount = account.generate(randomString.generate(32));
 const adminTinlake = createTinlake(adminAccount, testConfig);
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 
-const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig
+const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
 // ------------ admin tests borrower-site -------------
 describe('admin tests', async () => {
@@ -22,12 +22,11 @@ describe('admin tests', async () => {
     await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
   });
 
-
   describe('ceiling', async () => {
 
     it('success: set ceiling for a loan', async () => {
       // rely admin on ceiling contract
-      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["CEILING"]);
+      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['CEILING']);
       // await tinlake.setCeiling(loanId, ceiling);
     });
 
@@ -37,14 +36,14 @@ describe('admin tests', async () => {
   });
 
   describe('pile', async () => {
-    //rely admin account on pile
+    // rely admin account on pile
   });
 
   // ------------ admin tests lender-site -------------
   describe('operator', async () => {
     it('success: set allowance for junior investor', async () => {
       // rely admin on junior operator
-      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
+      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['JUNIOR_OPERATOR']);
       const maxCurrency = 1000;
       const maxToken = 100;
 
@@ -56,9 +55,7 @@ describe('admin tests', async () => {
       assert.equal(allowanceResult.status, testConfig.SUCCESS_STATUS);
       assert.equal(maxRedeemAmount, maxToken);
       assert.equal(maxSupplyAmount, maxCurrency);
-    })
-  })
+    });
+  });
 
-})
-
-
+});
