@@ -99,6 +99,16 @@ export interface Loan {
   status?: string;
 }
 
+export interface Investor {
+  address:string;
+  maxSupplyJunior: BN;
+  maxSupplySenior?: BN;
+  maxRedeemJunior: BN;
+  maxRedeemSenior?: BN;
+  tokenBalanceJunior: BN;
+  tokenBalanceSenior?: BN;
+}
+
 export interface BalanceDebt {
   debt: BN;
   balance: BN;

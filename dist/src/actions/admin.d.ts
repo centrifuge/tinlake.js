@@ -9,7 +9,7 @@ declare function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
         canSetSeniorTrancheInterest: (user: string) => Promise<boolean>;
         canSetEquityRatio: (user: string) => Promise<boolean>;
         canSetRiskScore: (user: string) => Promise<boolean>;
-        canSetInvestorAllowance: (user: string) => Promise<boolean>;
+        canSetInvestorAllowanceJunior: (user: string) => Promise<boolean>;
         canSetThreshold: (user: string) => Promise<boolean>;
         canSetLoanPrice: (user: string) => Promise<boolean>;
         setCeiling: (loanId: string, amount: string) => Promise<unknown>;
@@ -17,7 +17,7 @@ declare function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
         initRate: (rate: string) => Promise<unknown>;
         changeRate: (loan: string, rate: string) => Promise<unknown>;
         setRate: (loan: string, rate: string) => Promise<unknown>;
-        approveAllowance: (user: string, maxCurrency: string, maxToken: string) => Promise<unknown>;
+        approveAllowanceJunior: (user: string, maxCurrency: string, maxToken: string) => Promise<unknown>;
         provider: any;
         eth: import("../types").ethI;
         ethOptions: any;
@@ -36,12 +36,12 @@ export declare type IAdminActions = {
     canSetSeniorTrancheInterest(user: string): Promise<boolean>;
     canSetEquityRatio(user: string): Promise<boolean>;
     canSetRiskScore(user: string): Promise<boolean>;
-    canSetInvestorAllowance(user: string): Promise<boolean>;
+    canSetInvestorAllowanceJunior(user: string): Promise<boolean>;
     canSetThreshold(user: string): Promise<boolean>;
     canSetLoanPrice(user: string): Promise<boolean>;
     setCeiling(loanId: string, amount: string): Promise<any>;
     initRate(rate: string, speed: string): Promise<any>;
     setRate(loan: string, rate: string): Promise<any>;
-    approveAllowance(user: string, maxCurrency: string, maxToken: string): Promise<any>;
+    approveAllowanceJunior(user: string, maxCurrency: string, maxToken: string): Promise<any>;
 };
 export default AdminActions;
