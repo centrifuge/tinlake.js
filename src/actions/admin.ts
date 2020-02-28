@@ -43,7 +43,7 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
     }
 
     // lender permissions (note: allowance operator for default deployment)
-    canSetInvestorAllowance = async (user: string) => {
+    canSetInvestorAllowanceJunior = async (user: string) => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].wards, [user]);
       return res[0].toNumber() === 1;
     }
@@ -66,8 +66,19 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       return waitAndReturnEvents(this.eth, txHash, this.contracts['CEILING'].abi, this.transactionTimeout);
     }
 
-    initRate = async (rate: string, speed: string) => {
-      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rate, speed, this.ethConfig]);
+    existsRateGroup = async (rate: string) => {
+      const res: { ratePerSecond: BN } = await executeAndRetry(this.contracts['PILE'].rates, [rate]);
+      return !res.ratePerSecond.isZero();
+    }
+
+    initRate = async (rate: string) => {
+      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rate, rate, this.ethConfig]);
+      console.log(`[Initialising rate] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
+    }
+
+    changeRate = async (loan: string, rate: string) => {
+      const txHash = await executeAndRetry(this.contracts['PILE'].changeRate, [loan, rate, this.ethConfig]);
       console.log(`[Initialising rate] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }
@@ -79,7 +90,7 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
     }
 
     // ------------ admin functions lender-site -------------
-    approveAllowance = async (user: string, maxCurrency: string, maxToken: string) => {
+    approveAllowanceJunior = async (user: string, maxCurrency: string, maxToken: string) => {
       const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout);
@@ -95,13 +106,13 @@ export type IAdminActions = {
   canSetSeniorTrancheInterest(user: string): Promise<boolean>,
   canSetEquityRatio(user: string): Promise<boolean>,
   canSetRiskScore(user: string): Promise<boolean>,
-  canSetInvestorAllowance(user: string): Promise<boolean>,
+  canSetInvestorAllowanceJunior(user: string): Promise<boolean>,
   canSetThreshold(user: string): Promise<boolean>,
   canSetLoanPrice(user: string): Promise<boolean>,
   setCeiling(loanId: string, amount: string): Promise<any>,
   initRate(rate: string, speed: string): Promise<any>,
   setRate(loan: string, rate: string): Promise<any>,
-  approveAllowance(user: string, maxCurrency: string, maxToken: string): Promise<any>,
+  approveAllowanceJunior(user: string, maxCurrency: string, maxToken: string): Promise<any>,
 };
 
 export default AdminActions;
