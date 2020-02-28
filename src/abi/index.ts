@@ -13,6 +13,9 @@ import contractAbiAssessor from './DefaultAssessor.abi.json';
 import contractAbiRoot from './Root.abi.json';
 import contractAbiTranche from './Tranche.abi.json';
 import contractAbiNFTData from './NftData.abi.json';
+import contractAbiActions from './Actions.abi.json';
+import contractAbiProxy from './Proxy.abi.json';
+import contractAbiProxyRegistry from './ProxyRegistry.abi.json';
 
 import { ContractAbis } from '../types';
 
@@ -35,4 +38,7 @@ export default {
   JUNIOR: contractAbiTranche,
   SENIOR: contractAbiTranche,
   SENIOR_TOKEN: contractAbiCurrency,
+  PROXY: contractAbiProxy,
+  PROXY_REGISTRY: contractAbiProxyRegistry,
+  ACTIONS: contractAbiActions,
 } as ContractAbis;

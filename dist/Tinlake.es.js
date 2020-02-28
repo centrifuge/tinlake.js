@@ -10377,7 +10377,11 @@ var contractNames = [
     'PRICE_POOL',
     'COLLATERAL_NFT',
     'ROOT_CONTRACT',
-    'COLLATERAL_NFT_DATA',
+    'PROXY',
+    'PROXY_REGISTRY',
+    'ACTIONS',
+    'TEST_PROXY_REGISTRY',
+    'TEST_PROXY',
 ];
 
 var contractAbiTitle = [
@@ -10925,403 +10929,6 @@ var contractAbiTitle = [
     payable: false,
     stateMutability: "view",
     type: "function"
-  }
-];
-
-var contractAbiNFT = [
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "interfaceId",
-        type: "bytes4"
-      }
-    ],
-    name: "supportsInterface",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "getApproved",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "transferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "ownerOf",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "setApprovalForAll",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      },
-      {
-        name: "_data",
-        type: "bytes"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "tokenURI",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "tkn",
-        type: "uint256"
-      },
-      {
-        name: "ref",
-        type: "string"
-      },
-      {
-        name: "amount",
-        type: "uint256"
-      },
-      {
-        name: "asset",
-        type: "string"
-      }
-    ],
-    name: "mint",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      },
-      {
-        name: "operator",
-        type: "address"
-      }
-    ],
-    name: "isApprovedForAll",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "data",
-    outputs: [
-      {
-        name: "reference_id",
-        type: "string"
-      },
-      {
-        name: "amount",
-        type: "uint256"
-      },
-      {
-        name: "asset_type",
-        type: "string"
-      },
-      {
-        name: "borrower",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "to",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Transfer",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "approved",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Approval",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "operator",
-        type: "address"
-      },
-      {
-        indexed: false,
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "ApprovalForAll",
-    type: "event"
   }
 ];
 
@@ -16364,24 +15971,7 @@ var contractAbiRoot = [
   }
 ];
 
-var contractAbiTranche = [
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "token_",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "currency_",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
+var contractAbiActions = [
   {
     anonymous: true,
     inputs: [
@@ -16428,12 +16018,131 @@ var contractAbiTranche = [
   {
     constant: false,
     inputs: [
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
     ],
-    name: "balance",
+    name: "approveERC20",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      }
+    ],
+    name: "approveNFT",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "borrowWithdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      }
+    ],
+    name: "issue",
     outputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "loan",
         type: "uint256"
       }
     ],
@@ -16445,17 +16154,727 @@ var contractAbiTranche = [
     constant: false,
     inputs: [
       {
-        internalType: "address",
-        name: "usr",
+        internalType: "contract ShelfLike",
+        name: "shelf",
         type: "address"
       },
       {
         internalType: "uint256",
-        name: "currencyAmount",
+        name: "loan",
         type: "uint256"
       }
     ],
-    name: "borrow",
+    name: "lock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "lockBorrowWithdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repay",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repayUnlock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "repayUnlockClose",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract OperatorLike",
+        name: "operator",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "supply",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      }
+    ],
+    name: "transferIssue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "transferIssueLockBorrowWithdraw",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract NFTLike",
+        name: "registry",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "token",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "unlock",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "unlockClose",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  }
+];
+
+var contractAbiProxy = [
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "accessToken_",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    payable: true,
+    stateMutability: "payable",
+    type: "fallback"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "accessToken",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "_target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "registry",
+    outputs: [
+      {
+        internalType: "contract RegistryLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiProxyRegistry = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "approved",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "ApprovalForAll",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "proxy",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Created",
+    type: "event"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    name: "cache",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheRead",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheWrite",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tkn",
+        type: "uint256"
+      }
+    ],
+    name: "close",
     outputs: [
     ],
     payable: false,
@@ -16466,12 +16885,12 @@ var contractAbiTranche = [
     constant: true,
     inputs: [
     ],
-    name: "currency",
+    name: "count",
     outputs: [
       {
-        internalType: "contract TokenLike",
+        internalType: "uint256",
         name: "",
-        type: "address"
+        type: "uint256"
       }
     ],
     payable: false,
@@ -16495,24 +16914,50 @@ var contractAbiTranche = [
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
-        internalType: "bytes32",
-        name: "contractName",
-        type: "bytes32"
-      },
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
       {
         internalType: "address",
-        name: "addr",
+        name: "",
         type: "address"
       }
     ],
-    name: "depend",
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
     outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -16522,23 +16967,76 @@ var contractAbiTranche = [
         internalType: "address",
         name: "usr",
         type: "address"
-      },
+      }
+    ],
+    name: "issue",
+    outputs: [
       {
         internalType: "uint256",
-        name: "currencyAmount",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "tokenAmount",
+        name: "",
         type: "uint256"
       }
     ],
-    name: "redeem",
-    outputs: [
-    ],
     payable: false,
     stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "proxies",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -16562,16 +17060,73 @@ var contractAbiTranche = [
     inputs: [
       {
         internalType: "address",
-        name: "usr",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
         type: "address"
       },
       {
         internalType: "uint256",
-        name: "currencyAmount",
+        name: "tokenId",
         type: "uint256"
       }
     ],
-    name: "repay",
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
     outputs: [
     ],
     payable: false,
@@ -16581,13 +17136,55 @@ var contractAbiTranche = [
   {
     constant: true,
     inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4"
+      }
     ],
-    name: "self",
+    name: "supportsInterface",
     outputs: [
       {
-        internalType: "address",
+        internalType: "bool",
         name: "",
-        type: "address"
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
       }
     ],
     payable: false,
@@ -16599,21 +17196,21 @@ var contractAbiTranche = [
     inputs: [
       {
         internalType: "address",
-        name: "usr",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
         type: "address"
       },
       {
         internalType: "uint256",
-        name: "currencyAmount",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "tokenAmount",
+        name: "tokenId",
         type: "uint256"
       }
     ],
-    name: "supply",
+    name: "transferFrom",
     outputs: [
     ],
     payable: false,
@@ -16624,32 +17221,16 @@ var contractAbiTranche = [
     constant: true,
     inputs: [
     ],
-    name: "token",
+    name: "uri",
     outputs: [
       {
-        internalType: "contract TokenLike",
+        internalType: "string",
         name: "",
-        type: "address"
+        type: "string"
       }
     ],
     payable: false,
     stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-    ],
-    name: "tokenSupply",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -16675,18 +17256,826 @@ var contractAbiTranche = [
   }
 ];
 
-var contractAbiNFTData = [
+var contractAbiTestProxyRegistry = [
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "approved",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "ApprovalForAll",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "proxy",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Created",
+    type: "event"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
   {
     constant: true,
     inputs: [
       {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
         name: "",
         type: "uint256"
       }
     ],
-    name: "data",
-    outputs: {
-    },
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "build",
+    outputs: [
+      {
+        internalType: "address payable",
+        name: "proxy",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    name: "cache",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheRead",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      }
+    ],
+    name: "cacheWrite",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "called",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tkn",
+        type: "uint256"
+      }
+    ],
+    name: "close",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "count",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "issue",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "proxies",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "test",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "uri",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiTestProxy = [
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "accessToken_",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    payable: true,
+    stateMutability: "payable",
+    type: "fallback"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "accessToken",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "_target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_code",
+        type: "bytes"
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "execute",
+    outputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address"
+      },
+      {
+        internalType: "bytes",
+        name: "response",
+        type: "bytes"
+      }
+    ],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "registry",
+    outputs: [
+      {
+        internalType: "contract RegistryLike",
+        name: "",
+        type: "address"
+      }
+    ],
     payable: false,
     stateMutability: "view",
     type: "function"
@@ -16694,8 +18083,7 @@ var contractAbiNFTData = [
 ];
 
 var abiDefinitions = {
-    COLLATERAL_NFT: contractAbiNFT,
-    COLLATERAL_NFT_DATA: contractAbiNFTData,
+    COLLATERAL_NFT: contractAbiTitle,
     TITLE: contractAbiTitle,
     TINLAKE_CURRENCY: contractAbiCurrency,
     SHELF: contractAbiShelf,
@@ -16704,14 +18092,17 @@ var abiDefinitions = {
     THRESHOLD: contractAbiThreshold,
     PRICE_POOL: contractAbiPricePool,
     PILE: contractAbiPile,
+    JUNIOR_OPERATOR: contractAbiOperator,
     DISTRIBUTOR: contractAbiDistributor,
     ASSESSOR: contractAbiAssessor,
     ROOT_CONTRACT: contractAbiRoot,
     JUNIOR_TOKEN: contractAbiCurrency,
-    JUNIOR_OPERATOR: contractAbiOperator,
-    JUNIOR: contractAbiTranche,
-    SENIOR: contractAbiTranche,
     SENIOR_TOKEN: contractAbiCurrency,
+    PROXY: contractAbiProxy,
+    PROXY_REGISTRY: contractAbiProxyRegistry,
+    ACTIONS: contractAbiActions,
+    TEST_PROXY_REGISTRY: contractAbiTestProxyRegistry,
+    TEST_PROXY: contractAbiTestProxy,
 };
 
 /*! *****************************************************************************
@@ -16742,17 +18133,6 @@ function __extends(d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 
 function __awaiter(thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -24454,7 +25834,7 @@ var Utils = /*#__PURE__*/Object.freeze({
 
 var _version = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.version = "4.0.45";
+exports.version = "4.0.30";
 });
 
 unwrapExports(_version);
@@ -25907,7 +27287,7 @@ function _decode(data, offset) {
     else if (data[offset] >= 0x80) {
         var length = data[offset] - 0x80;
         if (offset + 1 + length > data.length) {
-            throw new Error('invalid rlp data');
+            throw new Error('invlaid rlp data');
         }
         var result = bytes.hexlify(data.slice(offset + 1, offset + 1 + length));
         return { consumed: (1 + length), result: result };
@@ -26053,48 +27433,12 @@ function getContractAddress(transaction) {
     ])).substring(26));
 }
 exports.getContractAddress = getContractAddress;
-// See: https://eips.ethereum.org/EIPS/eip-1014
-function getCreate2Address(options) {
-    var initCodeHash = options.initCodeHash;
-    if (options.initCode) {
-        if (initCodeHash) {
-            if (keccak256_1.keccak256(options.initCode) !== initCodeHash) {
-                errors.throwError("initCode/initCodeHash mismatch", errors.INVALID_ARGUMENT, {
-                    arg: "options", value: options
-                });
-            }
-        }
-        else {
-            initCodeHash = keccak256_1.keccak256(options.initCode);
-        }
-    }
-    if (!initCodeHash) {
-        errors.throwError("missing initCode or initCodeHash", errors.INVALID_ARGUMENT, {
-            arg: "options", value: options
-        });
-    }
-    var from = getAddress(options.from);
-    var salt = bytes.arrayify(options.salt);
-    if (salt.length !== 32) {
-        errors.throwError("invalid salt", errors.INVALID_ARGUMENT, {
-            arg: "options", value: options
-        });
-    }
-    return getAddress("0x" + keccak256_1.keccak256(bytes.concat([
-        "0xff",
-        from,
-        salt,
-        initCodeHash
-    ])).substring(26));
-}
-exports.getCreate2Address = getCreate2Address;
 });
 
 unwrapExports(address);
 var address_1 = address.getAddress;
 var address_2 = address.getIcapAddress;
 var address_3 = address.getContractAddress;
-var address_4 = address.getCreate2Address;
 
 var utf8$1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -34383,7 +35727,7 @@ function AdminActions(Base) {
                 });
             }); };
             // lender permissions (note: allowance operator for default deployment)
-            _this.canSetInvestorAllowanceJunior = function (user) { return __awaiter(_this, void 0, void 0, function () {
+            _this.canSetInvestorAllowance = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -34430,26 +35774,11 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.existsRateGroup = function (ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
-                var rateGroup, res;
+            _this.initRate = function (rate, speed) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            rateGroup = getRateGroup(ratePerSecond);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rateGroup])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, !res.ratePerSecond.isZero()];
-                    }
-                });
-            }); };
-            _this.initRate = function (ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
-                var rateGroup, txHash;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            rateGroup = getRateGroup(ratePerSecond);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rate, speed, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -34457,27 +35786,11 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.changeRate = function (loan, ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
-                var rateGroup, txHash;
+            _this.setRate = function (loan, rate) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            rateGroup = getRateGroup(ratePerSecond);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rateGroup, this.ethConfig])];
-                        case 1:
-                            txHash = _a.sent();
-                            console.log("[Initialising rate] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout)];
-                    }
-                });
-            }); };
-            _this.setRate = function (loan, ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
-                var rateGroup, txHash;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            rateGroup = getRateGroup(ratePerSecond);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rateGroup, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rate, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Setting rate] txHash: " + txHash);
@@ -34486,7 +35799,7 @@ function AdminActions(Base) {
                 });
             }); };
             // ------------ admin functions lender-site -------------
-            _this.approveAllowanceJunior = function (user, maxCurrency, maxToken) { return __awaiter(_this, void 0, void 0, function () {
+            _this.approveAllowance = function (user, maxCurrency, maxToken) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -34503,10 +35816,6 @@ function AdminActions(Base) {
         return class_1;
     }(Base));
 }
-var ONE = '1000000000000000000000000000';
-function getRateGroup(ratePerSecond) {
-    return (ratePerSecond === ONE) ? 0 : ratePerSecond;
-}
 
 function BorrowerActions(Base) {
     return /** @class */ (function (_super) {
@@ -34520,7 +35829,7 @@ function BorrowerActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
-                            console.log("[Mint NFT] txHash: " + txHash);
+                            console.log("[Issue Loan] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout)];
                     }
                 });
@@ -34608,54 +35917,6 @@ function LenderActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.getInvestor = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var includeSenior, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
-                        case 0:
-                            includeSenior = this.existsSenior();
-                            return [4 /*yield*/, this.getJuniorTokenBalance(user)];
-                        case 1:
-                            tokenBalanceJunior = _d.sent();
-                            _a = includeSenior;
-                            if (!_a) return [3 /*break*/, 3];
-                            return [4 /*yield*/, this.getSeniorTokenBalance(user)];
-                        case 2:
-                            _a = (_d.sent());
-                            _d.label = 3;
-                        case 3:
-                            tokenBalanceSenior = _a || null;
-                            return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
-                        case 4:
-                            maxSupplyJunior = _d.sent();
-                            _b = includeSenior;
-                            if (!_b) return [3 /*break*/, 6];
-                            return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
-                        case 5:
-                            _b = (_d.sent());
-                            _d.label = 6;
-                        case 6:
-                            maxSupplySenior = _b || null;
-                            return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
-                        case 7:
-                            maxRedeemJunior = _d.sent();
-                            _c = includeSenior;
-                            if (!_c) return [3 /*break*/, 9];
-                            return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
-                        case 8:
-                            _c = (_d.sent());
-                            _d.label = 9;
-                        case 9:
-                            maxRedeemSenior = _c || null;
-                            return [2 /*return*/, __assign({ address: user, tokenBalanceJunior: tokenBalanceJunior,
-                                    maxSupplyJunior: maxSupplyJunior,
-                                    maxRedeemJunior: maxRedeemJunior }, (tokenBalanceSenior && { tokenBalanceSenior: tokenBalanceSenior }), (maxSupplySenior && { maxSupplySenior: maxSupplySenior }), (maxRedeemSenior && { maxRedeemSenior: maxRedeemSenior }))];
-                    }
-                });
-            }); };
-            _this.existsSenior = function () {
-                return _this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
-            };
             _this.supplyJunior = function (currencyAmount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -34726,7 +35987,7 @@ function LenderActions(Base) {
                     }
                 });
             }); };
-            _this.getMaxSupplyAmountJunior = function (user) { return __awaiter(_this, void 0, void 0, function () {
+            _this.getMaxSupplyAmount = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -34737,44 +35998,11 @@ function LenderActions(Base) {
                     }
                 });
             }); };
-            _this.getMaxSupplyAmountSenior = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["SENIOR_OPERATOR"].maxCurrency, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
-            _this.getMaxRedeemAmountJunior = function (user) { return __awaiter(_this, void 0, void 0, function () {
+            _this.getMaxRedeemAmount = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts["JUNIOR_OPERATOR"].maxToken, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
-            _this.getMaxRedeemAmountSenior = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["SENIOR_OPERATOR"].maxToken, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
-            _this.getTokenPriceJunior = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [this.contractAddresses["JUNIOR"]])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
@@ -34794,21 +36022,6 @@ function LenderActions(Base) {
                 });
             }); };
             return _this;
-            // fix: change to view functions in contracts
-            // juniorReserve = async () => {
-            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
-            //   return res[0] || new BN(0);
-            // }
-            // seniorReserve = async () => {
-            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
-            //   return res[0] || new BN(0);
-            // }
-            // availableTrancheFunds = async () => {
-            //   const juniorFunds = await this.juniorReserve();
-            //   const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
-            //   const trancheFunds = juniorFunds.add(seniorFunds);
-            //   return trancheFunds;
-            // }
         }
         return class_1;
     }(Base));
@@ -34842,50 +36055,6 @@ function CurrencyActions(Base) {
                     }
                 });
             }); };
-            _this.getJuniorBalance = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['JUNIOR']])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0] || new bn(0)];
-                    }
-                });
-            }); };
-            _this.getSeniorBalance = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['SENIOR']])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0] || new bn(0)];
-                    }
-                });
-            }); };
-            _this.getTrancheBalance = function () { return __awaiter(_this, void 0, void 0, function () {
-                var seniorExists, juniorFunds, seniorFunds, _a, trancheFunds;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0:
-                            seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
-                            return [4 /*yield*/, this.getJuniorBalance()];
-                        case 1:
-                            juniorFunds = _b.sent();
-                            _a = seniorExists;
-                            if (!_a) return [3 /*break*/, 3];
-                            return [4 /*yield*/, this.getSeniorBalance()];
-                        case 2:
-                            _a = (_b.sent());
-                            _b.label = 3;
-                        case 3:
-                            seniorFunds = _a || new bn(0);
-                            trancheFunds = juniorFunds.add(seniorFunds);
-                            return [2 /*return*/, trancheFunds];
-                    }
-                });
-            }); };
             _this.approveCurrency = function (usr, currencyAmount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -34909,27 +36078,18 @@ function CollateralActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.mintTitleNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.mintNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash, response;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Mint NFT] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
-                    }
-                });
-            }); };
-            _this.mintNFT = function (owner, tokenId, ref, amount, asset) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].mint, [owner, tokenId, ref, amount, asset, this.ethConfig])];
-                        case 1:
-                            txHash = _a.sent();
-                            console.log("[NFT.mint] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                        case 2:
+                            response = _a.sent();
+                            return [2 /*return*/, response.events[0].data[2].toString()];
                     }
                 });
             }); };
@@ -34937,11 +36097,11 @@ function CollateralActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[NFT Approve] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout)];
                     }
                 });
             }); };
@@ -34956,11 +36116,22 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
+            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
             _this.getNFTData = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT_DATA'].data, [tokenId])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].data, [tokenId])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res];
@@ -34973,7 +36144,6 @@ function CollateralActions(Base) {
     }(Base));
 }
 
-var ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 function AnalyticsActions(Base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -35045,17 +36215,6 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
-            _this.getOwnerOfCollateral = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
             _this.getInterestRate = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
@@ -35063,81 +36222,48 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].loanRates, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res ? res[0] : new bn(0)];
+                            return [2 /*return*/, res ? res[0] : Promise.resolve(new bn(0))];
                     }
                 });
             }); };
             _this.getOwnerOfLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var address, res, e_1;
+                var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            _a.trys.push([0, 2, , 3]);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
                         case 1:
                             res = _a.sent();
-                            address = res[0];
-                            return [3 /*break*/, 3];
-                        case 2:
-                            e_1 = _a.sent();
-                            address = ZERO_ADDRESS;
-                            return [3 /*break*/, 3];
-                        case 3: return [2 /*return*/, address];
-                    }
-                });
-            }); };
-            _this.getStatus = function (tokenId, loanId) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.getOwnerOfCollateral(tokenId)];
-                        case 1:
-                            if ((_a.sent()) === this.contracts['SHELF'].address) {
-                                return [2 /*return*/, 'ongoing'];
-                            }
-                            return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
-                        case 2:
-                            if ((_a.sent()) === '0x0000000000000000000000000000000000000000') {
-                                return [2 /*return*/, 'closed'];
-                            }
-                            return [2 /*return*/, 'opened'];
+                            return [2 /*return*/, res[0]];
                     }
                 });
             }); };
             _this.getLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var collateral, principal, ownerOf, interestRate, debt, status;
+                var collateral, principal, ownerOf, interestRate, debt;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            if (loanId === '0') {
-                                return [2 /*return*/, null];
-                            }
-                            return [4 /*yield*/, this.getCollateral(loanId)];
+                        case 0: return [4 /*yield*/, this.getCollateral(loanId)];
                         case 1:
                             collateral = _a.sent();
                             return [4 /*yield*/, this.getPrincipal(loanId)];
                         case 2:
-                            principal = _a.sent();
+                            principal = (_a.sent()).toNumber();
                             return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
                         case 3:
                             ownerOf = _a.sent();
                             return [4 /*yield*/, this.getInterestRate(loanId)];
                         case 4:
-                            interestRate = _a.sent();
+                            interestRate = (_a.sent()).toNumber();
                             return [4 /*yield*/, this.getDebt(loanId)];
                         case 5:
-                            debt = _a.sent();
-                            return [4 /*yield*/, this.getStatus(collateral.tokenId, loanId)];
-                        case 6:
-                            status = _a.sent();
+                            debt = (_a.sent()).toNumber();
                             return [2 /*return*/, {
                                     loanId: loanId,
                                     registry: collateral.registry,
-                                    tokenId: collateral.tokenId,
+                                    tokenId: collateral.tokenId.toNumber(),
                                     principal: principal,
                                     interestRate: interestRate,
                                     ownerOf: ownerOf,
                                     debt: debt,
-                                    status: status,
                                 }];
                     }
                 });
@@ -35150,15 +36276,15 @@ function AnalyticsActions(Base) {
                             loanArray = [];
                             return [4 /*yield*/, this.loanCount()];
                         case 1:
-                            count = (_a.sent()).toNumber();
+                            count = (_a.sent()).toNumber() - 1;
                             i = 0;
                             _a.label = 2;
                         case 2:
-                            if (!(i < count)) return [3 /*break*/, 5];
+                            if (!(i <= count)) return [3 /*break*/, 5];
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();
-                            loan && loanArray.push(loan);
+                            loanArray.push(loan);
                             _a.label = 4;
                         case 4:
                             i += 1;
@@ -35198,6 +36324,282 @@ function GovernanceActions(Base) {
     }(Base));
 }
 
+var Contract = require('web3-eth-contract');
+var abiCoder$2 = new AbiCoder$1();
+function ProxyActions(Base) {
+    return /** @class */ (function (_super) {
+        __extends(class_1, _super);
+        function class_1() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.approveNFT = function (tokenId, to) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT Approve] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.getTokenOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.transferNFT = function (from, to, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].transferFrom, [from, to, tokenId, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT Approve] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.newProxy = function (owner) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash, response;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].build, [owner, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Proxy created] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['PROXY_REGISTRY'].abi, this.transactionTimeout)];
+                        case 2:
+                            response = _a.sent();
+                            return [2 /*return*/, response.events[0].data[2].toString()];
+                    }
+                });
+            }); };
+            _this.newTestProxy = function (owner) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash, response;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TEST_PROXY_REGISTRY'].build, [owner, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Proxy created] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['TEST_PROXY_REGISTRY'].abi, this.transactionTimeout)];
+                        case 2:
+                            response = _a.sent();
+                            return [2 /*return*/, response.events[0].data[2].toString()];
+                    }
+                });
+            }); };
+            _this.getTestProxy = function (accessTokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TEST_PROXY_REGISTRY'].proxies, [accessTokenId, this.ethConfig])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getProxy = function (accessTokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].proxies, [accessTokenId, this.ethConfig])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getProxyAccessToken = function () { return __awaiter(_this, void 0, void 0, function () {
+                var accessToken, address, proxy, res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!(this.ethConfig.proxy === '')) return [3 /*break*/, 3];
+                            return [4 /*yield*/, this.newProxy(this.ethConfig.from)];
+                        case 1:
+                            accessToken = _a.sent();
+                            return [4 /*yield*/, this.getProxy(accessToken)];
+                        case 2:
+                            address = _a.sent();
+                            this.ethConfig.proxy = address;
+                            _a.label = 3;
+                        case 3:
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                            return [4 /*yield*/, executeAndRetry(proxy.accessToken, [this.ethConfig])];
+                        case 4:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0].toNumber()];
+                    }
+                });
+            }); };
+            _this.proxyApproveNFT = function (address, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var registry, proxy, actions, encoded, txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            registry = this.contracts['COLLATERAL_NFT'].address;
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                            actions = new Contract(this.contractAbis['ACTIONS'], this.contracts['ACTIONS'].address, this.ethConfig);
+                            encoded = actions.methods.approveNFT(registry, address, tokenId).encodeABI();
+                            console.log('TESTencoded!', encoded);
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Approve NFT] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['ACTIONS'], this.transactionTimeout)];
+                        case 2: return [2 /*return*/, _a.sent()];
+                    }
+                });
+            }); };
+            _this.testProxy = function () { return __awaiter(_this, void 0, void 0, function () {
+                var access, _a, _b, _c, encoded1, registry, encoded;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, this.getProxyAccessToken()];
+                        case 1:
+                            access = _d.sent();
+                            _b = (_a = console).log;
+                            _c = ['owner of token'];
+                            return [4 /*yield*/, this.getTokenOwner(access)];
+                        case 2:
+                            _b.apply(_a, _c.concat([_d.sent()]));
+                            encoded1 = abiCoder$2.encodeFunctionCall({
+                                name: 'test',
+                                type: 'function',
+                                inputs: []
+                            }, []);
+                            console.log('TEST', encoded1);
+                            registry = new Contract(this.contractAbis['TEST_PROXY_REGISTRY'], '0x207b2fe52ce5d935a93785238b2879e2e07de756', this.ethConfig);
+                            encoded = registry.methods.test().encodeABI();
+                            console.log('TESTencoded!', encoded);
+                            return [2 /*return*/];
+                    }
+                });
+            }); };
+            _this.proxyTransferIssue = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var accessToken, address, access, _a, _b, _c, shelf, registry, proxy, actions, encoded, approve, _d, _e, _f, txHash, res;
+                return __generator(this, function (_g) {
+                    switch (_g.label) {
+                        case 0:
+                            if (!(this.ethConfig.proxy === '')) return [3 /*break*/, 3];
+                            return [4 /*yield*/, this.newProxy(this.ethConfig.from)];
+                        case 1:
+                            accessToken = _g.sent();
+                            return [4 /*yield*/, this.getProxy(accessToken)];
+                        case 2:
+                            address = _g.sent();
+                            this.ethConfig.proxy = address;
+                            _g.label = 3;
+                        case 3:
+                            console.log('proxy inside', this.ethConfig.proxy);
+                            return [4 /*yield*/, this.getProxyAccessToken()];
+                        case 4:
+                            access = _g.sent();
+                            _b = (_a = console).log;
+                            _c = ['owner of token'];
+                            return [4 /*yield*/, this.getTokenOwner(access)];
+                        case 5:
+                            _b.apply(_a, _c.concat([_g.sent()]));
+                            shelf = this.contracts['SHELF'].address;
+                            registry = this.contracts['COLLATERAL_NFT'].address;
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                            actions = this.contracts['ACTIONS'].address;
+                            encoded = abiCoder$2.encodeFunctionCall({
+                                name: 'transferIssue',
+                                type: 'function',
+                                inputs: [{ name: 'shelf', type: 'address' }, { name: 'registry', type: 'address' }, { name: 'token', type: 'uint256' }]
+                            }, [shelf, registry, tokenId]);
+                            console.log('encoded', encoded);
+                            return [4 /*yield*/, this.approveNFT(tokenId, this.ethConfig.proxy)];
+                        case 6:
+                            approve = _g.sent();
+                            console.log('nft approve', approve);
+                            // await this.transferNFT(this.ethConfig.from, this.ethConfig.proxy, tokenId);
+                            _e = (_d = console).log;
+                            _f = ['NFT OWNER NOW'];
+                            return [4 /*yield*/, this.getNFTOwner(tokenId)];
+                        case 7:
+                            // await this.transferNFT(this.ethConfig.from, this.ethConfig.proxy, tokenId);
+                            _e.apply(_d, _f.concat([_g.sent()]));
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [actions, encoded, this.ethConfig])];
+                        case 8:
+                            txHash = _g.sent();
+                            console.log("[Transfer Issue Loan] txHash: " + txHash);
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['ACTIONS'], this.transactionTimeout)];
+                        case 9:
+                            res = _g.sent();
+                            console.log(res);
+                            return [4 /*yield*/, this.getNFTOwner(tokenId)];
+                        case 10: return [2 /*return*/, _g.sent()];
+                    }
+                });
+            }); };
+            return _this;
+            // transferIssue = async (tokenId: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['ACTIONS'].transferIssue, [this.contractAddresses['SHELF'], [this.contractAddresses['COLLATERAL_NFT], tokenId, this.ethConfig]);
+            //   console.log(`[Mint NFT] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['ACTIONS'].abi, this.transactionTimeout);
+            // }
+            //
+            // lock = async (loan: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['ACTIONS'].lock, [loan, this.ethConfig]);
+            //   console.log(`[Collateral NFT lock] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['ACTIONS'].abi, this.transactionTimeout);
+            // }
+            // unlock = async (loan: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].unlock, [loan, this.ethConfig]);
+            //   console.log(`[Collateral NFT unlock] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // close = async (loan: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].close, [loan, this.ethConfig]);
+            //   console.log(`[Loan close] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // borrow = async (loan: string, currencyAmount: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].borrow, [loan, currencyAmount, this.ethConfig]);
+            //   console.log(`[Borrow] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // withdraw = async (loan: string, currencyAmount: string, usr: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].withdraw, [loan, currencyAmount, usr, this.ethConfig]);
+            //   console.log(`[Withdraw] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+            //
+            // repay = async (loan: string, currencyAmount: string) => {
+            //   const txHash = await executeAndRetry(this.contracts['SHELF'].repay, [loan, currencyAmount, this.ethConfig]);
+            //   console.log(`[Repay] txHash: ${txHash}`);
+            //   return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
+            // }
+        }
+        return class_1;
+    }(Base));
+}
+
 var actions = {
     Admin: AdminActions,
     Borrower: BorrowerActions,
@@ -35205,7 +36607,8 @@ var actions = {
     Currency: CurrencyActions,
     Collateral: CollateralActions,
     Analytics: AnalyticsActions,
-    Governance: GovernanceActions
+    Governance: GovernanceActions,
+    ProxyActions: ProxyActions,
 };
 
 var baseToDisplay = function (base, decimals) {
@@ -35297,7 +36700,7 @@ var MAX_DIGITS = 1e9,                        // 0 to 1e9
 
   isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,
 
-  ONE$1,
+  ONE,
   BASE = 1e7,
   LOG_BASE = 7,
   MAX_SAFE_INTEGER$2 = 9007199254740991,
@@ -35552,7 +36955,7 @@ P.logarithm = P.log = function (base) {
     // log[-b](x) = NaN
     // log[0](x)  = NaN
     // log[1](x)  = NaN
-    if (base.s < 1 || base.eq(ONE$1)) throw Error(decimalError + 'NaN');
+    if (base.s < 1 || base.eq(ONE)) throw Error(decimalError + 'NaN');
   }
 
   // log[b](-x) = NaN
@@ -35560,7 +36963,7 @@ P.logarithm = P.log = function (base) {
   if (x.s < 1) throw Error(decimalError + (x.s ? 'NaN' : '-Infinity'));
 
   // log[b](1) = 0
-  if (x.eq(ONE$1)) return new Ctor(0);
+  if (x.eq(ONE)) return new Ctor(0);
 
   external = false;
   r = divide(ln(x, wpr), ln(base, wpr), wpr);
@@ -35961,7 +37364,7 @@ P.toPower = P.pow = function (y) {
     yn = +(y = new Ctor(y));
 
   // pow(x, 0) = 1
-  if (!y.s) return new Ctor(ONE$1);
+  if (!y.s) return new Ctor(ONE);
 
   x = new Ctor(x);
 
@@ -35973,12 +37376,12 @@ P.toPower = P.pow = function (y) {
   }
 
   // pow(1, y) = 1
-  if (x.eq(ONE$1)) return x;
+  if (x.eq(ONE)) return x;
 
   pr = Ctor.precision;
 
   // pow(x, 1) = x
-  if (y.eq(ONE$1)) return round(x, pr);
+  if (y.eq(ONE)) return round(x, pr);
 
   e = y.e;
   k = y.d.length - 1;
@@ -35992,7 +37395,7 @@ P.toPower = P.pow = function (y) {
 
   // If y is a small integer use the 'exponentiation by squaring' algorithm.
   } else if ((k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER$2) {
-    r = new Ctor(ONE$1);
+    r = new Ctor(ONE);
 
     // Max k of 9007199254740991 takes 53 loop iterations.
     // Maximum digits array length; leaves [28, 34] guard digits.
@@ -36015,7 +37418,7 @@ P.toPower = P.pow = function (y) {
 
     external = true;
 
-    return y.s < 0 ? new Ctor(ONE$1).div(r) : round(r, pr);
+    return y.s < 0 ? new Ctor(ONE).div(r) : round(r, pr);
   }
 
   // Result is negative if x is negative and the last digit of integer y is odd.
@@ -36516,7 +37919,7 @@ function exp(x, sd) {
   if (getBase10Exponent(x) > 16) throw Error(exponentOutOfRange + getBase10Exponent(x));
 
   // exp(0) = 1
-  if (!x.s) return new Ctor(ONE$1);
+  if (!x.s) return new Ctor(ONE);
 
   if (sd == null) {
     external = false;
@@ -36535,7 +37938,7 @@ function exp(x, sd) {
   // Estimate the precision increase necessary to ensure the first 4 rounding digits are correct.
   guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
   wpr += guard;
-  denominator = pow = sum = new Ctor(ONE$1);
+  denominator = pow = sum = new Ctor(ONE);
   Ctor.precision = wpr;
 
   for (;;) {
@@ -36608,7 +38011,7 @@ function ln(y, sd) {
   if (x.s < 1) throw Error(decimalError + (x.s ? 'NaN' : '-Infinity'));
 
   // ln(1) = 0
-  if (x.eq(ONE$1)) return new Ctor(0);
+  if (x.eq(ONE)) return new Ctor(0);
 
   if (sd == null) {
     external = false;
@@ -36673,7 +38076,7 @@ function ln(y, sd) {
   // Taylor series.
   // ln(y) = ln((1 + x)/(1 - x)) = 2(x + x^3/3 + x^5/5 + x^7/7 + ...)
   // where x = (y - 1)/(y + 1)    (|x| < 1)
-  sum = numerator = x = divide(x.minus(ONE$1), x.plus(ONE$1), wpr);
+  sum = numerator = x = divide(x.minus(ONE), x.plus(ONE), wpr);
   x2 = round(x.times(x), wpr);
   denominator = 3;
 
@@ -37205,7 +38608,7 @@ function config(obj) {
 var Decimal = clone(defaults);
 
 // Internal constant.
-ONE$1 = new Decimal(1);
+ONE = new Decimal(1);
 
 Decimal.set({
     precision: 30,
@@ -37224,11 +38627,9 @@ var lookup = {};
  * @param fee Fee
  */
 var feeToInterestRate = function (fee) {
+    // tslint:disable-next-line:no-parameter-reassignment
     if (typeof fee !== 'string' && typeof fee !== 'number') {
         fee = fee.toString();
-    }
-    if (fee.toString() === "0") {
-        return fee.toString();
     }
     if (lookup[fee]) {
         return lookup[fee];
@@ -37309,7 +38710,6 @@ var Tinlake = /** @class */ (function () {
         else {
             this.contractAbis = contractAbis;
         }
-        nftDataOutputs && (this.contractAbis['COLLATERAL_NFT_DATA'][0].outputs = nftDataOutputs);
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);
@@ -37317,8 +38717,8 @@ var Tinlake = /** @class */ (function () {
     }
     return Tinlake;
 }());
-var Admin = actions.Admin, Borrower = actions.Borrower, Lender = actions.Lender, Analytics = actions.Analytics, Currency = actions.Currency, Collateral = actions.Collateral, Governance = actions.Governance;
-var TinlakeWithActions = (Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake))))))));
+var Admin = actions.Admin, Borrower = actions.Borrower, Lender = actions.Lender, Analytics = actions.Analytics, Currency = actions.Currency, Collateral = actions.Collateral, Governance = actions.Governance, ProxyActions$1 = actions.ProxyActions;
+var TinlakeWithActions = (ProxyActions$1(Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake)))))))));
 
 export default TinlakeWithActions;
 export { Tinlake, baseToDisplay, bnToHex, displayToBase, feeToInterestRate, getLoanStatus, interestRateToFee };
