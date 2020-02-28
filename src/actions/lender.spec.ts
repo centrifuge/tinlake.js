@@ -16,7 +16,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, FAIL_STATUS, contractAddresses } = testConfig
 
-describe.only('lender functions', async () => {
+describe('lender functions', async () => {
 
   before(async () => {
     // fund lender & admin accounts with currency
@@ -32,7 +32,7 @@ describe.only('lender functions', async () => {
   });
 
 
-  it.only('success: supply junior', async () => {
+  it('success: supply junior', async () => {
     const currencyAmount = 100000;
     const tokenAmount = 100;
     // whitelist investor
@@ -114,9 +114,9 @@ async function supply(investor: string, currencyAmount: string, tinlake: ITinlak
   // assert result successful
   assert.equal(supplyResult.status, SUCCESS_STATUS);
   // assert tranche balance increased by currency amount
-  // assert.equal((newTrancheCurrencyBalance.toNumber() - initialTrancheCurrencyBalance.toNumber()), parseInt(currencyAmount));
+  assert.equal((newTrancheCurrencyBalance.toNumber() - initialTrancheCurrencyBalance.toNumber()), parseInt(currencyAmount));
   // assert investor currency balanace decreased
-  // assert.equal((initialLenderCurrencyBalance.toNumber() - newLenderCurrencyBalance.toNumber()), parseInt(currencyAmount));
+  assert.equal((initialLenderCurrencyBalance.toNumber() - newLenderCurrencyBalance.toNumber()), parseInt(currencyAmount));
   // assert investor received tokens
-  // assert.equal(initialJuniorTokenBalance.toNumber() + parseInt(currencyAmount), newJuniorTokenBalance.toNumber());
+  assert.equal(initialJuniorTokenBalance.toNumber() + parseInt(currencyAmount), newJuniorTokenBalance.toNumber());
 }
