@@ -6,7 +6,7 @@
 [ -d ./tinlake-proxy ] && rm -rf ./tinlake-proxy
 [ -d ./tinlake-actions ] && rm -rf ./tinlake-actions
 git submodule init
-git submodule update --recursive --remote --merge
+git submodule update --recursive --merge
 
 # superpower user for tinlake.js tests
 GOD_ADDRESS=0xf6fa8a3f3199cdd85749ec749fb8f9c2551f9928
