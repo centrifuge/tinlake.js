@@ -44,21 +44,32 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
       return res[0];
     }
-   
+
     getLoan = async (loanId: string): Promise<Loan> => {
       const collateral = await this.getCollateral(loanId);
       const principal = (await this.getPrincipal(loanId));
       const ownerOf = await this.getOwnerOfLoan(loanId);
       const interestRate = await this.getInterestRate(loanId);
       const debt = (await this.getDebt(loanId));
+
+      let status;
+      if (await this.getOwnerOfLoan(collateral.tokenId) === this.contracts['SHELF'].address) {
+        status = 'ongoing';
+      } else if (await this.getOwnerOfLoan(collateral.tokenId) === '0x0000000000000000000000000000000000000000') {
+        status = 'closed';
+      } else {
+        status = 'issued';
+      }
+
       return {
-       loanId: loanId,
-       registry: collateral.registry,
-       tokenId: collateral.tokenId,
-       principal,
-       interestRate,
-       ownerOf,
-       debt,
+        loanId,
+        registry: collateral.registry,
+        tokenId: collateral.tokenId,
+        principal,
+        interestRate,
+        ownerOf,
+        debt,
+        status,
       };
     }
 
@@ -66,9 +77,9 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const loanArray = [];
       const count = (await this.loanCount()).toNumber();
       for (let i = 0; i < count; i++) {
-        const loan = await this.getLoan(i.toString());
-        loanArray.push(loan);
-      }
+          const loan = await this.getLoan(i.toString());
+          loanArray.push(loan);
+        }
       return loanArray;
     }
   };
@@ -83,7 +94,7 @@ export type IAnalyticsActions = {
   getCollateral(loanId:string):Promise<any>,
   getPrincipal(loanId:string):Promise<BN>,
   getInterestRate(loanId:string):Promise<BN>,
-  getOwnerOfLoan(loanId:string):Promise<BN>
+  getOwnerOfLoan(loanId:string):Promise<BN>,
 };
 
 export default AnalyticsActions;
