@@ -31,12 +31,15 @@ describe('lender functions', async () => {
     await testProvider.fundAccountWithETH(lenderAccount.address, FAUCET_AMOUNT);
   });
 
+
   it('success: supply junior', async () => {
-    const currencyAmount = 1000;
+    const currencyAmount = 100000;
     const tokenAmount = 100;
     // whitelist investor
-    await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, tokenAmount)
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount)
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
+    const newJuniorTokenBalance = await lenderTinlake.getJuniorTokenBalance(lenderAccount.address);
+    console.log("newJuniorTokenBalance", newJuniorTokenBalance.toString());
   });
 
   it('fail: supply junior - no allowance', async () => {
@@ -54,10 +57,10 @@ describe('lender functions', async () => {
   });
 
   it('success: redeem junior', async () => {
-    const currencyAmount = 1000;
+    const currencyAmount = 10000;
     const tokenAmount = 100;
     // whitelist investor
-    await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, tokenAmount)
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount)
     // supply currency - receive tokens
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens
@@ -69,10 +72,10 @@ describe('lender functions', async () => {
 
     const redeemResult = await lenderTinlake.redeemJunior(tokenAmount);
 
+
     const newTrancheCurrencyBalance = await lenderTinlake.getCurrencyBalance(contractAddresses['JUNIOR']);
     const newLenderCurrencyBalance = await lenderTinlake.getCurrencyBalance(lenderAccount.address);
     const newJuniorTokenBalance = await lenderTinlake.getJuniorTokenBalance(lenderAccount.address);
-
     assert.equal(redeemResult.status, SUCCESS_STATUS);
     assert.equal(initialTrancheCurrencyBalance.toNumber(), newTrancheCurrencyBalance.toNumber() + tokenAmount);
     assert.equal(initialLenderCurrencyBalance.toNumber() + tokenAmount, newLenderCurrencyBalance);
@@ -84,7 +87,7 @@ describe('lender functions', async () => {
     const tokenAmount = 100;
 
     // whitelist investor with no allowance to redeem
-    await adminTinlake.approveAllowance(lenderAccount.address, currencyAmount, 0)
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, 0)
     // supply currency - receive tokens
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens

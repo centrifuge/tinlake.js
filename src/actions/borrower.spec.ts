@@ -143,7 +143,7 @@ async function fundTranche(amount: string) {
   // make admin adress ward on tranche operator
   await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
   // whitelist lender
-  await adminTinlake.approveAllowance(lenderAccount.address, amount, amount);
+  await adminTinlake.approveAllowanceJunior(lenderAccount.address, amount, amount);
   // lender approves tranche to take currency
   await lenderTinlake.approveCurrency(contractAddresses['JUNIOR'], amount);
   // mint currency for lender
