@@ -34080,11 +34080,11 @@ function CollateralActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["COLLATERAL_NFT"].approve, [to, tokenId, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[NFT Approve] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts["COLLATERAL_NFT"].abi, this.transactionTimeout)];
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
                     }
                 });
             }); };
@@ -34093,17 +34093,6 @@ function CollateralActions(Base) {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].count, [])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
-            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
@@ -34198,6 +34187,17 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
+            _this.getOwnerOfCollateral = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
             _this.getInterestRate = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
@@ -34220,6 +34220,23 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
+            _this.getStatus = function (tokenId, loanId) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.getOwnerOfCollateral(tokenId)];
+                        case 1:
+                            if ((_a.sent()) === this.contracts['SHELF'].address) {
+                                return [2 /*return*/, 'ongoing'];
+                            }
+                            return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
+                        case 2:
+                            if ((_a.sent()) === '0x0000000000000000000000000000000000000000') {
+                                return [2 /*return*/, 'closed'];
+                            }
+                            return [2 /*return*/, 'issued'];
+                    }
+                });
+            }); };
             _this.getLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
                 var collateral, principal, ownerOf, interestRate, debt, status;
                 return __generator(this, function (_a) {
@@ -34229,7 +34246,7 @@ function AnalyticsActions(Base) {
                             collateral = _a.sent();
                             return [4 /*yield*/, this.getPrincipal(loanId)];
                         case 2:
-                            principal = (_a.sent());
+                            principal = _a.sent();
                             return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
                         case 3:
                             ownerOf = _a.sent();
@@ -34238,31 +34255,20 @@ function AnalyticsActions(Base) {
                             interestRate = _a.sent();
                             return [4 /*yield*/, this.getDebt(loanId)];
                         case 5:
-                            debt = (_a.sent());
-                            return [4 /*yield*/, this.getOwnerOfLoan(collateral.tokenId)];
+                            debt = _a.sent();
+                            return [4 /*yield*/, this.getStatus(collateral.tokenId, loanId)];
                         case 6:
-                            if (!((_a.sent()) === this.contracts['SHELF'].address)) return [3 /*break*/, 7];
-                            status = 'ongoing';
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
-                        case 8:
-                            if ((_a.sent()) === '0x0000000000000000000000000000000000000000') {
-                                status = 'closed';
-                            }
-                            else {
-                                status = 'issued';
-                            }
-                            _a.label = 9;
-                        case 9: return [2 /*return*/, {
-                                loanId: loanId,
-                                registry: collateral.registry,
-                                tokenId: collateral.tokenId,
-                                principal: principal,
-                                interestRate: interestRate,
-                                ownerOf: ownerOf,
-                                debt: debt,
-                                status: status,
-                            }];
+                            status = _a.sent();
+                            return [2 /*return*/, {
+                                    loanId: loanId,
+                                    registry: collateral.registry,
+                                    tokenId: collateral.tokenId,
+                                    principal: principal,
+                                    interestRate: interestRate,
+                                    ownerOf: ownerOf,
+                                    debt: debt,
+                                    status: status,
+                                }];
                     }
                 });
             }); };
@@ -34285,7 +34291,7 @@ function AnalyticsActions(Base) {
                             loanArray.push(loan);
                             _a.label = 4;
                         case 4:
-                            i++;
+                            i += 1;
                             return [3 /*break*/, 2];
                         case 5: return [2 /*return*/, loanArray];
                     }
