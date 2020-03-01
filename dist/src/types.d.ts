@@ -82,6 +82,7 @@ export interface Investor {
     maxRedeemSenior?: BN;
     tokenBalanceJunior: BN;
     tokenBalanceSenior?: BN;
+    tokenPriceJunior?: BN;
 }
 export interface BalanceDebt {
     debt: BN;

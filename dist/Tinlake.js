@@ -33873,7 +33873,7 @@ function LenderActions(Base) {
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.getInvestor = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var seniorExists, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c;
+                var seniorExists, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c, tokenPriceJunior;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0:
@@ -33911,9 +33911,15 @@ function LenderActions(Base) {
                             _d.label = 9;
                         case 9:
                             maxRedeemSenior = _c || null;
+                            return [4 /*yield*/, this.getTokenPriceJunior()];
+                        case 10:
+                            tokenPriceJunior = _d.sent();
+                            console.log("price", tokenPriceJunior);
                             return [2 /*return*/, __assign({ address: user, tokenBalanceJunior: tokenBalanceJunior,
                                     maxSupplyJunior: maxSupplyJunior,
-                                    maxRedeemJunior: maxRedeemJunior }, (tokenBalanceSenior && { tokenBalanceSenior: tokenBalanceSenior }), (maxSupplySenior && { maxSupplySenior: maxSupplySenior }), (maxRedeemSenior && { maxRedeemSenior: maxRedeemSenior }))];
+                                    maxRedeemJunior: maxRedeemJunior,
+                                    // will be part of tranche stats
+                                    tokenPriceJunior: tokenPriceJunior }, (tokenBalanceSenior && { tokenBalanceSenior: tokenBalanceSenior }), (maxSupplySenior && { maxSupplySenior: maxSupplySenior }), (maxRedeemSenior && { maxRedeemSenior: maxRedeemSenior }))];
                     }
                 });
             }); };
@@ -34028,6 +34034,24 @@ function LenderActions(Base) {
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getTokenPriceJunior = function () { return __awaiter(_this, void 0, void 0, function () {
+                var address, txHash, moin;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            console.log("getting token", this.contractAddresses['JUNIOR']);
+                            address = this.contractAddresses['JUNIOR'];
+                            return [4 /*yield*/, executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [address, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts["ASSESSOR"].abi, this.transactionTimeout)];
+                        case 2:
+                            moin = _a.sent();
+                            console.log("result", moin);
+                            return [2 /*return*/, new bn(0)];
                     }
                 });
             }); };
@@ -36440,6 +36464,7 @@ var Tinlake = /** @class */ (function () {
                         .at(_this.contractAddresses[name]);
                 }
             });
+            console.log(_this.contracts);
         };
         this.setEthConfig = function (ethConfig) {
             _this.ethConfig = ethConfig;

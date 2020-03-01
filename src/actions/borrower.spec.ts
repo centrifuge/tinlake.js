@@ -151,4 +151,3 @@ async function fundTranche(amount: string) {
   // lender supplies tranche with funds
   await lenderTinlake.supplyJunior(amount);
 }
-
