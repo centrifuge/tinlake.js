@@ -23730,7 +23730,7 @@ var Utils = /*#__PURE__*/Object.freeze({
 
 var _version = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.version = "4.0.45";
+exports.version = "4.0.30";
 });
 
 unwrapExports(_version);
@@ -25183,7 +25183,7 @@ function _decode(data, offset) {
     else if (data[offset] >= 0x80) {
         var length = data[offset] - 0x80;
         if (offset + 1 + length > data.length) {
-            throw new Error('invalid rlp data');
+            throw new Error('invlaid rlp data');
         }
         var result = bytes.hexlify(data.slice(offset + 1, offset + 1 + length));
         return { consumed: (1 + length), result: result };
@@ -25329,48 +25329,12 @@ function getContractAddress(transaction) {
     ])).substring(26));
 }
 exports.getContractAddress = getContractAddress;
-// See: https://eips.ethereum.org/EIPS/eip-1014
-function getCreate2Address(options) {
-    var initCodeHash = options.initCodeHash;
-    if (options.initCode) {
-        if (initCodeHash) {
-            if (keccak256_1.keccak256(options.initCode) !== initCodeHash) {
-                errors.throwError("initCode/initCodeHash mismatch", errors.INVALID_ARGUMENT, {
-                    arg: "options", value: options
-                });
-            }
-        }
-        else {
-            initCodeHash = keccak256_1.keccak256(options.initCode);
-        }
-    }
-    if (!initCodeHash) {
-        errors.throwError("missing initCode or initCodeHash", errors.INVALID_ARGUMENT, {
-            arg: "options", value: options
-        });
-    }
-    var from = getAddress(options.from);
-    var salt = bytes.arrayify(options.salt);
-    if (salt.length !== 32) {
-        errors.throwError("invalid salt", errors.INVALID_ARGUMENT, {
-            arg: "options", value: options
-        });
-    }
-    return getAddress("0x" + keccak256_1.keccak256(bytes.concat([
-        "0xff",
-        from,
-        salt,
-        initCodeHash
-    ])).substring(26));
-}
-exports.getCreate2Address = getCreate2Address;
 });
 
 unwrapExports(address);
 var address_1 = address.getAddress;
 var address_2 = address.getIcapAddress;
 var address_3 = address.getContractAddress;
-var address_4 = address.getCreate2Address;
 
 var utf8$1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -34257,7 +34221,7 @@ function AnalyticsActions(Base) {
                 });
             }); };
             _this.getLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var collateral, principal, ownerOf, interestRate, debt;
+                var collateral, principal, ownerOf, interestRate, debt, status;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, this.getCollateral(loanId)];
@@ -34275,15 +34239,30 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.getDebt(loanId)];
                         case 5:
                             debt = (_a.sent());
-                            return [2 /*return*/, {
-                                    loanId: loanId,
-                                    registry: collateral.registry,
-                                    tokenId: collateral.tokenId,
-                                    principal: principal,
-                                    interestRate: interestRate,
-                                    ownerOf: ownerOf,
-                                    debt: debt,
-                                }];
+                            return [4 /*yield*/, this.getOwnerOfLoan(collateral.tokenId)];
+                        case 6:
+                            if (!((_a.sent()) === this.contracts['SHELF'].address)) return [3 /*break*/, 7];
+                            status = 'ongoing';
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
+                        case 8:
+                            if ((_a.sent()) === '0x0000000000000000000000000000000000000000') {
+                                status = 'closed';
+                            }
+                            else {
+                                status = 'issued';
+                            }
+                            _a.label = 9;
+                        case 9: return [2 /*return*/, {
+                                loanId: loanId,
+                                registry: collateral.registry,
+                                tokenId: collateral.tokenId,
+                                principal: principal,
+                                interestRate: interestRate,
+                                ownerOf: ownerOf,
+                                debt: debt,
+                                status: status,
+                            }];
                     }
                 });
             }); };
