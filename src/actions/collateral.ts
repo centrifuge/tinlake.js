@@ -33,7 +33,6 @@ export type ICollateralActions = {
   mintNFT(usr: string): Promise<any>,
   approveNFT(tokenId: string, to: string) : Promise<any>,
   getNFTCount(): Promise<BN>,
-  getNFTOwner(tokenId: string): Promise<BN>,
   getNFTData(tokenId: string): Promise<any>,
 };
 
