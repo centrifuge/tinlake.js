@@ -55,7 +55,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       let status;
       if (await this.getOwnerOfLoan(collateral.tokenId) === this.contracts['SHELF'].address) {
         status = 'ongoing';
-      } else if (await this.getOwnerOfLoan(collateral.tokenId) === '0x0000000000000000000000000000000000000000') {
+      } else if (await this.getOwnerOfLoan(loanId) === '0x0000000000000000000000000000000000000000') {
         status = 'closed';
       } else {
         status = 'issued';
