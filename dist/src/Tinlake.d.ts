@@ -93,8 +93,10 @@ declare const TinlakeWithActions: {
         getDebt: (loanID: string) => Promise<BN>;
         loanCount: () => Promise<BN>;
         getCollateral: (loanId: string) => Promise<any>;
+        getOwnerOfCollateral: (tokenId: string) => Promise<BN>;
         getInterestRate: (loanId: string) => Promise<BN>;
         getOwnerOfLoan: (loanId: string) => Promise<any>;
+        getStatus: (tokenId: string, loanId: string) => Promise<any>;
         getLoan: (loanId: string) => Promise<import("./types").Loan>;
         getLoanList: () => Promise<import("./types").Loan[]>;
         provider: any;
@@ -125,7 +127,6 @@ declare const TinlakeWithActions: {
         mintNFT: (user: string) => Promise<unknown>;
         approveNFT: (tokenId: string, to: string) => Promise<unknown>;
         getNFTCount: () => Promise<BN>;
-        getNFTOwner: (tokenId: string) => Promise<BN>;
         getNFTData: (tokenId: string) => Promise<any>;
         provider: any;
         eth: ethI;

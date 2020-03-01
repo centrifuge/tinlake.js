@@ -35,6 +35,11 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return res;
     }
 
+    getOwnerOfCollateral = async (tokenId: string): Promise<BN> => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId]);
+      return res[0];
+    }
+
     getInterestRate = async (loanId: string): Promise<BN> => {
       const res = await executeAndRetry(this.contracts['PILE'].loanRates, [loanId]);
       return res ? res[0] : new BN(0);
@@ -44,28 +49,41 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
       return res[0];
     }
-   
+
+    getStatus = async(tokenId: string, loanId: string): Promise<any> => {
+      if (await this.getOwnerOfCollateral(tokenId) === this.contracts['SHELF'].address) {
+        return 'ongoing';
+      }
+      if (await this.getOwnerOfLoan(loanId) === '0x0000000000000000000000000000000000000000') {
+        return 'closed';
+      }
+      return 'issued';
+    }
+
     getLoan = async (loanId: string): Promise<Loan> => {
       const collateral = await this.getCollateral(loanId);
-      const principal = (await this.getPrincipal(loanId));
+      const principal = await this.getPrincipal(loanId);
       const ownerOf = await this.getOwnerOfLoan(loanId);
       const interestRate = await this.getInterestRate(loanId);
-      const debt = (await this.getDebt(loanId));
+      const debt = await this.getDebt(loanId);
+      const status = await this.getStatus(collateral.tokenId, loanId);
+
       return {
-       loanId: loanId,
-       registry: collateral.registry,
-       tokenId: collateral.tokenId,
-       principal,
-       interestRate,
-       ownerOf,
-       debt,
+        loanId,
+        registry: collateral.registry,
+        tokenId: collateral.tokenId,
+        principal,
+        interestRate,
+        ownerOf,
+        debt,
+        status,
       };
     }
 
     getLoanList = async (): Promise<Loan[]> => {
       const loanArray = [];
       const count = (await this.loanCount()).toNumber();
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < count; i += 1) {
         const loan = await this.getLoan(i.toString());
         loanArray.push(loan);
       }
@@ -83,7 +101,8 @@ export type IAnalyticsActions = {
   getCollateral(loanId:string):Promise<any>,
   getPrincipal(loanId:string):Promise<BN>,
   getInterestRate(loanId:string):Promise<BN>,
-  getOwnerOfLoan(loanId:string):Promise<BN>
+  getOwnerOfLoan(loanId:string):Promise<BN>,
+  getOwnerOfCollateral(tokenId:string, loanId:string):Promise<BN>,
 };
 
 export default AnalyticsActions;

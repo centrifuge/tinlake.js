@@ -44,7 +44,6 @@ export class Tinlake {
         .at(this.contractAddresses[name]);
       }
     });
-    console.log(this.contracts);
   };
   setEthConfig = (ethConfig: { [key: string]: any }) => {
     this.ethConfig = ethConfig;

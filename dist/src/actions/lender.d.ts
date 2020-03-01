@@ -28,7 +28,6 @@ declare function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: Ac
 export declare type ILenderActions = {
     supplyJunior(currencyAmount: string): Promise<any>;
     redeemJunior(tokenAmount: string): Promise<any>;
-    getTokenPriceJunior(): Promise<BN>;
     getJuniorTokenBalance(user: string): Promise<BN>;
     getSeniorTokenBalance(user: string): Promise<BN>;
     getMaxSupplyAmountJunior(user: string): Promise<BN>;

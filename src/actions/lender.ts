@@ -82,14 +82,8 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
     }
 
     getTokenPriceJunior = async () => {
-      console.log("getting token", this.contractAddresses['JUNIOR']);
-      const address = this.contractAddresses['JUNIOR'];
-      const txHash =  await executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [address, this.ethConfig]);
-
-      const moin = await waitAndReturnEvents(this.eth, txHash, this.contracts["ASSESSOR"].abi, this.transactionTimeout);
-      console.log("result", moin);
-      return new BN(0);
-
+      const res =  await executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [this.contractAddresses["JUNIOR"]]);
+      return res[0];
     }
 
     balance = async () => {
