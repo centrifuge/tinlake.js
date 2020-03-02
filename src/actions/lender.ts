@@ -76,8 +76,13 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
       return res[0];
     }
 
-    getMaxRedeemAmountSenior= async (user: string) => {
+    getMaxRedeemAmountSenior = async (user: string) => {
       const res  =  await executeAndRetry(this.contracts["SENIOR_OPERATOR"].maxToken, [user]);
+      return res[0];
+    }
+
+    getTokenPriceJunior = async () => {
+      const res =  await executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [this.contractAddresses["JUNIOR"]]);
       return res[0];
     }
 
