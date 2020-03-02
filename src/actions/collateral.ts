@@ -5,11 +5,17 @@ import BN from 'bn.js';
 function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements ICollateralActions {
 
-    mintNFT = async (user: string) => {
+    mintTitleNFT = async (user: string) => {
       const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
     }
+
+    mintNFT = async (owner: string, tokenId: string, ref: string, amount: string, asset:string) => {
+      const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].mint, [owner, tokenId, ref, amount, asset, this.ethConfig]);
+      console.log(`[NFT.mint] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
+    };
 
     approveNFT = async (tokenId: string, to: string) => {
       const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig]);
@@ -30,7 +36,8 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
 }
 
 export type ICollateralActions = {
-  mintNFT(usr: string): Promise<any>,
+  mintTitleNFT(usr: string): Promise<any>,
+  mintNFT(owner: string, tokenId: string, ref: string, amount: string, asset:string): Promise<any>,
   approveNFT(tokenId: string, to: string) : Promise<any>,
   getNFTCount(): Promise<BN>,
   getNFTData(tokenId: string): Promise<any>,

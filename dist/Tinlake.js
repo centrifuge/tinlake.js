@@ -34032,20 +34032,13 @@ function LenderActions(Base) {
                 });
             }); };
             _this.getTokenPriceJunior = function () { return __awaiter(_this, void 0, void 0, function () {
-                var address, txHash, moin;
+                var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            console.log("getting token", this.contractAddresses['JUNIOR']);
-                            address = this.contractAddresses['JUNIOR'];
-                            return [4 /*yield*/, executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [address, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [this.contractAddresses["JUNIOR"]])];
                         case 1:
-                            txHash = _a.sent();
-                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts["ASSESSOR"].abi, this.transactionTimeout)];
-                        case 2:
-                            moin = _a.sent();
-                            console.log("result", moin);
-                            return [2 /*return*/, new bn(0)];
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
                     }
                 });
             }); };
@@ -34118,7 +34111,7 @@ function CollateralActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.mintNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
+            _this.mintTitleNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -34126,6 +34119,18 @@ function CollateralActions(Base) {
                         case 1:
                             txHash = _a.sent();
                             console.log("[Mint NFT] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.mintNFT = function (owner, tokenId, ref, amount, asset) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].mint, [owner, tokenId, ref, amount, asset, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT.mint] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
                     }
                 });

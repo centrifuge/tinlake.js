@@ -92,7 +92,7 @@ describe('borrower tests', async () => {
 
 async function mintIssue(usr: string, tinlake: ITinlake) {
   // super user mints nft for borrower
-  const mintResult : any = await governanceTinlake.mintNFT(usr);
+  const mintResult : any = await governanceTinlake.mintTitleNFT(usr);
   const tokenId = mintResult.events[0].data[2].toString();
   // assert nft successfully minted
   assert.equal(mintResult.status, SUCCESS_STATUS);

@@ -1,6 +1,6 @@
-import testConfig from './config';
-import { ITinlake } from '../src/Tinlake';
-import { createTinlake, TestProvider} from './utils';
+import testConfig from '../../test/config';
+import { ITinlake } from '../Tinlake';
+import { createTinlake, TestProvider} from '../../test/utils';
 
 
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
@@ -16,11 +16,11 @@ describe.only('borrower tests', async () => {
     const lenderAddress = '0x2f00338f29cc3D2F66b869d3c36Aa8bE24E3462b';
     const ethAmount = '1000000000000000000000';
     const currencyAmount = '1000000000000000000000000000000000000';
-    for (let i = 0; i<20; i++) {
-      await governanceTinlake.mintNFT(borrowerAddress);
-    }
 
-    await setupTestAccounts(adminAddress, lenderAddress, borrowerAddress, ethAmount, currencyAmount);
+    // await setupTestAccounts(adminAddress, lenderAddress, borrowerAddress, ethAmount, currencyAmount);
+    for (let i = 0; i<5; i++) {
+       await governanceTinlake.mintTitleNFT(borrowerAddress);
+     }
   });
 
   it(' setup accounts for UI testing', async () => {
