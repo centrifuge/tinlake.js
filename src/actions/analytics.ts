@@ -60,7 +60,8 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       return 'issued';
     }
 
-    getLoan = async (loanId: string): Promise<Loan> => {
+    getLoan = async (loanId: string): Promise<Loan | null> => {
+      if (loanId === '0') { return null};
       const collateral = await this.getCollateral(loanId);
       const principal = await this.getPrincipal(loanId);
       const ownerOf = await this.getOwnerOfLoan(loanId);
@@ -85,7 +86,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       const count = (await this.loanCount()).toNumber();
       for (let i = 0; i < count; i += 1) {
         const loan = await this.getLoan(i.toString());
-        loanArray.push(loan);
+        loan && loanArray.push(loan);
       }
       return loanArray;
     }
@@ -97,7 +98,7 @@ export type IAnalyticsActions = {
   getTotalBalance(): Promise<BN>,
   loanCount(): Promise<BN>,
   getLoanList(): Promise<Loan[]>,
-  getLoan(loanId: string): Promise<Loan>,
+  getLoan(loanId: string): Promise<Loan | null>,
   getCollateral(loanId:string):Promise<any>,
   getPrincipal(loanId:string):Promise<BN>,
   getInterestRate(loanId:string):Promise<BN>,

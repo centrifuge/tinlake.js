@@ -39,7 +39,6 @@ describe('lender functions', async () => {
     await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount)
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     const newJuniorTokenBalance = await lenderTinlake.getJuniorTokenBalance(lenderAccount.address);
-    console.log("newJuniorTokenBalance", newJuniorTokenBalance.toString());
   });
 
   it('fail: supply junior - no allowance', async () => {
