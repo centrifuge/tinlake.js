@@ -2,7 +2,8 @@ import { Constructor, Tinlake } from '../types';
 import BN from 'bn.js';
 declare function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase): {
     new (...args: any[]): {
-        mintNFT: (user: string) => Promise<unknown>;
+        mintTitleNFT: (user: string) => Promise<unknown>;
+        mintNFT: (owner: string, tokenId: string, ref: string, amount: string, asset: string) => Promise<unknown>;
         approveNFT: (tokenId: string, to: string) => Promise<unknown>;
         getNFTCount: () => Promise<BN>;
         getNFTData: (tokenId: string) => Promise<any>;
@@ -17,7 +18,8 @@ declare function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Bas
     };
 } & ActionsBase;
 export declare type ICollateralActions = {
-    mintNFT(usr: string): Promise<any>;
+    mintTitleNFT(usr: string): Promise<any>;
+    mintNFT(owner: string, tokenId: string, ref: string, amount: string, asset: string): Promise<any>;
     approveNFT(tokenId: string, to: string): Promise<any>;
     getNFTCount(): Promise<BN>;
     getNFTData(tokenId: string): Promise<any>;

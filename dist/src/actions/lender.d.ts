@@ -15,6 +15,7 @@ declare function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: Ac
         getMaxSupplyAmountSenior: (user: string) => Promise<BN>;
         getMaxRedeemAmountJunior: (user: string) => Promise<any>;
         getMaxRedeemAmountSenior: (user: string) => Promise<any>;
+        getTokenPriceJunior: () => Promise<any>;
         balance: () => Promise<unknown>;
         provider: any;
         eth: import("../types").ethI;

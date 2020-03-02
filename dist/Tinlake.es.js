@@ -10927,6 +10927,403 @@ var contractAbiTitle = [
   }
 ];
 
+var contractAbiNFT = [
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "name",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "getApproved",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "from",
+        type: "address"
+      },
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "transferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "from",
+        type: "address"
+      },
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "ownerOf",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "symbol",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "from",
+        type: "address"
+      },
+      {
+        name: "to",
+        type: "address"
+      },
+      {
+        name: "tokenId",
+        type: "uint256"
+      },
+      {
+        name: "_data",
+        type: "bytes"
+      }
+    ],
+    name: "safeTransferFrom",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "tokenURI",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "usr",
+        type: "address"
+      },
+      {
+        name: "tkn",
+        type: "uint256"
+      },
+      {
+        name: "ref",
+        type: "string"
+      },
+      {
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        name: "asset",
+        type: "string"
+      }
+    ],
+    name: "mint",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "owner",
+        type: "address"
+      },
+      {
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "isApprovedForAll",
+    outputs: [
+      {
+        name: "",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "data",
+    outputs: [
+      {
+        name: "reference_id",
+        type: "string"
+      },
+      {
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        name: "asset_type",
+        type: "string"
+      },
+      {
+        name: "borrower",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "to",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Transfer",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "approved",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256"
+      }
+    ],
+    name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        name: "operator",
+        type: "address"
+      },
+      {
+        indexed: false,
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "ApprovalForAll",
+    type: "event"
+  }
+];
+
 var contractAbiCurrency = [
   {
     inputs: [
@@ -15967,7 +16364,7 @@ var contractAbiRoot = [
 ];
 
 var abiDefinitions = {
-    COLLATERAL_NFT: contractAbiTitle,
+    COLLATERAL_NFT: contractAbiNFT,
     TITLE: contractAbiTitle,
     TINLAKE_CURRENCY: contractAbiCurrency,
     SHELF: contractAbiShelf,
@@ -23724,7 +24121,7 @@ var Utils = /*#__PURE__*/Object.freeze({
 
 var _version = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.version = "4.0.30";
+exports.version = "4.0.45";
 });
 
 unwrapExports(_version);
@@ -25177,7 +25574,7 @@ function _decode(data, offset) {
     else if (data[offset] >= 0x80) {
         var length = data[offset] - 0x80;
         if (offset + 1 + length > data.length) {
-            throw new Error('invlaid rlp data');
+            throw new Error('invalid rlp data');
         }
         var result = bytes.hexlify(data.slice(offset + 1, offset + 1 + length));
         return { consumed: (1 + length), result: result };
@@ -25323,12 +25720,48 @@ function getContractAddress(transaction) {
     ])).substring(26));
 }
 exports.getContractAddress = getContractAddress;
+// See: https://eips.ethereum.org/EIPS/eip-1014
+function getCreate2Address(options) {
+    var initCodeHash = options.initCodeHash;
+    if (options.initCode) {
+        if (initCodeHash) {
+            if (keccak256_1.keccak256(options.initCode) !== initCodeHash) {
+                errors.throwError("initCode/initCodeHash mismatch", errors.INVALID_ARGUMENT, {
+                    arg: "options", value: options
+                });
+            }
+        }
+        else {
+            initCodeHash = keccak256_1.keccak256(options.initCode);
+        }
+    }
+    if (!initCodeHash) {
+        errors.throwError("missing initCode or initCodeHash", errors.INVALID_ARGUMENT, {
+            arg: "options", value: options
+        });
+    }
+    var from = getAddress(options.from);
+    var salt = bytes.arrayify(options.salt);
+    if (salt.length !== 32) {
+        errors.throwError("invalid salt", errors.INVALID_ARGUMENT, {
+            arg: "options", value: options
+        });
+    }
+    return getAddress("0x" + keccak256_1.keccak256(bytes.concat([
+        "0xff",
+        from,
+        salt,
+        initCodeHash
+    ])).substring(26));
+}
+exports.getCreate2Address = getCreate2Address;
 });
 
 unwrapExports(address);
 var address_1 = address.getAddress;
 var address_2 = address.getIcapAddress;
 var address_3 = address.getContractAddress;
+var address_4 = address.getCreate2Address;
 
 var utf8$1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -33989,6 +34422,17 @@ function LenderActions(Base) {
                     }
                 });
             }); };
+            _this.getTokenPriceJunior = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [this.contractAddresses["JUNIOR"]])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
             _this.balance = function () { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -34058,7 +34502,7 @@ function CollateralActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.mintNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
+            _this.mintTitleNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -34066,6 +34510,18 @@ function CollateralActions(Base) {
                         case 1:
                             txHash = _a.sent();
                             console.log("[Mint NFT] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.mintNFT = function (owner, tokenId, ref, amount, asset) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].mint, [owner, tokenId, ref, amount, asset, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT.mint] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
                     }
                 });
@@ -34235,7 +34691,11 @@ function AnalyticsActions(Base) {
                 var collateral, principal, ownerOf, interestRate, debt, status;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.getCollateral(loanId)];
+                        case 0:
+                            if (loanId === '0') {
+                                return [2 /*return*/, null];
+                            }
+                            return [4 /*yield*/, this.getCollateral(loanId)];
                         case 1:
                             collateral = _a.sent();
                             return [4 /*yield*/, this.getPrincipal(loanId)];
@@ -34282,7 +34742,7 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();
-                            loanArray.push(loan);
+                            loan && loanArray.push(loan);
                             _a.label = 4;
                         case 4:
                             i += 1;
