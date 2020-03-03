@@ -66,25 +66,33 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       return waitAndReturnEvents(this.eth, txHash, this.contracts['CEILING'].abi, this.transactionTimeout);
     }
 
-    existsRateGroup = async (rate: string) => {
-      const res: { ratePerSecond: BN } = await executeAndRetry(this.contracts['PILE'].rates, [rate]);
+    existsRateGroup = async (ratePerSecond: string) => {
+      const rateGroup = getRateGroup(ratePerSecond);
+      console.log("checking exists", rateGroup, ratePerSecond);
+      const res: { ratePerSecond: BN } = await executeAndRetry(this.contracts['PILE'].rates, [rateGroup]);
       return !res.ratePerSecond.isZero();
     }
 
-    initRate = async (rate: string) => {
-      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rate, rate, this.ethConfig]);
+    initRate = async (ratePerSecond: string) => {
+      const rateGroup = getRateGroup(ratePerSecond);
+      console.log("init rategroup", rateGroup, ratePerSecond);
+      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig]);
       console.log(`[Initialising rate] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }
 
-    changeRate = async (loan: string, rate: string) => {
-      const txHash = await executeAndRetry(this.contracts['PILE'].changeRate, [loan, rate, this.ethConfig]);
+    changeRate = async (loan: string, ratePerSecond: string) => {
+      const rateGroup = getRateGroup(ratePerSecond);
+      console.log("changing loan", rateGroup, ratePerSecond);
+      const txHash = await executeAndRetry(this.contracts['PILE'].changeRate, [loan, rateGroup, this.ethConfig]);
       console.log(`[Initialising rate] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }
 
-    setRate = async (loan: string, rate: string) => {
-      const txHash = await executeAndRetry(this.contracts['PILE'].setRate, [loan, rate, this.ethConfig]);
+    setRate = async (loan: string, ratePerSecond: string) => {
+      const rateGroup = getRateGroup(ratePerSecond);
+      console.log("assigning loan", rateGroup, ratePerSecond);
+      const txHash = await executeAndRetry(this.contracts['PILE'].setRate, [loan, rateGroup, this.ethConfig]);
       console.log(`[Setting rate] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }
@@ -98,6 +106,11 @@ function AdminActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
   };
 }
 
+const ONE : string = '1000000000000000000000000000';
+function getRateGroup(ratePerSecond: string) {
+  return (ratePerSecond === ONE) ? 0 : ratePerSecond;
+}
+ 
 export type IAdminActions = {
   isWard(user: string, contractName: ContractNames): Promise<BN>,
   canSetCeiling(user: string): Promise<boolean>,
