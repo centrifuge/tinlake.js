@@ -8,7 +8,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { contractAddresses} = testConfig
 
-describe.only('borrower tests', async () => {
+describe.only('setup', async () => {
 
   before(async () =>  {
     const adminAddress = '0x3334273e545826E4C42569cF35E80C529DfA7185';
@@ -17,13 +17,13 @@ describe.only('borrower tests', async () => {
     const ethAmount = '1000000000000000000000';
     const currencyAmount = '1000000000000000000000000000000000000';
 
-    // await setupTestAccounts(adminAddress, lenderAddress, borrowerAddress, ethAmount, currencyAmount);
+    await setupTestAccounts(adminAddress, lenderAddress, borrowerAddress, ethAmount, currencyAmount);
     for (let i = 0; i<5; i++) {
        await governanceTinlake.mintTitleNFT(borrowerAddress);
      }
   });
 
-  it(' setup accounts for UI testing', async () => {
+  it.only(' setup accounts for UI testing', async () => {
 
   });
 

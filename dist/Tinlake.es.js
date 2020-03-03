@@ -34097,22 +34097,26 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.existsRateGroup = function (rate) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+            _this.existsRateGroup = function (ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rate])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rateGroup])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, !res.ratePerSecond.isZero()];
                     }
                 });
             }); };
-            _this.initRate = function (rate) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.initRate = function (ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rate, rate, this.ethConfig])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -34120,11 +34124,13 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.changeRate = function (loan, rate) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.changeRate = function (loan, ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rate, this.ethConfig])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rateGroup, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -34132,11 +34138,13 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.setRate = function (loan, rate) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.setRate = function (loan, ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rate, this.ethConfig])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rateGroup, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Setting rate] txHash: " + txHash);
@@ -34161,6 +34169,10 @@ function AdminActions(Base) {
         }
         return class_1;
     }(Base));
+}
+var ONE = '1000000000000000000000000000';
+function getRateGroup(ratePerSecond) {
+    return (ratePerSecond === ONE) ? 0 : ratePerSecond;
 }
 
 function BorrowerActions(Base) {
@@ -34881,7 +34893,7 @@ var MAX_DIGITS = 1e9,                        // 0 to 1e9
 
   isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,
 
-  ONE,
+  ONE$1,
   BASE = 1e7,
   LOG_BASE = 7,
   MAX_SAFE_INTEGER$2 = 9007199254740991,
@@ -35136,7 +35148,7 @@ P.logarithm = P.log = function (base) {
     // log[-b](x) = NaN
     // log[0](x)  = NaN
     // log[1](x)  = NaN
-    if (base.s < 1 || base.eq(ONE)) throw Error(decimalError + 'NaN');
+    if (base.s < 1 || base.eq(ONE$1)) throw Error(decimalError + 'NaN');
   }
 
   // log[b](-x) = NaN
@@ -35144,7 +35156,7 @@ P.logarithm = P.log = function (base) {
   if (x.s < 1) throw Error(decimalError + (x.s ? 'NaN' : '-Infinity'));
 
   // log[b](1) = 0
-  if (x.eq(ONE)) return new Ctor(0);
+  if (x.eq(ONE$1)) return new Ctor(0);
 
   external = false;
   r = divide(ln(x, wpr), ln(base, wpr), wpr);
@@ -35545,7 +35557,7 @@ P.toPower = P.pow = function (y) {
     yn = +(y = new Ctor(y));
 
   // pow(x, 0) = 1
-  if (!y.s) return new Ctor(ONE);
+  if (!y.s) return new Ctor(ONE$1);
 
   x = new Ctor(x);
 
@@ -35557,12 +35569,12 @@ P.toPower = P.pow = function (y) {
   }
 
   // pow(1, y) = 1
-  if (x.eq(ONE)) return x;
+  if (x.eq(ONE$1)) return x;
 
   pr = Ctor.precision;
 
   // pow(x, 1) = x
-  if (y.eq(ONE)) return round(x, pr);
+  if (y.eq(ONE$1)) return round(x, pr);
 
   e = y.e;
   k = y.d.length - 1;
@@ -35576,7 +35588,7 @@ P.toPower = P.pow = function (y) {
 
   // If y is a small integer use the 'exponentiation by squaring' algorithm.
   } else if ((k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER$2) {
-    r = new Ctor(ONE);
+    r = new Ctor(ONE$1);
 
     // Max k of 9007199254740991 takes 53 loop iterations.
     // Maximum digits array length; leaves [28, 34] guard digits.
@@ -35599,7 +35611,7 @@ P.toPower = P.pow = function (y) {
 
     external = true;
 
-    return y.s < 0 ? new Ctor(ONE).div(r) : round(r, pr);
+    return y.s < 0 ? new Ctor(ONE$1).div(r) : round(r, pr);
   }
 
   // Result is negative if x is negative and the last digit of integer y is odd.
@@ -36100,7 +36112,7 @@ function exp(x, sd) {
   if (getBase10Exponent(x) > 16) throw Error(exponentOutOfRange + getBase10Exponent(x));
 
   // exp(0) = 1
-  if (!x.s) return new Ctor(ONE);
+  if (!x.s) return new Ctor(ONE$1);
 
   if (sd == null) {
     external = false;
@@ -36119,7 +36131,7 @@ function exp(x, sd) {
   // Estimate the precision increase necessary to ensure the first 4 rounding digits are correct.
   guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
   wpr += guard;
-  denominator = pow = sum = new Ctor(ONE);
+  denominator = pow = sum = new Ctor(ONE$1);
   Ctor.precision = wpr;
 
   for (;;) {
@@ -36192,7 +36204,7 @@ function ln(y, sd) {
   if (x.s < 1) throw Error(decimalError + (x.s ? 'NaN' : '-Infinity'));
 
   // ln(1) = 0
-  if (x.eq(ONE)) return new Ctor(0);
+  if (x.eq(ONE$1)) return new Ctor(0);
 
   if (sd == null) {
     external = false;
@@ -36257,7 +36269,7 @@ function ln(y, sd) {
   // Taylor series.
   // ln(y) = ln((1 + x)/(1 - x)) = 2(x + x^3/3 + x^5/5 + x^7/7 + ...)
   // where x = (y - 1)/(y + 1)    (|x| < 1)
-  sum = numerator = x = divide(x.minus(ONE), x.plus(ONE), wpr);
+  sum = numerator = x = divide(x.minus(ONE$1), x.plus(ONE$1), wpr);
   x2 = round(x.times(x), wpr);
   denominator = 3;
 
@@ -36789,7 +36801,7 @@ function config(obj) {
 var Decimal = clone(defaults);
 
 // Internal constant.
-ONE = new Decimal(1);
+ONE$1 = new Decimal(1);
 
 Decimal.set({
     precision: 30,
