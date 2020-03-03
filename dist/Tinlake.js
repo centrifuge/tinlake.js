@@ -34109,7 +34109,6 @@ function AdminActions(Base) {
                     switch (_a.label) {
                         case 0:
                             rateGroup = getRateGroup(ratePerSecond);
-                            console.log("checking exists", rateGroup, ratePerSecond);
                             return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rateGroup])];
                         case 1:
                             res = _a.sent();
@@ -34123,7 +34122,6 @@ function AdminActions(Base) {
                     switch (_a.label) {
                         case 0:
                             rateGroup = getRateGroup(ratePerSecond);
-                            console.log("init rategroup", rateGroup, ratePerSecond);
                             return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
@@ -34138,7 +34136,6 @@ function AdminActions(Base) {
                     switch (_a.label) {
                         case 0:
                             rateGroup = getRateGroup(ratePerSecond);
-                            console.log("changing loan", rateGroup, ratePerSecond);
                             return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rateGroup, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
@@ -34153,7 +34150,6 @@ function AdminActions(Base) {
                     switch (_a.label) {
                         case 0:
                             rateGroup = getRateGroup(ratePerSecond);
-                            console.log("assigning loan", rateGroup, ratePerSecond);
                             return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rateGroup, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
