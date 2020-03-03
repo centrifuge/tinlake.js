@@ -34578,6 +34578,7 @@ function CollateralActions(Base) {
     }(Base));
 }
 
+var ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 function AnalyticsActions(Base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -34672,13 +34673,21 @@ function AnalyticsActions(Base) {
                 });
             }); };
             _this.getOwnerOfLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+                var address, res, e_1;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
+                        case 0:
+                            _a.trys.push([0, 2, , 3]);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res[0]];
+                            address = res[0];
+                            return [3 /*break*/, 3];
+                        case 2:
+                            e_1 = _a.sent();
+                            address = ZERO_ADDRESS;
+                            return [3 /*break*/, 3];
+                        case 3: return [2 /*return*/, address];
                     }
                 });
             }); };

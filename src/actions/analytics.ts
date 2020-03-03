@@ -2,6 +2,8 @@ import { Loan, Constructor, Tinlake } from './../types';
 import { executeAndRetry } from './../ethereum';
 import BN from 'bn.js';
 
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+
 function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
   return class extends Base implements IAnalyticsActions {
 
@@ -46,8 +48,14 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
     }
 
     getOwnerOfLoan = async (loanId: string): Promise<any> => {
-      const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
-      return res[0];
+      let address;
+      try {
+        const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
+        address = res[0]
+      } catch (e) {
+        address = ZERO_ADDRESS;
+      }
+      return address;
     }
 
     getStatus = async(tokenId: string, loanId: string): Promise<any> => {
