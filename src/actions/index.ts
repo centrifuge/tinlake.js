@@ -5,7 +5,7 @@ import Currency, { ICurrencyActions } from './currency';
 import Collateral, { ICollateralActions } from './collateral';
 import Analytics, { IAnalyticsActions } from './analytics';
 import Governance, { IGovernanceActions } from './governance';
-import ProxyActions, { IProxyActions } from './proxy';
+import Proxy, { IProxyActions } from './proxy';
 
 export default {
   Admin,
@@ -15,7 +15,7 @@ export default {
   Collateral,
   Analytics,
   Governance,
-  ProxyActions,
+  Proxy,
 };
 
 export type TinlakeActions =
