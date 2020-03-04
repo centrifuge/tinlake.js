@@ -2,11 +2,11 @@
 # dapp testnet
 
 # remove submodules and install newest dependencies
-[ -d ./tinlake ] && rm -rf ./tinlake
+[ -d ./tinlake ] && rm -r ./tinlake
 [ -d ./tinlake-proxy ] && rm -rf ./tinlake-proxy
 [ -d ./tinlake-actions ] && rm -rf ./tinlake-actions
-git submodule init
-git submodule update --recursive --merge
+git submodule update --init --recursive 
+git submodule update --recursive --remote --merge 
 
 # superpower user for tinlake.js tests
 GOD_ADDRESS=0xf6fa8a3f3199cdd85749ec749fb8f9c2551f9928
@@ -24,6 +24,8 @@ source ./tinlake/bin/test/local_env.sh
 
 #create address folder
 mkdir ./tinlake/deployments
+mkdir ./tinlake-proxy/deployments
+mkdir ./tinlake-actions/deployments
 
 # deploy tinlake contracts
 ./tinlake/bin/deploy.sh
@@ -44,11 +46,11 @@ seth send --value 10000000000000000000000000000000000000000000000000000000 $GOD_
 
 # deploy proxy registry contract
 ./tinlake-proxy/bin/deploy.sh
-cat ./tinlake-proxy/bin/test/addresses.json >> ./test/addresses.json
+cat ./tinlake-proxy/deployments/addresses.json >> ./test/addresses.json
 
 # deploy tinlake actions
 ./tinlake-actions/  bin/deploy.sh
-cat ./tinlake-actions/bin/test/addresses.json >> ./test/addresses.json
+cat ./tinlake-actions/deployments/addresses.json >> ./test/addresses.json
 
 
 
