@@ -5,6 +5,7 @@ declare function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: Ac
         contracts: Contracts;
         ethConfig: EthConfig;
         getInvestor: (user: string) => Promise<Investor>;
+        existsSenior: () => boolean;
         supplyJunior: (currencyAmount: string) => Promise<unknown>;
         redeemJunior: (tokenAmount: string) => Promise<unknown>;
         getJuniorTokenBalance: (user: string) => Promise<BN>;
@@ -17,6 +18,9 @@ declare function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: Ac
         getMaxRedeemAmountSenior: (user: string) => Promise<any>;
         getTokenPriceJunior: () => Promise<any>;
         balance: () => Promise<unknown>;
+        juniorReserve: () => Promise<BN>;
+        seniorReserve: () => Promise<BN>;
+        availableTrancheFunds: () => Promise<BN>;
         provider: any;
         eth: import("../types").ethI;
         ethOptions: any;
@@ -34,7 +38,11 @@ export declare type ILenderActions = {
     getMaxRedeemAmountJunior(user: string): Promise<BN>;
     getMaxSupplyAmountSenior(user: string): Promise<BN>;
     getMaxRedeemAmountSenior(user: string): Promise<BN>;
+    getTokenPriceJunior(): Promise<BN>;
     getInvestor(user: string): Promise<Investor>;
     balance(): Promise<any>;
+    juniorReserve(): Promise<BN>;
+    seniorReserve(): Promise<BN>;
+    availableTrancheFunds(): Promise<BN>;
 };
 export default LenderActions;

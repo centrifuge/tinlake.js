@@ -15,6 +15,24 @@ function CurrencyActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
       return res[0]; 
     }
 
+    getJuniorBalance = async () => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['JUNIOR']]);
+      return res[0] || new BN(0); 
+    }
+
+    getSeniorBalance = async () => {
+      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['SENIOR']]);
+      return res[0] || new BN(0); 
+    }
+
+    getTrancheBalance = async () => {
+      const seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+      const juniorFunds = await this.getJuniorBalance();
+      const seniorFunds = seniorExists && await this.getSeniorBalance() || new BN (0);
+      const trancheFunds = juniorFunds.add(seniorFunds);
+      return trancheFunds;
+    }
+
     approveCurrency = async (usr: string, currencyAmount: string) => {
       const txHash = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])
       console.log(`[Currency.approve] txHash: ${txHash}`);
@@ -26,8 +44,10 @@ function CurrencyActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 export type ICurrencyActions = {
   mintCurrency(usr: string, amount: string): void,
   getCurrencyBalance(usr: string): Promise<BN>,
-  approveCurrency(usr: string, amount: string): Promise<any> 
+  approveCurrency(usr: string, amount: string): Promise<any>,
+  getJuniorBalance(): Promise<BN>,
+  getSeniorBalance(): Promise<BN>,
+  getTrancheBalance() :Promise<BN>
 }
-
 
 export default CurrencyActions;
