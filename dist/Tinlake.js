@@ -34779,49 +34779,22 @@ function LenderActions(Base) {
                     }
                 });
             }); };
-            _this.juniorReserve = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0] || new bn(0)];
-                    }
-                });
-            }); };
-            _this.seniorReserve = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["SENIOR"].balance, [])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0] || new bn(0)];
-                    }
-                });
-            }); };
-            _this.availableTrancheFunds = function () { return __awaiter(_this, void 0, void 0, function () {
-                var juniorFunds, seniorFunds, _a, trancheFunds;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0: return [4 /*yield*/, this.juniorReserve()];
-                        case 1:
-                            juniorFunds = _b.sent();
-                            _a = this.existsSenior();
-                            if (!_a) return [3 /*break*/, 3];
-                            return [4 /*yield*/, this.seniorReserve()];
-                        case 2:
-                            _a = (_b.sent());
-                            _b.label = 3;
-                        case 3:
-                            seniorFunds = _a || new bn(0);
-                            trancheFunds = juniorFunds.add(seniorFunds);
-                            return [2 /*return*/, trancheFunds];
-                    }
-                });
-            }); };
             return _this;
+            // fix: change to view functions in contracts
+            // juniorReserve = async () => {
+            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
+            //   return res[0] || new BN(0);
+            // }
+            // seniorReserve = async () => {
+            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
+            //   return res[0] || new BN(0);
+            // }
+            // availableTrancheFunds = async () => {
+            //   const juniorFunds = await this.juniorReserve();
+            //   const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
+            //   const trancheFunds = juniorFunds.add(seniorFunds);
+            //   return trancheFunds;
+            // }
         }
         return class_1;
     }(Base));

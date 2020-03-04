@@ -96,22 +96,23 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
       return waitAndReturnEvents(this.eth, txHash, this.contracts['DISTRIBUTOR'].abi, this.transactionTimeout);
     }
 
-    juniorReserve = async () => {
-      const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
-      return res[0] || new BN(0);
-    }
+    // fix: change to view functions in contracts
+    // juniorReserve = async () => {
+    //   const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
+    //   return res[0] || new BN(0);
+    // }
 
-    seniorReserve = async () => {
-      const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
-      return res[0] || new BN(0);
-    }
+    // seniorReserve = async () => {
+    //   const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
+    //   return res[0] || new BN(0);
+    // }
 
-    availableTrancheFunds = async () => {
-      const juniorFunds = await this.juniorReserve();
-      const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
-      const trancheFunds = juniorFunds.add(seniorFunds);
-      return trancheFunds;
-    }
+    // availableTrancheFunds = async () => {
+    //   const juniorFunds = await this.juniorReserve();
+    //   const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
+    //   const trancheFunds = juniorFunds.add(seniorFunds);
+    //   return trancheFunds;
+    // }
   };
 }
 
@@ -127,9 +128,9 @@ export type ILenderActions = {
   getTokenPriceJunior(): Promise<BN>,
   getInvestor(user:string): Promise<Investor>,
   balance(): Promise<any>,
-  juniorReserve(): Promise<BN>,
-  seniorReserve(): Promise<BN>,
-  availableTrancheFunds(): Promise<BN>
+  // juniorReserve(): Promise<BN>,
+  // seniorReserve(): Promise<BN>,
+  // availableTrancheFunds(): Promise<BN>
 }
 
 export default LenderActions;
