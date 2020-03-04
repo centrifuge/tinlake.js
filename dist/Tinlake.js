@@ -16369,6 +16369,317 @@ var contractAbiRoot = [
   }
 ];
 
+var contractAbiTranche = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "currency_",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "balance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "borrow",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "currency",
+    outputs: [
+      {
+        internalType: "contract TokenLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "contractName",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenAmount",
+        type: "uint256"
+      }
+    ],
+    name: "redeem",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "repay",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "self",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenAmount",
+        type: "uint256"
+      }
+    ],
+    name: "supply",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "token",
+    outputs: [
+      {
+        internalType: "contract TokenLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "tokenSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
 var abiDefinitions = {
     COLLATERAL_NFT: contractAbiNFT,
     TITLE: contractAbiTitle,
@@ -16379,11 +16690,13 @@ var abiDefinitions = {
     THRESHOLD: contractAbiThreshold,
     PRICE_POOL: contractAbiPricePool,
     PILE: contractAbiPile,
-    JUNIOR_OPERATOR: contractAbiOperator,
     DISTRIBUTOR: contractAbiDistributor,
     ASSESSOR: contractAbiAssessor,
     ROOT_CONTRACT: contractAbiRoot,
     JUNIOR_TOKEN: contractAbiCurrency,
+    JUNIOR_OPERATOR: contractAbiOperator,
+    JUNIOR: contractAbiTranche,
+    SENIOR: contractAbiTranche,
     SENIOR_TOKEN: contractAbiCurrency
 };
 
@@ -34282,15 +34595,15 @@ function LenderActions(Base) {
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.getInvestor = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var seniorExists, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c;
+                var includeSenior, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0:
-                            seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+                            includeSenior = this.existsSenior();
                             return [4 /*yield*/, this.getJuniorTokenBalance(user)];
                         case 1:
                             tokenBalanceJunior = _d.sent();
-                            _a = seniorExists;
+                            _a = includeSenior;
                             if (!_a) return [3 /*break*/, 3];
                             return [4 /*yield*/, this.getSeniorTokenBalance(user)];
                         case 2:
@@ -34301,7 +34614,7 @@ function LenderActions(Base) {
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 4:
                             maxSupplyJunior = _d.sent();
-                            _b = seniorExists;
+                            _b = includeSenior;
                             if (!_b) return [3 /*break*/, 6];
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 5:
@@ -34312,7 +34625,7 @@ function LenderActions(Base) {
                             return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
                         case 7:
                             maxRedeemJunior = _d.sent();
-                            _c = seniorExists;
+                            _c = includeSenior;
                             if (!_c) return [3 /*break*/, 9];
                             return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
                         case 8:
@@ -34326,6 +34639,9 @@ function LenderActions(Base) {
                     }
                 });
             }); };
+            _this.existsSenior = function () {
+                return _this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+            };
             _this.supplyJunior = function (currencyAmount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -34464,6 +34780,21 @@ function LenderActions(Base) {
                 });
             }); };
             return _this;
+            // fix: change to view functions in contracts
+            // juniorReserve = async () => {
+            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
+            //   return res[0] || new BN(0);
+            // }
+            // seniorReserve = async () => {
+            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
+            //   return res[0] || new BN(0);
+            // }
+            // availableTrancheFunds = async () => {
+            //   const juniorFunds = await this.juniorReserve();
+            //   const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
+            //   const trancheFunds = juniorFunds.add(seniorFunds);
+            //   return trancheFunds;
+            // }
         }
         return class_1;
     }(Base));
@@ -34494,6 +34825,50 @@ function CurrencyActions(Base) {
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getJuniorBalance = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['JUNIOR']])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getSeniorBalance = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['SENIOR']])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getTrancheBalance = function () { return __awaiter(_this, void 0, void 0, function () {
+                var seniorExists, juniorFunds, seniorFunds, _a, trancheFunds;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+                            return [4 /*yield*/, this.getJuniorBalance()];
+                        case 1:
+                            juniorFunds = _b.sent();
+                            _a = seniorExists;
+                            if (!_a) return [3 /*break*/, 3];
+                            return [4 /*yield*/, this.getSeniorBalance()];
+                        case 2:
+                            _a = (_b.sent());
+                            _b.label = 3;
+                        case 3:
+                            seniorFunds = _a || new bn(0);
+                            trancheFunds = juniorFunds.add(seniorFunds);
+                            return [2 /*return*/, trancheFunds];
                     }
                 });
             }); };

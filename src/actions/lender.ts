@@ -8,13 +8,13 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
     ethConfig: EthConfig;
 
     getInvestor = async (user: string) : Promise<Investor> => {
-      const seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+      const includeSenior = this.existsSenior();
       const tokenBalanceJunior = await this.getJuniorTokenBalance(user);
-      const tokenBalanceSenior = seniorExists && await this.getSeniorTokenBalance(user) || null;
+      const tokenBalanceSenior = includeSenior && await this.getSeniorTokenBalance(user) || null;
       const maxSupplyJunior = await this.getMaxSupplyAmountJunior(user);
-      const maxSupplySenior = seniorExists && await this.getMaxSupplyAmountJunior(user) || null;
+      const maxSupplySenior = includeSenior && await this.getMaxSupplyAmountJunior(user) || null;
       const maxRedeemJunior = await this.getMaxRedeemAmountJunior(user);
-      const maxRedeemSenior = seniorExists && await this.getMaxRedeemAmountJunior(user) || null;
+      const maxRedeemSenior = includeSenior && await this.getMaxRedeemAmountJunior(user) || null;
 
       return {
         address: user,
@@ -25,6 +25,10 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
         ...(maxSupplySenior  && {maxSupplySenior }),
         ...(maxRedeemSenior  && {maxRedeemSenior }),
       }
+    }
+
+    existsSenior = () => {
+     return this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
     }
 
     supplyJunior = async (currencyAmount: string) => {
@@ -91,6 +95,24 @@ function LenderActions<ActionBase extends Constructor<Tinlake>>(Base: ActionBase
       console.log(`[Balance] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['DISTRIBUTOR'].abi, this.transactionTimeout);
     }
+
+    // fix: change to view functions in contracts
+    // juniorReserve = async () => {
+    //   const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
+    //   return res[0] || new BN(0);
+    // }
+
+    // seniorReserve = async () => {
+    //   const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
+    //   return res[0] || new BN(0);
+    // }
+
+    // availableTrancheFunds = async () => {
+    //   const juniorFunds = await this.juniorReserve();
+    //   const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
+    //   const trancheFunds = juniorFunds.add(seniorFunds);
+    //   return trancheFunds;
+    // }
   };
 }
 
@@ -103,8 +125,12 @@ export type ILenderActions = {
   getMaxRedeemAmountJunior(user: string): Promise<BN>,
   getMaxSupplyAmountSenior(user: string): Promise<BN>,
   getMaxRedeemAmountSenior(user: string): Promise<BN>,
+  getTokenPriceJunior(): Promise<BN>,
   getInvestor(user:string): Promise<Investor>,
   balance(): Promise<any>,
+  // juniorReserve(): Promise<BN>,
+  // seniorReserve(): Promise<BN>,
+  // availableTrancheFunds(): Promise<BN>
 }
 
 export default LenderActions;
