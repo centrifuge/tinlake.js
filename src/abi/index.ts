@@ -11,6 +11,7 @@ import contractAbiOperator from './AllowanceOperator.abi.json';
 import contractAbiDistributor from './DefaultDistributor.abi.json';
 import contractAbiAssessor from './DefaultAssessor.abi.json';
 import contractAbiRoot from './Root.abi.json';
+import contractAbiTranche from './Tranche.abi.json'
 
 import { ContractAbis } from '../types';
 
@@ -24,10 +25,12 @@ export default {
   THRESHOLD : contractAbiThreshold,
   PRICE_POOL : contractAbiPricePool,
   PILE: contractAbiPile,
-  JUNIOR_OPERATOR : contractAbiOperator,
   DISTRIBUTOR : contractAbiDistributor,
   ASSESSOR: contractAbiAssessor,
   ROOT_CONTRACT: contractAbiRoot,
   JUNIOR_TOKEN: contractAbiCurrency,
+  JUNIOR_OPERATOR : contractAbiOperator,
+  JUNIOR: contractAbiTranche,
+  SENIOR: contractAbiTranche,
   SENIOR_TOKEN: contractAbiCurrency
 } as ContractAbis;
