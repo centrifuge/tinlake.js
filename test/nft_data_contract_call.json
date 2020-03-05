@@ -1,29 +1,35 @@
 {
-  "outputs": [
-    {
-      "name": "document_version",
-      "type": "uint256"
-    },
-    {
-      "name": "amount",
-      "type": "uint256"
-    },
-    {
-      "name": "asis_value",
-      "type": "uint256"
-    },
-    {
-      "name": "rehab_value",
-      "type": "uint256"
-    },
-    {
-      "name": "borrower",
-      "type": "address"
-    }
-  ],
-  "displayedFields" :[
-      { "key":"amount", "label":"Mortgage Amount", "type":"uint", "decimals":18, "precision":18, "suffix":"DAI" },
-      { "key":"asis_value", "label":"As Is Value", "type":"uint", "decimals":18, "precision":18, "suffix":"DAI" },
-      { "key":"rehab_value", "label":"Rehab Value", "type":"uint", "decimals":18, "precision":18, "suffix":"DAI" }
-  ]
+  "outputs": [{
+    "name": "collateral_type",
+    "type": "string"
+  }, {
+    "name": "lien",
+    "type": "string"
+  }, {
+    "name": "requested_loan_amount",
+    "type": "uint256"
+  }, {
+    "name": "requested_tenor",
+    "type": "uint256"
+  }],
+  "displayedFields": [{
+    "key": "collateral_type",
+    "label": "Collateral Type",
+    "type": "utf8_string"
+  }, {
+    "key": "requested_loan_amount",
+    "label": "Requested Loan Amount",
+    "type": "uint",
+    "decimals": 18,
+    "precision": 2,
+    "suffix": " DAI"
+  }, {
+    "key": "lien",
+    "label": "Lien",
+    "type": "utf8_string"
+  }, {
+    "key": "requested_tenor",
+    "label": "Requested Tenor",
+    "type": "uint"
+  }]
 }
