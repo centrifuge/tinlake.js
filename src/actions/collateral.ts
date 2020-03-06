@@ -29,7 +29,7 @@ function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Base: Actio
     }
 
     getNFTData = async (tokenId: string): Promise<any> => {
-      const res = await executeAndRetry(this.contracts['COLLATERAL_NFT'].data, [tokenId]);
+      const res = await executeAndRetry(this.contracts['COLLATERAL_NFT_DATA'].data, [tokenId]);
       return res;
     }
   };

@@ -5,7 +5,7 @@ import actions, { TinlakeActions } from './actions/index';
 import BN from 'bn.js';
 
 export class Tinlake {
-  public provider: any
+  public provider: any;
   public eth: ethI;
   public ethOptions: any;
   public ethConfig: any;
@@ -27,6 +27,7 @@ export class Tinlake {
       this.contractAbis = contractAbis;
     }
 
+    nftDataOutputs && (this.contractAbis['COLLATERAL_NFT_DATA'][0].outputs = nftDataOutputs);
     this.contractAddresses = contractAddresses;
     this.transactionTimeout = transactionTimeout;
     this.setProvider(provider, ethOptions);
@@ -44,18 +45,18 @@ export class Tinlake {
         .at(this.contractAddresses[name]);
       }
     });
-  };
+  }
   setEthConfig = (ethConfig: { [key: string]: any }) => {
     this.ethConfig = ethConfig;
   }
 }
 
-const { Admin, Borrower, Lender, Analytics, Currency, Collateral, Governance} = actions;
+const { Admin, Borrower, Lender, Analytics, Currency, Collateral, Governance } = actions;
 const TinlakeWithActions = (Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake))))))));
 
 export type ITinlake = TinlakeActions & {
   setProvider(provider: any, ethOptions?: any) : void,
-  setEthConfig(ethConfig: { [key: string]: any }): void
+  setEthConfig(ethConfig: { [key: string]: any }): void,
 };
 
 export default TinlakeWithActions;
