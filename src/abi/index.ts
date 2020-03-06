@@ -11,12 +11,14 @@ import contractAbiOperator from './AllowanceOperator.abi.json';
 import contractAbiDistributor from './DefaultDistributor.abi.json';
 import contractAbiAssessor from './DefaultAssessor.abi.json';
 import contractAbiRoot from './Root.abi.json';
-import contractAbiTranche from './Tranche.abi.json'
+import contractAbiTranche from './Tranche.abi.json';
+import contractAbiNFTData from './NftData.abi.json';
 
 import { ContractAbis } from '../types';
 
 export default {
   COLLATERAL_NFT : contractAbiNFT,
+  COLLATERAL_NFT_DATA: contractAbiNFTData,
   TITLE : contractAbiTitle,
   TINLAKE_CURRENCY : contractAbiCurrency,
   SHELF : contractAbiShelf,
@@ -32,5 +34,5 @@ export default {
   JUNIOR_OPERATOR : contractAbiOperator,
   JUNIOR: contractAbiTranche,
   SENIOR: contractAbiTranche,
-  SENIOR_TOKEN: contractAbiCurrency
+  SENIOR_TOKEN: contractAbiCurrency,
 } as ContractAbis;

@@ -10382,7 +10382,8 @@ var contractNames = [
     'THRESHOLD',
     'PRICE_POOL',
     'COLLATERAL_NFT',
-    'ROOT_CONTRACT'
+    'ROOT_CONTRACT',
+    'COLLATERAL_NFT_DATA',
 ];
 
 var contractAbiTitle = [
@@ -16680,8 +16681,27 @@ var contractAbiTranche = [
   }
 ];
 
+var contractAbiNFTData = [
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "data",
+    outputs: {
+    },
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
 var abiDefinitions = {
     COLLATERAL_NFT: contractAbiNFT,
+    COLLATERAL_NFT_DATA: contractAbiNFTData,
     TITLE: contractAbiTitle,
     TINLAKE_CURRENCY: contractAbiCurrency,
     SHELF: contractAbiShelf,
@@ -16697,7 +16717,7 @@ var abiDefinitions = {
     JUNIOR_OPERATOR: contractAbiOperator,
     JUNIOR: contractAbiTranche,
     SENIOR: contractAbiTranche,
-    SENIOR_TOKEN: contractAbiCurrency
+    SENIOR_TOKEN: contractAbiCurrency,
 };
 
 /*! *****************************************************************************
@@ -34946,9 +34966,13 @@ function CollateralActions(Base) {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].data, [tokenId])];
+                        case 0:
+                            console.log('calling data fxn', tokenId);
+                            console.log('abi');
+                            return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT_DATA'].data, [tokenId])];
                         case 1:
                             res = _a.sent();
+                            console.log('res', res);
                             return [2 /*return*/, res];
                     }
                 });
@@ -37295,6 +37319,7 @@ var Tinlake = /** @class */ (function () {
         else {
             this.contractAbis = contractAbis;
         }
+        nftDataOutputs && (this.contractAbis['COLLATERAL_NFT_DATA'][0].outputs = nftDataOutputs);
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);
