@@ -18,8 +18,18 @@ export declare class Tinlake {
 }
 declare const TinlakeWithActions: {
     new (...args: any[]): {
+        approveNFT: (tokenId: string, to: string) => Promise<unknown>;
+        getTokenOwner: (tokenId: string) => Promise<BN>;
+        getNFTOwner: (tokenId: string) => Promise<BN>;
+        transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
         newProxy: (owner: string) => Promise<any>;
+        newTestProxy: (owner: string) => Promise<any>;
+        getTestProxy: (accessTokenId: string) => Promise<any>;
         getProxy: (accessTokenId: string) => Promise<any>;
+        getProxyAccessToken: () => Promise<any>;
+        proxyApproveNFT: (address: string, tokenId: string) => Promise<unknown>;
+        testProxy: () => Promise<void>;
+        proxyTransferIssue: (tokenId: string) => Promise<BN>;
         provider: any;
         eth: ethI;
         ethOptions: any;
@@ -60,10 +70,10 @@ declare const TinlakeWithActions: {
         canSetThreshold: (user: string) => Promise<boolean>;
         canSetLoanPrice: (user: string) => Promise<boolean>;
         setCeiling: (loanId: string, amount: string) => Promise<unknown>;
-        existsRateGroup: (ratePerSecond: string) => Promise<boolean>;
-        initRate: (ratePerSecond: string) => Promise<unknown>;
-        changeRate: (loan: string, ratePerSecond: string) => Promise<unknown>;
-        setRate: (loan: string, ratePerSecond: string) => Promise<unknown>;
+        existsRateGroup: (rate: string) => Promise<boolean>;
+        initRate: (rate: string) => Promise<unknown>;
+        changeRate: (loan: string, rate: string) => Promise<unknown>;
+        setRate: (loan: string, rate: string) => Promise<unknown>;
         approveAllowanceJunior: (user: string, maxCurrency: string, maxToken: string) => Promise<unknown>;
         provider: any;
         eth: ethI;
@@ -79,7 +89,6 @@ declare const TinlakeWithActions: {
         contracts: Contracts;
         ethConfig: import("./types").EthConfig;
         getInvestor: (user: string) => Promise<import("./types").Investor>;
-        existsSenior: () => boolean;
         supplyJunior: (currencyAmount: string) => Promise<unknown>;
         redeemJunior: (tokenAmount: string) => Promise<unknown>;
         getJuniorTokenBalance: (user: string) => Promise<BN>;
@@ -90,7 +99,6 @@ declare const TinlakeWithActions: {
         getMaxSupplyAmountSenior: (user: string) => Promise<BN>;
         getMaxRedeemAmountJunior: (user: string) => Promise<any>;
         getMaxRedeemAmountSenior: (user: string) => Promise<any>;
-        getTokenPriceJunior: () => Promise<any>;
         balance: () => Promise<unknown>;
         provider: any;
         eth: ethI;
@@ -107,11 +115,9 @@ declare const TinlakeWithActions: {
         getDebt: (loanID: string) => Promise<BN>;
         loanCount: () => Promise<BN>;
         getCollateral: (loanId: string) => Promise<any>;
-        getOwnerOfCollateral: (tokenId: string) => Promise<BN>;
         getInterestRate: (loanId: string) => Promise<BN>;
         getOwnerOfLoan: (loanId: string) => Promise<any>;
-        getStatus: (tokenId: string, loanId: string) => Promise<any>;
-        getLoan: (loanId: string) => Promise<import("./types").Loan | null>;
+        getLoan: (loanId: string) => Promise<import("./types").Loan>;
         getLoanList: () => Promise<import("./types").Loan[]>;
         provider: any;
         eth: ethI;
@@ -126,9 +132,6 @@ declare const TinlakeWithActions: {
     new (...args: any[]): {
         mintCurrency: (usr: string, amount: string) => Promise<void>;
         getCurrencyBalance: (user: string) => Promise<BN>;
-        getJuniorBalance: () => Promise<BN>;
-        getSeniorBalance: () => Promise<BN>;
-        getTrancheBalance: () => Promise<BN>;
         approveCurrency: (usr: string, currencyAmount: string) => Promise<unknown>;
         provider: any;
         eth: ethI;

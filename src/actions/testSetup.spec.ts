@@ -1,7 +1,7 @@
 import testConfig from '../../test/config';
 import { ITinlake } from '../Tinlake';
-import { createTinlake, TestProvider} from '../../test/utils';
 
+import { createTinlake, TestProvider} from '../../test/utils';
 
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 const testProvider = new TestProvider(testConfig);

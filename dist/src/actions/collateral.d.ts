@@ -6,6 +6,7 @@ declare function CollateralActions<ActionsBase extends Constructor<Tinlake>>(Bas
         mintNFT: (owner: string, tokenId: string, ref: string, amount: string, asset: string) => Promise<unknown>;
         approveNFT: (tokenId: string, to: string) => Promise<unknown>;
         getNFTCount: () => Promise<BN>;
+        getNFTOwner: (tokenId: string) => Promise<BN>;
         getNFTData: (tokenId: string) => Promise<any>;
         provider: any;
         eth: import("../types").ethI;
@@ -23,5 +24,6 @@ export declare type ICollateralActions = {
     approveNFT(tokenId: string, to: string): Promise<any>;
     getNFTCount(): Promise<BN>;
     getNFTData(tokenId: string): Promise<any>;
+    getNFTOwner(tokenId: string): Promise<any>;
 };
 export default CollateralActions;
