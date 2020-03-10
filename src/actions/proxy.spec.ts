@@ -45,16 +45,7 @@ describe.only('proxy tests', async () => {
       assert.equal(res.status, FAIL_STATUS);
     });
 
-    it('success: successfully locks and withdraws a loan', async () => {
-      const accessToken = await borrowerTinlake.newProxy(borrowerTinlake.ethConfig.from);
-      const proxyAddress = await borrowerTinlake.getProxy(accessToken);
-
-      borrowerTinlake.ethConfig.proxy = proxyAddress;
-      const mintResult: any = await governanceTinlake.mintTitleNFT(borrowerTinlake.ethConfig.from);
-      const nftId = mintResult.events[0].data[2].toString();
-      await borrowerTinlake.approveNFT(nftId, proxyAddress);
-      await borrowerTinlake.proxyTransferIssue(nftId);
-
+      it('success: successfully locks and withdraws a loan', async () => {
     });
 
   });
