@@ -77,6 +77,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
 export type IAnalyticsActions = {
   getTotalDebt(): Promise<BN>,
   getTotalBalance(): Promise<BN>,
+  getDebt(loanId:string): Promise<BN>,
   loanCount(): Promise<BN>,
   getLoanList(): Promise<Loan[]>,
   getLoan(loanId: string): Promise<Loan>,

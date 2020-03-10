@@ -14,9 +14,6 @@ import contractAbiActions from './Actions.abi.json';
 import contractAbiProxy from './Proxy.abi.json';
 import contractAbiProxyRegistry from './ProxyRegistry.abi.json';
 
-import contractAbiTestProxyRegistry from './TestProxyRegistry.abi.json';
-import contractAbiTestProxy from './TestProxy.abi.json';
-
 import { ContractAbis } from '../types';
 
 export default {
@@ -38,6 +35,4 @@ export default {
   PROXY: contractAbiProxy,
   PROXY_REGISTRY: contractAbiProxyRegistry,
   ACTIONS: contractAbiActions,
-  TEST_PROXY_REGISTRY: contractAbiTestProxyRegistry,
-  TEST_PROXY: contractAbiTestProxy,
 } as ContractAbis;
