@@ -57,9 +57,6 @@ export const contractNames = [
   'PROXY',
   'PROXY_REGISTRY',
   'ACTIONS',
-
-  'TEST_PROXY_REGISTRY',
-  'TEST_PROXY',
 ];
 
 export type ContractNames = typeof contractNames[number];

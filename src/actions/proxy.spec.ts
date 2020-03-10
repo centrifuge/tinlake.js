@@ -15,7 +15,7 @@ const { SUCCESS_STATUS, FAIL_STATUS, FAUCET_AMOUNT, contractAddresses } = testCo
 describe.only('proxy tests', async () => {
 
   before(async () => {
-    // fund admin account with eth
+    // fund borrower account with ETH
     await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   });
 
