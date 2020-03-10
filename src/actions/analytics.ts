@@ -65,7 +65,7 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
       if (await this.getOwnerOfLoan(loanId) === '0x0000000000000000000000000000000000000000') {
         return 'closed';
       }
-      return 'issued';
+      return 'opened';
     }
 
     getLoan = async (loanId: string): Promise<Loan | null> => {

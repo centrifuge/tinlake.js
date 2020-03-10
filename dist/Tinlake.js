@@ -35105,7 +35105,7 @@ function AnalyticsActions(Base) {
                             if ((_a.sent()) === '0x0000000000000000000000000000000000000000') {
                                 return [2 /*return*/, 'closed'];
                             }
-                            return [2 /*return*/, 'issued'];
+                            return [2 /*return*/, 'opened'];
                     }
                 });
             }); };
