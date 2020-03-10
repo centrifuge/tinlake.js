@@ -10377,8 +10377,6 @@ var contractNames = [
     'PROXY',
     'PROXY_REGISTRY',
     'ACTIONS',
-    'TEST_PROXY_REGISTRY',
-    'TEST_PROXY',
 ];
 
 var contractAbiTitle = [
@@ -24125,7 +24123,6 @@ var src_11 = src$4.sha3;
 
 var _this = undefined;
 var abiCoder = require('web3-eth-abi');
-// const abiCoder = new AbiCoder();
 // tslint:disable-next-line:prefer-array-literal
 function executeAndRetry(f, args) {
     if (args === void 0) { args = []; }
