@@ -8,8 +8,7 @@ declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
         actions: any;
         proxy: void;
         checkProxy: () => Promise<void>;
-        approveNFT: (tokenId: string, to: string) => Promise<unknown>;
-        getTokenOwner: (tokenId: string) => Promise<BN>;
+        getAccessTokenOwner: (tokenId: string) => Promise<BN>;
         getNFTOwner: (tokenId: string) => Promise<BN>;
         transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
         newProxy: (owner: string) => Promise<any>;
@@ -32,6 +31,7 @@ export declare type IProxyActions = {
     newProxy(owner: string): Promise<any>;
     getProxy(accessTokenId: string): Promise<any>;
     getProxyAccessToken(): Promise<any>;
+    getAccessTokenOwner(tokenId: string): Promise<any>;
     proxyTransferIssue(shelf: string, registry: string, token: string): Promise<any>;
     proxyLockBorrowWithdraw(loanId: string, amount: string, usr: string): Promise<any>;
     proxyRepayUnlockClose(tokenId: string, loanId: string, amount: string): Promise<any>;
