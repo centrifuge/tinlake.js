@@ -34,28 +34,28 @@ describe.only('proxy tests', async () => {
       const issueResult = await borrowerTinlake.proxyTransferIssue(nftId);
       assert.equal(issueResult.status, SUCCESS_STATUS);
       assert.equal(await borrowerTinlake.getNFTOwner(nftId), borrowerTinlake.ethConfig.proxy);
-        // set loan parameters and fund tranche
+      // set loan parameters and fund tranche
       const loanId = await borrowerTinlake.nftLookup(contractAddresses.COLLATERAL_NFT, nftId);
       const amount = 1000;
       await governanceTinlake.relyAddress(adminTinlake.ethConfig.from, contractAddresses.CEILING);
       await adminTinlake.setCeiling(loanId, amount.toString());
       await fundTranche('1000000000');
       const initialTrancheBalance = await borrowerTinlake.getCurrencyBalance(contractAddresses.JUNIOR);
-        // borrow
+      // borrow
       const borrowResult = await borrowerTinlake.proxyLockBorrowWithdraw(loanId, amount.toString(), borrowerAccount.address);
       const balance = await borrowerTinlake.getCurrencyBalance(borrowerAccount.address);
       const secondTrancheBalance = await borrowerTinlake.getCurrencyBalance(contractAddresses.JUNIOR);
       assert.equal(borrowResult.status, SUCCESS_STATUS);
       assert.equal(balance.toNumber(), amount);
       assert.equal(secondTrancheBalance.toNumber(), initialTrancheBalance.toNumber() - amount);
-        // fuel borrower with extra to cover loan interest, approve borrower proxy to take currency
+      // fuel borrower with extra to cover loan interest, approve borrower proxy to take currency
       await governanceTinlake.mintCurrency(borrowerAccount.address, amount.toString());
       await borrowerTinlake.approveCurrency(borrowerTinlake.ethConfig.proxy, amount.toString());
-        // repay
+      // repay
       const repayResult = await borrowerTinlake.proxyRepayUnlockClose(nftId, loanId, amount.toString());
       assert.equal(repayResult.status, SUCCESS_STATUS);
-        // borrower should be owner of collateral NFT again
-        // tranche balance should be back to pre-borrow amount
+      // borrower should be owner of collateral NFT again
+      // tranche balance should be back to pre-borrow amount
       const owner = await governanceTinlake.getNFTOwner(nftId);
       assert.equal(ethers.utils.getAddress(owner.toString()), ethers.utils.getAddress(borrowerAccount.address));
       await borrowerTinlake.getCurrencyBalance(borrowerTinlake.ethConfig.proxy);
