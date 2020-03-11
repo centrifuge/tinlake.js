@@ -53,6 +53,7 @@ export const contractNames = [
   'THRESHOLD',
   'PRICE_POOL',
   'COLLATERAL_NFT',
+  'COLLATERAL_NFT_DATA',
   'ROOT_CONTRACT',
   'PROXY',
   'PROXY_REGISTRY',

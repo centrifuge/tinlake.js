@@ -32,6 +32,7 @@ export declare type IProxyActions = {
     getProxy(accessTokenId: string): Promise<any>;
     getProxyAccessToken(): Promise<any>;
     getAccessTokenOwner(tokenId: string): Promise<any>;
+    getNFTOwner(tokenId: string): Promise<BN>;
     proxyTransferIssue(shelf: string, registry: string, token: string): Promise<any>;
     proxyLockBorrowWithdraw(loanId: string, amount: string, usr: string): Promise<any>;
     proxyRepayUnlockClose(tokenId: string, loanId: string, amount: string): Promise<any>;

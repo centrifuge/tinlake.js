@@ -13,11 +13,14 @@ import contractAbiRoot from './Root.abi.json';
 import contractAbiActions from './Actions.abi.json';
 import contractAbiProxy from './Proxy.abi.json';
 import contractAbiProxyRegistry from './ProxyRegistry.abi.json';
+import contractAbiTranche from './Tranche.abi.json';
+import contractAbiNFTData from './NftData.abi.json';
 
 import { ContractAbis } from '../types';
 
 export default {
   COLLATERAL_NFT : contractAbiTitle,
+  COLLATERAL_NFT_DATA: contractAbiNFTData,
   TITLE : contractAbiTitle,
   TINLAKE_CURRENCY : contractAbiCurrency,
   SHELF : contractAbiShelf,
@@ -26,7 +29,6 @@ export default {
   THRESHOLD : contractAbiThreshold,
   PRICE_POOL : contractAbiPricePool,
   PILE: contractAbiPile,
-  JUNIOR_OPERATOR : contractAbiOperator,
   DISTRIBUTOR : contractAbiDistributor,
   ASSESSOR: contractAbiAssessor,
   ROOT_CONTRACT: contractAbiRoot,
@@ -35,4 +37,7 @@ export default {
   PROXY: contractAbiProxy,
   PROXY_REGISTRY: contractAbiProxyRegistry,
   ACTIONS: contractAbiActions,
+  JUNIOR_OPERATOR : contractAbiOperator,
+  JUNIOR: contractAbiTranche,
+  SENIOR: contractAbiTranche,
 } as ContractAbis;

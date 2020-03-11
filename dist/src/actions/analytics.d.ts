@@ -8,9 +8,11 @@ declare function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base
         getDebt: (loanID: string) => Promise<BN>;
         loanCount: () => Promise<BN>;
         getCollateral: (loanId: string) => Promise<any>;
+        getOwnerOfCollateral: (tokenId: string) => Promise<BN>;
         getInterestRate: (loanId: string) => Promise<BN>;
         getOwnerOfLoan: (loanId: string) => Promise<any>;
-        getLoan: (loanId: string) => Promise<Loan>;
+        getStatus: (tokenId: string, loanId: string) => Promise<any>;
+        getLoan: (loanId: string) => Promise<Loan | null>;
         getLoanList: () => Promise<Loan[]>;
         provider: any;
         eth: import("../types").ethI;
@@ -28,10 +30,11 @@ export declare type IAnalyticsActions = {
     getDebt(loanId: string): Promise<BN>;
     loanCount(): Promise<BN>;
     getLoanList(): Promise<Loan[]>;
-    getLoan(loanId: string): Promise<Loan>;
+    getLoan(loanId: string): Promise<Loan | null>;
     getCollateral(loanId: string): Promise<any>;
     getPrincipal(loanId: string): Promise<BN>;
     getInterestRate(loanId: string): Promise<BN>;
     getOwnerOfLoan(loanId: string): Promise<BN>;
+    getOwnerOfCollateral(tokenId: string, loanId: string): Promise<BN>;
 };
 export default AnalyticsActions;

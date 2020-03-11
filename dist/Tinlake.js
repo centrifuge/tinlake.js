@@ -10383,6 +10383,7 @@ var contractNames = [
     'THRESHOLD',
     'PRICE_POOL',
     'COLLATERAL_NFT',
+    'COLLATERAL_NFT_DATA',
     'ROOT_CONTRACT',
     'PROXY',
     'PROXY_REGISTRY',
@@ -17230,8 +17231,338 @@ var contractAbiProxyRegistry = [
   }
 ];
 
+var contractAbiTranche = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "currency_",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    anonymous: true,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes4",
+        name: "sig",
+        type: "bytes4"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "guy",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "foo",
+        type: "bytes32"
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "bar",
+        type: "bytes32"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "wad",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "fax",
+        type: "bytes"
+      }
+    ],
+    name: "LogNote",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "balance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "borrow",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "currency",
+    outputs: [
+      {
+        internalType: "contract TokenLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "deny",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "contractName",
+        type: "bytes32"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      }
+    ],
+    name: "depend",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenAmount",
+        type: "uint256"
+      }
+    ],
+    name: "redeem",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      }
+    ],
+    name: "rely",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      }
+    ],
+    name: "repay",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "self",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "usr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "currencyAmount",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenAmount",
+        type: "uint256"
+      }
+    ],
+    name: "supply",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "token",
+    outputs: [
+      {
+        internalType: "contract TokenLike",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "tokenSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "wards",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiNFTData = [
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "data",
+    outputs: {
+    },
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
 var abiDefinitions = {
     COLLATERAL_NFT: contractAbiTitle,
+    COLLATERAL_NFT_DATA: contractAbiNFTData,
     TITLE: contractAbiTitle,
     TINLAKE_CURRENCY: contractAbiCurrency,
     SHELF: contractAbiShelf,
@@ -17240,7 +17571,6 @@ var abiDefinitions = {
     THRESHOLD: contractAbiThreshold,
     PRICE_POOL: contractAbiPricePool,
     PILE: contractAbiPile,
-    JUNIOR_OPERATOR: contractAbiOperator,
     DISTRIBUTOR: contractAbiDistributor,
     ASSESSOR: contractAbiAssessor,
     ROOT_CONTRACT: contractAbiRoot,
@@ -17249,6 +17579,9 @@ var abiDefinitions = {
     PROXY: contractAbiProxy,
     PROXY_REGISTRY: contractAbiProxyRegistry,
     ACTIONS: contractAbiActions,
+    JUNIOR_OPERATOR: contractAbiOperator,
+    JUNIOR: contractAbiTranche,
+    SENIOR: contractAbiTranche,
 };
 
 /*! *****************************************************************************
@@ -24383,22 +24716,26 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.existsRateGroup = function (rate) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+            _this.existsRateGroup = function (ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rate])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].rates, [rateGroup])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, !res.ratePerSecond.isZero()];
                     }
                 });
             }); };
-            _this.initRate = function (rate) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.initRate = function (ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rate, rate, this.ethConfig])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -24406,11 +24743,13 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.changeRate = function (loan, rate) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.changeRate = function (loan, ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rate, this.ethConfig])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].changeRate, [loan, rateGroup, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -24418,11 +24757,13 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.setRate = function (loan, rate) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.setRate = function (loan, ratePerSecond) { return __awaiter(_this, void 0, void 0, function () {
+                var rateGroup, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rate, this.ethConfig])];
+                        case 0:
+                            rateGroup = getRateGroup(ratePerSecond);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].setRate, [loan, rateGroup, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Setting rate] txHash: " + txHash);
@@ -24447,6 +24788,10 @@ function AdminActions(Base) {
         }
         return class_1;
     }(Base));
+}
+var ONE = '1000000000000000000000000000';
+function getRateGroup(ratePerSecond) {
+    return (ratePerSecond === ONE) ? 0 : ratePerSecond;
 }
 
 var _version = createCommonjsModule(function (module, exports) {
@@ -42912,15 +43257,15 @@ function LenderActions(Base) {
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.getInvestor = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var seniorExists, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c;
+                var includeSenior, tokenBalanceJunior, tokenBalanceSenior, _a, maxSupplyJunior, maxSupplySenior, _b, maxRedeemJunior, maxRedeemSenior, _c;
                 return __generator(this, function (_d) {
                     switch (_d.label) {
                         case 0:
-                            seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+                            includeSenior = this.existsSenior();
                             return [4 /*yield*/, this.getJuniorTokenBalance(user)];
                         case 1:
                             tokenBalanceJunior = _d.sent();
-                            _a = seniorExists;
+                            _a = includeSenior;
                             if (!_a) return [3 /*break*/, 3];
                             return [4 /*yield*/, this.getSeniorTokenBalance(user)];
                         case 2:
@@ -42931,7 +43276,7 @@ function LenderActions(Base) {
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 4:
                             maxSupplyJunior = _d.sent();
-                            _b = seniorExists;
+                            _b = includeSenior;
                             if (!_b) return [3 /*break*/, 6];
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 5:
@@ -42942,7 +43287,7 @@ function LenderActions(Base) {
                             return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
                         case 7:
                             maxRedeemJunior = _d.sent();
-                            _c = seniorExists;
+                            _c = includeSenior;
                             if (!_c) return [3 /*break*/, 9];
                             return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
                         case 8:
@@ -42956,6 +43301,9 @@ function LenderActions(Base) {
                     }
                 });
             }); };
+            _this.existsSenior = function () {
+                return _this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+            };
             _this.supplyJunior = function (currencyAmount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -43070,6 +43418,17 @@ function LenderActions(Base) {
                     }
                 });
             }); };
+            _this.getTokenPriceJunior = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["ASSESSOR"].calcTokenPrice, [this.contractAddresses["JUNIOR"]])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
             _this.balance = function () { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -43083,6 +43442,21 @@ function LenderActions(Base) {
                 });
             }); };
             return _this;
+            // fix: change to view functions in contracts
+            // juniorReserve = async () => {
+            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["JUNIOR"].balance, [this.ethConfig]);
+            //   return res[0] || new BN(0);
+            // }
+            // seniorReserve = async () => {
+            //   const res: { 0: BN } =  await executeAndRetry(this.contracts["SENIOR"].balance, []);
+            //   return res[0] || new BN(0);
+            // }
+            // availableTrancheFunds = async () => {
+            //   const juniorFunds = await this.juniorReserve();
+            //   const seniorFunds = this.existsSenior() && await this.seniorReserve() || new BN (0);
+            //   const trancheFunds = juniorFunds.add(seniorFunds);
+            //   return trancheFunds;
+            // }
         }
         return class_1;
     }(Base));
@@ -43113,6 +43487,50 @@ function CurrencyActions(Base) {
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.getJuniorBalance = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['JUNIOR']])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getSeniorBalance = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['SENIOR']])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getTrancheBalance = function () { return __awaiter(_this, void 0, void 0, function () {
+                var seniorExists, juniorFunds, seniorFunds, _a, trancheFunds;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            seniorExists = this.contractAddresses["SENIOR_OPERATOR"] !== "0x0000000000000000000000000000000000000000";
+                            return [4 /*yield*/, this.getJuniorBalance()];
+                        case 1:
+                            juniorFunds = _b.sent();
+                            _a = seniorExists;
+                            if (!_a) return [3 /*break*/, 3];
+                            return [4 /*yield*/, this.getSeniorBalance()];
+                        case 2:
+                            _a = (_b.sent());
+                            _b.label = 3;
+                        case 3:
+                            seniorFunds = _a || new bn(0);
+                            trancheFunds = juniorFunds.add(seniorFunds);
+                            return [2 /*return*/, trancheFunds];
                     }
                 });
             }); };
@@ -43186,17 +43604,6 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
-            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
             _this.getNFTData = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
@@ -43214,6 +43621,7 @@ function CollateralActions(Base) {
     }(Base));
 }
 
+var ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 function AnalyticsActions(Base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -43285,6 +43693,17 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
+            _this.getOwnerOfCollateral = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
             _this.getInterestRate = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
@@ -43297,26 +43716,55 @@ function AnalyticsActions(Base) {
                 });
             }); };
             _this.getOwnerOfLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+                var address, res, e_1;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
+                        case 0:
+                            _a.trys.push([0, 2, , 3]);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res[0]];
+                            address = res[0];
+                            return [3 /*break*/, 3];
+                        case 2:
+                            e_1 = _a.sent();
+                            address = ZERO_ADDRESS;
+                            return [3 /*break*/, 3];
+                        case 3: return [2 /*return*/, address];
+                    }
+                });
+            }); };
+            _this.getStatus = function (tokenId, loanId) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.getOwnerOfCollateral(tokenId)];
+                        case 1:
+                            if ((_a.sent()) === this.contracts['SHELF'].address) {
+                                return [2 /*return*/, 'ongoing'];
+                            }
+                            return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
+                        case 2:
+                            if ((_a.sent()) === '0x0000000000000000000000000000000000000000') {
+                                return [2 /*return*/, 'closed'];
+                            }
+                            return [2 /*return*/, 'opened'];
                     }
                 });
             }); };
             _this.getLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var collateral, principal, ownerOf, interestRate, debt;
+                var collateral, principal, ownerOf, interestRate, debt, status;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.getCollateral(loanId)];
+                        case 0:
+                            if (loanId === '0') {
+                                return [2 /*return*/, null];
+                            }
+                            return [4 /*yield*/, this.getCollateral(loanId)];
                         case 1:
                             collateral = _a.sent();
                             return [4 /*yield*/, this.getPrincipal(loanId)];
                         case 2:
-                            principal = (_a.sent());
+                            principal = _a.sent();
                             return [4 /*yield*/, this.getOwnerOfLoan(loanId)];
                         case 3:
                             ownerOf = _a.sent();
@@ -43325,7 +43773,10 @@ function AnalyticsActions(Base) {
                             interestRate = _a.sent();
                             return [4 /*yield*/, this.getDebt(loanId)];
                         case 5:
-                            debt = (_a.sent());
+                            debt = _a.sent();
+                            return [4 /*yield*/, this.getStatus(collateral.tokenId, loanId)];
+                        case 6:
+                            status = _a.sent();
                             return [2 /*return*/, {
                                     loanId: loanId,
                                     registry: collateral.registry,
@@ -43334,6 +43785,7 @@ function AnalyticsActions(Base) {
                                     interestRate: interestRate,
                                     ownerOf: ownerOf,
                                     debt: debt,
+                                    status: status,
                                 }];
                     }
                 });
@@ -43354,10 +43806,10 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.getLoan(i.toString())];
                         case 3:
                             loan = _a.sent();
-                            loanArray.push(loan);
+                            loan && loanArray.push(loan);
                             _a.label = 4;
                         case 4:
-                            i++;
+                            i += 1;
                             return [3 /*break*/, 2];
                         case 5: return [2 /*return*/, loanArray];
                     }
@@ -43688,7 +44140,7 @@ var MAX_DIGITS = 1e9,                        // 0 to 1e9
 
   isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,
 
-  ONE,
+  ONE$1,
   BASE = 1e7,
   LOG_BASE = 7,
   MAX_SAFE_INTEGER = 9007199254740991,
@@ -43943,7 +44395,7 @@ P.logarithm = P.log = function (base) {
     // log[-b](x) = NaN
     // log[0](x)  = NaN
     // log[1](x)  = NaN
-    if (base.s < 1 || base.eq(ONE)) throw Error(decimalError + 'NaN');
+    if (base.s < 1 || base.eq(ONE$1)) throw Error(decimalError + 'NaN');
   }
 
   // log[b](-x) = NaN
@@ -43951,7 +44403,7 @@ P.logarithm = P.log = function (base) {
   if (x.s < 1) throw Error(decimalError + (x.s ? 'NaN' : '-Infinity'));
 
   // log[b](1) = 0
-  if (x.eq(ONE)) return new Ctor(0);
+  if (x.eq(ONE$1)) return new Ctor(0);
 
   external = false;
   r = divide(ln(x, wpr), ln(base, wpr), wpr);
@@ -44352,7 +44804,7 @@ P.toPower = P.pow = function (y) {
     yn = +(y = new Ctor(y));
 
   // pow(x, 0) = 1
-  if (!y.s) return new Ctor(ONE);
+  if (!y.s) return new Ctor(ONE$1);
 
   x = new Ctor(x);
 
@@ -44364,12 +44816,12 @@ P.toPower = P.pow = function (y) {
   }
 
   // pow(1, y) = 1
-  if (x.eq(ONE)) return x;
+  if (x.eq(ONE$1)) return x;
 
   pr = Ctor.precision;
 
   // pow(x, 1) = x
-  if (y.eq(ONE)) return round(x, pr);
+  if (y.eq(ONE$1)) return round(x, pr);
 
   e = y.e;
   k = y.d.length - 1;
@@ -44383,7 +44835,7 @@ P.toPower = P.pow = function (y) {
 
   // If y is a small integer use the 'exponentiation by squaring' algorithm.
   } else if ((k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER) {
-    r = new Ctor(ONE);
+    r = new Ctor(ONE$1);
 
     // Max k of 9007199254740991 takes 53 loop iterations.
     // Maximum digits array length; leaves [28, 34] guard digits.
@@ -44406,7 +44858,7 @@ P.toPower = P.pow = function (y) {
 
     external = true;
 
-    return y.s < 0 ? new Ctor(ONE).div(r) : round(r, pr);
+    return y.s < 0 ? new Ctor(ONE$1).div(r) : round(r, pr);
   }
 
   // Result is negative if x is negative and the last digit of integer y is odd.
@@ -44907,7 +45359,7 @@ function exp(x, sd) {
   if (getBase10Exponent(x) > 16) throw Error(exponentOutOfRange + getBase10Exponent(x));
 
   // exp(0) = 1
-  if (!x.s) return new Ctor(ONE);
+  if (!x.s) return new Ctor(ONE$1);
 
   if (sd == null) {
     external = false;
@@ -44926,7 +45378,7 @@ function exp(x, sd) {
   // Estimate the precision increase necessary to ensure the first 4 rounding digits are correct.
   guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
   wpr += guard;
-  denominator = pow = sum = new Ctor(ONE);
+  denominator = pow = sum = new Ctor(ONE$1);
   Ctor.precision = wpr;
 
   for (;;) {
@@ -44999,7 +45451,7 @@ function ln(y, sd) {
   if (x.s < 1) throw Error(decimalError + (x.s ? 'NaN' : '-Infinity'));
 
   // ln(1) = 0
-  if (x.eq(ONE)) return new Ctor(0);
+  if (x.eq(ONE$1)) return new Ctor(0);
 
   if (sd == null) {
     external = false;
@@ -45064,7 +45516,7 @@ function ln(y, sd) {
   // Taylor series.
   // ln(y) = ln((1 + x)/(1 - x)) = 2(x + x^3/3 + x^5/5 + x^7/7 + ...)
   // where x = (y - 1)/(y + 1)    (|x| < 1)
-  sum = numerator = x = divide(x.minus(ONE), x.plus(ONE), wpr);
+  sum = numerator = x = divide(x.minus(ONE$1), x.plus(ONE$1), wpr);
   x2 = round(x.times(x), wpr);
   denominator = 3;
 
@@ -45596,7 +46048,7 @@ function config(obj) {
 var Decimal = clone(defaults);
 
 // Internal constant.
-ONE = new Decimal(1);
+ONE$1 = new Decimal(1);
 
 Decimal.set({
     precision: 30,
@@ -45700,6 +46152,7 @@ var Tinlake = /** @class */ (function () {
         else {
             this.contractAbis = contractAbis;
         }
+        nftDataOutputs && (this.contractAbis['COLLATERAL_NFT_DATA'][0].outputs = nftDataOutputs);
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);
