@@ -21,13 +21,7 @@ function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       this.proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
     }
 
-    approveNFT = async (tokenId: string, to: string) => {
-      const txHash = await executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig]);
-      console.log(`[NFT Approve] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout);
-    }
-
-    getTokenOwner = async (tokenId: string): Promise<BN> => {
+    getAccessTokenOwner = async (tokenId: string): Promise<BN> => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['PROXY_REGISTRY'].ownerOf, [tokenId]);
       return res[0];
     }
@@ -125,6 +119,7 @@ export type IProxyActions = {
   newProxy(owner: string): Promise<any>,
   getProxy(accessTokenId: string): Promise<any>,
   getProxyAccessToken(): Promise<any>,
+  getAccessTokenOwner(tokenId: string): Promise<any>,
   proxyTransferIssue(shelf: string, registry: string, token: string): Promise<any>,
   proxyLockBorrowWithdraw(loanId: string, amount: string, usr: string): Promise<any>,
   proxyRepayUnlockClose(tokenId: string, loanId: string, amount: string): Promise<any>,
