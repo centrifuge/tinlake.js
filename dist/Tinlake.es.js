@@ -43525,18 +43525,20 @@ function ProxyActions(Base) {
                             i = 0;
                             _a.label = 2;
                         case 2:
-                            if (!(i < count)) return [3 /*break*/, 5];
-                            ownerBN = this.getAccessTokenOwner(i.toString());
-                            if (!(ownerBN && ethers_2$1.utils.getAddress(ownerBN.toString()) === ethers_2$1.utils.getAddress(borrowerAddr))) return [3 /*break*/, 4];
-                            return [4 /*yield*/, this.getProxy(i.toString())];
+                            if (!(i < count)) return [3 /*break*/, 6];
+                            return [4 /*yield*/, this.getAccessTokenOwner(i.toString())];
                         case 3:
+                            ownerBN = _a.sent();
+                            if (!(ownerBN && ethers_2$1.utils.getAddress(ownerBN.toString()) === ethers_2$1.utils.getAddress(borrowerAddr))) return [3 /*break*/, 5];
+                            return [4 /*yield*/, this.getProxy(i.toString())];
+                        case 4:
                             proxyAddress = _a.sent();
                             proxy = proxyAddress;
-                            _a.label = 4;
-                        case 4:
+                            _a.label = 5;
+                        case 5:
                             i += 1;
                             return [3 /*break*/, 2];
-                        case 5: return [2 /*return*/, proxy];
+                        case 6: return [2 /*return*/, proxy];
                     }
                 });
             }); };

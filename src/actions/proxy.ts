@@ -74,7 +74,7 @@ function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       let proxy;
       const count = (await this.proxyCount()).toNumber();
       for (let i = 0; i < count; i += 1) {
-        const ownerBN = this.getAccessTokenOwner(i.toString())
+        const ownerBN = await this.getAccessTokenOwner(i.toString())
         if (ownerBN && ethers.utils.getAddress(ownerBN.toString()) === ethers.utils.getAddress(borrowerAddr)) {
           const proxyAddress = await this.getProxy(i.toString());
           proxy = proxyAddress;
