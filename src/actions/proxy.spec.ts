@@ -24,7 +24,7 @@ describe.only('proxy tests', async () => {
   });
 
   describe.only('proxy registry', async () => {
-    it('success: successfully locks and withdraws a loan', async () => {
+    it('success: full loan cycle - open, borrow, lock, withdraw, repay, unlock, close', async () => {
       // create new proxy and mint collateral NFT to borrower
       const proxyAddr = await borrowerTinlake.proxyCreateNew(borrowerAccount.address);
       const mintResult: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
