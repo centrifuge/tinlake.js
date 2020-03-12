@@ -2,6 +2,9 @@ import { Constructor, Tinlake } from '../types';
 import { waitAndReturnEvents, executeAndRetry } from '../ethereum';
 const abiCoder = require('web3-eth-abi');
 import BN from 'bn.js';
+import { ethers } from 'ethers';
+
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase) {
 
@@ -39,6 +42,45 @@ function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
       const proxy: any = this.eth.contract(this.contractAbis['PROXY']).at(proxyAddr);
       const res = await executeAndRetry(proxy.accessToken, [this.ethConfig]);
       return res[0].toNumber();
+    }
+
+    getProxyFromLoan = async (loanId: string) => {
+      let address;
+      let accessTokenId;
+      try {
+        const res = await executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId]);
+        address = res[0];
+      } catch (e) {
+        address = ZERO_ADDRESS;
+      }
+      if (address !== ZERO_ADDRESS) {
+        try {
+          accessTokenId = await this.getProxyAccessToken(address);
+        } catch (e) {
+          accessTokenId = null;
+        }
+      }
+      if (accessTokenId) {
+        return await this.getAccessTokenOwner(accessTokenId);
+      }
+    }
+
+    proxyCount = async (): Promise<BN> => {
+      const res: { 0: BN }  = await executeAndRetry(this.contracts['PROXY_REGISTRY'].count, []);
+      return res[0];
+    }
+
+    checkProxyExistence = async (borrowerAddr: string) => {
+      let proxy;
+      const count = (await this.proxyCount()).toNumber();
+      for (let i = 0; i < count; i += 1) {
+        const ownerBN = this.getAccessTokenOwner(i.toString())
+        if (ownerBN && ethers.utils.getAddress(ownerBN.toString()) === ethers.utils.getAddress(borrowerAddr)) {
+          const proxyAddress = await this.getProxy(i.toString());
+          proxy = proxyAddress;
+        }
+      }
+      return proxy;
     }
 
     proxyCreateNew = async (borrowerAddr: string) => {
@@ -103,10 +145,13 @@ function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBas
 
 export type IProxyActions = {
   buildProxy(owner: string): Promise<any>,
+  checkProxyExistence(provider:any, borrowerAddr: string): any,
   getProxy(accessTokenId: string): Promise<any>,
+  proxyCount(): Promise<any>,
   getProxyAccessToken(proxyAddr: string): Promise<any>,
   getAccessTokenOwner(tokenId: string): Promise<any>,
   getNFTOwner(tokenId: string): Promise<BN>,
+  getProxyFromLoan(loanId: string): Promise<any>,
   proxyCreateNew(borrowerAddr: string): Promise<any>,
   proxyTransferIssue(proxyAddr:string , tokenId: string): Promise<any>,
   proxyLockBorrowWithdraw(proxyAddr:string, loanId: string, amount: string, usr: string): Promise<any>,

@@ -43395,6 +43395,7 @@ function GovernanceActions(Base) {
 }
 
 var abiCoder$2 = require('web3-eth-abi');
+var ZERO_ADDRESS$1 = '0x0000000000000000000000000000000000000000';
 function ProxyActions(Base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -43470,6 +43471,78 @@ function ProxyActions(Base) {
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0].toNumber()];
+                    }
+                });
+            }); };
+            _this.getProxyFromLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
+                var address, accessTokenId, res, e_1, e_2;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, 2, , 3]);
+                            return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
+                        case 1:
+                            res = _a.sent();
+                            address = res[0];
+                            return [3 /*break*/, 3];
+                        case 2:
+                            e_1 = _a.sent();
+                            address = ZERO_ADDRESS$1;
+                            return [3 /*break*/, 3];
+                        case 3:
+                            if (!(address !== ZERO_ADDRESS$1)) return [3 /*break*/, 7];
+                            _a.label = 4;
+                        case 4:
+                            _a.trys.push([4, 6, , 7]);
+                            return [4 /*yield*/, this.getProxyAccessToken(address)];
+                        case 5:
+                            accessTokenId = _a.sent();
+                            return [3 /*break*/, 7];
+                        case 6:
+                            e_2 = _a.sent();
+                            accessTokenId = null;
+                            return [3 /*break*/, 7];
+                        case 7:
+                            if (!accessTokenId) return [3 /*break*/, 9];
+                            return [4 /*yield*/, this.getAccessTokenOwner(accessTokenId)];
+                        case 8: return [2 /*return*/, _a.sent()];
+                        case 9: return [2 /*return*/];
+                    }
+                });
+            }); };
+            _this.proxyCount = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PROXY_REGISTRY'].count, [])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.checkProxyExistence = function (borrowerAddr) { return __awaiter(_this, void 0, void 0, function () {
+                var proxy, count, i, ownerBN, proxyAddress;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.proxyCount()];
+                        case 1:
+                            count = (_a.sent()).toNumber();
+                            i = 0;
+                            _a.label = 2;
+                        case 2:
+                            if (!(i < count)) return [3 /*break*/, 5];
+                            ownerBN = this.getAccessTokenOwner(i.toString());
+                            if (!(ownerBN && ethers_2$1.utils.getAddress(ownerBN.toString()) === ethers_2$1.utils.getAddress(borrowerAddr))) return [3 /*break*/, 4];
+                            return [4 /*yield*/, this.getProxy(i.toString())];
+                        case 3:
+                            proxyAddress = _a.sent();
+                            proxy = proxyAddress;
+                            _a.label = 4;
+                        case 4:
+                            i += 1;
+                            return [3 /*break*/, 2];
+                        case 5: return [2 /*return*/, proxy];
                     }
                 });
             }); };
