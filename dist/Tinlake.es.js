@@ -43394,31 +43394,6 @@ function ProxyActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.shelf = _this.contracts['SHELF'].address;
-            _this.currency = _this.contracts['TINLAKE_CURRENCY'].address;
-            _this.registry = _this.contracts['COLLATERAL_NFT'].address;
-            _this.actions = _this.contracts['ACTIONS'].address;
-            _this.proxy = _this.eth.contract(_this.contractAbis['PROXY']).at(_this.ethConfig.proxy);
-            _this.checkProxy = function () { return __awaiter(_this, void 0, void 0, function () {
-                var accessToken, _a;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0:
-                            if (!(this.ethConfig.proxy === '')) return [3 /*break*/, 3];
-                            return [4 /*yield*/, this.newProxy(this.ethConfig.from)];
-                        case 1:
-                            accessToken = _b.sent();
-                            _a = this.ethConfig;
-                            return [4 /*yield*/, this.getProxy(accessToken)];
-                        case 2:
-                            _a.proxy = _b.sent();
-                            _b.label = 3;
-                        case 3:
-                            this.proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
-                            return [2 /*return*/];
-                    }
-                });
-            }); };
             _this.getAccessTokenOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
@@ -43453,7 +43428,7 @@ function ProxyActions(Base) {
                     }
                 });
             }); };
-            _this.newProxy = function (owner) { return __awaiter(_this, void 0, void 0, function () {
+            _this.buildProxy = function (owner) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash, response;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -43479,29 +43454,37 @@ function ProxyActions(Base) {
                     }
                 });
             }); };
-            _this.getProxyAccessToken = function () { return __awaiter(_this, void 0, void 0, function () {
+            _this.getProxyAccessToken = function (proxyAddr) { return __awaiter(_this, void 0, void 0, function () {
                 var proxy, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.checkProxy()];
-                        case 1:
-                            _a.sent();
-                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                        case 0:
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(proxyAddr);
                             return [4 /*yield*/, executeAndRetry(proxy.accessToken, [this.ethConfig])];
-                        case 2:
+                        case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0].toNumber()];
                     }
                 });
             }); };
-            _this.proxyTransferIssue = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+            _this.proxyCreateNew = function (borrowerAddr) { return __awaiter(_this, void 0, void 0, function () {
+                var accessToken;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.buildProxy(borrowerAddr)];
+                        case 1:
+                            accessToken = _a.sent();
+                            return [4 /*yield*/, this.getProxy(accessToken)];
+                        case 2: return [2 /*return*/, _a.sent()];
+                    }
+                });
+            }); };
+            _this.proxyTransferIssue = function (proxyAddr, tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var proxy, encoded, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.checkProxy()];
-                        case 1:
-                            _a.sent();
-                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                        case 0:
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(proxyAddr);
                             encoded = abiCoder$2.encodeFunctionCall({
                                 name: 'transferIssue',
                                 type: 'function',
@@ -43510,24 +43493,22 @@ function ProxyActions(Base) {
                                     { type: 'address', name: 'registry' },
                                     { type: 'uint256', name: 'token' }
                                 ]
-                            }, [this.shelf, this.registry, tokenId]);
-                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.actions, encoded, this.ethConfig])];
-                        case 2:
+                            }, [this.contracts['SHELF'].address, this.contracts['COLLATERAL_NFT'].address, tokenId]);
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
+                        case 1:
                             txHash = _a.sent();
                             console.log("[Proxy Transfer Issue Loan] txHash: " + txHash);
                             return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
-                        case 3: return [2 /*return*/, _a.sent()];
+                        case 2: return [2 /*return*/, _a.sent()];
                     }
                 });
             }); };
-            _this.proxyLockBorrowWithdraw = function (loanId, amount, usr) { return __awaiter(_this, void 0, void 0, function () {
+            _this.proxyLockBorrowWithdraw = function (proxyAddr, loanId, amount, usr) { return __awaiter(_this, void 0, void 0, function () {
                 var proxy, encoded, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.checkProxy()];
-                        case 1:
-                            _a.sent();
-                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                        case 0:
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(proxyAddr);
                             encoded = abiCoder$2.encodeFunctionCall({
                                 name: 'lockBorrowWithdraw',
                                 type: 'function',
@@ -43537,24 +43518,22 @@ function ProxyActions(Base) {
                                     { type: 'uint256', name: 'amount' },
                                     { type: 'address', name: 'usr' }
                                 ]
-                            }, [this.shelf, loanId, amount, usr]);
-                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.actions, encoded, this.ethConfig])];
-                        case 2:
+                            }, [this.contracts['SHELF'].address, loanId, amount, usr]);
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
+                        case 1:
                             txHash = _a.sent();
                             console.log("[Proxy Lock Borrow Withdraw] txHash: " + txHash);
                             return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
-                        case 3: return [2 /*return*/, _a.sent()];
+                        case 2: return [2 /*return*/, _a.sent()];
                     }
                 });
             }); };
-            _this.proxyRepayUnlockClose = function (tokenId, loanId, amount) { return __awaiter(_this, void 0, void 0, function () {
+            _this.proxyRepayUnlockClose = function (proxyAddr, tokenId, loanId, amount) { return __awaiter(_this, void 0, void 0, function () {
                 var proxy, encoded, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.checkProxy()];
-                        case 1:
-                            _a.sent();
-                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(this.ethConfig.proxy);
+                        case 0:
+                            proxy = this.eth.contract(this.contractAbis['PROXY']).at(proxyAddr);
                             encoded = abiCoder$2.encodeFunctionCall({
                                 name: 'repayUnlockClose',
                                 type: 'function',
@@ -43566,13 +43545,13 @@ function ProxyActions(Base) {
                                     { type: 'uint256', name: 'loan' },
                                     { type: 'uint256', name: 'amount' }
                                 ]
-                            }, [this.shelf, this.registry, tokenId, this.currency, loanId, amount]);
-                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.actions, encoded, this.ethConfig])];
-                        case 2:
+                            }, [this.contracts['SHELF'].address, this.contracts['COLLATERAL_NFT'].address, tokenId, this.contracts['TINLAKE_CURRENCY'].address, loanId, amount]);
+                            return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
+                        case 1:
                             txHash = _a.sent();
                             console.log("[Proxy Repay Unlock Close] txHash: " + txHash);
                             return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
-                        case 3: return [2 /*return*/, _a.sent()];
+                        case 2: return [2 /*return*/, _a.sent()];
                     }
                 });
             }); };
