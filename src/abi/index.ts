@@ -15,11 +15,12 @@ import contractAbiProxy from './Proxy.abi.json';
 import contractAbiProxyRegistry from './ProxyRegistry.abi.json';
 import contractAbiTranche from './Tranche.abi.json';
 import contractAbiNFTData from './NftData.abi.json';
+import contractAbiNFT from './test/SimpleNFT.abi.json';
 
 import { ContractAbis } from '../types';
 
 export default {
-  COLLATERAL_NFT : contractAbiTitle,
+  COLLATERAL_NFT : contractAbiNFT,
   COLLATERAL_NFT_DATA: contractAbiNFTData,
   TITLE : contractAbiTitle,
   TINLAKE_CURRENCY : contractAbiCurrency,
