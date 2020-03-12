@@ -8,6 +8,9 @@ declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
         buildProxy: (owner: string) => Promise<any>;
         getProxy: (accessTokenId: string) => Promise<any>;
         getProxyAccessToken: (proxyAddr: string) => Promise<any>;
+        getProxyFromLoan: (loanId: string) => Promise<BN | undefined>;
+        proxyCount: () => Promise<BN>;
+        checkProxyExistence: (borrowerAddr: string) => Promise<any>;
         proxyCreateNew: (borrowerAddr: string) => Promise<any>;
         proxyTransferIssue: (proxyAddr: string, tokenId: string) => Promise<unknown>;
         proxyLockBorrowWithdraw: (proxyAddr: string, loanId: string, amount: string, usr: string) => Promise<unknown>;
@@ -24,10 +27,13 @@ declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
 } & ActionsBase;
 export declare type IProxyActions = {
     buildProxy(owner: string): Promise<any>;
+    checkProxyExistence(provider: any, borrowerAddr: string): any;
     getProxy(accessTokenId: string): Promise<any>;
+    proxyCount(): Promise<any>;
     getProxyAccessToken(proxyAddr: string): Promise<any>;
     getAccessTokenOwner(tokenId: string): Promise<any>;
     getNFTOwner(tokenId: string): Promise<BN>;
+    getProxyFromLoan(loanId: string): Promise<any>;
     proxyCreateNew(borrowerAddr: string): Promise<any>;
     proxyTransferIssue(proxyAddr: string, tokenId: string): Promise<any>;
     proxyLockBorrowWithdraw(proxyAddr: string, loanId: string, amount: string, usr: string): Promise<any>;

@@ -71,6 +71,14 @@ describe.only('proxy tests', async () => {
       assert.equal(res.status, FAIL_STATUS);
     });
 
+    it('fail: does not succeed if the proxy is not approved to take the NFT', async () => {
+      const proxyAddr = await borrowerTinlake.proxyCreateNew(borrowerAccount.address);
+      const mintResult: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
+      const nftId = mintResult.events[0].data[2].toString();
+      const res = await borrowerTinlake.proxyTransferIssue(proxyAddr, nftId);
+      assert.equal(res.status, FAIL_STATUS);
+    });
+
     it('fail: does not succeed if the proxy is not approved to transfer currency from the borrower', async () => {
       // create new proxy and mint collateral NFT to vorrower
       const proxyAddr = await borrowerTinlake.proxyCreateNew(borrowerAccount.address);

@@ -32,7 +32,6 @@ export interface Options {
 export interface EthConfig {
   from: string;
   gasLimit: string;
-  proxy: string;
 }
 
 export const contractNames = [
