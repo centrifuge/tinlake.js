@@ -1,5 +1,4 @@
 import contractAbiTitle from './Title.abi.json';
-import contractAbiNFT from './test/SimpleNFT.abi.json';
 import contractAbiCurrency from './test/SimpleToken.abi.json';
 import contractAbiShelf from './Shelf.abi.json';
 import contractAbiCeiling from './Principal.abi.json';
@@ -11,11 +10,12 @@ import contractAbiOperator from './AllowanceOperator.abi.json';
 import contractAbiDistributor from './DefaultDistributor.abi.json';
 import contractAbiAssessor from './DefaultAssessor.abi.json';
 import contractAbiRoot from './Root.abi.json';
-import contractAbiTranche from './Tranche.abi.json';
-import contractAbiNFTData from './NftData.abi.json';
 import contractAbiActions from './Actions.abi.json';
 import contractAbiProxy from './Proxy.abi.json';
 import contractAbiProxyRegistry from './ProxyRegistry.abi.json';
+import contractAbiTranche from './Tranche.abi.json';
+import contractAbiNFTData from './NftData.abi.json';
+import contractAbiNFT from './test/SimpleNFT.abi.json';
 
 import { ContractAbis } from '../types';
 
