@@ -2,21 +2,16 @@ import { Constructor, Tinlake } from '../types';
 import BN from 'bn.js';
 declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase): {
     new (...args: any[]): {
-        shelf: any;
-        currency: any;
-        registry: any;
-        actions: any;
-        proxy: void;
-        checkProxy: () => Promise<void>;
         getAccessTokenOwner: (tokenId: string) => Promise<BN>;
         getNFTOwner: (tokenId: string) => Promise<BN>;
         transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
-        newProxy: (owner: string) => Promise<any>;
+        buildProxy: (owner: string) => Promise<any>;
         getProxy: (accessTokenId: string) => Promise<any>;
-        getProxyAccessToken: () => Promise<any>;
-        proxyTransferIssue: (tokenId: string) => Promise<unknown>;
-        proxyLockBorrowWithdraw: (loanId: string, amount: string, usr: string) => Promise<unknown>;
-        proxyRepayUnlockClose: (tokenId: string, loanId: string, amount: string) => Promise<unknown>;
+        getProxyAccessToken: (proxyAddr: string) => Promise<any>;
+        proxyCreateNew: (borrowerAddr: string) => Promise<any>;
+        proxyTransferIssue: (proxyAddr: string, tokenId: string) => Promise<unknown>;
+        proxyLockBorrowWithdraw: (proxyAddr: string, loanId: string, amount: string, usr: string) => Promise<unknown>;
+        proxyRepayUnlockClose: (proxyAddr: string, tokenId: string, loanId: string, amount: string) => Promise<unknown>;
         provider: any;
         eth: import("../types").ethI;
         ethOptions: any;
@@ -28,13 +23,14 @@ declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
     };
 } & ActionsBase;
 export declare type IProxyActions = {
-    newProxy(owner: string): Promise<any>;
+    buildProxy(owner: string): Promise<any>;
     getProxy(accessTokenId: string): Promise<any>;
-    getProxyAccessToken(): Promise<any>;
+    getProxyAccessToken(proxyAddr: string): Promise<any>;
     getAccessTokenOwner(tokenId: string): Promise<any>;
     getNFTOwner(tokenId: string): Promise<BN>;
-    proxyTransferIssue(shelf: string, registry: string, token: string): Promise<any>;
-    proxyLockBorrowWithdraw(loanId: string, amount: string, usr: string): Promise<any>;
-    proxyRepayUnlockClose(tokenId: string, loanId: string, amount: string): Promise<any>;
+    proxyCreateNew(borrowerAddr: string): Promise<any>;
+    proxyTransferIssue(proxyAddr: string, tokenId: string): Promise<any>;
+    proxyLockBorrowWithdraw(proxyAddr: string, loanId: string, amount: string, usr: string): Promise<any>;
+    proxyRepayUnlockClose(proxyAddr: string, tokenId: string, loanId: string, amount: string): Promise<any>;
 };
 export default ProxyActions;
