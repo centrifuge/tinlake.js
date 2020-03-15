@@ -18,7 +18,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
-describe('borrower tests', async () => {
+describe.only('borrower tests', async () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
@@ -38,7 +38,7 @@ describe('borrower tests', async () => {
     await mintIssue(borrowerAccount.address, borrowerTinlake);
   });
 
-  it('success: close loan', async () => {
+  it.only('success: close loan', async () => {
     const { loanId } = await mintIssue(borrowerAccount.address, borrowerTinlake);
     const closeResult = await borrowerTinlake.close(loanId);
     assert.equal(closeResult.status, SUCCESS_STATUS);
@@ -93,11 +93,8 @@ describe('borrower tests', async () => {
 
 async function mintIssue(usr: string, tinlake: ITinlake) {
   // super user mints nft for borrower
-  const mintResult : any = await governanceTinlake.mintTitleNFT(usr);
-  console.log(mintResult)
-  const tokenId = mintResult.events[0].data[2].toString();
-  // assert nft successfully minted
-  assert.equal(mintResult.status, SUCCESS_STATUS);
+  const tokenId : any = await governanceTinlake.mintTitleNFT(usr);
+  assert(tokenId);
   // assert usr = nftOwner
   const nftOwner = `${await tinlake.getNFTOwner(tokenId)}`;
   assert.equal(nftOwner.toLowerCase(), usr.toLowerCase());

@@ -2,19 +2,17 @@ import { Constructor, Tinlake } from '../types';
 import BN from 'bn.js';
 declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: ActionsBase): {
     new (...args: any[]): {
-        getAccessTokenOwner: (tokenId: string) => Promise<BN>;
-        getNFTOwner: (tokenId: string) => Promise<BN>;
-        transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
+        getProxyAccessTokenOwner: (tokenId: string) => Promise<BN>;
         buildProxy: (owner: string) => Promise<any>;
         getProxy: (accessTokenId: string) => Promise<any>;
         getProxyAccessToken: (proxyAddr: string) => Promise<any>;
-        getProxyFromLoan: (loanId: string) => Promise<BN | undefined>;
+        getProxyOwnerByLoan: (loanId: string) => Promise<BN>;
         proxyCount: () => Promise<BN>;
-        checkProxyExistence: (borrowerAddr: string) => Promise<any>;
-        proxyCreateNew: (borrowerAddr: string) => Promise<any>;
+        checkProxyExists: (address: string) => Promise<string | null>;
+        proxyCreateNew: (address: string) => Promise<any>;
         proxyTransferIssue: (proxyAddr: string, tokenId: string) => Promise<unknown>;
         proxyLockBorrowWithdraw: (proxyAddr: string, loanId: string, amount: string, usr: string) => Promise<unknown>;
-        proxyRepayUnlockClose: (proxyAddr: string, tokenId: string, loanId: string, amount: string) => Promise<unknown>;
+        proxyRepayUnlockClose: (proxyAddr: string, tokenId: string, loanId: string) => Promise<unknown>;
         provider: any;
         eth: import("../types").ethI;
         ethOptions: any;
@@ -27,14 +25,13 @@ declare function ProxyActions<ActionsBase extends Constructor<Tinlake>>(Base: Ac
 } & ActionsBase;
 export declare type IProxyActions = {
     buildProxy(owner: string): Promise<any>;
-    checkProxyExistence(provider: any, borrowerAddr: string): any;
+    checkProxyExists(provider: any, address: string): Promise<string | null>;
     getProxy(accessTokenId: string): Promise<any>;
     proxyCount(): Promise<any>;
     getProxyAccessToken(proxyAddr: string): Promise<any>;
-    getAccessTokenOwner(tokenId: string): Promise<any>;
-    getNFTOwner(tokenId: string): Promise<BN>;
-    getProxyFromLoan(loanId: string): Promise<any>;
-    proxyCreateNew(borrowerAddr: string): Promise<any>;
+    getProxyAccessTokenOwner(tokenId: string): Promise<any>;
+    getProxyOwnerByLoan(loanId: string): Promise<any>;
+    proxyCreateNew(address: string): Promise<any>;
     proxyTransferIssue(proxyAddr: string, tokenId: string): Promise<any>;
     proxyLockBorrowWithdraw(proxyAddr: string, loanId: string, amount: string, usr: string): Promise<any>;
     proxyRepayUnlockClose(proxyAddr: string, tokenId: string, loanId: string, amount: string): Promise<any>;

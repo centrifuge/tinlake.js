@@ -19,12 +19,12 @@ function AnalyticsActions<ActionsBase extends Constructor<Tinlake>>(Base: Action
 
     getPrincipal = async (loanId: string): Promise<BN> => {
       const res = await executeAndRetry(this.contracts['CEILING'].ceiling, [loanId]);
-      return res ? res[0] : Promise.resolve(new BN(0));
+      return res ? res[0] : new BN(0);
     }
 
     getDebt = async (loanID: string): Promise<BN> => {
       const res = await executeAndRetry(this.contracts['PILE'].debt, [loanID]);
-      return res ? res[0] : Promise.resolve(new BN(0));
+      return res ? res[0] : new BN(0);
     }
 
     loanCount = async (): Promise<BN> => {

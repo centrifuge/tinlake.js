@@ -8,15 +8,14 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 
     issue = async (registry: string, tokenId: string) => {
       const txHash = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
-      console.log(`[Issue Loan] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
     nftLookup = async (registry: string, tokenId: string) => {
       const nft = ethers.utils.solidityKeccak256(['address', 'uint'], [registry, tokenId]);
       console.log('NFT Look Up]');
-      const loanBn = await executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig]);
-      return (loanBn[0].toString());
+      const res = await executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig]);
+      return res[0].toString();
     }
 
     lock = async (loan: string) => {

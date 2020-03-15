@@ -15,7 +15,7 @@ const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 
 const { SUCCESS_STATUS, FAIL_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
-describe.only('proxy tests', async () => {
+describe('proxy tests', async () => {
 
   before(async () => {
     // fund accounts with ETH
@@ -23,12 +23,11 @@ describe.only('proxy tests', async () => {
     await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   });
 
-  describe.only('proxy registry', async () => {
+  describe('proxy registry', async () => {
     it('success: full loan cycle - open, borrow, lock, withdraw, repay, unlock, close', async () => {
       // create new proxy and mint collateral NFT to borrower
       const proxyAddr = await borrowerTinlake.proxyCreateNew(borrowerAccount.address);
-      const mintResult: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
-      const nftId = mintResult.events[0].data[2].toString();
+      const nftId = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
       await borrowerTinlake.approveNFT(nftId, proxyAddr);
       // issue loan from collateral NFT
       const issueResult = await borrowerTinlake.proxyTransferIssue(proxyAddr, nftId);
@@ -65,8 +64,7 @@ describe.only('proxy tests', async () => {
 
     it('fail: does not succeed if the proxy is not approved to take the NFT', async () => {
       const proxyAddr = await borrowerTinlake.proxyCreateNew(borrowerAccount.address);
-      const mintResult: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
-      const nftId = mintResult.events[0].data[2].toString();
+      const nftId: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
       const res = await borrowerTinlake.proxyTransferIssue(proxyAddr, nftId);
       assert.equal(res.status, FAIL_STATUS);
     });
@@ -74,8 +72,7 @@ describe.only('proxy tests', async () => {
     it('fail: does not succeed if the proxy is not approved to transfer currency from the borrower', async () => {
       // create new proxy and mint collateral NFT to vorrower
       const proxyAddr = await borrowerTinlake.proxyCreateNew(borrowerAccount.address);
-      const mintResult: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
-      const nftId = mintResult.events[0].data[2].toString();
+      const nftId: any = await governanceTinlake.mintTitleNFT(borrowerAccount.address);
       await borrowerTinlake.approveNFT(nftId, proxyAddr);
       // issue loan from collateral NFT
       await borrowerTinlake.proxyTransferIssue(proxyAddr, nftId);

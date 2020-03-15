@@ -11877,7 +11877,7 @@ var contractAbiShelf = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "what",
+        name: "contractName",
         type: "bytes32"
       },
       {
@@ -15067,7 +15067,7 @@ var contractAbiAssessor = [
     type: "event"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
         internalType: "address",
@@ -15084,11 +15084,32 @@ var contractAbiAssessor = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
     constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "tranche",
+        type: "address"
+      }
+    ],
+    name: "calcAndUpdateTokenPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
     inputs: [
       {
         internalType: "address",
@@ -15105,11 +15126,11 @@ var contractAbiAssessor = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "calcMaxSeniorAssetValue",
@@ -15121,11 +15142,11 @@ var contractAbiAssessor = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "calcMinJuniorAssetValue",
@@ -15137,11 +15158,11 @@ var contractAbiAssessor = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
         internalType: "address",
@@ -15158,7 +15179,7 @@ var contractAbiAssessor = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -15234,7 +15255,7 @@ var contractAbiAssessor = [
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "currentJuniorRatio",
@@ -15246,7 +15267,7 @@ var contractAbiAssessor = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -15270,7 +15291,7 @@ var contractAbiAssessor = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "what",
+        name: "contractName",
         type: "bytes32"
       },
       {
@@ -16242,6 +16263,42 @@ var contractAbiActions = [
         type: "address"
       },
       {
+        internalType: "contract PileLike",
+        name: "pile",
+        type: "address"
+      },
+      {
+        internalType: "contract ERC20Like",
+        name: "erc20",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "loan",
+        type: "uint256"
+      }
+    ],
+    name: "repayFullDebt",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "contract ShelfLike",
+        name: "shelf",
+        type: "address"
+      },
+      {
+        internalType: "contract PileLike",
+        name: "pile",
+        type: "address"
+      },
+      {
         internalType: "contract NFTLike",
         name: "registry",
         type: "address"
@@ -16259,11 +16316,6 @@ var contractAbiActions = [
       {
         internalType: "uint256",
         name: "loan",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
         type: "uint256"
       }
     ],
@@ -16283,6 +16335,11 @@ var contractAbiActions = [
         type: "address"
       },
       {
+        internalType: "contract PileLike",
+        name: "pile",
+        type: "address"
+      },
+      {
         internalType: "contract NFTLike",
         name: "registry",
         type: "address"
@@ -16300,11 +16357,6 @@ var contractAbiActions = [
       {
         internalType: "uint256",
         name: "loan",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
         type: "uint256"
       }
     ],
@@ -17554,405 +17606,8 @@ var contractAbiNFTData = [
   }
 ];
 
-var contractAbiNFT = [
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "interfaceId",
-        type: "bytes4"
-      }
-    ],
-    name: "supportsInterface",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "getApproved",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "transferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "ownerOf",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-    ],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "setApprovalForAll",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address"
-      },
-      {
-        name: "to",
-        type: "address"
-      },
-      {
-        name: "tokenId",
-        type: "uint256"
-      },
-      {
-        name: "_data",
-        type: "bytes"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "tokenURI",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "usr",
-        type: "address"
-      },
-      {
-        name: "tkn",
-        type: "uint256"
-      },
-      {
-        name: "ref",
-        type: "string"
-      },
-      {
-        name: "amount",
-        type: "uint256"
-      },
-      {
-        name: "asset",
-        type: "string"
-      }
-    ],
-    name: "mint",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
-        type: "address"
-      },
-      {
-        name: "operator",
-        type: "address"
-      }
-    ],
-    name: "isApprovedForAll",
-    outputs: [
-      {
-        name: "",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "data",
-    outputs: [
-      {
-        name: "reference_id",
-        type: "string"
-      },
-      {
-        name: "amount",
-        type: "uint256"
-      },
-      {
-        name: "asset_type",
-        type: "string"
-      },
-      {
-        name: "borrower",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "to",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Transfer",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "approved",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "Approval",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        name: "operator",
-        type: "address"
-      },
-      {
-        indexed: false,
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "ApprovalForAll",
-    type: "event"
-  }
-];
-
 var abiDefinitions = {
-    COLLATERAL_NFT: contractAbiNFT,
+    COLLATERAL_NFT: contractAbiTitle,
     COLLATERAL_NFT_DATA: contractAbiNFTData,
     TITLE: contractAbiTitle,
     TINLAKE_CURRENCY: contractAbiCurrency,
@@ -29486,6 +29141,12 @@ unwrapExports(hmac);
 var hmac_1 = hmac.SupportedAlgorithms;
 var hmac_2 = hmac.computeHmac;
 
+var _args = [
+  [
+    "elliptic@6.5.2",
+    "/Users/ilinzweilin/Desktop/centrifuge/forks/tinlake.js"
+  ]
+];
 var _from = "elliptic@6.5.2";
 var _id = "elliptic@6.5.2";
 var _inBundle = false;
@@ -29507,9 +29168,8 @@ var _requiredBy = [
   "/ethers"
 ];
 var _resolved = "https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz";
-var _shasum = "05c5678d7173c049d8ca433552224a495d0e3762";
-var _spec = "elliptic@6.5.2";
-var _where = "/Users/ch4rly/go/src/github.com/centrifuge/tinlake.js/node_modules/ethers";
+var _spec = "6.5.2";
+var _where = "/Users/ilinzweilin/Desktop/centrifuge/forks/tinlake.js";
 var author = {
   name: "Fedor Indutny",
   email: "fedor@indutny.com"
@@ -29517,7 +29177,6 @@ var author = {
 var bugs = {
   url: "https://github.com/indutny/elliptic/issues"
 };
-var bundleDependencies = false;
 var dependencies = {
   "bn.js": "^4.4.0",
   brorand: "^1.0.1",
@@ -29527,7 +29186,6 @@ var dependencies = {
   "minimalistic-assert": "^1.0.0",
   "minimalistic-crypto-utils": "^1.0.0"
 };
-var deprecated = false;
 var description = "EC cryptography";
 var devDependencies = {
   brfs: "^1.4.3",
@@ -29572,6 +29230,7 @@ var scripts = {
 };
 var version = "6.5.2";
 var _package = {
+  _args: _args,
   _from: _from,
   _id: _id,
   _inBundle: _inBundle,
@@ -29581,14 +29240,11 @@ var _package = {
   _requested: _requested,
   _requiredBy: _requiredBy,
   _resolved: _resolved,
-  _shasum: _shasum,
   _spec: _spec,
   _where: _where,
   author: author,
   bugs: bugs,
-  bundleDependencies: bundleDependencies,
   dependencies: dependencies,
-  deprecated: deprecated,
   description: description,
   devDependencies: devDependencies,
   files: files,
@@ -29603,6 +29259,7 @@ var _package = {
 };
 
 var _package$1 = /*#__PURE__*/Object.freeze({
+  _args: _args,
   _from: _from,
   _id: _id,
   _inBundle: _inBundle,
@@ -29612,14 +29269,11 @@ var _package$1 = /*#__PURE__*/Object.freeze({
   _requested: _requested,
   _requiredBy: _requiredBy,
   _resolved: _resolved,
-  _shasum: _shasum,
   _spec: _spec,
   _where: _where,
   author: author,
   bugs: bugs,
-  bundleDependencies: bundleDependencies,
   dependencies: dependencies,
-  deprecated: deprecated,
   description: description,
   devDependencies: devDependencies,
   files: files,
@@ -43545,13 +43199,12 @@ function BorrowerActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
-                            console.log("[Issue Loan] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout)];
                     }
                 });
             }); };
             _this.nftLookup = function (registry, tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var nft, loanBn;
+                var nft, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -43559,8 +43212,8 @@ function BorrowerActions(Base) {
                             console.log('NFT Look Up]');
                             return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig])];
                         case 1:
-                            loanBn = _a.sent();
-                            return [2 /*return*/, (loanBn[0].toString())];
+                            res = _a.sent();
+                            return [2 /*return*/, res[0].toString()];
                     }
                 });
             }); };
@@ -43929,7 +43582,9 @@ function CurrencyActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])];
+                        case 0:
+                            console.log("currencyAmount to approve", currencyAmount.toString());
+                            return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Currency.approve] txHash: " + txHash);
@@ -43949,7 +43604,7 @@ function CollateralActions(Base) {
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.mintTitleNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash, response;
+                var txHash, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig])];
@@ -43958,8 +43613,8 @@ function CollateralActions(Base) {
                             console.log("[Mint NFT] txHash: " + txHash);
                             return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
                         case 2:
-                            response = _a.sent();
-                            return [2 /*return*/, response.events[0].data[2].toString()];
+                            res = _a.sent();
+                            return [2 /*return*/, res.events[0].data[2].toString()];
                     }
                 });
             }); };
@@ -44009,6 +43664,29 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
+            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0]];
+                    }
+                });
+            }); };
+            _this.transferNFT = function (from, to, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].transferFrom, [from, to, tokenId, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[NFT Approve] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
             return _this;
         }
         return class_1;
@@ -44050,7 +43728,7 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['CEILING'].ceiling, [loanId])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res ? res[0] : Promise.resolve(new bn(0))];
+                            return [2 /*return*/, res ? res[0] : new bn(0)];
                     }
                 });
             }); };
@@ -44061,7 +43739,7 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].debt, [loanID])];
                         case 1:
                             res = _a.sent();
-                            return [2 /*return*/, res ? res[0] : Promise.resolve(new bn(0))];
+                            return [2 /*return*/, res ? res[0] : new bn(0)];
                     }
                 });
             }); };
@@ -44241,13 +43919,12 @@ function GovernanceActions(Base) {
 }
 
 var abiCoder$2 = require('web3-eth-abi');
-var ZERO_ADDRESS$1 = '0x0000000000000000000000000000000000000000';
 function ProxyActions(Base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.getAccessTokenOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
+            _this.getProxyAccessTokenOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -44255,29 +43932,6 @@ function ProxyActions(Base) {
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
-            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                    }
-                });
-            }); };
-            _this.transferNFT = function (from, to, tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].transferFrom, [from, to, tokenId, this.ethConfig])];
-                        case 1:
-                            txHash = _a.sent();
-                            console.log("[NFT Approve] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['COLLATERAL_NFT'].abi, this.transactionTimeout)];
                     }
                 });
             }); };
@@ -44313,46 +43967,25 @@ function ProxyActions(Base) {
                     switch (_a.label) {
                         case 0:
                             proxy = this.eth.contract(this.contractAbis['PROXY']).at(proxyAddr);
-                            return [4 /*yield*/, executeAndRetry(proxy.accessToken, [this.ethConfig])];
+                            return [4 /*yield*/, executeAndRetry(proxy.accessToken, [])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0].toNumber()];
                     }
                 });
             }); };
-            _this.getProxyFromLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
-                var address, accessTokenId, res, e_1, e_2;
+            _this.getProxyOwnerByLoan = function (loanId) { return __awaiter(_this, void 0, void 0, function () {
+                var res, loanOwner, accessToken;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            _a.trys.push([0, 2, , 3]);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TITLE'].ownerOf, [loanId])];
                         case 1:
                             res = _a.sent();
-                            address = res[0];
-                            return [3 /*break*/, 3];
+                            loanOwner = res[0];
+                            return [4 /*yield*/, this.getProxyAccessToken(loanOwner)];
                         case 2:
-                            e_1 = _a.sent();
-                            address = ZERO_ADDRESS$1;
-                            return [3 /*break*/, 3];
-                        case 3:
-                            if (!(address !== ZERO_ADDRESS$1)) return [3 /*break*/, 7];
-                            _a.label = 4;
-                        case 4:
-                            _a.trys.push([4, 6, , 7]);
-                            return [4 /*yield*/, this.getProxyAccessToken(address)];
-                        case 5:
-                            accessTokenId = _a.sent();
-                            return [3 /*break*/, 7];
-                        case 6:
-                            e_2 = _a.sent();
-                            accessTokenId = null;
-                            return [3 /*break*/, 7];
-                        case 7:
-                            if (!accessTokenId) return [3 /*break*/, 9];
-                            return [4 /*yield*/, this.getAccessTokenOwner(accessTokenId)];
-                        case 8: return [2 /*return*/, _a.sent()];
-                        case 9: return [2 /*return*/];
+                            accessToken = _a.sent();
+                            return [2 /*return*/, this.getProxyAccessTokenOwner(accessToken)];
                     }
                 });
             }); };
@@ -44367,42 +44000,39 @@ function ProxyActions(Base) {
                     }
                 });
             }); };
-            _this.checkProxyExistence = function (borrowerAddr) { return __awaiter(_this, void 0, void 0, function () {
-                var proxy, count, i, ownerBN, proxyAddress;
+            _this.checkProxyExists = function (address) { return __awaiter(_this, void 0, void 0, function () {
+                var count, i, accessToken, ownerBN;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, this.proxyCount()];
                         case 1:
                             count = (_a.sent()).toNumber();
-                            i = 0;
+                            i = 1;
                             _a.label = 2;
                         case 2:
                             if (!(i < count)) return [3 /*break*/, 6];
-                            return [4 /*yield*/, this.getAccessTokenOwner(i.toString())];
+                            accessToken = i.toString();
+                            return [4 /*yield*/, this.getProxyAccessTokenOwner(accessToken)];
                         case 3:
                             ownerBN = _a.sent();
-                            if (!(ownerBN && ethers_2$1.utils.getAddress(ownerBN.toString()) === ethers_2$1.utils.getAddress(borrowerAddr))) return [3 /*break*/, 5];
-                            return [4 /*yield*/, this.getProxy(i.toString())];
-                        case 4:
-                            proxyAddress = _a.sent();
-                            proxy = proxyAddress;
-                            _a.label = 5;
+                            if (!(ownerBN && ethers_2$1.utils.getAddress(ownerBN.toString()) === ethers_2$1.utils.getAddress(address))) return [3 /*break*/, 5];
+                            return [4 /*yield*/, this.getProxy(accessToken)];
+                        case 4: return [2 /*return*/, _a.sent()];
                         case 5:
                             i += 1;
                             return [3 /*break*/, 2];
-                        case 6: return [2 /*return*/, proxy];
+                        case 6: return [2 /*return*/, null];
                     }
                 });
             }); };
-            _this.proxyCreateNew = function (borrowerAddr) { return __awaiter(_this, void 0, void 0, function () {
+            _this.proxyCreateNew = function (address) { return __awaiter(_this, void 0, void 0, function () {
                 var accessToken;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.buildProxy(borrowerAddr)];
+                        case 0: return [4 /*yield*/, this.buildProxy(address)];
                         case 1:
                             accessToken = _a.sent();
-                            return [4 /*yield*/, this.getProxy(accessToken)];
-                        case 2: return [2 /*return*/, _a.sent()];
+                            return [2 /*return*/, this.getProxy(accessToken)];
                     }
                 });
             }); };
@@ -44425,8 +44055,7 @@ function ProxyActions(Base) {
                         case 1:
                             txHash = _a.sent();
                             console.log("[Proxy Transfer Issue Loan] txHash: " + txHash);
-                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
-                        case 2: return [2 /*return*/, _a.sent()];
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
                     }
                 });
             }); };
@@ -44450,12 +44079,11 @@ function ProxyActions(Base) {
                         case 1:
                             txHash = _a.sent();
                             console.log("[Proxy Lock Borrow Withdraw] txHash: " + txHash);
-                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
-                        case 2: return [2 /*return*/, _a.sent()];
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
                     }
                 });
             }); };
-            _this.proxyRepayUnlockClose = function (proxyAddr, tokenId, loanId, amount) { return __awaiter(_this, void 0, void 0, function () {
+            _this.proxyRepayUnlockClose = function (proxyAddr, tokenId, loanId) { return __awaiter(_this, void 0, void 0, function () {
                 var proxy, encoded, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -44466,19 +44094,18 @@ function ProxyActions(Base) {
                                 type: 'function',
                                 inputs: [
                                     { type: 'address', name: 'shelf' },
+                                    { type: 'address', name: 'pile' },
                                     { type: 'address', name: 'registry' },
                                     { type: 'uint256', name: 'token' },
                                     { type: 'address', name: 'erc20' },
-                                    { type: 'uint256', name: 'loan' },
-                                    { type: 'uint256', name: 'amount' }
+                                    { type: 'uint256', name: 'loan' }
                                 ]
-                            }, [this.contracts['SHELF'].address, this.contracts['COLLATERAL_NFT'].address, tokenId, this.contracts['TINLAKE_CURRENCY'].address, loanId, amount]);
+                            }, [this.contracts['SHELF'].address, this.contracts['PILE'].address, this.contracts['COLLATERAL_NFT'].address, tokenId, this.contracts['TINLAKE_CURRENCY'].address, loanId]);
                             return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Proxy Repay Unlock Close] txHash: " + txHash);
-                            return [4 /*yield*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
-                        case 2: return [2 /*return*/, _a.sent()];
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contractAbis['PROXY'], this.transactionTimeout)];
                     }
                 });
             }); };

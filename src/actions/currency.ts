@@ -11,18 +11,18 @@ function CurrencyActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
     }
 
     getCurrencyBalance = async (user: string) => {
-      const res: { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [user]);
-      return res[0];
+      const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [user]);
+      return res[0]; 
     }
 
     getJuniorBalance = async () => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['JUNIOR']]);
-      return res[0] || new BN(0);
+      return res[0] || new BN(0); 
     }
 
     getSeniorBalance = async () => {
       const res : { 0: BN } = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].balanceOf, [this.contractAddresses['SENIOR']]);
-      return res[0] || new BN(0);
+      return res[0] || new BN(0); 
     }
 
     getTrancheBalance = async () => {
@@ -34,11 +34,12 @@ function CurrencyActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
     }
 
     approveCurrency = async (usr: string, currencyAmount: string) => {
-      const txHash = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig]);
+      console.log("currencyAmount to approve", currencyAmount.toString());
+      const txHash = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])
       console.log(`[Currency.approve] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['TINLAKE_CURRENCY'].abi, this.transactionTimeout);
     }
-  };
+  }
 }
 
 export type ICurrencyActions = {
@@ -48,6 +49,6 @@ export type ICurrencyActions = {
   getJuniorBalance(): Promise<BN>,
   getSeniorBalance(): Promise<BN>,
   getTrancheBalance() :Promise<BN>
-};
+}
 
 export default CurrencyActions;
