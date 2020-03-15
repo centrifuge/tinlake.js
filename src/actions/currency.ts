@@ -34,7 +34,6 @@ function CurrencyActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
     }
 
     approveCurrency = async (usr: string, currencyAmount: string) => {
-      console.log("currencyAmount to approve", currencyAmount.toString());
       const txHash = await executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])
       console.log(`[Currency.approve] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['TINLAKE_CURRENCY'].abi, this.transactionTimeout);
