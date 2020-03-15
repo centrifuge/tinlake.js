@@ -43588,9 +43588,7 @@ function CurrencyActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0:
-                            console.log("currencyAmount to approve", currencyAmount.toString());
-                            return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['TINLAKE_CURRENCY'].approve, [usr, currencyAmount, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Currency.approve] txHash: " + txHash);

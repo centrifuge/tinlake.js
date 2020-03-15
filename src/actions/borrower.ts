@@ -8,6 +8,7 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
 
     issue = async (registry: string, tokenId: string) => {
       const txHash = await executeAndRetry(this.contracts['SHELF'].issue, [registry, tokenId, this.ethConfig]);
+      console.log(`[Issue Loan] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['SHELF'].abi, this.transactionTimeout);
     }
 
