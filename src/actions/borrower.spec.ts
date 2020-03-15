@@ -18,7 +18,7 @@ const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
-describe.only('borrower tests', async () => {
+describe('borrower tests', async () => {
 
   before(async () =>  {
     // fund borrowerAccount with ETH
@@ -38,7 +38,7 @@ describe.only('borrower tests', async () => {
     await mintIssue(borrowerAccount.address, borrowerTinlake);
   });
 
-  it.only('success: close loan', async () => {
+  it('success: close loan', async () => {
     const { loanId } = await mintIssue(borrowerAccount.address, borrowerTinlake);
     const closeResult = await borrowerTinlake.close(loanId);
     assert.equal(closeResult.status, SUCCESS_STATUS);
