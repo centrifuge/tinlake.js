@@ -14336,7 +14336,7 @@ var contractAbiOperator = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "what",
+        name: "contractName",
         type: "bytes32"
       },
       {
@@ -17345,7 +17345,7 @@ var contractAbiTranche = [
     type: "event"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "balance",
@@ -17357,7 +17357,7 @@ var contractAbiTranche = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -17556,7 +17556,7 @@ var contractAbiTranche = [
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "tokenSupply",
@@ -17568,7 +17568,7 @@ var contractAbiTranche = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
