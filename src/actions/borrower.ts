@@ -15,8 +15,8 @@ function BorrowerActions<ActionsBase extends Constructor<Tinlake>>(Base: Actions
     nftLookup = async (registry: string, tokenId: string) => {
       const nft = ethers.utils.solidityKeccak256(['address', 'uint'], [registry, tokenId]);
       console.log('NFT Look Up]');
-      const loanBn = await executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig]);
-      return (loanBn[0].toString());
+      const res = await executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig]);
+      return res[0].toString();
     }
 
     lock = async (loan: string) => {

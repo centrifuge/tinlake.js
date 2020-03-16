@@ -20,6 +20,7 @@ import contractAbiNFT from './test/SimpleNFT.abi.json';
 import { ContractAbis } from '../types';
 
 export default {
+  // COLLATERAL_NFT : contractAbiTitle,
   COLLATERAL_NFT : contractAbiNFT,
   COLLATERAL_NFT_DATA: contractAbiNFTData,
   TITLE : contractAbiTitle,

@@ -18,21 +18,19 @@ export declare class Tinlake {
 }
 declare const TinlakeWithActions: {
     new (...args: any[]): {
-        shelf: any;
-        currency: any;
-        registry: any;
-        actions: any;
-        proxy: void;
-        checkProxy: () => Promise<void>;
         getAccessTokenOwner: (tokenId: string) => Promise<BN>;
         getNFTOwner: (tokenId: string) => Promise<BN>;
         transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
-        newProxy: (owner: string) => Promise<any>;
+        buildProxy: (owner: string) => Promise<any>;
         getProxy: (accessTokenId: string) => Promise<any>;
-        getProxyAccessToken: () => Promise<any>;
-        proxyTransferIssue: (tokenId: string) => Promise<unknown>;
-        proxyLockBorrowWithdraw: (loanId: string, amount: string, usr: string) => Promise<unknown>;
-        proxyRepayUnlockClose: (tokenId: string, loanId: string, amount: string) => Promise<unknown>;
+        getProxyAccessToken: (proxyAddr: string) => Promise<any>;
+        getProxyFromLoan: (loanId: string) => Promise<BN | undefined>;
+        proxyCount: () => Promise<BN>;
+        checkProxyExistence: (borrowerAddr: string) => Promise<any>;
+        proxyCreateNew: (borrowerAddr: string) => Promise<any>;
+        proxyTransferIssue: (proxyAddr: string, tokenId: string) => Promise<unknown>;
+        proxyLockBorrowWithdraw: (proxyAddr: string, loanId: string, amount: string, usr: string) => Promise<unknown>;
+        proxyRepayUnlockClose: (proxyAddr: string, tokenId: string, loanId: string, amount: string) => Promise<unknown>;
         provider: any;
         eth: ethI;
         ethOptions: any;
@@ -155,7 +153,7 @@ declare const TinlakeWithActions: {
     };
 } & {
     new (...args: any[]): {
-        mintTitleNFT: (user: string) => Promise<unknown>;
+        mintTitleNFT: (user: string) => Promise<any>;
         mintNFT: (owner: string, tokenId: string, ref: string, amount: string, asset: string) => Promise<unknown>;
         approveNFT: (tokenId: string, to: string) => Promise<unknown>;
         getNFTCount: () => Promise<BN>;

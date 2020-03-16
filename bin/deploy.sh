@@ -46,11 +46,11 @@ seth send --value 10000000000000000000000000000000000000000000000000000000 $GOD_
 
 # deploy proxy registry contract
 ./tinlake-proxy/bin/deploy.sh
-cat ./tinlake-proxy/deployments/addresses.json >> ./test/addresses.json
+cat ./tinlake-proxy/deployments/addresses_unknown.json >> ./test/addresses.json
 
 # deploy tinlake actions
-./tinlake-actions/  bin/deploy.sh
-cat ./tinlake-actions/deployments/addresses.json >> ./test/addresses.json
+./tinlake-actions/bin/deploy.sh
+cat ./tinlake-actions/deployments/addresses_unknown.json >> ./test/addresses.json
 
 
 
