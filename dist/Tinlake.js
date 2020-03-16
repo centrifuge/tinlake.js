@@ -16043,7 +16043,7 @@ var contractAbiActions = [
     type: "event"
   },
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
         internalType: "contract ERC20Like",
@@ -16065,7 +16065,7 @@ var contractAbiActions = [
     outputs: [
     ],
     payable: false,
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -16395,7 +16395,7 @@ var contractAbiActions = [
     type: "function"
   },
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
         internalType: "contract ShelfLike",
@@ -16422,7 +16422,7 @@ var contractAbiActions = [
       }
     ],
     payable: false,
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -17345,7 +17345,7 @@ var contractAbiTranche = [
     type: "event"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "balance",
@@ -17357,7 +17357,7 @@ var contractAbiTranche = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -17556,7 +17556,7 @@ var contractAbiTranche = [
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "tokenSupply",
@@ -17568,7 +17568,7 @@ var contractAbiTranche = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
