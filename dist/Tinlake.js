@@ -14336,7 +14336,7 @@ var contractAbiOperator = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "what",
+        name: "contractName",
         type: "bytes32"
       },
       {
@@ -16043,7 +16043,7 @@ var contractAbiActions = [
     type: "event"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
         internalType: "contract ERC20Like",
@@ -16065,7 +16065,7 @@ var contractAbiActions = [
     outputs: [
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -16395,7 +16395,7 @@ var contractAbiActions = [
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
         internalType: "contract ShelfLike",
@@ -16422,7 +16422,7 @@ var contractAbiActions = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
