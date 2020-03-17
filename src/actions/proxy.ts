@@ -126,7 +126,7 @@ export type IProxyActions = {
   proxyCreateNew(address: string): Promise<any>,
   proxyTransferIssue(proxyAddr:string , tokenId: string): Promise<any>,
   proxyLockBorrowWithdraw(proxyAddr:string, loanId: string, amount: string, usr: string): Promise<any>,
-  proxyRepayUnlockClose(proxyAddr: string, tokenId: string, loanId: string, amount: string): Promise<any>,
+  proxyRepayUnlockClose(proxyAddr: string, tokenId: string, loanId: string): Promise<any>,
 };
 
 export default ProxyActions;
