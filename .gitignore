@@ -69,5 +69,9 @@ typings/
 # IDE files
 .DS_Store
 .idea/
+<<<<<<< HEAD
+=======
+bin/.idea/
+>>>>>>> master
 src/.DS_Store
 

@@ -18,19 +18,17 @@ export declare class Tinlake {
 }
 declare const TinlakeWithActions: {
     new (...args: any[]): {
-        getAccessTokenOwner: (tokenId: string) => Promise<BN>;
-        getNFTOwner: (tokenId: string) => Promise<BN>;
-        transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
+        getProxyAccessTokenOwner: (tokenId: string) => Promise<BN>;
         buildProxy: (owner: string) => Promise<any>;
         getProxy: (accessTokenId: string) => Promise<any>;
         getProxyAccessToken: (proxyAddr: string) => Promise<any>;
-        getProxyFromLoan: (loanId: string) => Promise<BN | undefined>;
+        getProxyOwnerByLoan: (loanId: string) => Promise<BN>;
         proxyCount: () => Promise<BN>;
-        checkProxyExistence: (borrowerAddr: string) => Promise<any>;
-        proxyCreateNew: (borrowerAddr: string) => Promise<any>;
+        checkProxyExists: (address: string) => Promise<string | null>;
+        proxyCreateNew: (address: string) => Promise<any>;
         proxyTransferIssue: (proxyAddr: string, tokenId: string) => Promise<unknown>;
         proxyLockBorrowWithdraw: (proxyAddr: string, loanId: string, amount: string, usr: string) => Promise<unknown>;
-        proxyRepayUnlockClose: (proxyAddr: string, tokenId: string, loanId: string, amount: string) => Promise<unknown>;
+        proxyRepayUnlockClose: (proxyAddr: string, tokenId: string, loanId: string) => Promise<unknown>;
         provider: any;
         eth: ethI;
         ethOptions: any;
@@ -158,6 +156,8 @@ declare const TinlakeWithActions: {
         approveNFT: (tokenId: string, to: string) => Promise<unknown>;
         getNFTCount: () => Promise<BN>;
         getNFTData: (tokenId: string) => Promise<any>;
+        getNFTOwner: (tokenId: string) => Promise<BN>;
+        transferNFT: (from: string, to: string, tokenId: string) => Promise<unknown>;
         provider: any;
         eth: ethI;
         ethOptions: any;
