@@ -5,8 +5,12 @@ cache:
   directories:
   - node_modules
 before_install:
-    - curl https://dapp.tools/install | sh
-    - nix-env -f $HOME/.dapp/dapptools -iA dapp solc
+# install nix
+- curl https://nixos.org/nix/install | sh
+- . $HOME/.nix-profile/etc/profile.d/nix.sh
+# install dapptools
+- git clone --recursive https://github.com/dapphub/dapptools $HOME/.dapp/dapptools
+- nix-env -f $HOME/.dapp/dapptools -iA dapp solc
 jobs:
   include:
   - stage: tests
