@@ -6,17 +6,10 @@ cache:
   - node_modules
 before_install:
     - curl https://dapp.tools/install | sh
-    - /home/travis/.nix-profile/etc/profile.d/nix.sh
-    - dapp --use solc:0.5.0 test
 jobs:
   include:
   - stage: tests
     script:
     - dapp testnet &
-    - ./build/deploy_tinlake.sh
+    - ./bin/deploy.sh
     - npm run test
-  - stage: publish
-    if: "(NOT type IN (pull_request)) AND (branch = master)"
-    script:
-      - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-      - npm run publish
