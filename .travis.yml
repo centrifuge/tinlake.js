@@ -11,6 +11,7 @@ jobs:
   include:
   - stage: test
     script:
+      - dapp --use solc:0.5.15
       - dapp testnet &
       - ./bin/deploy.sh
       - npm run test
