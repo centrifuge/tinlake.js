@@ -6,6 +6,7 @@ cache:
   - node_modules
 before_install:
     - curl https://dapp.tools/install | sh
+    - nix-env -f $HOME/.dapp/dapptools -iA dapp solc
 jobs:
   include:
   - stage: tests
