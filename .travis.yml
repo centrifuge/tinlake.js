@@ -4,7 +4,6 @@ node_js:
 cache:
   directories:
     - node_modules
-    - $HOME/nix.store
 before_install:
 	  - curl https://dapp.tools/install | sh
     - /home/travis/.nix-profile/etc/profile.d/nix.sh
