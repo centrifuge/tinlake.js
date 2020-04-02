@@ -7,11 +7,11 @@ cache:
 before_install:
   - curl https://dapp.tools/install | sh
   - . $HOME/.nix-profile/etc/profile.d/nix.sh
+  - dapp --use solc:0.5.12 test
 jobs:
   include:
   - stage: test
     script:
-      - dapp --use solc:0.5.15
       - dapp testnet &
       - ./bin/deploy.sh
-      - npm run test
+    # - npm run test
