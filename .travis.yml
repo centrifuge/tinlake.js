@@ -6,7 +6,7 @@ cache:
     - node_modules
 before_install:
   - curl https://dapp.tools/install | sh
-  - . $HOME/.nix-profile/etc/profile.d/nix.sh
+  - nix-env -f $HOME/.dapp/dapptools -iA dapp solc
   - dapp --use solc:0.5.15 test
 jobs:
   include:
