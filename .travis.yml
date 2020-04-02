@@ -1,6 +1,22 @@
-language: nix
-script: |
-  cachix use dapp
-  git clone --recursive https://github.com/dapphub/dapptools $HOME/.dapp/dapptools
-  nix-env -f $HOME/.dapp/dapptools -iA dapp solc
-  dapp testnet
+language: node_js
+node_js:
+- '10'
+cache:
+  directories:
+  - node_modules
+before_install:
+    - curl https://dapp.tools/install | sh
+    - /home/travis/.nix-profile/etc/profile.d/nix.sh
+    - dapp --use solc:0.5.0 test
+jobs:
+  include:
+  - stage: tests
+    script:
+    - dapp testnet &
+    - ./build/deploy_tinlake.sh
+    - npm run test
+  - stage: publish
+    if: "(NOT type IN (pull_request)) AND (branch = master)"
+    script:
+      - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+      - npm run publish
