@@ -1,20 +1,18 @@
 language: node_js
 node_js:
-- '10'
+  - '10'
 cache:
   directories:
-  - node_modules
+    - node_modules
+    - $HOME/nix.store
 before_install:
-# install nix
-- curl https://nixos.org/nix/install | sh
-- . $HOME/.nix-profile/etc/profile.d/nix.sh
-# install dapptools
-- git clone --recursive https://github.com/dapphub/dapptools $HOME/.dapp/dapptools
-- nix-env -f $HOME/.dapp/dapptools -iA dapp solc
+	  - curl https://dapp.tools/install | sh
+    - /home/travis/.nix-profile/etc/profile.d/nix.sh
+    - dapp --use solc:0.5.0 test
 jobs:
   include:
-  - stage: tests
+  - stage: test
     script:
-    - dapp testnet &
-    - ./bin/deploy.sh
-    - npm run test
+      - dapp testnet &
+      - ./bin/deploy.sh
+      - npm run test
