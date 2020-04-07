@@ -64,7 +64,7 @@ export type TinlakeParams = {
 
 export type Constructor<T = {}> = new (...args: any[]) => Tinlake;
 
-export class Tinlake {
+export default class Tinlake {
   public provider: any;
   public eth: ethI;
   public ethOptions: any;
@@ -76,7 +76,6 @@ export class Tinlake {
 
   constructor(params: TinlakeParams) {
     const { provider, contractAddresses, nftDataOutputs, transactionTimeout, contractAbis, ethOptions, ethConfig } = params;
-    console.log('moin', params.provider);
     if (!contractAbis) {
       contractNames.forEach((name) => {
         if (abiDefinitions[name]) {

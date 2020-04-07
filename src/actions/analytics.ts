@@ -1,4 +1,4 @@
-import { Constructor, TinlakeParams, Tinlake } from '../Tinlake';
+import { Constructor, TinlakeParams } from '../Tinlake';
 import { executeAndRetry } from '../services/ethereum';
 import { Loan, Investor } from '../types/tinlake';
 import BN from 'bn.js';

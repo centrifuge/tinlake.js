@@ -38,6 +38,14 @@ export type Investor = {
 };
 
 export type ITinlake = TinlakeActions & {
+  provider: any;
+  eth: any;
+  ethOptions: any;
+  ethConfig: any;
+  contractAddresses: any;
+  transactionTimeout: number;
+  contracts: any;
+  contractAbis: any;
   setProvider(provider: any, ethOptions?: any): void;
   setEthConfig(ethConfig: {
     [key: string]: any;

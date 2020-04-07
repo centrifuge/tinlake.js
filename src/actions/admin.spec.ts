@@ -1,20 +1,19 @@
 const randomString = require('randomstring');
 const account = require('ethjs-account');
+import { ITinlake } from '../types/tinlake';
 import assert from 'assert';
-import { ITinlake } from '../Tinlake';
-import { Account } from '../../test/types';
-import { createTinlake, TestProvider } from '../../test/utils';
-import config from '../../test/config';
+import { createTinlake, TestProvider } from '../test/utils';
+import testConfig from '../test/config';
 import { interestRateToFee } from '../utils/interestRateToFee';
 
 const testProvider = new TestProvider(testConfig);
 const adminAccount = account.generate(randomString.generate(32));
 const borrowerAccount = account.generate(randomString.generate(32));
 const lenderAccount = account.generate(randomString.generate(32));
-const adminTinlake = createTinlake(adminAccount, testConfig);
+const adminTinlake : Partial<ITinlake> = createTinlake(adminAccount, testConfig);
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 
-const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
+const { FAUCET_AMOUNT, contractAddresses } = testConfig;
 
 // ------------ admin tests borrower-site -------------
 describe('admin tests', async () => {
@@ -54,7 +53,7 @@ describe('admin tests', async () => {
     it('success: set allowance for junior investor', async () => {
       // rely admin on junior operator
       await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['JUNIOR_OPERATOR']);
-      const maxCurrency = 1000;
+      const maxCurrency = '1000';
       const maxToken = 100;
 
       // set allowance for lender address

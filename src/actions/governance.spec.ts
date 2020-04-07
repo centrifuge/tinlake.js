@@ -1,9 +1,9 @@
 const randomString = require('randomstring');
 const account = require('ethjs-account');
 import assert from 'assert';
-import { createTinlake } from '../../test/utils';
-import config from '../../test/config';
-import { ContractNames } from '../types';
+import { createTinlake } from '../test/utils';
+import testConfig from '../test/config';
+import { ContractNames } from '../Tinlake';
 
 // god account = governance address for the tinlake test deployment
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);

@@ -1,5 +1,5 @@
 /// <reference types="bn.js" />
-import { Tinlake } from './Tinlake';
+import Tinlake from './Tinlake';
 export declare const TinlakeWithActions: {
     new (...args: any[]): {
         getProxyAccessTokenOwner: (tokenId: string) => Promise<import("bn.js")>;

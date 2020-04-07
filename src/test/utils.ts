@@ -1,7 +1,8 @@
 import { Account } from './types';
-import Tinlake, { ITinlake } from '../src/Tinlake';
-import { ethI, EthConfig, ContractAbis, ContractAddresses, ContractNames } from '../src/types';
-import { executeAndRetry, waitAndReturnEvents } from '../src/services/ethereum';
+import Tinlake, { EthConfig } from '../Tinlake';
+import { ITinlake } from '../types/tinlake';
+import { ethI, executeAndRetry  } from '../services/ethereum';
+import { fromExtendedKey } from 'ethers/utils/hdnode';
 const Eth = require('ethjs');
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
@@ -35,7 +36,7 @@ export class TestProvider {
   }
 }
 
-export function createTinlake(usr: Account, testConfig: any) {
+export function createTinlake(usr: Account, testConfig: any) : Partial<ITinlake> {
   const {
         rpcUrl,
         transactionTimeout,
@@ -44,15 +45,13 @@ export function createTinlake(usr: Account, testConfig: any) {
         nftDataContractCall,
     } = testConfig;
 
-  const tinlake = new Tinlake(
-    createSignerProvider(rpcUrl, usr),
+  const tinlake = new Tinlake({
+    provider: createSignerProvider(rpcUrl, usr),
     contractAddresses,
-    nftDataContractCall.outputs,
+    nftDataOutputs: nftDataContractCall.outputs,
     transactionTimeout,
-    {
-      ethConfig: { from: usr.address, gasLimit: `0x${gasLimit.toString(16)}` },
-    },
-  );
+    ethConfig: { from: usr.address, gasLimit: `0x${gasLimit.toString(16)}` },
+  });
 
   return tinlake;
 }

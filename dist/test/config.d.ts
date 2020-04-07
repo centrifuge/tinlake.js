@@ -1,6 +1,19 @@
 declare const testConfig: {
     contractAddresses: any;
-    nftDataContractCall: any;
+    nftDataContractCall: {
+        outputs: {
+            name: string;
+            type: string;
+        }[];
+        displayedFields: {
+            key: string;
+            label: string;
+            type: string;
+            decimals: number;
+            precision: number;
+            suffix: string;
+        }[];
+    };
     godAccount: {
         address: string;
         publicKey: string;
@@ -10,7 +23,7 @@ declare const testConfig: {
     gasPrice: number;
     gasLimit: number;
     rpcUrl: string;
-    contractAbis: any;
+    contractAbis: import("../Tinlake").ContractAbis;
     SUCCESS_STATUS: string;
     FAIL_STATUS: string;
     FAUCET_AMOUNT: string;

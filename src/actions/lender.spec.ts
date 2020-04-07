@@ -2,16 +2,16 @@ import assert from 'assert';
 const account = require('ethjs-account');
 const randomString = require('randomstring');
 
-import config from '../../test/config';
-import { ITinlake } from '../Tinlake';
-import { createTinlake, TestProvider } from '../../test/utils';
+import testConfig from '../test/config';
+import { ITinlake } from '../types/tinlake';
+import { createTinlake, TestProvider } from '../test/utils';
 
 let lenderAccount;
 let lenderTinlake;
 
 const adminAccount = account.generate(randomString.generate(32));
-const adminTinlake = createTinlake(adminAccount, testConfig);
-const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
+const adminTinlake: Partial<ITinlake>  = createTinlake(adminAccount, testConfig);
+const governanceTinlake: Partial<ITinlake> = createTinlake(testConfig.godAccount, testConfig);
 const testProvider = new TestProvider(testConfig);
 
 const { SUCCESS_STATUS, FAUCET_AMOUNT, FAIL_STATUS, contractAddresses } = testConfig;
@@ -32,8 +32,8 @@ describe('lender functions', async () => {
   });
 
   it('success: supply junior', async () => {
-    const currencyAmount = 100000;
-    const tokenAmount = 100;
+    const currencyAmount = '100000';
+    const tokenAmount = '100';
     // whitelist investor
     await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount);
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
@@ -41,7 +41,7 @@ describe('lender functions', async () => {
   });
 
   it('fail: supply junior - no allowance', async () => {
-    const currencyAmount = 1000;
+    const currencyAmount = '1000';
     // approve junior tranche to take currency
     await lenderTinlake.approveCurrency(contractAddresses['JUNIOR'], currencyAmount);
     // fund investor with tinlake currency
@@ -55,8 +55,8 @@ describe('lender functions', async () => {
   });
 
   it('success: redeem junior', async () => {
-    const currencyAmount = 10000;
-    const tokenAmount = 100;
+    const currencyAmount = '10000';
+    const tokenAmount = '100';
     // whitelist investor
     await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount);
     // supply currency - receive tokens
@@ -80,11 +80,11 @@ describe('lender functions', async () => {
   });
 
   it('fail: redeem junior - no allowance', async () => {
-    const currencyAmount = 1000;
+    const currencyAmount = '1000';
     const tokenAmount = 100;
 
     // whitelist investor with no allowance to redeem
-    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, 0);
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, '0');
     // supply currency - receive tokens
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens

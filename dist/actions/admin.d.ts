@@ -42,7 +42,7 @@ export declare type IAdminActions = {
     canSetThreshold(user: string): Promise<boolean>;
     canSetLoanPrice(user: string): Promise<boolean>;
     setCeiling(loanId: string, amount: string): Promise<any>;
-    initRate(rate: string, speed: string): Promise<any>;
+    initRate(rate: string): Promise<any>;
     setRate(loan: string, rate: string): Promise<any>;
     approveAllowanceJunior(user: string, maxCurrency: string, maxToken: string): Promise<any>;
 };

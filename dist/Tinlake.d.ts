@@ -29,7 +29,7 @@ export declare type TinlakeParams = {
     contracts?: Contracts | {};
 };
 export declare type Constructor<T = {}> = new (...args: any[]) => Tinlake;
-export declare class Tinlake {
+export default class Tinlake {
     provider: any;
     eth: ethI;
     ethOptions: any;

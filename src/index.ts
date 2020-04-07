@@ -1,6 +1,6 @@
 
 import actions from './actions/index';
-import { Tinlake } from  './Tinlake';
+import Tinlake from  './Tinlake';
 const { Admin, Borrower, Lender, Analytics, Currency, Collateral, Governance, Proxy } = actions;
 
 export const TinlakeWithActions = (Proxy(Borrower(Admin(Lender(Analytics(Currency(Collateral(Governance(Tinlake)))))))));

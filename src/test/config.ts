@@ -1,6 +1,6 @@
-import addressesJson from './addresses.json';
-import nft_data_contract_callJson from './nft_data_contract_call.json';
-import abiDefinitions from '../src/abi/';
+import contractAddresses from './addresses.json';
+import nftDataContractCall from './nft_data_contract_call.json';
+import abiDefinitions from '../abi/';
 
 const testConfig = {
   contractAddresses,

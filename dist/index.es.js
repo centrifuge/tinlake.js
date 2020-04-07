@@ -44541,7 +44541,6 @@ var Tinlake = /** @class */ (function () {
             _this.ethConfig = ethConfig;
         };
         var provider = params.provider, contractAddresses = params.contractAddresses, nftDataOutputs = params.nftDataOutputs, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig;
-        console.log('moin', params.provider);
         if (!contractAbis) {
             contractNames.forEach(function (name) {
                 if (abiDefinitions[name]) {

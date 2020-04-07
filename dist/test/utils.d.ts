@@ -1,5 +1,7 @@
 import { Account } from './types';
-import { ethI, EthConfig } from '../src/types';
+import { EthConfig } from '../Tinlake';
+import { ITinlake } from '../types/tinlake';
+import { ethI } from '../services/ethereum';
 export declare class TestProvider {
     eth: ethI;
     sponsorAccount: Account;
@@ -9,4 +11,4 @@ export declare class TestProvider {
     constructor(testConfig: any);
     fundAccountWithETH(usr: string, amount: string): Promise<void>;
 }
-export declare function createTinlake(usr: Account, testConfig: any): any;
+export declare function createTinlake(usr: Account, testConfig: any): Partial<ITinlake>;
