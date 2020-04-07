@@ -13,10 +13,6 @@
     "lib": [
       "es2015"
     ],
-    // "typeRoots": [
-    //   "./node_modules/@types",
-    //   "./typings/"
-    // ],
     "resolveJsonModule": true
   },
   "include": [

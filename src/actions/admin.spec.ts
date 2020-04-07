@@ -13,7 +13,7 @@ const lenderAccount = account.generate(randomString.generate(32));
 const adminTinlake : Partial<ITinlake> = createTinlake(adminAccount, testConfig);
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 
-const { FAUCET_AMOUNT, contractAddresses } = testConfig;
+const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
 // ------------ admin tests borrower-site -------------
 describe('admin tests', async () => {
@@ -37,7 +37,7 @@ describe('admin tests', async () => {
       const rate = '5';
       const ratePerSecond = interestRateToFee(rate);
       const initResult = await adminTinlake.initRate(ratePerSecond);
-      assert.equal(initResult.status, testConfig.SUCCESS_STATUS);
+      assert.equal(initResult.status, SUCCESS_STATUS);
     });
 
     it('success: set rate for loan', async () => {
@@ -61,7 +61,7 @@ describe('admin tests', async () => {
 
       const maxSupplyAmount = await adminTinlake.getMaxSupplyAmountJunior(lenderAccount.address);
       const maxRedeemAmount = await adminTinlake.getMaxRedeemAmountJunior(lenderAccount.address);
-      assert.equal(allowanceResult.status, testConfig.SUCCESS_STATUS);
+      assert.equal(allowanceResult.status, SUCCESS_STATUS);
       assert.equal(maxRedeemAmount, maxToken);
       assert.equal(maxSupplyAmount, maxCurrency);
     });

@@ -2,7 +2,6 @@ import { Account } from './types';
 import Tinlake, { EthConfig } from '../Tinlake';
 import { ITinlake } from '../types/tinlake';
 import { ethI, executeAndRetry  } from '../services/ethereum';
-import { fromExtendedKey } from 'ethers/utils/hdnode';
 const Eth = require('ethjs');
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
@@ -46,10 +45,10 @@ export function createTinlake(usr: Account, testConfig: any) : Partial<ITinlake>
     } = testConfig;
 
   const tinlake = new Tinlake({
-    provider: createSignerProvider(rpcUrl, usr),
     contractAddresses,
-    nftDataOutputs: nftDataContractCall.outputs,
     transactionTimeout,
+    provider: createSignerProvider(rpcUrl, usr),
+    nftDataOutputs: nftDataContractCall.outputs,
     ethConfig: { from: usr.address, gasLimit: `0x${gasLimit.toString(16)}` },
   });
 
