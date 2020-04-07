@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;ethereum&quot; | tinlake</title>
+	<title>&quot;services/ethereum&quot; | tinlake</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_ethereum_.html">&quot;ethereum&quot;</a>
+					<a href="_services_ethereum_.html">&quot;services/ethereum&quot;</a>
 				</li>
 			</ul>
-			<h1>Module &quot;ethereum&quot;</h1>
+			<h1>Module &quot;services/ethereum&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -67,12 +67,19 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_services_ethereum_.events.html" class="tsd-kind-icon">Events</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_services_ethereum_.ethi.html" class="tsd-kind-icon">ethI</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_ethereum_.html#executeandretry" class="tsd-kind-icon">execute<wbr>And<wbr>Retry</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_ethereum_.html#findevent" class="tsd-kind-icon">find<wbr>Event</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_ethereum_.html#waitandreturnevents" class="tsd-kind-icon">wait<wbr>And<wbr>Return<wbr>Events</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_ethereum_.html#waitfortransaction" class="tsd-kind-icon">wait<wbr>For<wbr>Transaction</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_services_ethereum_.html#executeandretry" class="tsd-kind-icon">execute<wbr>And<wbr>Retry</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_services_ethereum_.html#findevent" class="tsd-kind-icon">find<wbr>Event</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_services_ethereum_.html#waitandreturnevents" class="tsd-kind-icon">wait<wbr>And<wbr>Return<wbr>Events</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_services_ethereum_.html#waitfortransaction" class="tsd-kind-icon">wait<wbr>For<wbr>Transaction</a></li>
 							</ul>
 						</section>
 					</div>
@@ -84,13 +91,13 @@
 					<a name="executeandretry" class="tsd-anchor"></a>
 					<h3>execute<wbr>And<wbr>Retry</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>And<wbr>Retry<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, args<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>And<wbr>Retry<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, args<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/760b634/src/ethereum.ts#L5">ethereum.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/992a266/src/services/ethereum.ts#L21">services/ethereum.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -99,7 +106,7 @@
 									<h5>f: <span class="tsd-signature-type">Function</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> args: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = []</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = []</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -116,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/760b634/src/ethereum.ts#L68">ethereum.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/992a266/src/services/ethereum.ts#L84">services/ethereum.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -177,19 +184,19 @@
 					<a name="waitandreturnevents" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> wait<wbr>And<wbr>Return<wbr>Events</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">wait<wbr>And<wbr>Return<wbr>Events<span class="tsd-signature-symbol">(</span>eth<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.ethi.html" class="tsd-signature-type">ethI</a>, txHash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, abi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, transactionTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">wait<wbr>And<wbr>Return<wbr>Events<span class="tsd-signature-symbol">(</span>eth<span class="tsd-signature-symbol">: </span><a href="../interfaces/_services_ethereum_.ethi.html" class="tsd-signature-type">ethI</a>, txHash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, abi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, transactionTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/760b634/src/ethereum.ts#L24">ethereum.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/992a266/src/services/ethereum.ts#L40">services/ethereum.ts:40</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>eth: <a href="../interfaces/_types_.ethi.html" class="tsd-signature-type">ethI</a></h5>
+									<h5>eth: <a href="../interfaces/_services_ethereum_.ethi.html" class="tsd-signature-type">ethI</a></h5>
 								</li>
 								<li>
 									<h5>txHash: <span class="tsd-signature-type">string</span></h5>
@@ -209,19 +216,19 @@
 					<a name="waitfortransaction" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> wait<wbr>For<wbr>Transaction</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>Transaction<span class="tsd-signature-symbol">(</span>eth<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.ethi.html" class="tsd-signature-type">ethI</a>, txHash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, transactionTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>Transaction<span class="tsd-signature-symbol">(</span>eth<span class="tsd-signature-symbol">: </span><a href="../interfaces/_services_ethereum_.ethi.html" class="tsd-signature-type">ethI</a>, txHash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, transactionTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/760b634/src/ethereum.ts#L39">ethereum.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/ilinzweilin/tinlake.js/blob/992a266/src/services/ethereum.ts#L55">services/ethereum.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>eth: <a href="../interfaces/_types_.ethi.html" class="tsd-signature-type">ethI</a></h5>
+									<h5>eth: <a href="../interfaces/_services_ethereum_.ethi.html" class="tsd-signature-type">ethI</a></h5>
 								</li>
 								<li>
 									<h5>txHash: <span class="tsd-signature-type">any</span></h5>
@@ -242,93 +249,30 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="_tinlake_.html">&quot;<wbr>Tinlake&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_abi_index_.html">&quot;abi/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_admin_.html">&quot;actions/admin&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_analytics_.html">&quot;actions/analytics&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_borrower_.html">&quot;actions/borrower&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_collateral_.html">&quot;actions/collateral&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_currency_.html">&quot;actions/currency&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_governance_.html">&quot;actions/governance&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_index_.html">&quot;actions/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_lender_.html">&quot;actions/lender&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_actions_proxy_.html">&quot;actions/proxy&quot;</a>
-					</li>
 					<li class="current tsd-kind-module">
-						<a href="_ethereum_.html">&quot;ethereum&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_types_.html">&quot;types&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_basetodisplay_.html">&quot;utils/base<wbr>ToDisplay&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_basetodisplay_spec_.html">&quot;utils/base<wbr>ToDisplay.spec&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_bntohex_.html">&quot;utils/bn<wbr>ToHex&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_bntohex_spec_.html">&quot;utils/bn<wbr>ToHex.spec&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_displaytobase_.html">&quot;utils/display<wbr>ToBase&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_displaytobase_spec_.html">&quot;utils/display<wbr>ToBase.spec&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_feetointerestrate_.html">&quot;utils/fee<wbr>ToInterest<wbr>Rate&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_feetointerestrate_spec_.html">&quot;utils/fee<wbr>ToInterest<wbr>Rate.spec&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_getloanstatus_.html">&quot;utils/get<wbr>Loan<wbr>Status&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_interestratetofee_.html">&quot;utils/interest<wbr>Rate<wbr>ToFee&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_utils_interestratetofee_spec_.html">&quot;utils/interest<wbr>Rate<wbr>ToFee.spec&quot;</a>
+						<a href="_services_ethereum_.html">&quot;services/ethereum&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_ethereum_.html#executeandretry" class="tsd-kind-icon">execute<wbr>And<wbr>Retry</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_services_ethereum_.events.html" class="tsd-kind-icon">Events</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_services_ethereum_.ethi.html" class="tsd-kind-icon">ethI</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_ethereum_.html#findevent" class="tsd-kind-icon">find<wbr>Event</a>
+						<a href="_services_ethereum_.html#executeandretry" class="tsd-kind-icon">execute<wbr>And<wbr>Retry</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_ethereum_.html#waitandreturnevents" class="tsd-kind-icon">wait<wbr>And<wbr>Return<wbr>Events</a>
+						<a href="_services_ethereum_.html#findevent" class="tsd-kind-icon">find<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_ethereum_.html#waitfortransaction" class="tsd-kind-icon">wait<wbr>For<wbr>Transaction</a>
+						<a href="_services_ethereum_.html#waitandreturnevents" class="tsd-kind-icon">wait<wbr>And<wbr>Return<wbr>Events</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_services_ethereum_.html#waitfortransaction" class="tsd-kind-icon">wait<wbr>For<wbr>Transaction</a>
 					</li>
 				</ul>
 			</nav>

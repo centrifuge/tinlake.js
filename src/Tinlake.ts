@@ -1,6 +1,6 @@
-import ethjs from 'ethjs';
+import Eth from 'ethjs';
 import { ethI }  from './services/ethereum';
-import  index  from './abi/index';
+import  abiDefinitions  from './abi';
 
 const contractNames = [
   'TINLAKE_CURRENCY',

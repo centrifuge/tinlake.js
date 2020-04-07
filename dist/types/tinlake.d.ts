@@ -1,5 +1,5 @@
 import { TinlakeActions } from '../actions';
-import BN from "bn.js";
+import BN from 'bn.js';
 export declare type Loan = {
     loanId: string;
     registry: string;

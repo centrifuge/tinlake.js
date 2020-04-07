@@ -20,7 +20,7 @@ export interface Events {
         data: any[];
     }[];
 }
-export declare function executeAndRetry(f: Function, args?: Array<any>): Promise<any>;
+export declare function executeAndRetry(f: Function, args?: any): Promise<any>;
 export declare const waitAndReturnEvents: (eth: ethI, txHash: string, abi: any, transactionTimeout: number) => Promise<unknown>;
 export declare const waitForTransaction: (eth: ethI, txHash: any, transactionTimeout: number) => Promise<unknown>;
 export declare const findEvent: (abi: {

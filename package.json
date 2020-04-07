@@ -55,7 +55,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm generate-docs && npm lint && npm build"
+      "pre-commit": "npm run generate-docs && npm run lint-fix && npm run build"
     }
   },
   "repository": {

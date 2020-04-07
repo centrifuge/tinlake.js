@@ -1,5 +1,5 @@
 
-import index from './actions/index';
+import actions from './actions/index';
 import { Tinlake } from  './Tinlake';
 const { Admin, Borrower, Lender, Analytics, Currency, Collateral, Governance, Proxy } = actions;
 

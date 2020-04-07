@@ -118,6 +118,8 @@ export declare const TinlakeWithActions: {
         getMaxSupplyAmountSenior: (user: string) => Promise<import("bn.js")>;
         getMaxRedeemAmountSenior: (user: string) => Promise<any>;
         getTokenPriceSenior: () => Promise<any>;
+        getSeniorReserve: () => Promise<import("bn.js")>;
+        getJuniorReserve: () => Promise<import("bn.js")>;
         provider: any;
         eth: import("./services/ethereum").ethI;
         ethOptions: any;

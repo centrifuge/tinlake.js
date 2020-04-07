@@ -29353,7 +29353,7 @@ function LenderActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            // senior tranch functions 
+            // senior tranch functions
             _this.supplySenior = function (currencyAmount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -29747,13 +29747,13 @@ function AnalyticsActions(Base) {
                             status = _a.sent();
                             return [2 /*return*/, {
                                     loanId: loanId,
-                                    registry: collateral.registry,
-                                    tokenId: collateral.tokenId,
                                     principal: principal,
                                     interestRate: interestRate,
                                     ownerOf: ownerOf,
                                     debt: debt,
                                     status: status,
+                                    registry: collateral.registry,
+                                    tokenId: collateral.tokenId,
                                 }];
                     }
                 });
@@ -29823,9 +29823,9 @@ function AnalyticsActions(Base) {
                             _d.label = 9;
                         case 9:
                             maxRedeemSenior = _c || null;
-                            return [2 /*return*/, __assign(__assign(__assign({ address: user, tokenBalanceJunior: tokenBalanceJunior,
+                            return [2 /*return*/, __assign(__assign(__assign(__assign({ tokenBalanceJunior: tokenBalanceJunior,
                                     maxSupplyJunior: maxSupplyJunior,
-                                    maxRedeemJunior: maxRedeemJunior }, (tokenBalanceSenior && { tokenBalanceSenior: tokenBalanceSenior })), (maxSupplySenior && { maxSupplySenior: maxSupplySenior })), (maxRedeemSenior && { maxRedeemSenior: maxRedeemSenior }))];
+                                    maxRedeemJunior: maxRedeemJunior }, (tokenBalanceSenior && { tokenBalanceSenior: tokenBalanceSenior })), (maxSupplySenior && { maxSupplySenior: maxSupplySenior })), (maxRedeemSenior && { maxRedeemSenior: maxRedeemSenior })), { address: user })];
                     }
                 });
             }); };
@@ -29924,7 +29924,7 @@ function AnalyticsActions(Base) {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["SENIOR"].balance, [])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR'].balance, [])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0] || new bn(0)];
@@ -29935,7 +29935,7 @@ function AnalyticsActions(Base) {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts["JUNIOR"].balance, [])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR'].balance, [])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0] || new bn(0)];
@@ -44479,7 +44479,7 @@ var contractAbiNFT = [
 ];
 
 var abiDefinitions = {
-    //COLLATERAL_NFT : contractAbiTitle,
+    // COLLATERAL_NFT : contractAbiTitle,
     COLLATERAL_NFT: contractAbiNFT,
     COLLATERAL_NFT_DATA: contractAbiNFTData,
     TITLE: contractAbiTitle,
@@ -44547,7 +44547,7 @@ var Tinlake = /** @class */ (function () {
             _this.ethConfig = ethConfig;
         };
         var provider = params.provider, contractAddresses = params.contractAddresses, nftDataOutputs = params.nftDataOutputs, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig;
-        console.log("moin", params.provider);
+        console.log('moin', params.provider);
         if (!contractAbis) {
             contractNames.forEach(function (name) {
                 if (abiDefinitions[name]) {
@@ -46583,19 +46583,20 @@ var lookup = {};
  * @param fee Fee
  */
 var feeToInterestRate = function (fee) {
-    if (typeof fee !== 'string' && typeof fee !== 'number') {
-        fee = fee.toString();
+    var feeToConvert = fee;
+    if (typeof feeToConvert !== 'string' && typeof feeToConvert !== 'number') {
+        feeToConvert = feeToConvert.toString();
     }
-    if (fee.toString() === "0") {
-        return fee.toString();
+    if (feeToConvert.toString() === '0') {
+        return feeToConvert.toString();
     }
-    if (lookup[fee]) {
-        return lookup[fee];
+    if (lookup[feeToConvert]) {
+        return lookup[feeToConvert];
     }
-    var i = new Decimal(fee).div('1e27').pow(n);
+    var i = new Decimal(feeToConvert).div('1e27').pow(n);
     var interestRate = i.minus(1).mul(100);
     var interestRateString = interestRate.toString();
-    lookup[fee] = interestRateString;
+    lookup[feeToConvert] = interestRateString;
     return interestRateString;
 };
 
