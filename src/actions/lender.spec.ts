@@ -2,7 +2,7 @@ import assert from 'assert';
 const account = require('ethjs-account');
 const randomString = require('randomstring');
 
-import testConfig from '../../test/config';
+import config from '../../test/config';
 import { ITinlake } from '../Tinlake';
 import { createTinlake, TestProvider } from '../../test/utils';
 
@@ -14,7 +14,7 @@ const adminTinlake = createTinlake(adminAccount, testConfig);
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 const testProvider = new TestProvider(testConfig);
 
-const { SUCCESS_STATUS, FAUCET_AMOUNT, FAIL_STATUS, contractAddresses } = testConfig
+const { SUCCESS_STATUS, FAUCET_AMOUNT, FAIL_STATUS, contractAddresses } = testConfig;
 
 describe('lender functions', async () => {
 
@@ -22,7 +22,7 @@ describe('lender functions', async () => {
     // fund lender & admin accounts with currency
     await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
     // rely admin on junior operator
-    await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
+    await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['JUNIOR_OPERATOR']);
   });
 
   beforeEach(async () => {
@@ -31,12 +31,11 @@ describe('lender functions', async () => {
     await testProvider.fundAccountWithETH(lenderAccount.address, FAUCET_AMOUNT);
   });
 
-
   it('success: supply junior', async () => {
     const currencyAmount = 100000;
     const tokenAmount = 100;
     // whitelist investor
-    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount)
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount);
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     const newJuniorTokenBalance = await lenderTinlake.getJuniorTokenBalance(lenderAccount.address);
   });
@@ -59,7 +58,7 @@ describe('lender functions', async () => {
     const currencyAmount = 10000;
     const tokenAmount = 100;
     // whitelist investor
-    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount)
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, tokenAmount);
     // supply currency - receive tokens
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens
@@ -70,7 +69,6 @@ describe('lender functions', async () => {
     const initialJuniorTokenBalance = await lenderTinlake.getJuniorTokenBalance(lenderAccount.address);
 
     const redeemResult = await lenderTinlake.redeemJunior(tokenAmount);
-
 
     const newTrancheCurrencyBalance = await lenderTinlake.getCurrencyBalance(contractAddresses['JUNIOR']);
     const newLenderCurrencyBalance = await lenderTinlake.getCurrencyBalance(lenderAccount.address);
@@ -86,7 +84,7 @@ describe('lender functions', async () => {
     const tokenAmount = 100;
 
     // whitelist investor with no allowance to redeem
-    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, 0)
+    await adminTinlake.approveAllowanceJunior(lenderAccount.address, currencyAmount, 0);
     // supply currency - receive tokens
     await supply(lenderAccount.address, `${currencyAmount}`, lenderTinlake);
     // approve junior tranche to take tokens
@@ -113,9 +111,9 @@ async function supply(investor: string, currencyAmount: string, tinlake: ITinlak
   // assert result successful
   assert.equal(supplyResult.status, SUCCESS_STATUS);
   // assert tranche balance increased by currency amount
-  assert.equal((newTrancheCurrencyBalance.toNumber() - initialTrancheCurrencyBalance.toNumber()), parseInt(currencyAmount));
+  assert.equal((newTrancheCurrencyBalance.toNumber() - initialTrancheCurrencyBalance.toNumber()), parseInt(currencyAmount, 10));
   // assert investor currency balanace decreased
-  assert.equal((initialLenderCurrencyBalance.toNumber() - newLenderCurrencyBalance.toNumber()), parseInt(currencyAmount));
+  assert.equal((initialLenderCurrencyBalance.toNumber() - newLenderCurrencyBalance.toNumber()), parseInt(currencyAmount, 10));
   // assert investor received tokens
-  assert.equal(initialJuniorTokenBalance.toNumber() + parseInt(currencyAmount), newJuniorTokenBalance.toNumber());
+  assert.equal(initialJuniorTokenBalance.toNumber() + parseInt(currencyAmount, 10), newJuniorTokenBalance.toNumber());
 }

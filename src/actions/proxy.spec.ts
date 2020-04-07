@@ -2,7 +2,7 @@ const randomString = require('randomstring');
 const account = require('ethjs-account');
 import assert from 'assert';
 import { createTinlake, TestProvider } from '../../test/utils';
-import testConfig from '../../test/config';
+import config from '../../test/config';
 import { ethers } from 'ethers';
 
 const testProvider = new TestProvider(testConfig);

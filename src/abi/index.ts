@@ -1,26 +1,25 @@
-import contractAbiTitle from './Title.abi.json';
-import contractAbiCurrency from './test/SimpleToken.abi.json';
-import contractAbiShelf from './Shelf.abi.json';
-import contractAbiCeiling from './Principal.abi.json';
-import contractAbiCollector from './Collector.abi.json';
-import contractAbiThreshold from './PushRegistry.abi.json';
-import contractAbiPricePool from './PricePool.abi.json';
-import contractAbiPile from './Pile.abi.json';
-import contractAbiOperator from './AllowanceOperator.abi.json';
-import contractAbiDistributor from './DefaultDistributor.abi.json';
-import contractAbiAssessor from './DefaultAssessor.abi.json';
-import contractAbiRoot from './Root.abi.json';
-import contractAbiActions from './Actions.abi.json';
-import contractAbiProxy from './Proxy.abi.json';
-import contractAbiProxyRegistry from './ProxyRegistry.abi.json';
-import contractAbiTranche from './Tranche.abi.json';
-import contractAbiNFTData from './NftData.abi.json';
-import contractAbiNFT from './test/SimpleNFT.abi.json';
-
-import { ContractAbis } from '../types';
+import TitleAbiJson from './Title.abi.json';
+import SimpleTokenAbiJson from './test/SimpleToken.abi.json';
+import ShelfAbiJson from './Shelf.abi.json';
+import PrincipalAbiJson from './Principal.abi.json';
+import CollectorAbiJson from './Collector.abi.json';
+import PushRegistryAbiJson from './PushRegistry.abi.json';
+import PricePoolAbiJson from './PricePool.abi.json';
+import PileAbiJson from './Pile.abi.json';
+import AllowanceOperatorAbiJson from './AllowanceOperator.abi.json';
+import DefaultDistributorAbiJson from './DefaultDistributor.abi.json';
+import DefaultAssessorAbiJson from './DefaultAssessor.abi.json';
+import RootAbiJson from './Root.abi.json';
+import ActionsAbiJson from './Actions.abi.json';
+import ProxyAbiJson from './Proxy.abi.json';
+import ProxyRegistryAbiJson from './ProxyRegistry.abi.json';
+import TrancheAbiJson from './Tranche.abi.json';
+import NftDataAbiJson from './NftData.abi.json';
+import SimpleNFTAbiJson from './test/SimpleNFT.abi.json';
+import { ContractAbis } from '../Tinlake';
 
 export default {
-  //COLLATERAL_NFT : contractAbiTitle,
+  // COLLATERAL_NFT : contractAbiTitle,
   COLLATERAL_NFT : contractAbiNFT,
   COLLATERAL_NFT_DATA: contractAbiNFTData,
   TITLE : contractAbiTitle,

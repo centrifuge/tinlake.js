@@ -4,7 +4,7 @@ import assert from 'assert';
 import { ITinlake } from '../Tinlake';
 import { Account } from '../../test/types';
 import { createTinlake, TestProvider } from '../../test/utils';
-import testConfig from '../../test/config';
+import config from '../../test/config';
 import { interestRateToFee } from '../utils/interestRateToFee';
 
 const testProvider = new TestProvider(testConfig);
@@ -14,7 +14,7 @@ const lenderAccount = account.generate(randomString.generate(32));
 const adminTinlake = createTinlake(adminAccount, testConfig);
 const governanceTinlake = createTinlake(testConfig.godAccount, testConfig);
 
-const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig
+const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
 // ------------ admin tests borrower-site -------------
 describe('admin tests', async () => {
@@ -28,17 +28,17 @@ describe('admin tests', async () => {
   describe('ceiling', async () => {
     it('success: set ceiling for a loan', async () => {
       // rely admin on ceiling contract
-      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["CEILING"]);
+      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['CEILING']);
       // await tinlake.setCeiling(loanId, ceiling);
     });
 
     it('success: init rate', async () => {
         // rely admin on ceiling contract
-        await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["PILE"]);
-        const rate = '5';
-        const ratePerSecond = interestRateToFee(rate);
-        const initResult = await adminTinlake.initRate(ratePerSecond);
-        assert.equal(initResult.status, testConfig.SUCCESS_STATUS);
+      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['PILE']);
+      const rate = '5';
+      const ratePerSecond = interestRateToFee(rate);
+      const initResult = await adminTinlake.initRate(ratePerSecond);
+      assert.equal(initResult.status, testConfig.SUCCESS_STATUS);
     });
 
     it('success: set rate for loan', async () => {
@@ -46,14 +46,14 @@ describe('admin tests', async () => {
   });
 
   describe('pile', async () => {
-    //rely admin account on pile
+    // rely admin account on pile
   });
 
   // ------------ admin tests lender-site -------------
   describe('operator', async () => {
     it('success: set allowance for junior investor', async () => {
       // rely admin on junior operator
-      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses["JUNIOR_OPERATOR"]);
+      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['JUNIOR_OPERATOR']);
       const maxCurrency = 1000;
       const maxToken = 100;
 
@@ -65,8 +65,6 @@ describe('admin tests', async () => {
       assert.equal(allowanceResult.status, testConfig.SUCCESS_STATUS);
       assert.equal(maxRedeemAmount, maxToken);
       assert.equal(maxSupplyAmount, maxCurrency);
-    })
-  })
-})
-
-
+    });
+  });
+});

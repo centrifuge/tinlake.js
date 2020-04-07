@@ -1,10 +1,10 @@
 import assert from 'assert';
 const account = require('ethjs-account');
 const randomString = require('randomstring');
-import testConfig from '../../test/config';
-import { ITinlake } from '../Tinlake';
-import { createTinlake, TestProvider } from '../../test/utils';
-import { Account } from '../../test/types';
+import config from '../test/config';
+import { ITinlake } from '../types/tinlake';
+import { createTinlake, TestProvider } from '../test/utils';
+import { Account } from '../test/types';
 
 const adminAccount = account.generate(randomString.generate(32));
 let borrowerAccount: Account;
