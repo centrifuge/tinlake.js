@@ -194,7 +194,6 @@ export function AnalyticsActions<ActionsBase extends Constructor<TinlakeParams>>
       const res: { 0: BN } =  await executeAndRetry(this.contracts['SENIOR'].ratePerSecond, []);
       return res[0] || new BN(0);
     }
-
   };
 }
 
