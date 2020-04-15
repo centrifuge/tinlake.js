@@ -57,12 +57,6 @@ export function AdminActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
     }
 
     // ------------ admin functions borrower-site -------------
-    setEquityRatio = async (amount: string) => {
-      const txHash = await executeAndRetry(this.contracts['ASSESSOR'].file, ['minJuniorRatio', amount, this.ethConfig]);
-      console.log(`[Assessor file] txHash: ${txHash}`);
-      return waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout);
-    }
-
     setCeiling = async (loanId: string, amount: string) => {
       const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);
       console.log(`[Ceiling file] txHash: ${txHash}`);
@@ -97,6 +91,12 @@ export function AdminActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
     }
 
     // ------------ admin functions lender-site -------------
+    setEquityRatio = async (amount: string) => {
+      const txHash = await executeAndRetry(this.contracts['ASSESSOR'].file, ['minJuniorRatio', amount, this.ethConfig]);
+      console.log(`[Assessor file] txHash: ${txHash}`);
+      return waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout);
+    }
+    
     approveAllowanceJunior = async (user: string, maxCurrency: string, maxToken: string) => {
       const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance Junior] txHash: ${txHash}`);

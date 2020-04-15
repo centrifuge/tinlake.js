@@ -12,12 +12,12 @@ export declare function AdminActions<ActionsBase extends Constructor<TinlakePara
         canSetInvestorAllowanceSenior: (user: string) => Promise<boolean>;
         canSetThreshold: (user: string) => Promise<boolean>;
         canSetLoanPrice: (user: string) => Promise<boolean>;
-        setEquityRatio: (amount: string) => Promise<unknown>;
         setCeiling: (loanId: string, amount: string) => Promise<unknown>;
         existsRateGroup: (ratePerSecond: string) => Promise<boolean>;
         initRate: (ratePerSecond: string) => Promise<unknown>;
         changeRate: (loan: string, ratePerSecond: string) => Promise<unknown>;
         setRate: (loan: string, ratePerSecond: string) => Promise<unknown>;
+        setEquityRatio: (amount: string) => Promise<unknown>;
         approveAllowanceJunior: (user: string, maxCurrency: string, maxToken: string) => Promise<unknown>;
         approveAllowanceSenior: (user: string, maxCurrency: string, maxToken: string) => Promise<unknown>;
         provider: any;

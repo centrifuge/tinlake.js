@@ -10802,18 +10802,6 @@ function AdminActions(Base) {
                 });
             }); };
             // ------------ admin functions borrower-site -------------
-            _this.setEquityRatio = function (amount) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].file, ['minJuniorRatio', amount, this.ethConfig])];
-                        case 1:
-                            txHash = _a.sent();
-                            console.log("[Assessor file] txHash: " + txHash);
-                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout)];
-                    }
-                });
-            }); };
             _this.setCeiling = function (loanId, amount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -10882,6 +10870,18 @@ function AdminActions(Base) {
                 });
             }); };
             // ------------ admin functions lender-site -------------
+            _this.setEquityRatio = function (amount) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].file, ['minJuniorRatio', amount, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Assessor file] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
             _this.approveAllowanceJunior = function (user, maxCurrency, maxToken) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
