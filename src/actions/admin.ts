@@ -58,11 +58,11 @@ export function AdminActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     // ------------ admin functions borrower-site -------------
     setEquityRatio = async (amount: string) => {
-      const txHash = await executeAndRetry(this.contracts['ASSESSOR'].file, ["minJuniorRatio", amount, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['ASSESSOR'].file, ['minJuniorRatio', amount, this.ethConfig]);
       console.log(`[Assessor file] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout);
     }
-    
+
     setCeiling = async (loanId: string, amount: string) => {
       const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);
       console.log(`[Ceiling file] txHash: ${txHash}`);

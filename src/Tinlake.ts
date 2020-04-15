@@ -93,8 +93,6 @@ export default class Tinlake {
     this.setEthConfig(ethConfig || {});
   }
 
-
-
   setProvider = (provider: any, ethOptions?: any) => {
     this.provider = provider;
     this.ethOptions = ethOptions || {};
