@@ -93,6 +93,8 @@ export default class Tinlake {
     this.setEthConfig(ethConfig || {});
   }
 
+
+
   setProvider = (provider: any, ethOptions?: any) => {
     this.provider = provider;
     this.ethOptions = ethOptions || {};
@@ -105,7 +107,9 @@ export default class Tinlake {
       }
     });
   }
+
   setEthConfig = (ethConfig: EthConfig | {}) => {
     this.ethConfig = ethConfig;
   }
+
 }

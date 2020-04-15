@@ -10717,33 +10717,11 @@ function AdminActions(Base) {
                     }
                 });
             }); };
-            _this.canSetJuniorTrancheInterest = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR'].wards, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0].toNumber() === 1];
-                    }
-                });
-            }); };
             _this.canSetSeniorTrancheInterest = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR'].wards, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0].toNumber() === 1];
-                    }
-                });
-            }); };
-            _this.canSetEquityRatio = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].wards, [user])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0].toNumber() === 1];
@@ -10762,11 +10740,33 @@ function AdminActions(Base) {
                 });
             }); };
             // lender permissions (note: allowance operator for default deployment)
+            _this.canSetEquityRatio = function (user) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].wards, [user])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0].toNumber() === 1];
+                    }
+                });
+            }); };
             _this.canSetInvestorAllowanceJunior = function (user) { return __awaiter(_this, void 0, void 0, function () {
                 var res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR_OPERATOR'].wards, [user])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0].toNumber() === 1];
+                    }
+                });
+            }); };
+            _this.canSetInvestorAllowanceSenior = function (user) { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].wards, [user])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0].toNumber() === 1];
@@ -10796,6 +10796,18 @@ function AdminActions(Base) {
                 });
             }); };
             // ------------ admin functions borrower-site -------------
+            _this.setEquityRatio = function (amount) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].file, ['minJuniorRatio', amount, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Assessor file] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
             _this.setCeiling = function (loanId, amount) { return __awaiter(_this, void 0, void 0, function () {
                 var txHash;
                 return __generator(this, function (_a) {
@@ -10871,8 +10883,20 @@ function AdminActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
-                            console.log("[Approve allowance] txHash: " + txHash);
+                            console.log("[Approve allowance Junior] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['JUNIOR_OPERATOR'].abi, this.transactionTimeout)];
+                    }
+                });
+            }); };
+            _this.approveAllowanceSenior = function (user, maxCurrency, maxToken) { return __awaiter(_this, void 0, void 0, function () {
+                var txHash;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig])];
+                        case 1:
+                            txHash = _a.sent();
+                            console.log("[Approve allowance Senior] txHash: " + txHash);
+                            return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['SENIOR_OPERATOR'].abi, this.transactionTimeout)];
                     }
                 });
             }); };
@@ -29930,6 +29954,50 @@ function AnalyticsActions(Base) {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR'].balance, [])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getMinEquityRatio = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].minJuniorRatio, [])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getCurrentEquityRatio = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].currentJuniorRatio, [])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getSeniorDebt = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR'].debt, [])];
+                        case 1:
+                            res = _a.sent();
+                            return [2 /*return*/, res[0] || new bn(0)];
+                    }
+                });
+            }); };
+            _this.getSeniorInterestRate = function () { return __awaiter(_this, void 0, void 0, function () {
+                var res;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR'].ratePerSecond, [])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0] || new bn(0)];
