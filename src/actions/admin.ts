@@ -96,7 +96,7 @@ export function AdminActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
       console.log(`[Assessor file] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['ASSESSOR'].abi, this.transactionTimeout);
     }
-    
+
     approveAllowanceJunior = async (user: string, maxCurrency: string, maxToken: string) => {
       const txHash = await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig]);
       console.log(`[Approve allowance Junior] txHash: ${txHash}`);
