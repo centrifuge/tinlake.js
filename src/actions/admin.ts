@@ -58,7 +58,7 @@ export function AdminActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     // ------------ admin functions borrower-site -------------
     setCeiling = async (loanId: string, amount: string) => {
-      const txHash = await executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['CEILING'].file, ['loan', loanId, amount, this.ethConfig]);
       console.log(`[Ceiling file] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['CEILING'].abi, this.transactionTimeout);
     }
@@ -71,7 +71,7 @@ export function AdminActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     initRate = async (ratePerSecond: string) => {
       const rateGroup = getRateGroup(ratePerSecond);
-      const txHash = await executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig]);
+      const txHash = await executeAndRetry(this.contracts['PILE'].file, ['rate', rateGroup, ratePerSecond, this.ethConfig]);
       console.log(`[Initialising rate] txHash: ${txHash}`);
       return waitAndReturnEvents(this.eth, txHash, this.contracts['PILE'].abi, this.transactionTimeout);
     }
