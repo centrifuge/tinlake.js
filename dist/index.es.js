@@ -15211,12 +15211,6 @@ unwrapExports(hmac);
 var hmac_1 = hmac.SupportedAlgorithms;
 var hmac_2 = hmac.computeHmac;
 
-var _args = [
-  [
-    "elliptic@6.5.2",
-    "/Users/ilinzweilin/Desktop/centrifuge/forks/tinlake.js"
-  ]
-];
 var _from = "elliptic@6.5.2";
 var _id = "elliptic@6.5.2";
 var _inBundle = false;
@@ -15238,8 +15232,9 @@ var _requiredBy = [
   "/ethers"
 ];
 var _resolved = "https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz";
-var _spec = "6.5.2";
-var _where = "/Users/ilinzweilin/Desktop/centrifuge/forks/tinlake.js";
+var _shasum = "05c5678d7173c049d8ca433552224a495d0e3762";
+var _spec = "elliptic@6.5.2";
+var _where = "/Users/ch4rly/go/src/github.com/centrifuge/tinlake.js/node_modules/ethers";
 var author = {
   name: "Fedor Indutny",
   email: "fedor@indutny.com"
@@ -15247,6 +15242,7 @@ var author = {
 var bugs = {
   url: "https://github.com/indutny/elliptic/issues"
 };
+var bundleDependencies = false;
 var dependencies = {
   "bn.js": "^4.4.0",
   brorand: "^1.0.1",
@@ -15256,6 +15252,7 @@ var dependencies = {
   "minimalistic-assert": "^1.0.0",
   "minimalistic-crypto-utils": "^1.0.0"
 };
+var deprecated = false;
 var description = "EC cryptography";
 var devDependencies = {
   brfs: "^1.4.3",
@@ -15300,7 +15297,6 @@ var scripts = {
 };
 var version = "6.5.2";
 var _package = {
-  _args: _args,
   _from: _from,
   _id: _id,
   _inBundle: _inBundle,
@@ -15310,11 +15306,14 @@ var _package = {
   _requested: _requested,
   _requiredBy: _requiredBy,
   _resolved: _resolved,
+  _shasum: _shasum,
   _spec: _spec,
   _where: _where,
   author: author,
   bugs: bugs,
+  bundleDependencies: bundleDependencies,
   dependencies: dependencies,
+  deprecated: deprecated,
   description: description,
   devDependencies: devDependencies,
   files: files,
@@ -15329,7 +15328,6 @@ var _package = {
 };
 
 var _package$1 = /*#__PURE__*/Object.freeze({
-    _args: _args,
     _from: _from,
     _id: _id,
     _inBundle: _inBundle,
@@ -15339,11 +15337,14 @@ var _package$1 = /*#__PURE__*/Object.freeze({
     _requested: _requested,
     _requiredBy: _requiredBy,
     _resolved: _resolved,
+    _shasum: _shasum,
     _spec: _spec,
     _where: _where,
     author: author,
     bugs: bugs,
+    bundleDependencies: bundleDependencies,
     dependencies: dependencies,
+    deprecated: deprecated,
     description: description,
     devDependencies: devDependencies,
     files: files,
@@ -29516,11 +29517,13 @@ function CollateralActions(Base) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.mintTitleNFT = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash, res;
+            _this.mintTitleNFT = function (nftAddr, user) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, txHash, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].issue, [user, this.ethConfig])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.issue, [user, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Mint NFT] txHash: " + txHash);
@@ -29531,11 +29534,13 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
-            _this.mintNFT = function (owner, tokenId, ref, amount, asset) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.mintNFT = function (nftAddr, owner, tokenId, ref, amount, asset) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].mint, [owner, tokenId, ref, amount, asset, this.ethConfig])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.mint, [owner, tokenId, ref, amount, asset, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[NFT.mint] txHash: " + txHash);
@@ -29543,11 +29548,13 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
-            _this.approveNFT = function (tokenId, to) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.approveNFT = function (nftAddr, tokenId, to) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].approve, [to, tokenId, this.ethConfig])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.approve, [to, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[NFT Approve] txHash: " + txHash);
@@ -29555,44 +29562,52 @@ function CollateralActions(Base) {
                     }
                 });
             }); };
-            _this.getNFTCount = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+            _this.getNFTCount = function (nftAddr) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].count, [])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.count, [])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
                     }
                 });
             }); };
-            _this.getNFTData = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+            _this.getNFTData = function (nftAddr, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT_DATA'].data, [tokenId])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.data, [tokenId])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res];
                     }
                 });
             }); };
-            _this.getNFTOwner = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+            _this.getNFTOwner = function (nftAddr, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.ownerOf, [tokenId])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
                     }
                 });
             }); };
-            _this.transferNFT = function (from, to, tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
+            _this.transferNFT = function (nftAddr, from, to, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].transferFrom, [from, to, tokenId, this.ethConfig])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.transferFrom, [from, to, tokenId, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[NFT Approve] txHash: " + txHash);
@@ -29679,11 +29694,13 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
-            _this.getOwnerOfCollateral = function (tokenId) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
+            _this.getOwnerOfCollateral = function (nftRegistryAddr, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+                var nft, res;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['COLLATERAL_NFT'].ownerOf, [tokenId])];
+                        case 0:
+                            nft = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftRegistryAddr);
+                            return [4 /*yield*/, executeAndRetry(nft.ownerOf, [tokenId])];
                         case 1:
                             res = _a.sent();
                             return [2 /*return*/, res[0]];
@@ -29720,10 +29737,10 @@ function AnalyticsActions(Base) {
                     }
                 });
             }); };
-            _this.getStatus = function (tokenId, loanId) { return __awaiter(_this, void 0, void 0, function () {
+            _this.getStatus = function (nftRegistryAddr, tokenId, loanId) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.getOwnerOfCollateral(tokenId)];
+                        case 0: return [4 /*yield*/, this.getOwnerOfCollateral(nftRegistryAddr, tokenId)];
                         case 1:
                             if ((_a.sent()) === this.contracts['SHELF'].address) {
                                 return [2 /*return*/, 'ongoing'];
@@ -29760,7 +29777,7 @@ function AnalyticsActions(Base) {
                             return [4 /*yield*/, this.getDebt(loanId)];
                         case 5:
                             debt = _a.sent();
-                            return [4 /*yield*/, this.getStatus(collateral.tokenId, loanId)];
+                            return [4 /*yield*/, this.getStatus(collateral.registry, collateral.tokenId, loanId)];
                         case 6:
                             status = _a.sent();
                             return [2 /*return*/, {
@@ -30153,7 +30170,7 @@ function ProxyActions(Base) {
                     }
                 });
             }); };
-            _this.proxyTransferIssue = function (proxyAddr, tokenId) { return __awaiter(_this, void 0, void 0, function () {
+            _this.proxyTransferIssue = function (proxyAddr, nftRegistryAddr, tokenId) { return __awaiter(_this, void 0, void 0, function () {
                 var proxy, encoded, txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -30167,7 +30184,7 @@ function ProxyActions(Base) {
                                     { type: 'address', name: 'registry' },
                                     { type: 'uint256', name: 'token' }
                                 ]
-                            }, [this.contracts['SHELF'].address, this.contracts['COLLATERAL_NFT'].address, tokenId]);
+                            }, [this.contracts['SHELF'].address, nftRegistryAddr, tokenId]);
                             return [4 /*yield*/, executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
