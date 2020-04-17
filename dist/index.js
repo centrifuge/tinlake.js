@@ -38495,32 +38495,6 @@ var contractAbiShelf = [
     constant: false,
     inputs: [
       {
-        internalType: "uint256",
-        name: "loan",
-        type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "registry_",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "nft_",
-        type: "uint256"
-      }
-    ],
-    name: "file",
-    outputs: [
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
         internalType: "address",
         name: "registry_",
         type: "address"
@@ -39097,6 +39071,11 @@ var contractAbiCeiling = [
   {
     constant: false,
     inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
       {
         internalType: "uint256",
         name: "loan",
@@ -39829,7 +39808,7 @@ var contractAbiPricePool = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "what",
+        name: "contractName",
         type: "bytes32"
       },
       {
@@ -40055,7 +40034,7 @@ var contractAbiPricePool = [
     type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
     ],
     name: "totalValue",
@@ -40067,7 +40046,7 @@ var contractAbiPricePool = [
       }
     ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -40330,6 +40309,11 @@ var contractAbiPile = [
   {
     constant: false,
     inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
       {
         internalType: "uint256",
         name: "rate",
@@ -41333,7 +41317,7 @@ var contractAbiDistributor = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "what",
+        name: "contractName",
         type: "bytes32"
       },
       {
