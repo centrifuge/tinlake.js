@@ -195,7 +195,6 @@ export function AnalyticsActions<ActionsBase extends Constructor<TinlakeParams>>
 
     getMinJuniorRatio = async () => {
       const res: { 0: BN } =  await executeAndRetry(this.contracts['ASSESSOR'].minJuniorRatio, []);
-      console.log('get min junior ratio', res[0]);
       return res[0] || new BN(0);
     }
 

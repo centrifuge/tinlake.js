@@ -29988,7 +29988,6 @@ function AnalyticsActions(Base) {
                         case 0: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].minJuniorRatio, [])];
                         case 1:
                             res = _a.sent();
-                            console.log('get min junior ratio', res[0]);
                             return [2 /*return*/, res[0] || new bn(0)];
                     }
                 });
