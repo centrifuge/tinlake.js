@@ -10797,7 +10797,7 @@ function AdminActions(Base) {
                 var txHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['CEILING'].file, [loanId, amount, this.ethConfig])];
+                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['CEILING'].file, [web3.fromAscii('loan'), loanId, amount, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Ceiling file] txHash: " + txHash);
@@ -10824,7 +10824,7 @@ function AdminActions(Base) {
                     switch (_a.label) {
                         case 0:
                             rateGroup = getRateGroup(ratePerSecond);
-                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [rateGroup, ratePerSecond, this.ethConfig])];
+                            return [4 /*yield*/, executeAndRetry(this.contracts['PILE'].file, [web3.fromAscii('rate'), rateGroup, ratePerSecond, this.ethConfig])];
                         case 1:
                             txHash = _a.sent();
                             console.log("[Initialising rate] txHash: " + txHash);
@@ -29820,7 +29820,7 @@ function AnalyticsActions(Base) {
                             maxSupplyJunior = _d.sent();
                             _b = includeSenior;
                             if (!_b) return [3 /*break*/, 6];
-                            return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
+                            return [4 /*yield*/, this.getMaxSupplyAmountSenior(user)];
                         case 5:
                             _b = (_d.sent());
                             _d.label = 6;
@@ -29831,7 +29831,7 @@ function AnalyticsActions(Base) {
                             maxRedeemJunior = _d.sent();
                             _c = includeSenior;
                             if (!_c) return [3 /*break*/, 9];
-                            return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
+                            return [4 /*yield*/, this.getMaxRedeemAmountSenior(user)];
                         case 8:
                             _c = (_d.sent());
                             _d.label = 9;
@@ -39091,6 +39091,11 @@ var contractAbiCeiling = [
     constant: false,
     inputs: [
       {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
+      {
         internalType: "uint256",
         name: "loan",
         type: "uint256"
@@ -40323,6 +40328,11 @@ var contractAbiPile = [
   {
     constant: false,
     inputs: [
+      {
+        internalType: "bytes32",
+        name: "what",
+        type: "bytes32"
+      },
       {
         internalType: "uint256",
         name: "rate",
