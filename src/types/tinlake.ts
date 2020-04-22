@@ -23,6 +23,7 @@ export type Tranche = {
   token: string;
 };
 export type NFT = {
+  registry: string;
   tokenId: BN;
   nftOwner: string;
   nftData: any;
