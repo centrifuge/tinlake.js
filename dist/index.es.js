@@ -15208,6 +15208,12 @@ unwrapExports(hmac);
 var hmac_1 = hmac.SupportedAlgorithms;
 var hmac_2 = hmac.computeHmac;
 
+var _args = [
+  [
+    "elliptic@6.5.2",
+    "/Users/ilinzweilin/Desktop/centrifuge/forks/tinlake.js"
+  ]
+];
 var _from = "elliptic@6.5.2";
 var _id = "elliptic@6.5.2";
 var _inBundle = false;
@@ -15229,9 +15235,8 @@ var _requiredBy = [
   "/ethers"
 ];
 var _resolved = "https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz";
-var _shasum = "05c5678d7173c049d8ca433552224a495d0e3762";
-var _spec = "elliptic@6.5.2";
-var _where = "/Users/ch4rly/go/src/github.com/centrifuge/tinlake.js/node_modules/ethers";
+var _spec = "6.5.2";
+var _where = "/Users/ilinzweilin/Desktop/centrifuge/forks/tinlake.js";
 var author = {
   name: "Fedor Indutny",
   email: "fedor@indutny.com"
@@ -15239,7 +15244,6 @@ var author = {
 var bugs = {
   url: "https://github.com/indutny/elliptic/issues"
 };
-var bundleDependencies = false;
 var dependencies = {
   "bn.js": "^4.4.0",
   brorand: "^1.0.1",
@@ -15249,7 +15253,6 @@ var dependencies = {
   "minimalistic-assert": "^1.0.0",
   "minimalistic-crypto-utils": "^1.0.0"
 };
-var deprecated = false;
 var description = "EC cryptography";
 var devDependencies = {
   brfs: "^1.4.3",
@@ -15294,6 +15297,7 @@ var scripts = {
 };
 var version = "6.5.2";
 var _package = {
+  _args: _args,
   _from: _from,
   _id: _id,
   _inBundle: _inBundle,
@@ -15303,14 +15307,11 @@ var _package = {
   _requested: _requested,
   _requiredBy: _requiredBy,
   _resolved: _resolved,
-  _shasum: _shasum,
   _spec: _spec,
   _where: _where,
   author: author,
   bugs: bugs,
-  bundleDependencies: bundleDependencies,
   dependencies: dependencies,
-  deprecated: deprecated,
   description: description,
   devDependencies: devDependencies,
   files: files,
@@ -15325,6 +15326,7 @@ var _package = {
 };
 
 var _package$1 = /*#__PURE__*/Object.freeze({
+    _args: _args,
     _from: _from,
     _id: _id,
     _inBundle: _inBundle,
@@ -15334,14 +15336,11 @@ var _package$1 = /*#__PURE__*/Object.freeze({
     _requested: _requested,
     _requiredBy: _requiredBy,
     _resolved: _resolved,
-    _shasum: _shasum,
     _spec: _spec,
     _where: _where,
     author: author,
     bugs: bugs,
-    bundleDependencies: bundleDependencies,
     dependencies: dependencies,
-    deprecated: deprecated,
     description: description,
     devDependencies: devDependencies,
     files: files,
@@ -45376,6 +45375,803 @@ var contractAbiNFT = [
   }
 ];
 
+var contractAbiBorrowerDeployer = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "root_",
+        type: "address"
+      },
+      {
+        internalType: "contract TitleFab",
+        name: "titlefab_",
+        type: "address"
+      },
+      {
+        internalType: "contract ShelfFab",
+        name: "shelffab_",
+        type: "address"
+      },
+      {
+        internalType: "contract PileFab",
+        name: "pilefab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "ceilingFab_",
+        type: "address"
+      },
+      {
+        internalType: "contract CollectorFab",
+        name: "collectorFab_",
+        type: "address"
+      },
+      {
+        internalType: "contract ThresholdFab",
+        name: "thresholdFab_",
+        type: "address"
+      },
+      {
+        internalType: "contract PricePoolFab",
+        name: "pricePoolFab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "currency_",
+        type: "address"
+      },
+      {
+        internalType: "string",
+        name: "titleName_",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "titleSymbol_",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "ceiling",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "ceilingFab",
+    outputs: [
+      {
+        internalType: "contract CeilingFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "collector",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "collectorFab",
+    outputs: [
+      {
+        internalType: "contract CollectorFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "currency",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deploy",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployCeiling",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployCollector",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployPile",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployPricePool",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployShelf",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployThreshold",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployTitle",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "pile",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "pilefab",
+    outputs: [
+      {
+        internalType: "contract PileFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "pricePool",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "pricePoolFab",
+    outputs: [
+      {
+        internalType: "contract PricePoolFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "root",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "shelf",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "shelffab",
+    outputs: [
+      {
+        internalType: "contract ShelfFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "threshold",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "thresholdFab",
+    outputs: [
+      {
+        internalType: "contract ThresholdFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "title",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "titleName",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "titleSymbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "titlefab",
+    outputs: [
+      {
+        internalType: "contract TitleFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
+var contractAbiLenderDeployer = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "root_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "currency_",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenAmountForONE_",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "juniorTrancheFab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "assessorFab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "juniorOperatorFab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "distributorFab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "seniorTrancheFab_",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "seniorOperatorFab_",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "assessor",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "assessorFab",
+    outputs: [
+      {
+        internalType: "contract AssessorFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "currency",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deploy",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployAssessor",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployDistributor",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployJuniorOperator",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deployJuniorTranche",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deploySeniorOperator",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+    ],
+    name: "deploySeniorTranche",
+    outputs: [
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "distributor",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "distributorFab",
+    outputs: [
+      {
+        internalType: "contract DistributorFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "junior",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "juniorOperator",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "juniorOperatorFab",
+    outputs: [
+      {
+        internalType: "contract OperatorFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "juniorTrancheFab",
+    outputs: [
+      {
+        internalType: "contract TrancheFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "senior",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "seniorOperator",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "seniorOperatorFab",
+    outputs: [
+      {
+        internalType: "contract OperatorFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "seniorTrancheFab",
+    outputs: [
+      {
+        internalType: "contract SeniorTrancheFab",
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+    ],
+    name: "tokenAmountForONE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  }
+];
+
 var abiDefinitions = {
     // COLLATERAL_NFT : contractAbiTitle,
     COLLATERAL_NFT: contractAbiNFT,
@@ -45400,6 +46196,8 @@ var abiDefinitions = {
     SENIOR_OPERATOR: contractAbiOperator,
     JUNIOR: contractAbiTranche,
     SENIOR: contractAbiSeniorTranche,
+    BORROWER_DEPLOYER: contractAbiBorrowerDeployer,
+    LENDER_DEPLOYER: contractAbiLenderDeployer,
 };
 
 var contractNames = [
@@ -45425,6 +46223,8 @@ var contractNames = [
     'PROXY',
     'PROXY_REGISTRY',
     'ACTIONS',
+    'BORROWER_DEPLOYER',
+    'LENDER_DEPLOYER',
 ];
 var Tinlake = /** @class */ (function () {
     function Tinlake(params) {
@@ -45435,6 +46235,7 @@ var Tinlake = /** @class */ (function () {
             _this.provider = provider;
             _this.ethOptions = ethOptions || {};
             _this.eth = new lib$a(_this.provider, _this.ethOptions);
+            // set root & proxy contracts
             contractNames.forEach(function (name) {
                 if (_this.contractAbis[name] && _this.contractAddresses[name]) {
                     _this.contracts[name] = _this.eth.contract(_this.contractAbis[name])
@@ -45445,7 +46246,143 @@ var Tinlake = /** @class */ (function () {
         this.setEthConfig = function (ethConfig) {
             _this.ethConfig = ethConfig;
         };
-        var provider = params.provider, contractAddresses = params.contractAddresses, nftDataOutputs = params.nftDataOutputs, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig;
+        // retrieves contract addresses based on the root address provided
+        this.setContractAddresses = function () { return __awaiter(_this, void 0, void 0, function () {
+            var _a, _b, _c, _d, lenderDeployer, borrowerDeployer, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11;
+            return __generator(this, function (_12) {
+                switch (_12.label) {
+                    case 0:
+                        // retrieve borrower & lender deployer addresses
+                        _a = this.contractAddresses;
+                        _b = 'LENDER_DEPLOYER';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['ROOT_CONTRACT'].lenderDeployer, [])];
+                    case 1:
+                        // retrieve borrower & lender deployer addresses
+                        _a[_b] = (_12.sent())[0];
+                        _c = this.contractAddresses;
+                        _d = 'BORROWER_DEPLOYER';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['ROOT_CONTRACT'].borrowerDeployer, [])];
+                    case 2:
+                        _c[_d] = (_12.sent())[0];
+                        lenderDeployer = this.eth.contract(this.contractAbis['LENDER_DEPLOYER']).at(this.contractAddresses['LENDER_DEPLOYER']);
+                        borrowerDeployer = this.eth.contract(this.contractAbis['BORROWER_DEPLOYER']).at(this.contractAddresses['BORROWER_DEPLOYER']);
+                        // retrieve borrower addresses & create contracts
+                        // use shelf to retrieve borrowersite addresses for this deployment
+                        _e = this.contractAddresses;
+                        _f = 'SHELF';
+                        return [4 /*yield*/, executeAndRetry(borrowerDeployer.shelf, [])];
+                    case 3:
+                        // retrieve borrower addresses & create contracts
+                        // use shelf to retrieve borrowersite addresses for this deployment
+                        _e[_f] = (_12.sent())[0];
+                        this.contracts['SHELF'] = this.eth.contract(this.contractAbis['SHELF']).at(this.contractAddresses['SHELF']);
+                        _g = this.contractAddresses;
+                        _h = 'COLLECTOR';
+                        return [4 /*yield*/, executeAndRetry(borrowerDeployer.collector, [])];
+                    case 4:
+                        _g[_h] = (_12.sent())[0];
+                        this.contracts['COLLECTOR'] = this.eth.contract(this.contractAbis['COLLECTOR']).at(this.contractAddresses['COLLECTOR']);
+                        _j = this.contractAddresses;
+                        _k = 'THRESHOLD';
+                        return [4 /*yield*/, executeAndRetry(borrowerDeployer.threshold, [])];
+                    case 5:
+                        _j[_k] = (_12.sent())[0];
+                        this.contracts['THRESHOLD'] = this.eth.contract(this.contractAbis['THRESHOLD']).at(this.contractAddresses['THRESHOLD']);
+                        _l = this.contractAddresses;
+                        _m = 'PRICE_POOL';
+                        return [4 /*yield*/, executeAndRetry(borrowerDeployer.pricePool, [])];
+                    case 6:
+                        _l[_m] = (_12.sent())[0];
+                        this.contracts['PRICE_POOL'] = this.eth.contract(this.contractAbis['PRICE_POOL']).at(this.contractAddresses['PRICE_POOL']);
+                        _o = this.contractAddresses;
+                        _p = 'TITLE';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].title, [])];
+                    case 7:
+                        _o[_p] = (_12.sent())[0];
+                        this.contracts['TITLE'] = this.eth.contract(this.contractAbis['TITLE']).at(this.contractAddresses['TITLE']);
+                        _q = this.contractAddresses;
+                        _r = 'CEILING';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].ceiling, [])];
+                    case 8:
+                        _q[_r] = (_12.sent())[0];
+                        this.contracts['CEILING'] = this.eth.contract(this.contractAbis['CEILING']).at(this.contractAddresses['CEILING']);
+                        _s = this.contractAddresses;
+                        _t = 'PILE';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].pile, [])];
+                    case 9:
+                        _s[_t] = (_12.sent())[0];
+                        this.contracts['PILE'] = this.eth.contract(this.contractAbis['PILE']).at(this.contractAddresses['PILE']);
+                        _u = this.contractAddresses;
+                        _v = 'TINLAKE_CURRENCY';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].currency, [])];
+                    case 10:
+                        _u[_v] = (_12.sent())[0];
+                        this.contracts['TINLAKE_CURRENCY'] = this.eth.contract(this.contractAbis['TINLAKE_CURRENCY']).at(this.contractAddresses['TINLAKE_CURRENCY']);
+                        _w = this.contractAddresses;
+                        _x = 'DISTRIBUTOR';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].distributor, [])];
+                    case 11:
+                        _w[_x] = (_12.sent())[0];
+                        this.contracts['DISTRIBUTOR'] = this.eth.contract(this.contractAbis['DISTRIBUTOR']).at(this.contractAddresses['DISTRIBUTOR']);
+                        // retrieve lender addresses & create contract
+                        // use tranche operators to retrieve retrieve lender site addresses for this deployment (if possible)
+                        _y = this.contractAddresses;
+                        _z = 'JUNIOR_OPERATOR';
+                        return [4 /*yield*/, executeAndRetry(lenderDeployer.juniorOperator, [])];
+                    case 12:
+                        // retrieve lender addresses & create contract
+                        // use tranche operators to retrieve retrieve lender site addresses for this deployment (if possible)
+                        _y[_z] = (_12.sent())[0];
+                        this.contracts['JUNIOR_OPERATOR'] = this.eth.contract(this.contractAbis['JUNIOR_OPERATOR']).at(this.contractAddresses['JUNIOR_OPERATOR']);
+                        _0 = this.contractAddresses;
+                        _1 = 'JUNIOR';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR_OPERATOR'].tranche, [])];
+                    case 13:
+                        _0[_1] = (_12.sent())[0];
+                        this.contracts['JUNIOR'] = this.eth.contract(this.contractAbis['JUNIOR']).at(this.contractAddresses['JUNIOR']);
+                        _2 = this.contractAddresses;
+                        _3 = 'JUNIOR_TOKEN';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR'].token, [])];
+                    case 14:
+                        _2[_3] = (_12.sent())[0];
+                        this.contracts['JUNIOR_TOKEN'] = this.eth.contract(this.contractAbis['JUNIOR_TOKEN']).at(this.contractAddresses['JUNIOR_TOKEN']);
+                        _4 = this.contractAddresses;
+                        _5 = 'ASSESSOR';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['JUNIOR_OPERATOR'].assessor, [])];
+                    case 15:
+                        _4[_5] = (_12.sent())[0];
+                        this.contracts['ASSESSOR'] = this.eth.contract(this.contractAbis['ASSESSOR']).at(this.contractAddresses['ASSESSOR']);
+                        // make sure senior tranche exists
+                        _6 = this.contractAddresses;
+                        _7 = 'SENIOR_OPERATOR';
+                        return [4 /*yield*/, executeAndRetry(lenderDeployer.seniorOperator, [])];
+                    case 16:
+                        // make sure senior tranche exists
+                        _6[_7] = (_12.sent())[0];
+                        if (!(this.contractAddresses['SENIOR_OPERATOR'] !== ZERO_ADDRESS)) return [3 /*break*/, 19];
+                        this.contracts['SENIOR_OPERATOR'] = this.eth.contract(this.contractAbis['SENIOR_OPERATOR']).at(this.contractAddresses['SENIOR_OPERATOR']);
+                        _8 = this.contractAddresses;
+                        _9 = 'SENIOR';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].tranche, [])];
+                    case 17:
+                        _8[_9] = (_12.sent())[0];
+                        this.contracts['SENIOR'] = this.eth.contract(this.contractAbis['SENIOR']).at(this.contractAddresses['SENIOR']);
+                        _10 = this.contractAddresses;
+                        _11 = 'SENIOR_TOKEN';
+                        return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR'].token, [])];
+                    case 18:
+                        _10[_11] = (_12.sent())[0];
+                        this.contracts['SENIOR_TOKEN'] = this.eth.contract(this.contractAbis['SENIOR']).at(this.contractAddresses['SENIOR_TOKEN']);
+                        return [3 /*break*/, 20];
+                    case 19:
+                        this.contractAddresses['SENIOR'] = ZERO_ADDRESS;
+                        this.contractAddresses['SENIOR_TOKEN'] = ZERO_ADDRESS;
+                        _12.label = 20;
+                    case 20: return [2 /*return*/];
+                }
+            });
+        }); };
+        var provider = params.provider, contractAddresses = params.contractAddresses, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig;
         if (!contractAbis) {
             contractNames.forEach(function (name) {
                 if (abiDefinitions[name]) {
@@ -45456,7 +46393,6 @@ var Tinlake = /** @class */ (function () {
         else {
             this.contractAbis = contractAbis;
         }
-        nftDataOutputs && (this.contractAbis['COLLATERAL_NFT_DATA'][0].outputs = nftDataOutputs);
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);

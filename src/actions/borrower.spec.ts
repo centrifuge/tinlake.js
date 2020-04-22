@@ -10,8 +10,8 @@ const adminAccount = account.generate(randomString.generate(32));
 let borrowerAccount: Account;
 
 // user with super powers can fund and rely accounts
-const governanceTinlake: Partial<ITinlake> = createTinlake(testConfig.godAccount, testConfig);
-const adminTinlake: Partial<ITinlake> = createTinlake(adminAccount, testConfig);
+let governanceTinlake: Partial<ITinlake>;
+let adminTinlake: Partial<ITinlake>;
 let borrowerTinlake: Partial<ITinlake>;
 
 const testProvider = new TestProvider(testConfig);
@@ -21,6 +21,8 @@ const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 describe('borrower tests', async () => {
 
   before(async () =>  {
+    governanceTinlake = await createTinlake(testConfig.godAccount, testConfig);
+    adminTinlake = await createTinlake(adminAccount, testConfig);
     // fund borrowerAccount with ETH
     await testProvider.fundAccountWithETH(adminAccount.address, FAUCET_AMOUNT);
     const amount = '5000';
@@ -30,7 +32,7 @@ describe('borrower tests', async () => {
 
   beforeEach(async() => {
     borrowerAccount = account.generate(randomString.generate(32));
-    borrowerTinlake = createTinlake(borrowerAccount, testConfig);
+    borrowerTinlake = await createTinlake(borrowerAccount, testConfig);
     await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   });
 
@@ -135,7 +137,7 @@ async function mintIssueBorrow(usr: string, tinlake: Partial<ITinlake>, amount: 
 
 async function fundTranche(amount: string) {
   const lenderAccount = account.generate(randomString.generate(32));
-  const lenderTinlake = createTinlake(lenderAccount, testConfig);
+  const lenderTinlake = await createTinlake(lenderAccount, testConfig);
   // fund lender accoutn with eth
   await testProvider.fundAccountWithETH(lenderAccount.address, FAUCET_AMOUNT);
   // make admin adress ward on tranche operator

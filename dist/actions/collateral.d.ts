@@ -19,6 +19,7 @@ export declare function CollateralActions<ActionsBase extends Constructor<Tinlak
         contractAbis: import("../Tinlake").ContractAbis;
         setProvider: (provider: any, ethOptions?: any) => void;
         setEthConfig: (ethConfig: {} | import("../Tinlake").EthConfig) => void;
+        setContractAddresses: () => Promise<void>;
     };
 } & ActionsBase;
 export declare type ICollateralActions = {

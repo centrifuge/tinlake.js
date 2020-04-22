@@ -55,4 +55,5 @@ export type ITinlake = TinlakeActions & {
   setEthConfig(ethConfig: {
     [key: string]: any;
   }): void;
+  setContractAddresses(): () => Promise<void>;
 };

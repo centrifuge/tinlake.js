@@ -23,6 +23,7 @@ export declare function ProxyActions<ActionsBase extends Constructor<TinlakePara
         contractAbis: import("../Tinlake").ContractAbis;
         setProvider: (provider: any, ethOptions?: any) => void;
         setEthConfig: (ethConfig: {} | import("../Tinlake").EthConfig) => void;
+        setContractAddresses: () => Promise<void>;
     };
 } & ActionsBase;
 export declare type IProxyActions = {
