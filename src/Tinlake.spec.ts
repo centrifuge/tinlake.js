@@ -12,7 +12,7 @@ describe('Tinlake setup tests', async () => {
 
     // check whether the addresses derived based on the root contract are correct
     Object.keys(tinlake.contractAddresses).forEach((contractName) => {
-        assert(ethers.utils.getAddress(allAddresses[contractName]) === ethers.utils.getAddress(tinlake.contractAddresses[contractName]));
+      assert(ethers.utils.getAddress(allAddresses[contractName]) === ethers.utils.getAddress(tinlake.contractAddresses[contractName]));
     });
   });
 });

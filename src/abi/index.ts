@@ -47,5 +47,5 @@ export default {
   JUNIOR: contractAbiTranche,
   SENIOR: contractAbiSeniorTranche,
   BORROWER_DEPLOYER: contractAbiBorrowerDeployer,
-  LENDER_DEPLOYER: contractAbiLenderDeployer
+  LENDER_DEPLOYER: contractAbiLenderDeployer,
 } as ContractAbis;

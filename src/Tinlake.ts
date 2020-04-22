@@ -26,7 +26,7 @@ const contractNames = [
   'PROXY_REGISTRY',
   'ACTIONS',
   'BORROWER_DEPLOYER',
-  'LENDER_DEPLOYER'
+  'LENDER_DEPLOYER',
 ];
 
 type AbiOutput = {
@@ -112,13 +112,13 @@ export default class Tinlake {
     this.ethConfig = ethConfig;
   }
 
-  // retrieves contract addresses based on the root address provided 
+  // retrieves contract addresses based on the root address provided
   setContractAddresses = async () => {
     // retrieve borrower & lender deployer addresses
     this.contractAddresses['LENDER_DEPLOYER'] = (await executeAndRetry(this.contracts['ROOT_CONTRACT'].lenderDeployer, []))[0];
     this.contractAddresses['BORROWER_DEPLOYER'] = (await executeAndRetry(this.contracts['ROOT_CONTRACT'].borrowerDeployer, []))[0];
-    const lenderDeployer = this.eth.contract(this.contractAbis['LENDER_DEPLOYER']).at(this.contractAddresses['LENDER_DEPLOYER']);
-    const borrowerDeployer = this.eth.contract(this.contractAbis['BORROWER_DEPLOYER']).at(this.contractAddresses['BORROWER_DEPLOYER']); 
+    const lenderDeployer: any = this.eth.contract(this.contractAbis['LENDER_DEPLOYER']).at(this.contractAddresses['LENDER_DEPLOYER']);
+    const borrowerDeployer: any = this.eth.contract(this.contractAbis['BORROWER_DEPLOYER']).at(this.contractAddresses['BORROWER_DEPLOYER']);
 
     // retrieve borrower addresses & create contracts
     // use shelf to retrieve borrowersite addresses for this deployment
@@ -153,7 +153,7 @@ export default class Tinlake {
 
     this.contractAddresses['ASSESSOR'] = (await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].assessor, []))[0];
     this.contracts['ASSESSOR'] = this.eth.contract(this.contractAbis['ASSESSOR']).at(this.contractAddresses['ASSESSOR']);
-    
+
     // make sure senior tranche exists
     this.contractAddresses['SENIOR_OPERATOR'] = (await executeAndRetry(lenderDeployer.seniorOperator, []))[0];
     if (this.contractAddresses['SENIOR_OPERATOR'] !== ZERO_ADDRESS) {
@@ -167,6 +167,5 @@ export default class Tinlake {
       this.contractAddresses['SENIOR_TOKEN'] = ZERO_ADDRESS;
     }
   }
-
 
 }
