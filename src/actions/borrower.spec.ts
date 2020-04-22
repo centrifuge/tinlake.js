@@ -49,17 +49,17 @@ describe('borrower tests', async () => {
   it('success: lock nft', async () => {
     // mint nft & issue loan
     const { tokenId, loanId } = await mintIssue(borrowerAccount.address, borrowerTinlake);
-    await borrowerTinlake.approveNFT(tokenId, contractAddresses['SHELF']);
+    await borrowerTinlake.approveNFT(contractAddresses['COLLATERAL_NFT'], tokenId, contractAddresses['SHELF']);
 
     // lock nft
     await borrowerTinlake.lock(loanId);
-    assert.equal(await borrowerTinlake.getNFTOwner(tokenId), contractAddresses['SHELF']);
+    assert.equal(await borrowerTinlake.getNFTOwner(contractAddresses['COLLATERAL_NFT'], tokenId), contractAddresses['SHELF']);
   });
 
   it('success: unlock nft', async () => {
     // mint nft & issue loan
     const { tokenId, loanId } = await mintIssue(borrowerAccount.address, borrowerTinlake);
-    await borrowerTinlake.approveNFT(tokenId, contractAddresses['SHELF']);
+    await borrowerTinlake.approveNFT(contractAddresses['COLLATERAL_NFT'], tokenId, contractAddresses['SHELF']);
 
     // lock nft
     await borrowerTinlake.lock(loanId);
@@ -114,7 +114,7 @@ async function mintIssue(usr: string, tinlake: Partial<ITinlake>) {
 async function mintIssueBorrow(usr: string, tinlake: Partial<ITinlake>, amount: string) {
   const { tokenId, loanId } = await mintIssue(usr, tinlake);
   // approve shelf to take nft
-  await borrowerTinlake.approveNFT(tokenId, contractAddresses['SHELF']);
+  await borrowerTinlake.approveNFT(contractAddresses['COLLATERAL_NFT'], tokenId, contractAddresses['SHELF']);
   // lock nft
   await borrowerTinlake.lock(loanId);
   // admin sets ceiling
