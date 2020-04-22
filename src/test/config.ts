@@ -3,7 +3,10 @@ import nftDataContractCall from './nft_data_contract_call.json';
 import abiDefinitions from '../abi/';
 
 const testConfig = {
-  contractAddresses,
+  contractAddresses: {
+    "ROOT_CONTRACT": contractAddresses["ROOT_CONTRACT"]
+  },
+  allAddresses:contractAddresses,
   nftDataContractCall,
   godAccount: {
     address: '0xf6fa8a3f3199cdd85749ec749fb8f9c2551f9928',
