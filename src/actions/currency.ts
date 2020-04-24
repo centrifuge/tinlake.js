@@ -23,12 +23,12 @@ export function CurrencyActions<ActionsBase extends Constructor<TinlakeParams>>(
     }
 
     approveSeniorForCurrency = async (currencyAmount: string) => {
-      if (!this.contractAddresses['SENIOR']) return
+      if (!this.contractAddresses['SENIOR']) return;
       return this.approveCurrency(this.contractAddresses['SENIOR'], currencyAmount);
     }
 
     approveJuniorForCurrency = async (currencyAmount: string) => {
-      if (!this.contractAddresses['JUNIOR']) return
+      if (!this.contractAddresses['JUNIOR']) return;
       return this.approveCurrency(this.contractAddresses['JUNIOR'], currencyAmount);
     }
   };
