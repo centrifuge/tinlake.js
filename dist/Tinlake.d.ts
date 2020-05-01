@@ -27,6 +27,7 @@ export declare type TinlakeParams = {
     ethConfig?: EthConfig | {};
     ethOptions?: any | {};
     contracts?: Contracts | {};
+    contractConfig?: any | {};
 };
 export declare type Constructor<T = {}> = new (...args: any[]) => Tinlake;
 export default class Tinlake {
@@ -38,6 +39,7 @@ export default class Tinlake {
     transactionTimeout: number;
     contracts: Contracts;
     contractAbis: ContractAbis;
+    contractConfig: any;
     constructor(params: TinlakeParams);
     setProvider: (provider: any, ethOptions?: any) => void;
     setEthConfig: (ethConfig: {} | EthConfig) => void;

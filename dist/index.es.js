@@ -46245,6 +46245,7 @@ var Tinlake = /** @class */ (function () {
         var _this = this;
         this.contracts = {};
         this.contractAbis = {};
+        this.contractConfig = {};
         this.setProvider = function (provider, ethOptions) {
             _this.provider = provider;
             _this.ethOptions = ethOptions || {};
@@ -46396,7 +46397,7 @@ var Tinlake = /** @class */ (function () {
                 }
             });
         }); };
-        var provider = params.provider, contractAddresses = params.contractAddresses, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig;
+        var provider = params.provider, contractAddresses = params.contractAddresses, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig, contractConfig = params.contractConfig;
         if (!contractAbis) {
             contractNames.forEach(function (name) {
                 if (abiDefinitions[name]) {
@@ -46407,6 +46408,7 @@ var Tinlake = /** @class */ (function () {
         else {
             this.contractAbis = contractAbis;
         }
+        this.contractConfig = contractConfig;
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);

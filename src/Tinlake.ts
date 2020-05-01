@@ -62,6 +62,7 @@ export type TinlakeParams = {
   ethConfig?: EthConfig | {};
   ethOptions?: any | {};
   contracts?: Contracts | {};
+  contractConfig?: any | {};
 };
 
 export type Constructor<T = {}> = new (...args: any[]) => Tinlake;
@@ -75,9 +76,10 @@ export default class Tinlake {
   public transactionTimeout: number;
   public contracts: Contracts = {};
   public contractAbis: ContractAbis = {};
+  public contractConfig: any = {};
 
   constructor(params: TinlakeParams) {
-    const { provider, contractAddresses, transactionTimeout, contractAbis, ethOptions, ethConfig } = params;
+    const { provider, contractAddresses, transactionTimeout, contractAbis, ethOptions, ethConfig, contractConfig } = params;
     if (!contractAbis) {
       contractNames.forEach((name) => {
         if (abiDefinitions[name]) {
@@ -88,6 +90,7 @@ export default class Tinlake {
       this.contractAbis = contractAbis;
     }
 
+    this.contractConfig = contractConfig;
     this.contractAddresses = contractAddresses;
     this.transactionTimeout = transactionTimeout;
     this.setProvider(provider, ethOptions);
