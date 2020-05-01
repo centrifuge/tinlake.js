@@ -10858,12 +10858,25 @@ function AdminActions(Base) {
                 });
             }); };
             _this.approveAllowanceSenior = function (user, maxCurrency, maxToken) { return __awaiter(_this, void 0, void 0, function () {
-                var txHash;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig])];
-                        case 1:
-                            txHash = _a.sent();
+                var operatorType, txHash, _a;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            operatorType = this.getOperatorType('senior');
+                            _a = operatorType;
+                            switch (_a) {
+                                case 'PROPORTIONAL_OPERATOR': return [3 /*break*/, 1];
+                            }
+                            return [3 /*break*/, 3];
+                        case 1: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].approve, [user, maxCurrency, this.ethConfig])];
+                        case 2:
+                            txHash = _b.sent();
+                            _b.label = 3;
+                        case 3: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].approve, [user, maxCurrency, maxToken, this.ethConfig])];
+                        case 4:
+                            txHash = _b.sent();
+                            _b.label = 5;
+                        case 5:
                             console.log("[Approve allowance Senior] txHash: " + txHash);
                             return [2 /*return*/, waitAndReturnEvents(this.eth, txHash, this.contracts['SENIOR_OPERATOR'].abi, this.transactionTimeout)];
                     }
@@ -29816,7 +29829,7 @@ function AnalyticsActions(Base) {
                             _a = (_d.sent());
                             _d.label = 3;
                         case 3:
-                            tokenBalanceSenior = _a || 0;
+                            tokenBalanceSenior = _a || new bn(0);
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 4:
                             maxSupplyJunior = _d.sent();
@@ -29827,7 +29840,7 @@ function AnalyticsActions(Base) {
                             _b = (_d.sent());
                             _d.label = 6;
                         case 6:
-                            maxSupplySenior = _b || 0;
+                            maxSupplySenior = _b || new bn(0);
                             return [4 /*yield*/, this.getMaxRedeemAmountJunior(user)];
                         case 7:
                             maxRedeemJunior = _d.sent();
@@ -29838,7 +29851,7 @@ function AnalyticsActions(Base) {
                             _c = (_d.sent());
                             _d.label = 9;
                         case 9:
-                            maxRedeemSenior = _c || 0;
+                            maxRedeemSenior = _c || new bn(0);
                             return [2 /*return*/, {
                                     junior: {
                                         tokenBalance: tokenBalanceJunior,
@@ -29917,44 +29930,98 @@ function AnalyticsActions(Base) {
                 });
             }); };
             _this.getMaxSupplyAmountSenior = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
+                var operatorType, maxSupply, _a, supplyLimitRes, suppliedRes, res;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
-                            if (!(this.contractAddresses['SENIOR_OPERATOR'] !== ZERO_ADDRESS)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].maxCurrency, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                        case 2: return [2 /*return*/, new bn(0)];
+                            if (this.contractAddresses['SENIOR_OPERATOR'] === ZERO_ADDRESS)
+                                return [2 /*return*/, new bn(0)];
+                            operatorType = this.getOperatorType('senior');
+                            _a = operatorType;
+                            switch (_a) {
+                                case 'PROPORTIONAL_OPERATOR': return [3 /*break*/, 1];
+                                case 'ALLOWANCE_OPERATOR': return [3 /*break*/, 4];
+                            }
+                            return [3 /*break*/, 6];
+                        case 1: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].supplyMaximum, [user])];
+                        case 2:
+                            supplyLimitRes = _b.sent();
+                            return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].tokenReceived, [user])];
+                        case 3:
+                            suppliedRes = _b.sent();
+                            maxSupply = supplyLimitRes[0].sub(suppliedRes[0]);
+                            return [3 /*break*/, 7];
+                        case 4: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].maxCurrency, [user])];
+                        case 5:
+                            res = _b.sent();
+                            maxSupply = res[0];
+                            return [3 /*break*/, 7];
+                        case 6:
+                            maxSupply = new bn(0);
+                            _b.label = 7;
+                        case 7: return [2 /*return*/, maxSupply];
                     }
                 });
             }); };
             _this.getMaxRedeemAmountSenior = function (user) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
+                var operatorType, maxRedeem, _a, redeemLimitRes, res;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
-                            if (!(this.contractAddresses['SENIOR_OPERATOR'] !== ZERO_ADDRESS)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].maxToken, [user])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                        case 2: return [2 /*return*/, new bn(0)];
+                            if (this.contractAddresses['SENIOR_OPERATOR'] === ZERO_ADDRESS)
+                                return [2 /*return*/, new bn(0)];
+                            operatorType = this.getOperatorType('senior');
+                            _a = operatorType;
+                            switch (_a) {
+                                case 'PROPORTIONAL_OPERATOR': return [3 /*break*/, 1];
+                                case 'ALLOWANCE_OPERATOR': return [3 /*break*/, 3];
+                            }
+                            return [3 /*break*/, 5];
+                        case 1: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].calcMaxRedeemToken, [user])];
+                        case 2:
+                            redeemLimitRes = _b.sent();
+                            maxRedeem = redeemLimitRes[0];
+                            return [3 /*break*/, 6];
+                        case 3: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].maxToken, [user])];
+                        case 4:
+                            res = _b.sent();
+                            maxRedeem = res[0];
+                            return [3 /*break*/, 6];
+                        case 5:
+                            maxRedeem = new bn(0);
+                            _b.label = 6;
+                        case 6: return [2 /*return*/, maxRedeem];
                     }
                 });
             }); };
-            _this.getTokenPriceSenior = function () { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
+            _this.getTokenPriceSenior = function (user) { return __awaiter(_this, void 0, void 0, function () {
+                var operatorType, tokenPrice, _a, customTokenPriceRes, res;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
-                            if (!(this.contractAddresses['SENIOR'] !== ZERO_ADDRESS)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].calcTokenPrice, [this.contractAddresses['SENIOR']])];
-                        case 1:
-                            res = _a.sent();
-                            return [2 /*return*/, res[0]];
-                        case 2: return [2 /*return*/, new bn(0)];
+                            if (this.contractAddresses['SENIOR_OPERATOR'] === ZERO_ADDRESS)
+                                return [2 /*return*/, new bn(0)];
+                            operatorType = this.getOperatorType('senior');
+                            _a = operatorType;
+                            switch (_a) {
+                                case 'PROPORTIONAL_OPERATOR': return [3 /*break*/, 1];
+                                case 'ALLOWANCE_OPERATOR': return [3 /*break*/, 3];
+                            }
+                            return [3 /*break*/, 5];
+                        case 1: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].calcTokenPrice, [user])];
+                        case 2:
+                            customTokenPriceRes = _b.sent();
+                            tokenPrice = customTokenPriceRes[0];
+                            return [3 /*break*/, 6];
+                        case 3: return [4 /*yield*/, executeAndRetry(this.contracts['ASSESSOR'].calcTokenPrice, [this.contractAddresses['SENIOR']])];
+                        case 4:
+                            res = _b.sent();
+                            tokenPrice = res[0];
+                            return [3 /*break*/, 6];
+                        case 5:
+                            tokenPrice = new bn(0);
+                            _b.label = 6;
+                        case 6: return [2 /*return*/, tokenPrice];
                     }
                 });
             }); };
@@ -47235,7 +47302,6 @@ var Tinlake = /** @class */ (function () {
                         // retrieve lender addresses & create contract
                         // use tranche operators to retrieve retrieve lender site addresses for this deployment (if possible)
                         _y[_z] = (_12.sent())[0];
-                        console.log('set junior', this.contractConfig['JUNIOR_OPERATOR']);
                         this.contracts['JUNIOR_OPERATOR'] = this.contractAddresses['JUNIOR_OPERATOR'] && (this.contractConfig['JUNIOR_OPERATOR']
                             ? this.createContract(this.contractAddresses['JUNIOR_OPERATOR'], this.contractConfig['JUNIOR_OPERATOR'])
                             : this.createContract(this.contractAddresses['JUNIOR_OPERATOR'], 'ALLOWANCE_OPERATOR'));
@@ -47265,7 +47331,6 @@ var Tinlake = /** @class */ (function () {
                         // make sure senior tranche exists
                         _6[_7] = (_12.sent())[0];
                         if (!(this.contractAddresses['SENIOR_OPERATOR'] !== ZERO_ADDRESS)) return [3 /*break*/, 19];
-                        console.log('set senior', this.contractConfig['SENIOR_OPERATOR']);
                         this.contracts['SENIOR_OPERATOR'] = this.contractAddresses['SENIOR_OPERATOR'] && (this.contractConfig['SENIOR_OPERATOR']
                             ? this.createContract(this.contractAddresses['SENIOR_OPERATOR'], this.contractConfig['SENIOR_OPERATOR'])
                             : this.createContract(this.contractAddresses['SENIOR_OPERATOR'], 'ALLOWANCE_OPERATOR'));
@@ -47290,20 +47355,27 @@ var Tinlake = /** @class */ (function () {
                 }
             });
         }); };
+        this.getOperatorType = function (tranche) {
+            switch (tranche) {
+                case 'senior':
+                    return _this.contractConfig['SENIOR_OPERATOR'] || 'ALLOWANCE_OPERATOR';
+                case 'junior':
+                    return _this.contractConfig['SENIOR_OPERATOR'] || 'ALLOWANCE_OPERATOR';
+                default:
+                    return 'ALLOWANCE_OPERATOR';
+            }
+        };
         var provider = params.provider, contractAddresses = params.contractAddresses, transactionTimeout = params.transactionTimeout, contractAbis = params.contractAbis, ethOptions = params.ethOptions, ethConfig = params.ethConfig, contractConfig = params.contractConfig;
         if (!contractAbis) {
             this.contractAbis = abiDefinitions;
         }
         this.contractConfig = contractConfig;
-        console.log(this.contractConfig);
         this.contractAddresses = contractAddresses;
         this.transactionTimeout = transactionTimeout;
         this.setProvider(provider, ethOptions);
         this.setEthConfig(ethConfig || {});
     }
     Tinlake.prototype.createContract = function (address, abiName) {
-        console.log('name abi', abiName);
-        console.log(this.contractAbis[abiName]);
         var contract = this.eth.contract(this.contractAbis[abiName]).at(address);
         return contract;
     };
