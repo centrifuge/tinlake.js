@@ -81,16 +81,11 @@ export default class Tinlake {
   constructor(params: TinlakeParams) {
     const { provider, contractAddresses, transactionTimeout, contractAbis, ethOptions, ethConfig, contractConfig } = params;
     if (!contractAbis) {
-      contractNames.forEach((name) => {
-        if (abiDefinitions[name]) {
-          this.contractAbis[name] = abiDefinitions[name];
-        }
-      });
-    } else {
-      this.contractAbis = contractAbis;
-    }
+        this.contractAbis = abiDefinitions
+    } 
 
     this.contractConfig = contractConfig;
+    console.log(this.contractConfig)
     this.contractAddresses = contractAddresses;
     this.transactionTimeout = transactionTimeout;
     this.setProvider(provider, ethOptions);
@@ -102,13 +97,29 @@ export default class Tinlake {
     this.ethOptions = ethOptions || {};
     this.eth = new Eth(this.provider, this.ethOptions) as ethI;
 
-    // set root & proxy contracts
+    // following code for backwards compatibility (can be removed once we do not need to support the old deployments)
+    
+    // set root & proxy contracts 
     contractNames.forEach((name) => {
       if (this.contractAbis[name] && this.contractAddresses[name]) {
         this.contracts[name] = this.eth.contract(this.contractAbis[name])
         .at(this.contractAddresses[name]);
       }
     });
+
+    //modular contracts
+    if (this.contractAddresses["JUNIOR_OPERATOR"]) {
+      this.contracts["JUNIOR_OPERATOR"] = this.contractConfig["JUNIOR_OPERATOR"] 
+                  ? this.createContract(this.contractAddresses["JUNIOR_OPERATOR"], this.contractConfig["JUNIOR_OPERATOR"])
+                  : this.createContract(this.contractAddresses["JUNIOR_OPERATOR"], "ALLOWANCE_OPERATOR");
+    }
+    if (this.contractAddresses["SENIOR_OPERATOR"]) {
+      this.contracts["SENIOR_OPERATOR"] = this.contractConfig["SENIOR_OPERATOR"]
+                  ? this.createContract(this.contractAddresses["SENIOR_OPERATOR"], this.contractConfig["SENIOR_OPERATOR"])
+                  : this.createContract(this.contractAddresses["SENIOR_OPERATOR"], "ALLOWANCE_OPERATOR");
+    }
+
+
   }
 
   setEthConfig = (ethConfig: EthConfig | {}) => {
@@ -148,7 +159,10 @@ export default class Tinlake {
     // retrieve lender addresses & create contract
     // use tranche operators to retrieve retrieve lender site addresses for this deployment (if possible)
     this.contractAddresses['JUNIOR_OPERATOR'] = (await executeAndRetry(lenderDeployer.juniorOperator, []))[0];
-    this.contracts['JUNIOR_OPERATOR'] = this.eth.contract(this.contractAbis['JUNIOR_OPERATOR']).at(this.contractAddresses['JUNIOR_OPERATOR']);
+    console.log("set junior", this.contractConfig["JUNIOR_OPERATOR"]);
+    this.contracts["JUNIOR_OPERATOR"] = this.contractAddresses['JUNIOR_OPERATOR'] && (this.contractConfig["JUNIOR_OPERATOR"] 
+                          ? this.createContract(this.contractAddresses["JUNIOR_OPERATOR"], this.contractConfig["JUNIOR_OPERATOR"])
+                          : this.createContract(this.contractAddresses["JUNIOR_OPERATOR"], "ALLOWANCE_OPERATOR"));
     this.contractAddresses['JUNIOR'] = (await executeAndRetry(this.contracts['JUNIOR_OPERATOR'].tranche, []))[0];
     this.contracts['JUNIOR'] = this.eth.contract(this.contractAbis['JUNIOR']).at(this.contractAddresses['JUNIOR']);
     this.contractAddresses['JUNIOR_TOKEN'] = (await executeAndRetry(this.contracts['JUNIOR'].token, []))[0];
@@ -160,7 +174,11 @@ export default class Tinlake {
     // make sure senior tranche exists
     this.contractAddresses['SENIOR_OPERATOR'] = (await executeAndRetry(lenderDeployer.seniorOperator, []))[0];
     if (this.contractAddresses['SENIOR_OPERATOR'] !== ZERO_ADDRESS) {
-      this.contracts['SENIOR_OPERATOR'] = this.eth.contract(this.contractAbis['SENIOR_OPERATOR']).at(this.contractAddresses['SENIOR_OPERATOR']);
+      console.log("set senior", this.contractConfig["SENIOR_OPERATOR"]);
+      
+      this.contracts["SENIOR_OPERATOR"] =  this.contractAddresses['SENIOR_OPERATOR'] && (this.contractConfig["SENIOR_OPERATOR"]
+      ? this.createContract(this.contractAddresses["SENIOR_OPERATOR"], this.contractConfig["SENIOR_OPERATOR"])
+      : this.createContract(this.contractAddresses["SENIOR_OPERATOR"], "ALLOWANCE_OPERATOR"));
       this.contractAddresses['SENIOR'] = (await executeAndRetry(this.contracts['SENIOR_OPERATOR'].tranche, []))[0];
       this.contracts['SENIOR'] = this.eth.contract(this.contractAbis['SENIOR']).at(this.contractAddresses['SENIOR']);
       this.contractAddresses['SENIOR_TOKEN'] = (await executeAndRetry(this.contracts['SENIOR'].token, []))[0];
@@ -171,4 +189,12 @@ export default class Tinlake {
     }
   }
 
+  createContract(address: string, abiName: string) {
+    console.log("name abi", abiName)
+    console.log(this.contractAbis[abiName])
+    const contract = this.eth.contract(this.contractAbis[abiName]).at(address);
+    return contract;
+  }
+
 }
+
