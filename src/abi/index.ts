@@ -48,5 +48,5 @@ export default {
   SENIOR: contractAbiSeniorTranche,
   BORROWER_DEPLOYER: contractAbiBorrowerDeployer,
   LENDER_DEPLOYER: contractAbiLenderDeployer,
-  NFT_FEED: contractAbiNftFeed
+  NFT_FEED: contractAbiNftFeed,
 } as ContractAbis;

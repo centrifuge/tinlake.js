@@ -47386,20 +47386,6 @@ var Tinlake = /** @class */ (function () {
                 }
             });
         }); };
-        this.nftLookup = function (registry, tokenId) { return __awaiter(_this, void 0, void 0, function () {
-            var nft, res;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        nft = ethers_2$1.utils.solidityKeccak256(['address', 'uint'], [registry, tokenId]);
-                        console.log('NFT Look Up]');
-                        return [4 /*yield*/, executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig])];
-                    case 1:
-                        res = _a.sent();
-                        return [2 /*return*/, res[0].toString()];
-                }
-            });
-        }); };
         this.getOperatorType = function (tranche) {
             switch (tranche) {
                 case 'senior':

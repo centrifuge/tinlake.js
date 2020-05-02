@@ -1,5 +1,4 @@
 import Eth from 'ethjs';
-import { ethers } from 'ethers';
 import { ethI, executeAndRetry, ZERO_ADDRESS }  from './services/ethereum';
 import  abiDefinitions  from './abi';
 
@@ -28,7 +27,7 @@ const contractNames = [
   'ACTIONS',
   'BORROWER_DEPLOYER',
   'LENDER_DEPLOYER',
-  'NFT_FEED'
+  'NFT_FEED',
 ];
 
 type AbiOutput = {
@@ -157,7 +156,6 @@ export default class Tinlake {
     this.contractAddresses['DISTRIBUTOR']  = (await executeAndRetry(this.contracts['SHELF'].distributor, []))[0];
     this.contracts['DISTRIBUTOR'] = this.eth.contract(this.contractAbis['DISTRIBUTOR']).at(this.contractAddresses['DISTRIBUTOR']);
 
-
     // retrieve lender addresses & create contract
     // use tranche operators to retrieve retrieve lender site addresses for this deployment (if possible)
     this.contractAddresses['JUNIOR_OPERATOR'] = (await executeAndRetry(lenderDeployer.juniorOperator, []))[0];
@@ -192,15 +190,7 @@ export default class Tinlake {
     const contract = this.eth.contract(this.contractAbis[abiName]).at(address);
     return contract;
   }
-
-  nftLookup = async (registry: string, tokenId: string) => {
-    const nft = ethers.utils.solidityKeccak256(['address', 'uint'], [registry, tokenId]);
-    console.log('NFT Look Up]');
-    const res = await executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig]);
-    return res[0].toString();
-  }
-
-
+  
   getOperatorType = (tranche: string) => {
     switch (tranche) {
       case 'senior':
