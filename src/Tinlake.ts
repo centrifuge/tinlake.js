@@ -1,4 +1,5 @@
 import Eth from 'ethjs';
+import { ethers } from 'ethers';
 import { ethI, executeAndRetry, ZERO_ADDRESS }  from './services/ethereum';
 import  abiDefinitions  from './abi';
 
@@ -27,6 +28,7 @@ const contractNames = [
   'ACTIONS',
   'BORROWER_DEPLOYER',
   'LENDER_DEPLOYER',
+  'NFT_FEED'
 ];
 
 type AbiOutput = {
@@ -136,7 +138,8 @@ export default class Tinlake {
     // use shelf to retrieve borrowersite addresses for this deployment
     this.contractAddresses['SHELF'] = (await executeAndRetry(borrowerDeployer.shelf, []))[0];
     this.contracts['SHELF'] = this.eth.contract(this.contractAbis['SHELF']).at(this.contractAddresses['SHELF']);
-
+    this.contractAddresses['NFT_FEED'] = (await executeAndRetry(borrowerDeployer.nftFeed, []))[0];
+    this.contracts['NFT_FEED'] = this.eth.contract(this.contractAbis['NFT_FEED']).at(this.contractAddresses['NFT_FEED']);
     this.contractAddresses['COLLECTOR'] = (await executeAndRetry(borrowerDeployer.collector, []))[0];
     this.contracts['COLLECTOR'] = this.eth.contract(this.contractAbis['COLLECTOR']).at(this.contractAddresses['COLLECTOR']);
     this.contractAddresses['THRESHOLD'] = (await executeAndRetry(borrowerDeployer.threshold, []))[0];
@@ -153,6 +156,7 @@ export default class Tinlake {
     this.contracts['TINLAKE_CURRENCY'] = this.eth.contract(this.contractAbis['TINLAKE_CURRENCY']).at(this.contractAddresses['TINLAKE_CURRENCY']);
     this.contractAddresses['DISTRIBUTOR']  = (await executeAndRetry(this.contracts['SHELF'].distributor, []))[0];
     this.contracts['DISTRIBUTOR'] = this.eth.contract(this.contractAbis['DISTRIBUTOR']).at(this.contractAddresses['DISTRIBUTOR']);
+
 
     // retrieve lender addresses & create contract
     // use tranche operators to retrieve retrieve lender site addresses for this deployment (if possible)
@@ -188,6 +192,14 @@ export default class Tinlake {
     const contract = this.eth.contract(this.contractAbis[abiName]).at(address);
     return contract;
   }
+
+  nftLookup = async (registry: string, tokenId: string) => {
+    const nft = ethers.utils.solidityKeccak256(['address', 'uint'], [registry, tokenId]);
+    console.log('NFT Look Up]');
+    const res = await executeAndRetry(this.contracts['SHELF'].nftlookup, [nft, this.ethConfig]);
+    return res[0].toString();
+  }
+
 
   getOperatorType = (tranche: string) => {
     switch (tranche) {
