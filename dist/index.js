@@ -49446,7 +49446,7 @@ var feeToInterestRate = function (fee) {
         return lookup[feeToConvert];
     }
     var i = new Decimal(feeToConvert).div('1e27').pow(n);
-    var interestRate = i.minus(1).mul(100);
+    var interestRate = i.minus(1).mul(100).toSignificantDigits(2, Decimal.ROUND_HALF_CEIL);
     var interestRateString = interestRate.toString();
     lookup[feeToConvert] = interestRateString;
     return interestRateString;
