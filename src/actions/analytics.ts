@@ -219,7 +219,7 @@ export function AnalyticsActions<ActionsBase extends Constructor<TinlakeParams>>
 
     getTokenPriceSenior = async (user?: string) => {
       if (this.contractAddresses['SENIOR_OPERATOR'] === ZERO_ADDRESS) return new BN(0);
-      
+
       // if no user address is passed always use price from asessor
       const operatorType = user ? this.getOperatorType('senior') : 'ALLOWANCE_OPERATOR';
       let tokenPrice : BN;
