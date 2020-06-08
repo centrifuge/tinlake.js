@@ -29879,7 +29879,6 @@ function AnalyticsActions(Base) {
                             _d.label = 3;
                         case 3:
                             tokenBalanceSenior = _a || new bn(0);
-                            console.log('token balance senior', tokenBalanceSenior.toString());
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 4:
                             maxSupplyJunior = _d.sent();
