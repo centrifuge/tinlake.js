@@ -29879,6 +29879,7 @@ function AnalyticsActions(Base) {
                             _d.label = 3;
                         case 3:
                             tokenBalanceSenior = _a || new bn(0);
+                            console.log('token balance senior', tokenBalanceSenior.toString());
                             return [4 /*yield*/, this.getMaxSupplyAmountJunior(user)];
                         case 4:
                             maxSupplyJunior = _d.sent();
@@ -30022,9 +30023,11 @@ function AnalyticsActions(Base) {
                         case 1: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].supplyMaximum, [user])];
                         case 2:
                             supplyLimitRes = _b.sent();
+                            console.log('limit', supplyLimitRes[0].toString());
                             return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].tokenReceived, [user])];
                         case 3:
                             suppliedRes = _b.sent();
+                            console.log('received', suppliedRes[0].toString());
                             maxSupply = supplyLimitRes[0].sub(suppliedRes[0]);
                             return [3 /*break*/, 7];
                         case 4: return [4 /*yield*/, executeAndRetry(this.contracts['SENIOR_OPERATOR'].maxCurrency, [user])];

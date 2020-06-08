@@ -180,7 +180,6 @@ export default class Tinlake {
       this.contractAddresses['COLLECTOR'] = collectorRes[0];
     }this.contracts['COLLECTOR'] = this.eth.contract(this.contractAbis['COLLECTOR']).at(this.contractAddresses['COLLECTOR']);
 
-
     if (!this.contractAddresses['THRESHOLD'])  {
       this.contractAddresses['THRESHOLD'] = thresholdRes[0];
     }
@@ -195,7 +194,7 @@ export default class Tinlake {
     if (!this.contractAddresses['JUNIOR_OPERATOR']) {
       this.contractAddresses['JUNIOR_OPERATOR'] = juniorOperatorRes[0];
     }
-      this.contracts['JUNIOR_OPERATOR'] = this.contractAddresses['JUNIOR_OPERATOR'] && (this.contractConfig['JUNIOR_OPERATOR']
+    this.contracts['JUNIOR_OPERATOR'] = this.contractAddresses['JUNIOR_OPERATOR'] && (this.contractConfig['JUNIOR_OPERATOR']
                             ? this.createContract(this.contractAddresses['JUNIOR_OPERATOR'], this.contractConfig['JUNIOR_OPERATOR'])
                             : this.createContract(this.contractAddresses['JUNIOR_OPERATOR'], 'ALLOWANCE_OPERATOR'));
 
