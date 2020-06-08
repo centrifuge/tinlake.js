@@ -7,7 +7,7 @@ import { createTinlake } from './test/utils';
 describe('Tinlake setup tests', async () => {
 
   it('success: retrieve all addresses for a give contract root', async () => {
-    const tinlake: Partial<ITinlake> = await createTinlake(testConfig.godAccount, testConfig);
+    const tinlake: Partial<ITinlake> = createTinlake(testConfig.godAccount, testConfig);
     const { allAddresses } = testConfig;
 
     // check whether the addresses derived based on the root contract are correct
