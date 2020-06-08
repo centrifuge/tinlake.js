@@ -46,7 +46,6 @@ export declare function AnalyticsActions<ActionsBase extends Constructor<Tinlake
         setProvider: (provider: any, ethOptions?: any) => void;
         setContracts: () => void;
         setEthConfig: (ethConfig: {} | import("../Tinlake").EthConfig) => void;
-        setContractAddresses: () => Promise<void>;
         createContract(address: string, abiName: string): void;
         getOperatorType: (tranche: string) => any;
     };
