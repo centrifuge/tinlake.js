@@ -110,7 +110,7 @@ export function AnalyticsActions<ActionsBase extends Constructor<TinlakeParams>>
       const includeSenior = this.existsSenior();
       const tokenBalanceJunior = await this.getJuniorTokenBalance(user);
       const tokenBalanceSenior = includeSenior && await this.getSeniorTokenBalance(user) || new BN(0);
-      console.log("token balance senior", tokenBalanceSenior.toString());
+      console.log('token balance senior', tokenBalanceSenior.toString());
       const maxSupplyJunior = await this.getMaxSupplyAmountJunior(user);
 
       const maxSupplySenior = includeSenior && await this.getMaxSupplyAmountSenior(user) || new BN(0);
@@ -185,9 +185,9 @@ export function AnalyticsActions<ActionsBase extends Constructor<TinlakeParams>>
       switch (operatorType) {
         case 'PROPORTIONAL_OPERATOR':
           const supplyLimitRes: { 0: BN } = await executeAndRetry(this.contracts['SENIOR_OPERATOR'].supplyMaximum, [user]);
-          console.log("limit", supplyLimitRes[0].toString());
+          console.log('limit', supplyLimitRes[0].toString());
           const suppliedRes: { 0: BN } = await executeAndRetry(this.contracts['SENIOR_OPERATOR'].tokenReceived, [user]);
-          console.log("received", suppliedRes[0].toString());
+          console.log('received', suppliedRes[0].toString());
           maxSupply = supplyLimitRes[0].sub(suppliedRes[0]);
           break;
 
