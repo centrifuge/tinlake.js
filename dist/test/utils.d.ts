@@ -12,7 +12,7 @@ export declare class TestProvider {
     sponsorAccount: Account;
     ethConfig: EthConfig;
     transactionTimeout: number;
-    gasLimit: string;
+    gasLimit: number;
     constructor(testConfig: Partial<ProviderConfig>);
     fundAccountWithETH(usr: string, amount: string): Promise<void>;
 }

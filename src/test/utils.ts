@@ -7,9 +7,9 @@ const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
 
 interface ProviderConfig extends TinlakeParams {
-  rpcUrl: string,
-  godAccount: Account,
-  gasLimit: number
+  rpcUrl: string;
+  godAccount: Account;
+  gasLimit: number;
 }
 
 export class TestProvider {
@@ -17,7 +17,7 @@ export class TestProvider {
   public sponsorAccount: Account;
   public ethConfig: EthConfig;
   public transactionTimeout: number;
-  public gasLimit: string;
+  public gasLimit: number;
 
   constructor(testConfig: Partial<ProviderConfig) {
     const { rpcUrl, godAccount, gasLimit, transactionTimeout } = testConfig;
