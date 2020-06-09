@@ -1,18 +1,4 @@
 declare const testConfig: {
-    nftDataContractCall: {
-        outputs: {
-            name: string;
-            type: string;
-        }[];
-        displayedFields: {
-            key: string;
-            label: string;
-            type: string;
-            decimals: number;
-            precision: number;
-            suffix: string;
-        }[];
-    };
     allAddresses: {
         DEPLOYMENT_NAME: string;
         ROOT_CONTRACT: string;

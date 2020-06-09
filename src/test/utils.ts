@@ -1,19 +1,25 @@
 import { Account } from './types';
-import Tinlake, { EthConfig } from '../Tinlake';
+import Tinlake, { EthConfig, TinlakeParams } from '../Tinlake';
 import { ITinlake } from '../types/tinlake';
 import { ethI, executeAndRetry  } from '../services/ethereum';
 const Eth = require('ethjs');
 const SignerProvider = require('ethjs-provider-signer');
 const { sign } = require('ethjs-signer');
 
+interface ProviderConfig extends TinlakeParams {
+  rpcUrl: string,
+  godAccount: Account,
+  gasLimit: number
+}
+
 export class TestProvider {
   public eth : ethI;
   public sponsorAccount: Account;
   public ethConfig: EthConfig;
   public transactionTimeout: number;
-  public gasLimit: number;
+  public gasLimit: string;
 
-  constructor(testConfig: any) {
+  constructor(testConfig: Partial<ProviderConfig) {
     const { rpcUrl, godAccount, gasLimit, transactionTimeout } = testConfig;
     this.eth = new Eth(createSignerProvider(rpcUrl, godAccount));
     this.ethConfig = { from: godAccount.address, gasLimit: `0x${gasLimit.toString(16)}` };
@@ -35,13 +41,12 @@ export class TestProvider {
   }
 }
 
-export function createTinlake(usr: Account, testConfig: any) : Partial<ITinlake> {
+export function createTinlake(usr: Account, testConfig: Partial<ProviderConfig>) : Partial<ITinlake> {
   const {
         rpcUrl,
         transactionTimeout,
         gasLimit,
         contractAddresses,
-        nftDataContractCall,
     } = testConfig;
 
   const tinlake = new Tinlake({

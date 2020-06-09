@@ -1,9 +1,7 @@
 import contractAddresses from './addresses.json';
-import nftDataContractCall from './nft_data_contract_call.json';
 import abiDefinitions from '../abi/';
 
 const testConfig = {
-  nftDataContractCall,
   allAddresses: contractAddresses,
   contractAddresses: {
     ROOT_CONTRACT: contractAddresses['ROOT_CONTRACT'],
