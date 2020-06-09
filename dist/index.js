@@ -47287,6 +47287,7 @@ var contractNames = [
     'BORROWER_DEPLOYER',
     'LENDER_DEPLOYER',
     'NFT_FEED',
+    'GOVERNANCE',
 ];
 var Tinlake = /** @class */ (function () {
     function Tinlake(params) {

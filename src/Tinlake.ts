@@ -1,5 +1,5 @@
 import Eth from 'ethjs';
-import { ethI, executeAndRetry, ZERO_ADDRESS }  from './services/ethereum';
+import { ethI }  from './services/ethereum';
 import  abiDefinitions  from './abi';
 
 const contractNames = [
@@ -28,6 +28,7 @@ const contractNames = [
   'BORROWER_DEPLOYER',
   'LENDER_DEPLOYER',
   'NFT_FEED',
+  'GOVERNANCE'
 ];
 
 type AbiOutput = {
