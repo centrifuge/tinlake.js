@@ -91,7 +91,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
         inputs: [
           { type: 'address', name: 'shelf' },
           { type: 'address', name: 'registry' },
-          { type: 'uint256', name: 'token' }]}, [this.contracts['SHELF'].address, nftRegistryAddr, tokenId],
+          { type: 'uint256', name: 'token' }]},   [this.contracts['SHELF'].address, nftRegistryAddr, tokenId],
       );
 
       const txHash = await executeAndRetry(proxy.execute, [this.contracts['ACTIONS'].address, encoded, this.ethConfig]);
