@@ -145,7 +145,7 @@ export type IProxyActions = {
   getProxyAccessToken(proxyAddr: string): Promise<any>,
   getProxyAccessTokenOwner(tokenId: string): Promise<any>,
   getProxyOwnerByLoan(loanId: string): Promise<any>,
-  getProxyOwnerByAddress(loanId: string): Promise<any>,
+  getProxyOwnerByAddress(proxyAddr: string): Promise<any>,
   proxyCreateNew(address: string): Promise<any>,
   proxyIssue(proxyAddr:string, nftRegistryAddr: string, tokenId: string): Promise<any>,
   proxyTransferIssue(proxyAddr:string, nftRegistryAddr: string, tokenId: string): Promise<any>,
