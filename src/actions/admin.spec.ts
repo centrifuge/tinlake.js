@@ -25,30 +25,6 @@ describe('admin tests', async () => {
     await testProvider.fundAccountWithETH(borrowerAccount.address, FAUCET_AMOUNT);
   });
 
-  describe('ceiling', async () => {
-    it('success: set ceiling for a loan', async () => {
-      // rely admin on ceiling contract
-      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['CEILING']);
-      // await tinlake.setCeiling(loanId, ceiling);
-    });
-
-    it('success: init rate', async () => {
-        // rely admin on ceiling contract
-      await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['PILE']);
-      const rate = '5';
-      const ratePerSecond = interestRateToFee(rate);
-      const initResult = await adminTinlake.initRate(ratePerSecond);
-      assert.equal(initResult.status, SUCCESS_STATUS);
-    });
-
-    it('success: set rate for loan', async () => {
-    });
-  });
-
-  describe('pile', async () => {
-    // rely admin account on pile
-  });
-
   // ------------ admin tests lender-site -------------
   describe('operator', async () => {
     it('success: set allowance for junior investor', async () => {

@@ -6,6 +6,7 @@ export declare type ProviderConfig = {
     godAccount: Account;
     gas: string;
     gasPrice: string;
+    nftRegistry: string;
     transactionTimeout: number;
     contractAddresses: ContractAddresses;
     contractAbis: ContractAbis;

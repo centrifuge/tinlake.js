@@ -27,7 +27,7 @@ export class TestProvider {
     };
 
     const res = await this.wallet.sendTransaction(transaction);
-    await res.wait();
+    await res.wait(1);
   }
 }
 
@@ -39,8 +39,6 @@ export function createTinlake(usr: Account, testConfig: ProviderConfig) : ITinla
       gasPrice,
       contractAddresses,
   } = testConfig;
-
-  console.log({ testConfig });
 
   const tinlake = new Tinlake({
     contractAddresses,
