@@ -5,14 +5,15 @@ import testConfig from '../test/config';
 import { ITinlake } from '../types/tinlake';
 import { createTinlake, TestProvider } from '../test/utils';
 import { Account } from '../test/types';
+import BN from 'bn.js';
 
 const adminAccount = account.generate(randomString.generate(32));
 let borrowerAccount: Account;
 
 // user with super powers can fund and rely accounts
-let governanceTinlake: Partial<ITinlake>;
-let adminTinlake: Partial<ITinlake>;
-let borrowerTinlake: Partial<ITinlake>;
+let governanceTinlake: ITinlake;
+let adminTinlake: ITinlake;
+let borrowerTinlake: ITinlake;
 
 const testProvider = new TestProvider(testConfig);
 
@@ -87,12 +88,12 @@ describe('borrower tests', async () => {
     const repayResult = await borrowerTinlake.repay(loanId, initialDebt.toString());
     const newDebt = await borrowerTinlake.getDebt(loanId);
 
-    assert.equal(newDebt.toNumber(), 0);
+    assert.equal(newDebt.toString(), '0');
     assert.equal(repayResult.status, SUCCESS_STATUS);
   });
 });
 
-async function mintIssue(usr: string, tinlake: Partial<ITinlake>) {
+async function mintIssue(usr: string, tinlake: ITinlake) {
   // super user mints nft for borrower
   const tokenId : any = await governanceTinlake.mintTitleNFT(usr);
   assert(tokenId);
@@ -111,7 +112,7 @@ async function mintIssue(usr: string, tinlake: Partial<ITinlake>) {
   return { tokenId: `${tokenId}`, loanId : `${loanId}` };
 }
 
-async function mintIssueBorrow(usr: string, tinlake: Partial<ITinlake>, amount: string) {
+async function mintIssueBorrow(usr: string, tinlake: ITinlake, amount: string) {
   const { tokenId, loanId } = await mintIssue(usr, tinlake);
   // approve shelf to take nft
   await borrowerTinlake.approveNFT(contractAddresses['COLLATERAL_NFT'], tokenId, contractAddresses['SHELF']);
@@ -125,7 +126,7 @@ async function mintIssueBorrow(usr: string, tinlake: Partial<ITinlake>, amount: 
 
   const newBorrowerCurrencyBalance = await borrowerTinlake.getCurrencyBalance(borrowerAccount.address);
 
-  assert.equal(initialBorrowerCurrencyBalance.toNumber() + amount, newBorrowerCurrencyBalance.toNumber());
+  assert.equal(initialBorrowerCurrencyBalance.add(new BN(amount)).toString(), newBorrowerCurrencyBalance.toString());
   assert.equal(borrowResult.status, SUCCESS_STATUS);
   assert.equal(withdrawResult.status, SUCCESS_STATUS);
 

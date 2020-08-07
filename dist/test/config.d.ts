@@ -4,8 +4,8 @@ declare const testConfig: ProviderConfig;
 export declare type ProviderConfig = {
     rpcUrl: string;
     godAccount: Account;
-    gasLimit: number;
-    gasPrice: number;
+    gas: string;
+    gasPrice: string;
     transactionTimeout: number;
     contractAddresses: ContractAddresses;
     contractAbis: ContractAbis;

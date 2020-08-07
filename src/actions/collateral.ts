@@ -6,7 +6,7 @@ export function CollateralActions<ActionsBase extends Constructor<TinlakeParams>
   return class extends Base implements ICollateralActions {
 
     mintTitleNFT = async (nftAddr: string, user: string) => {
-      const nft: any = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr);
+      const nft: any = this.eth.contract(this.contractAbis['COLLATERAL_NFT']).at(nftAddr); // TODO nftAddr does not exist?
       const txHash = await executeAndRetry(nft.issue, [user, this.ethConfig]);
       console.log(`[Mint NFT] txHash: ${txHash}`);
       const res: any = await waitAndReturnEvents(this.eth, txHash, this.contractAbis['COLLATERAL_NFT'], this.transactionTimeout);

@@ -11,8 +11,8 @@ const adminAccount = account.generate(randomString.generate(32));
 const borrowerAccount = account.generate(randomString.generate(32));
 const lenderAccount = account.generate(randomString.generate(32));
 const { SUCCESS_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
-let adminTinlake : Partial<ITinlake>;
-let governanceTinlake : Partial<ITinlake> ;
+let adminTinlake : ITinlake;
+let governanceTinlake : ITinlake;
 
 // ------------ admin tests borrower-site -------------
 describe('admin tests', async () => {
@@ -55,7 +55,7 @@ describe('admin tests', async () => {
       // rely admin on junior operator
       await governanceTinlake.relyAddress(adminAccount.address, contractAddresses['JUNIOR_OPERATOR']);
       const maxCurrency = '1000';
-      const maxToken = 100;
+      const maxToken = '100';
 
       // set allowance for lender address
       const allowanceResult: any = await adminTinlake.approveAllowanceJunior(lenderAccount.address, maxCurrency, maxToken);

@@ -5,13 +5,15 @@ import { createTinlake, TestProvider } from '../test/utils';
 import testConfig from '../test/config';
 import { ethers } from 'ethers';
 import { ITinlake } from '../types/tinlake';
+import { EthConfig } from '../Tinlake';
+import BN from 'bn.js';
 
 const testProvider = new TestProvider(testConfig);
 const borrowerAccount = account.generate(randomString.generate(32));
 const adminAccount = account.generate(randomString.generate(32));
-let borrowerTinlake: Partial<ITinlake>;
-let adminTinlake: Partial<ITinlake>;
-let governanceTinlake: Partial<ITinlake>;
+let borrowerTinlake: ITinlake;
+let adminTinlake: ITinlake;
+let governanceTinlake: ITinlake;
 
 const { SUCCESS_STATUS, FAIL_STATUS, FAUCET_AMOUNT, contractAddresses } = testConfig;
 
@@ -38,18 +40,18 @@ describe('proxy tests', async () => {
       assert.equal(await borrowerTinlake.getNFTOwner(nftId), proxyAddr);
       // set loan parameters and fund tranche
       const loanId = await borrowerTinlake.nftLookup(contractAddresses.COLLATERAL_NFT, nftId);
-      const amount = 1000;
+      const amount = '1000';
       await governanceTinlake.relyAddress(adminTinlake.ethConfig.from, contractAddresses.CEILING);
-      await adminTinlake.setCeiling(loanId, amount.toString());
+      await adminTinlake.setCeiling(loanId, amount);
       await fundTranche('1000000000');
       const initialTrancheBalance = await borrowerTinlake.getCurrencyBalance(contractAddresses.JUNIOR);
       // borrow
-      const borrowResult = await borrowerTinlake.proxyLockBorrowWithdraw(proxyAddr, loanId, amount.toString(), borrowerAccount.address);
+      const borrowResult = await borrowerTinlake.proxyLockBorrowWithdraw(proxyAddr, loanId, amount, borrowerAccount.address);
       const balance = await borrowerTinlake.getCurrencyBalance(borrowerAccount.address);
       const secondTrancheBalance = await borrowerTinlake.getCurrencyBalance(contractAddresses.JUNIOR);
       assert.equal(borrowResult.status, SUCCESS_STATUS);
-      assert.equal(balance.toNumber(), amount);
-      assert.equal(secondTrancheBalance.toNumber(), initialTrancheBalance.toNumber() - amount);
+      assert.equal(balance.toString(), amount);
+      assert.equal(secondTrancheBalance.toString(), initialTrancheBalance.sub(new BN(amount)).toString());
       // fuel borrower with extra to cover loan interest, approve borrower proxy to take currency
       await governanceTinlake.mintCurrency(borrowerAccount.address, amount.toString());
       await borrowerTinlake.approveCurrency(proxyAddr, amount.toString());
