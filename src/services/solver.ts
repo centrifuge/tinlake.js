@@ -1,3 +1,5 @@
+import BN from 'bn.js'
+
 /**
  * The limitations are:
  * - only input variables (those in state or orderState) can be on the right side of the constraint (the bnds key)
@@ -34,27 +36,27 @@ export const calculateOptimalSolution = async (
             { name: 'tinRedeem', coef: -1.0 },
             { name: 'dropRedeem', coef: -1.0 },
           ],
-          bnds: { type: glpk.GLP_LO, ub: 0.0, lb: -state.reserve },
+          bnds: { type: glpk.GLP_LO, ub: 0.0, lb: state.reserve.neg().toString() },
         },
         {
           name: 'dropRedeemOrder',
           vars: [{ name: 'dropRedeem', coef: 1.0 }],
-          bnds: { type: glpk.GLP_UP, ub: orderState.dropRedeemOrder, lb: 0.0 },
+          bnds: { type: glpk.GLP_UP, ub: orderState.dropRedeemOrder.toString(), lb: 0.0 },
         },
         {
           name: 'tinRedeemOrder',
           vars: [{ name: 'tinRedeem', coef: 1.0 }],
-          bnds: { type: glpk.GLP_UP, ub: orderState.tinRedeemOrder, lb: 0.0 },
+          bnds: { type: glpk.GLP_UP, ub: orderState.tinRedeemOrder.toString(), lb: 0.0 },
         },
         {
           name: 'dropInvestOrder',
           vars: [{ name: 'dropInvest', coef: 1.0 }],
-          bnds: { type: glpk.GLP_UP, ub: orderState.dropInvestOrder, lb: 0.0 },
+          bnds: { type: glpk.GLP_UP, ub: orderState.dropInvestOrder.toString(), lb: 0.0 },
         },
         {
           name: 'tinInvestOrder',
           vars: [{ name: 'tinInvest', coef: 1.0 }],
-          bnds: { type: glpk.GLP_UP, ub: orderState.tinInvestOrder, lb: 0.0 },
+          bnds: { type: glpk.GLP_UP, ub: orderState.tinInvestOrder.toString(), lb: 0.0 },
         },
         {
           name: 'maxReserve',
@@ -64,7 +66,7 @@ export const calculateOptimalSolution = async (
             { name: 'tinInvest', coef: 1.0 },
             { name: 'dropInvest', coef: 1.0 },
           ],
-          bnds: { type: glpk.GLP_UP, ub: state.maxReserve - state.reserve, lb: 0.0 },
+          bnds: { type: glpk.GLP_UP, ub: state.maxReserve.sub(state.reserve).toString(), lb: 0.0 },
         },
         /**
          * The next tow constraints were rewritten from the original equations in the epoch model.
@@ -77,35 +79,40 @@ export const calculateOptimalSolution = async (
         {
           name: 'minTINRatio',
           vars: [
-            { name: 'tinRedeem', coef: -(1 - state.minTinRatio) },
-            { name: 'dropRedeem', coef: state.minTinRatio },
-            { name: 'tinInvest', coef: 1 - state.minTinRatio },
-            { name: 'dropInvest', coef: -state.minTinRatio },
+            { name: 'tinRedeem', coef: new BN(1).sub(state.minTinRatio).neg().toString() },
+            { name: 'dropRedeem', coef: state.minTinRatio.toString() },
+            { name: 'tinInvest', coef: new BN(1).sub(state.minTinRatio).toString() },
+            { name: 'dropInvest', coef: state.minTinRatio.neg().toString() },
           ],
           bnds: {
             type: glpk.GLP_LO,
             ub: 0.0,
-            lb:
-              -(1 - state.minTinRatio) * state.netAssetValue -
-              (1 - state.minTinRatio) * state.reserve +
-              state.seniorAsset,
+            lb: new BN(1)
+              .sub(state.minTinRatio)
+              .neg()
+              .mul(state.netAssetValue)
+              .sub(new BN(1).sub(state.minTinRatio).mul(state.reserve))
+              .add(state.seniorAsset)
+              .toString(),
           },
         },
         {
           name: 'maxTINRatio',
           vars: [
-            { name: 'tinInvest', coef: -(1 - state.maxTinRatio) },
-            { name: 'dropInvest', coef: state.maxTinRatio },
-            { name: 'tinRedeem', coef: 1 - state.maxTinRatio },
-            { name: 'dropRedeem', coef: -state.maxTinRatio },
+            { name: 'tinInvest', coef: new BN(1).sub(state.maxTinRatio).neg().toString() },
+            { name: 'dropInvest', coef: state.maxTinRatio.toString() },
+            { name: 'tinRedeem', coef: new BN(1).sub(state.maxTinRatio).toString() },
+            { name: 'dropRedeem', coef: state.maxTinRatio.neg().toString() },
           ],
           bnds: {
             type: glpk.GLP_LO,
             ub: 0.0,
-            lb:
-              (1 - state.maxTinRatio) * state.netAssetValue +
-              (1 - state.maxTinRatio) * state.reserve -
-              state.seniorAsset,
+            lb: new BN(1)
+              .sub(state.maxTinRatio)
+              .mul(state.netAssetValue)
+              .add(new BN(1).sub(state.maxTinRatio).mul(state.reserve))
+              .sub(state.seniorAsset)
+              .toString(),
           },
         },
       ],
@@ -128,19 +135,19 @@ export const calculateOptimalSolution = async (
 }
 
 export interface State {
-  netAssetValue: number
-  reserve: number
-  seniorAsset: number
-  minTinRatio: number
-  maxTinRatio: number
-  maxReserve: number
+  netAssetValue: BN
+  reserve: BN
+  seniorAsset: BN
+  minTinRatio: BN
+  maxTinRatio: BN
+  maxReserve: BN
 }
 
 export interface OrderState {
-  tinRedeemOrder: number
-  dropRedeemOrder: number
-  tinInvestOrder: number
-  dropInvestOrder: number
+  tinRedeemOrder: BN
+  dropRedeemOrder: BN
+  tinInvestOrder: BN
+  dropInvestOrder: BN
 }
 
 export interface SolverWeights {
