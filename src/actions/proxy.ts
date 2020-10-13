@@ -19,7 +19,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
       // Two events are emitted: Transfer() (from the ERC721 contract mint method) and Created() (from the ProxyRegistry contract)
       // We parse the 4th arg of the Created() event, to grab the access token
       const parsedLog = this.contract('PROXY_REGISTRY').interface.parseLog(receipt.logs[1])
-      const accessToken = parsedLog.values['3'].toNumber()
+      const accessToken = parsedLog.args['3'].toNumber()
 
       return accessToken
     }
@@ -68,7 +68,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     proxyIssue = async (proxyAddress: string, nftRegistryAddress: string, tokenId: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.issue.encode([
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('issue', [
         this.contract('SHELF').address,
         nftRegistryAddress,
         tokenId,
@@ -79,7 +79,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     proxyTransferIssue = async (proxyAddress: string, nftRegistryAddress: string, tokenId: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.transferIssue.encode([
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('transferIssue', [
         this.contract('SHELF').address,
         nftRegistryAddress,
         tokenId,
@@ -90,7 +90,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     proxyLockBorrowWithdraw = async (proxyAddress: string, loanId: string, amount: string, usr: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.lockBorrowWithdraw.encode([
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('lockBorrowWithdraw', [
         this.contract('SHELF').address,
         loanId,
         amount,
@@ -102,14 +102,14 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     proxyLock = async (proxyAddress: string, loanId: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.lock.encode([this.contract('SHELF').address, loanId])
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('lock', [this.contract('SHELF').address, loanId])
 
       return this.pending(proxy.execute(this.contract('ACTIONS').address, encoded, this.overrides))
     }
 
     proxyBorrowWithdraw = async (proxyAddress: string, loanId: string, amount: string, usr: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.borrowWithdraw.encode([
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('borrowWithdraw', [
         this.contract('SHELF').address,
         loanId,
         amount,
@@ -121,7 +121,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     proxyRepay = async (proxyAddress: string, loanId: string, amount: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.repay.encode([
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('repay', [
         this.contract('SHELF').address,
         this.contract('TINLAKE_CURRENCY').address,
         loanId,
@@ -133,7 +133,7 @@ export function ProxyActions<ActionsBase extends Constructor<TinlakeParams>>(Bas
 
     proxyRepayUnlockClose = async (proxyAddress: string, tokenId: string, loanId: string, registry: string) => {
       const proxy = this.contract('PROXY', proxyAddress)
-      const encoded = this.contract('ACTIONS').interface.functions.repayUnlockClose.encode([
+      const encoded = this.contract('ACTIONS').interface.encodeFunctionData('repayUnlockClose', [
         this.contract('SHELF').address,
         this.contract('PILE').address,
         registry,

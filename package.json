@@ -1,5 +1,5 @@
 {
-  "name": "@centrifuge/tinlake-js",
+  "name": "@centrifuge/tinlake-js-v3",
   "version": "3.0.0-develop.26",
   "description": "Centrifuge Tinlake Contracts Client",
   "main": "dist/index.js",
@@ -13,7 +13,7 @@
     "decimal.js-light": "^2.5.0",
     "dotenv": "^8.2.0",
     "eth-permit": "^0.1.7",
-    "ethers": "4.0.45",
+    "ethers": "5.0.17",
     "glpk.js": "3.1.2",
     "mocha": "^6.1.4",
     "web3-eth-abi": "^1.2.11",

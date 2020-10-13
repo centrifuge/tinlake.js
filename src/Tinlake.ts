@@ -43,7 +43,7 @@ export type Contracts = {
 }
 
 export type ContractAbis = {
-  [key in ContractName]?: (ethers.utils.EventFragment | ethers.utils.FunctionFragment)[]
+  [key in ContractName]?: ethers.ContractInterface
 }
 
 export type ContractAddresses = {
@@ -53,7 +53,7 @@ export type ContractAddresses = {
 export type TinlakeParams = {
   provider: ethers.providers.Provider
   signer?: ethers.Signer
-  legacyWeb3Provider?: ethers.providers.AsyncSendable
+  legacyWeb3Provider?: ethers.providers.Web3Provider
   transactionTimeout?: number
   contractAddresses?: ContractAddresses | {}
   contractAbis?: ContractAbis | {}
@@ -64,17 +64,18 @@ export type TinlakeParams = {
 
 export type Constructor<T = {}> = new (...args: any[]) => Tinlake
 
-ethers.errors.setLogLevel('error')
+// TODO: re-enable
+// ethers.utils.Logger.setLogLevel(ethers.utils.logger.LogLevel.ERROR)
 
 // This adds a .toBN() function to all BigNumber instances returned by ethers.js
-;(ethers.utils.BigNumber as any).prototype.toBN = function () {
+(ethers.BigNumber as any).prototype.toBN = function () {
   return new BN((this as any).toString())
 }
 
 export default class Tinlake {
   public provider: ethers.providers.Provider
   public signer?: ethers.Signer
-  public legacyWeb3Provider?: ethers.providers.AsyncSendable
+  public legacyWeb3Provider?: ethers.providers.Web3Provider
   public overrides: ethers.providers.TransactionRequest = {}
   public contractAddresses: ContractAddresses
   public transactionTimeout: number
@@ -115,7 +116,7 @@ export default class Tinlake {
   setProviderAndSigner = (
     provider: ethers.providers.Provider,
     signer?: ethers.Signer,
-    legacyWeb3Provider?: ethers.providers.AsyncSendable
+    legacyWeb3Provider?: ethers.providers.Web3Provider
   ) => {
     this.provider = provider
     this.signer = signer
