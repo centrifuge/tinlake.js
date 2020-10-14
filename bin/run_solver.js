@@ -36,15 +36,23 @@ const run = async () => {
     exit()
   }
 
-  console.log('Running solver')
-  const solveTx = await tinlake.solveEpoch()
-  const solveResult = await tinlake.getTransactionReceipt(solveTx)
+  try {
+    console.log('Running solver')
 
-  if (solveResult.status === 1) {
-    console.log('Successfully ran the solver and submitted a solution')
-    console.log(`Transaction hash: ${solveTx.hash}`)
-  } else {
-    console.error('Failed to run the solver')
+    const solveTx = await tinlake.solveEpoch()
+    const solveResult = await tinlake.getTransactionReceipt(solveTx)
+
+    if (solveResult.status === 1) {
+      console.log('Successfully ran the solver and submitted a solution')
+      console.log(`Transaction hash: ${solveTx.hash}`)
+
+      const epochState = await tinlake.getCurrentEpochState()
+      console.log(`New epoch state: ${epochState}`)
+    } else {
+      console.error('Failed to run the solver')
+    }
+  } catch(error) {
+    console.error(error)
   }
 }
 
