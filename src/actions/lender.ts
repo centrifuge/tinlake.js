@@ -1,8 +1,10 @@
 import { Constructor, TinlakeParams, PendingTransaction } from '../Tinlake'
 import BN from 'bn.js'
 import { signDaiPermit, signERC2612Permit } from 'eth-permit'
+import { DaiPermitMessage, ERC2612PermitMessage, PermitMessage } from '../types/tinlake'
 
 const DaiTokenAddress = '0x6b175474e89094c44da98b954eedeac495271d0f'
+const maxUint256 = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
 
 export function LenderActions<ActionBase extends Constructor<TinlakeParams>>(Base: ActionBase) {
   return class extends Base implements ILenderActions {
@@ -11,71 +13,121 @@ export function LenderActions<ActionBase extends Constructor<TinlakeParams>>(Bas
       return this.pending(this.contract('SENIOR_OPERATOR').supplyOrder(supplyAmount, this.overrides))
     }
 
-    submitSeniorSupplyOrderWithPermit = async (amount: string, senderAddress: string) => {
+    submitSeniorSupplyOrderWithAllowance = async (amount: string, senderAddress: string) => {
+      const allowance = (await (this as any).getSeniorForCurrencyAllowance(senderAddress)) || new BN(0)
+
+      if (allowance.lt(new BN(amount))) {
+        const approvalTx = await (this as any).approveSeniorForCurrency(maxUint256)
+        await this.getTransactionReceipt(approvalTx)
+      }
+
+      return this.submitSeniorSupplyOrder(amount)
+    }
+
+    signSupplyPermit = async (
+      amount: string,
+      senderAddress: string,
+      tranche: 'senior' | 'junior'
+    ): Promise<PermitMessage> => {
       if (!this.legacyWeb3Provider) {
         throw new Error('You need to set legacyWeb3Provider')
       }
 
+      const trancheAddress =
+        tranche === 'senior' ? this.contract('SENIOR_TRANCHE').address : this.contract('JUNIOR_TRANCHE').address
+
       if (this.contractAddresses['TINLAKE_CURRENCY'] === DaiTokenAddress) {
-        const result = await signDaiPermit(
+        return await signDaiPermit(
           this.legacyWeb3Provider,
           this.contract('TINLAKE_CURRENCY').address,
           senderAddress,
-          this.contract('SENIOR_TRANCHE').address
+          trancheAddress
         )
+      }
+
+      return await signERC2612Permit(
+        this.legacyWeb3Provider,
+        this.contract('TINLAKE_CURRENCY').address,
+        senderAddress,
+        trancheAddress,
+        amount
+      )
+    }
+
+    signRedeemPermit = async (
+      amount: string,
+      senderAddress: string,
+      tranche: 'senior' | 'junior'
+    ): Promise<ERC2612PermitMessage> => {
+      if (!this.legacyWeb3Provider) {
+        throw new Error('You need to set legacyWeb3Provider')
+      }
+
+      const trancheAddress =
+        tranche === 'senior' ? this.contract('SENIOR_TRANCHE').address : this.contract('JUNIOR_TRANCHE').address
+
+      return await signERC2612Permit(
+        this.legacyWeb3Provider,
+        this.contract(tranche === 'senior' ? 'SENIOR_TOKEN' : 'JUNIOR_TOKEN').address,
+        senderAddress,
+        trancheAddress,
+        amount
+      )
+    }
+
+    submitSeniorSupplyOrderWithPermit = async (amount: string, permit: PermitMessage) => {
+      if (this.contractAddresses['TINLAKE_CURRENCY'] === DaiTokenAddress) {
+        const daiPermit = permit as DaiPermitMessage
+
         return this.pending(
           this.contract('SENIOR_OPERATOR').supplyOrderWithDaiPermit(
             amount,
-            result.nonce,
-            result.expiry,
-            result.v,
-            result.r,
-            result.s,
-            this.overrides
+            daiPermit.nonce,
+            daiPermit.expiry,
+            daiPermit.v,
+            daiPermit.r,
+            daiPermit.s,
+            { ...this.overrides, gasLimit: 400000 }
           )
         )
       }
-      const result = await signERC2612Permit(
-        this.legacyWeb3Provider,
-        this.contract('SENIOR_TOKEN').address,
-        senderAddress,
-        this.contract('SENIOR_TRANCHE').address,
-        amount
-      )
+
+      const erc2612Permit = permit as ERC2612PermitMessage
+
       return this.pending(
         this.contract('SENIOR_OPERATOR').supplyOrderWithPermit(
           amount,
           amount,
-          result.deadline,
-          result.v,
-          result.r,
-          result.s,
-          this.overrides
+          erc2612Permit.deadline,
+          erc2612Permit.v,
+          erc2612Permit.r,
+          erc2612Permit.s,
+          { ...this.overrides, gasLimit: 400000 }
         )
       )
     }
 
-    submitSeniorRedeemOrderWithPermit = async (amount: string, senderAddress: string) => {
-      if (!this.legacyWeb3Provider) {
-        throw new Error('You need to set legacyWeb3Provider')
+    submitSeniorRedeemOrderWithAllowance = async (amount: string, senderAddress: string) => {
+      const allowance = (await this.getSeniorTokenAllowance(senderAddress)) || new BN(0)
+
+      if (allowance.lt(new BN(amount))) {
+        const approvalTx = await this.approveSeniorToken(maxUint256)
+        await this.getTransactionReceipt(approvalTx)
       }
 
-      const result = await signERC2612Permit(
-        this.legacyWeb3Provider,
-        this.contract('SENIOR_TOKEN').address,
-        senderAddress,
-        this.contract('SENIOR_TRANCHE').address,
-        amount
-      )
+      return this.submitSeniorRedeemOrder(amount)
+    }
+
+    submitSeniorRedeemOrderWithPermit = async (amount: string, permit: ERC2612PermitMessage) => {
       return this.pending(
         this.contract('SENIOR_OPERATOR').redeemOrderWithPermit(
           amount,
           amount,
-          result.deadline,
-          result.v,
-          result.r,
-          result.s,
-          this.overrides
+          permit.deadline,
+          permit.v,
+          permit.r,
+          permit.s,
+          { ...this.overrides, gasLimit: 400000 }
         )
       )
     }
@@ -111,82 +163,70 @@ export function LenderActions<ActionBase extends Constructor<TinlakeParams>>(Bas
       return this.pending(this.contract('JUNIOR_OPERATOR').supplyOrder(supplyAmount, this.overrides))
     }
 
-    submitJuniorSupplyOrderWithPermit = async (amount: string, senderAddress: string) => {
-      if (!this.legacyWeb3Provider) {
-        throw new Error('You need to set legacyWeb3Provider')
+    submitJuniorSupplyOrderWithAllowance = async (amount: string, senderAddress: string) => {
+      const allowance = (await (this as any).getJuniorForCurrencyAllowance(senderAddress)) || new BN(0)
+
+      if (allowance.lt(new BN(amount))) {
+        const approvalTx = await (this as any).approveJuniorForCurrency(maxUint256)
+        await this.getTransactionReceipt(approvalTx)
       }
 
+      return this.submitJuniorSupplyOrder(amount)
+    }
+
+    submitJuniorSupplyOrderWithPermit = async (amount: string, permit: PermitMessage) => {
       if (this.contractAddresses['TINLAKE_CURRENCY'] === DaiTokenAddress) {
-        console.log('signing dai permit')
-        const result = await signDaiPermit(
-          this.legacyWeb3Provider,
-          this.contract('TINLAKE_CURRENCY').address,
-          senderAddress,
-          this.contract('JUNIOR_TRANCHE').address
-        )
+        const daiPermit = permit as DaiPermitMessage
+
         return this.pending(
           this.contract('JUNIOR_OPERATOR').supplyOrderWithDaiPermit(
             amount,
-            result.nonce,
-            result.expiry,
-            result.v,
-            result.r,
-            result.s,
-            this.overrides
+            daiPermit.nonce,
+            daiPermit.expiry,
+            daiPermit.v,
+            daiPermit.r,
+            daiPermit.s,
+            { ...this.overrides, gasLimit: 400000 }
           )
         )
       }
 
-      console.log('signing erc262 permit')
-
-      const nonce = await this.provider.getTransactionCount(senderAddress)
-      console.log(nonce)
-
-      const result = await signERC2612Permit(
-        this.legacyWeb3Provider,
-        this.contract('JUNIOR_TOKEN').address,
-        senderAddress,
-        this.contract('JUNIOR_TRANCHE').address,
-        amount,
-        undefined,
-        nonce
-      )
-      console.log(result)
+      const erc2612Permit = permit as ERC2612PermitMessage
 
       return this.pending(
         this.contract('JUNIOR_OPERATOR').supplyOrderWithPermit(
           amount,
           amount,
-          result.deadline && result.deadline,
-          result.v,
-          result.r,
-          result.s,
-          this.overrides
+          erc2612Permit.deadline,
+          erc2612Permit.v,
+          erc2612Permit.r,
+          erc2612Permit.s,
+          { ...this.overrides, gasLimit: 400000 }
         )
       )
     }
 
-    submitJuniorRedeemOrderWithPermit = async (amount: string, senderAddress: string) => {
-      if (!this.legacyWeb3Provider) {
-        throw new Error('You need to set legacyWeb3Provider')
+    submitJuniorRedeemOrderWithAllowance = async (amount: string, senderAddress: string) => {
+      const allowance = (await this.getJuniorTokenAllowance(senderAddress)) || new BN(0)
+
+      if (allowance.lt(new BN(amount))) {
+        const approvalTx = await this.approveJuniorToken(maxUint256)
+        await this.getTransactionReceipt(approvalTx)
       }
 
-      const result = await signERC2612Permit(
-        this.legacyWeb3Provider,
-        this.contract('JUNIOR_TOKEN').address,
-        senderAddress,
-        this.contract('JUNIOR_TRANCHE').address,
-        amount
-      )
+      return this.submitJuniorRedeemOrder(amount)
+    }
+
+    submitJuniorRedeemOrderWithPermit = async (amount: string, permit: ERC2612PermitMessage) => {
       return this.pending(
         this.contract('JUNIOR_OPERATOR').redeemOrderWithPermit(
           amount,
           amount,
-          result.deadline,
-          result.v,
-          result.r,
-          result.s,
-          this.overrides
+          permit.deadline,
+          permit.v,
+          permit.r,
+          permit.s,
+          { ...this.overrides, gasLimit: 400000 }
         )
       )
     }
@@ -240,20 +280,34 @@ export type ILenderActions = {
   getJuniorTokenAllowance(owner: string): Promise<BN>
   approveJuniorToken: (tokenAmount: string) => Promise<PendingTransaction>
   approveSeniorToken: (tokenAmount: string) => Promise<PendingTransaction>
+  signSupplyPermit: (
+    amount: string,
+    senderAddress: string,
+    tranche: 'senior' | 'junior'
+  ) => Promise<PermitMessage>
+  signRedeemPermit: (
+    amount: string,
+    senderAddress: string,
+    tranche: 'senior' | 'junior'
+  ) => Promise<ERC2612PermitMessage>
   submitSeniorSupplyOrder(supplyAmount: string): Promise<PendingTransaction>
-  submitSeniorSupplyOrderWithPermit(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitSeniorSupplyOrderWithPermit(amount: string, permit: PermitMessage): Promise<PendingTransaction>
   submitSeniorRedeemOrder(redeemAmount: string): Promise<PendingTransaction>
-  submitSeniorRedeemOrderWithPermit(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitSeniorRedeemOrderWithPermit(amount: string, permit: ERC2612PermitMessage): Promise<PendingTransaction>
   submitJuniorSupplyOrder(supplyAmount: string): Promise<PendingTransaction>
-  submitJuniorSupplyOrderWithPermit(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitJuniorSupplyOrderWithPermit(amount: string, permit: PermitMessage): Promise<PendingTransaction>
   submitJuniorRedeemOrder(redeemAmount: string): Promise<PendingTransaction>
-  submitJuniorRedeemOrderWithPermit(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitJuniorRedeemOrderWithPermit(amount: string, permit: ERC2612PermitMessage): Promise<PendingTransaction>
   disburseSenior(): Promise<PendingTransaction>
   disburseJunior(): Promise<PendingTransaction>
   calcJuniorDisburse(user: string): Promise<CalcDisburseResult>
   calcSeniorDisburse(user: string): Promise<CalcDisburseResult>
   checkJuniorTokenMemberlist(user: string): Promise<boolean>
   checkSeniorTokenMemberlist(user: string): Promise<boolean>
+  submitSeniorSupplyOrderWithAllowance(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitSeniorRedeemOrderWithAllowance(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitJuniorSupplyOrderWithAllowance(amount: string, senderAddress: string): Promise<PendingTransaction>
+  submitJuniorRedeemOrderWithAllowance(amount: string, senderAddress: string): Promise<PendingTransaction>
 }
 
 export default LenderActions
