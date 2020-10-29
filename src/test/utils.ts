@@ -18,7 +18,7 @@ export class TestProvider {
   async fundAccountWithETH(usr: string, amount: string) {
     const transaction = {
       to: usr,
-      value: ethers.utils.bigNumberify(amount),
+      value: ethers.BigNumber.from(amount),
     }
 
     const res = await this.wallet.sendTransaction(transaction)
