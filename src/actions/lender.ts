@@ -5,7 +5,9 @@ export function LenderActions<ActionBase extends Constructor<TinlakeParams>>(Bas
   return class extends Base implements ILenderActions {
     // senior tranche functions
     supplySenior = async (currencyAmount: string) => {
-      return this.pending(this.contract('SENIOR_OPERATOR').supply(currencyAmount, this.overrides))
+      return this.pending(
+        this.contract('SENIOR_OPERATOR').supply(currencyAmount, { ...this.overrides, gasLimit: 300000 })
+      )
     }
 
     redeemSenior = async (tokenAmount: string) => {
@@ -18,13 +20,18 @@ export function LenderActions<ActionBase extends Constructor<TinlakeParams>>(Bas
 
     approveSeniorToken = async (tokenAmount: string) => {
       return this.pending(
-        this.contract('SENIOR_TOKEN').approve(this.contractAddresses['SENIOR_TRANCHE'], tokenAmount, this.overrides)
+        this.contract('SENIOR_TOKEN').approve(this.contractAddresses['SENIOR_TRANCHE'], tokenAmount, {
+          ...this.overrides,
+          gasLimit: 200000,
+        })
       )
     }
 
     // junior tranche functions
     supplyJunior = async (currencyAmount: string) => {
-      return this.pending(this.contract('JUNIOR_OPERATOR').supply(currencyAmount, this.overrides))
+      return this.pending(
+        this.contract('JUNIOR_OPERATOR').supply(currencyAmount, { ...this.overrides, gasLimit: 300000 })
+      )
     }
 
     redeemJunior = async (tokenAmount: string) => {
@@ -37,7 +44,10 @@ export function LenderActions<ActionBase extends Constructor<TinlakeParams>>(Bas
 
     approveJuniorToken = async (tokenAmount: string) => {
       return this.pending(
-        this.contract('JUNIOR_TOKEN').approve(this.contractAddresses['JUNIOR_TRANCHE'], tokenAmount, this.overrides)
+        this.contract('JUNIOR_TOKEN').approve(this.contractAddresses['JUNIOR_TRANCHE'], tokenAmount, {
+          ...this.overrides,
+          gasLimit: 200000,
+        })
       )
     }
 
