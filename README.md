@@ -1,5 +1,7 @@
 # Tinlake JavaScript Client
 
+**Note: this project has been moved to the new repo at https://github.com/centrifuge/apps.**
+
 ## Usage
 
 Documentation can be found in `./docs/` or at https://centrifuge.github.io/tinlake.js/.
